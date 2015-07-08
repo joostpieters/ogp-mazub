@@ -41,24 +41,41 @@ public class InteractiveObject {
         iaLocation[1] = (int) dPixelBottomY;
         return iaLocation;
     }
-    private void setAlwaysCorrectLocation(int[]iaLocation){
-        //TODO
+    public double[] getRawLocation(){
+        double[] iaLocation = new double[2];
+        iaLocation[0] = dPixelLeftX;
+        iaLocation[1] = dPixelBottomY;
+        return iaLocation;
+    }
+    protected static double correctLocationX(double x){
+        if (x < 0)
+            x = 0;
+        if(x > 1024)
+            x = 1024;
+        return x;
+    }
+    protected static double correctLocationY(double y){
+        if (y < 0)
+            y = 0;
+        if(y > 778)
+           y = 778;
+        return y;
     }
 
-    private void setLocation(int[] iaLocation){
+    private void setLocation(double[] iaLocation){
         setLocationX(iaLocation[0]);
         setLocationY(iaLocation[1]);
     }
 
-    private void setLocationX(int x){
+    protected void setLocationX(double x){
         //world check TODO
         if (x < 0) throw new IllegalArgumentException("x is too small");
         dPixelLeftX = x;
-        return;
     }
-    private void setLocationY(int y){
+    protected void setLocationY(double y){
         //world check TODO
         if(y < 0) throw new IllegalArgumentException("y is too small");
+        dPixelBottomY = y;
     }
     @Basic
     public double[] getVelocity(){
@@ -73,11 +90,11 @@ public class InteractiveObject {
         setVelocityX(daVelocity[0]);
         setVelocityY(daVelocity[1]);
     }
-    private void setVelocityX(double x){
+    protected void setVelocityX(double x){
         //TODO test def
         dVelocityX = x;
     }
-    private void setVelocityY(double y){
+    protected void setVelocityY(double y){
         //TODO test def
         dVelocityY = y;
     }
@@ -90,17 +107,17 @@ public class InteractiveObject {
         return daAcceleration;
     }
 
-    private void setAcceleration(double[] daAccel){
+    protected void setAcceleration(double[] daAccel){
         if(daAccel.length != 2) throw new IllegalArgumentException("double array needs only an x & y value");
         //TODO test
         setAccelerationX(daAccel[0]);
         setAccelerationY(daAccel[1]);
     }
-    private void setAccelerationX(double x){
+    protected void setAccelerationX(double x){
         //TODO test def
         dAccelerationX = x;
     }
-    private void setAccelerationY(double y){
+    protected void setAccelerationY(double y){
         //TODO test def
         dAccelerationY = y;
     }
@@ -125,7 +142,7 @@ public class InteractiveObject {
     public void endJump(){
         eVerState = enVertState.stand;
         //recalculate sprite //TODO
-        if(getVelocity()[1] > 0)setVelocityY(0);
+        if(getVelocity()[1] < 0)setVelocityY(0);
     }
 
     public void startMoveLeft(){
