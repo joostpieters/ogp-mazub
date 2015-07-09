@@ -6,7 +6,7 @@ import jumpingalien.util.Sprite;
 /**
  * Created by covert on 08/07/15.
  */
-public class InteractiveObject {
+public abstract class InteractiveObject {
     //classe invarianten
         //locatie var
         private double dPixelLeftX;
@@ -20,14 +20,26 @@ public class InteractiveObject {
         //sprite var
         private Sprite[] aSprite;
         private int iCurrentSprite;
-        //state var
-        private enum enVertState{
+
+    protected abstract int correctSprite();
+
+    //state var
+        protected enum enVertState{
             jump,stand,duck
         };
-        private enum enHorState{
+        protected enum enHorState{
             left,stand,right
         };
-        private enVertState eVerState;
+
+    public enVertState geteVerState() {
+        return eVerState;
+    }
+
+    public enHorState geteHorState() {
+        return eHorState;
+    }
+
+    private enVertState eVerState;
         private enHorState eHorState;
 
     public InteractiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
@@ -159,7 +171,7 @@ public class InteractiveObject {
     }
 
     public void startMoveRight(){
-        eHorState = enHorState.left;
+        eHorState = enHorState.right;
         //recalculate sprite //TODO
         setVelocityX(1);
         setAccelerationX(0.9);
@@ -175,5 +187,13 @@ public class InteractiveObject {
     public void startDuck(){
         //recalculate sprite
         eVerState = enVertState.duck;
+    }
+    public void endDuck(){
+        //recalculate sprite
+        eVerState = enVertState.stand;
+    }
+
+    protected void setSprite(int iCurrentSprite){
+        this.iCurrentSprite = iCurrentSprite;
     }
 }

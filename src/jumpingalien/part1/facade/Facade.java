@@ -149,7 +149,7 @@ public class Facade implements IFacade {
      */
     @Override
     public void startDuck(Mazub alien) {
-        alien.startJump();
+        alien.startDuck();
     }
 
     /**
@@ -159,7 +159,7 @@ public class Facade implements IFacade {
      */
     @Override
     public void endDuck(Mazub alien) {
-        alien.endJump();
+        alien.endDuck();
     }
 
     /**
