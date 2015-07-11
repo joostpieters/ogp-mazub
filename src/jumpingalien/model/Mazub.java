@@ -35,6 +35,9 @@ public class Mazub extends InteractiveObject {
     @Override
     protected int correctSprite(){
         int iCounter = 0;
+        //
+        //possible bij left en right going plus 2 en 3 //TODO
+        //
         //if ducking ++
         if (geteVerState() == enVertState.duck)
             iCounter++;
