@@ -1,15 +1,17 @@
 package jumpingalien.part2.facade;
 
-import jumpingalien.model.Mazub;
+import jumpingalien.model.*;
 import jumpingalien.util.ModelException;
 import jumpingalien.util.Sprite;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * Created by covert on 12/07/15.
  */
 public class Facade implements IFacadePart2 {
+
     /**
      * Returns the current number of hitpoints of the given alien.
      *
@@ -33,7 +35,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public World createWorld(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight, int targetTileX, int targetTileY) {
-        return null;
+        return new World(tileSize,nbTilesX,nbTilesY,visibleWindowWidth,visibleWindowHeight);
     }
 
     /**
@@ -45,7 +47,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[] getWorldSizeInPixels(World world) {
-        return new int[0];
+        return world.getWorldSizeInPixel();
     }
 
     /**
@@ -57,7 +59,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int getTileLength(World world) {
-        return 0;
+        return world.getTileSize();
     }
 
     /**
@@ -74,7 +76,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public void startGame(World world) {
-
+        world.startGame();
     }
 
     /**
@@ -86,7 +88,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public boolean isGameOver(World world) {
-        return false;
+        return world.isGameOver();
     }
 
     /**
@@ -98,7 +100,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public boolean didPlayerWin(World world) {
-        return false;
+        return world.didPlayerWin();
     }
 
     /**
@@ -111,7 +113,153 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public void advanceTime(World world, double dt) {
+        world.advanceTime(dt);
+    }
 
+    /**
+     * Create an instance of Mazub.
+     *
+     * @param pixelLeftX   The x-location of Mazub's bottom left pixel.
+     * @param pixelBottomY The y-location of Mazub's bottom left pixel.
+     * @param sprites      The array of sprite images for Mazub.
+     * @return
+     */
+    @Override
+    public Mazub createMazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites) {
+        return new Mazub(pixelLeftX,pixelBottomY,sprites);
+    }
+
+    /**
+     * Return the current location of the given alien.
+     *
+     * @param alien The alien of which to get the location.
+     * @return an array, consisting of 2 integers {x, y}, that represents the
+     * coordinates of the given alien's bottom left pixel in the world.
+     */
+    @Override
+    public int[] getLocation(Mazub alien) {
+        return alien.getLocation();
+    }
+
+    /**
+     * Return the current velocity (in m/s) of the given alien.
+     *
+     * @param alien The alien of which to get the velocity.
+     * @return an array, consisting of 2 doubles {vx, vy}, that represents the
+     * horizontal and vertical components of the given alien's current
+     * velocity, in units of m/s.
+     */
+    @Override
+    public double[] getVelocity(Mazub alien) {
+        return alien.getVelocity();
+    }
+
+    /**
+     * Return the current acceleration (in m/s^2) of the given alien.
+     *
+     * @param alien The alien of which to get the acceleration.
+     * @return an array, consisting of 2 doubles {ax, ay}, that represents the
+     * horizontal and vertical components of the given alien's current
+     * acceleration, in units of m/s^2.
+     */
+    @Override
+    public double[] getAcceleration(Mazub alien) {
+        return alien.getAcceleration();
+    }
+
+    /**
+     * Return the current size of the given alien.
+     *
+     * @param alien The alien of which to get the size.
+     * @return An array, consisting of 2 integers {w, h}, that represents the
+     * current width and height of the given alien, in number of pixels.
+     */
+    @Override
+    public int[] getSize(Mazub alien) {
+        return alien.getSize();
+    }
+    public Sprite getCurrentSprite(Mazub alien) {
+        return alien.getCurrentSprite();
+    }
+
+    /**
+     * Make the given alien jump.
+     *
+     * @param alien The alien that has to start jumping.
+     */
+    @Override
+    public void startJump(Mazub alien) {
+        alien.startJump();
+    }
+
+    /**
+     * End the given alien's jump.
+     *
+     * @param alien The alien that has to stop jumping.
+     */
+    @Override
+    public void endJump(Mazub alien) {
+        alien.endJump();
+    }
+
+    /**
+     * Make the given alien move left.
+     *
+     * @param alien The alien that has to start moving left.
+     */
+    @Override
+    public void startMoveLeft(Mazub alien) {
+        alien.startMoveLeft();
+    }
+
+    /**
+     * End the given alien's left move.
+     *
+     * @param alien The alien that has to stop moving left.
+     */
+    @Override
+    public void endMoveLeft(Mazub alien) {
+        alien.endMoveLeft();
+    }
+
+    /**
+     * Make the given alien move right.
+     *
+     * @param alien The alien that has to start moving right.
+     */
+    @Override
+    public void startMoveRight(Mazub alien) {
+        alien.startMoveRight();
+    }
+
+    /**
+     * End the given alien's right move.
+     *
+     * @param alien The alien that has to stop moving right.
+     */
+    @Override
+    public void endMoveRight(Mazub alien) {
+        alien.endMoveRight();
+    }
+
+    /**
+     * Make the given alien duck.
+     *
+     * @param alien The alien that has to start ducking.
+     */
+    @Override
+    public void startDuck(Mazub alien) {
+        alien.startDuck();
+    }
+
+    /**
+     * End the given alien's ducking.
+     *
+     * @param alien The alien that has to stop ducking.
+     */
+    @Override
+    public void endDuck(Mazub alien) {
+        alien.endDuck();
     }
 
     /**
@@ -136,7 +284,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[] getVisibleWindow(World world) {
-        return new int[0];
+        return world.getVisibleWindow();
     }
 
     /**
@@ -151,7 +299,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[] getBottomLeftPixelOfTile(World world, int tileX, int tileY) {
-        return new int[0];
+        return world.getBottomLeftPixelOfTile(tileX,tileY);
     }
 
     /**
@@ -172,7 +320,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[][] getTilePositionsIn(World world, int pixelLeft, int pixelBottom, int pixelRight, int pixelTop) {
-        return new int[0][];
+        return world.getTilePositionsIn(pixelLeft,pixelBottom,pixelRight,pixelTop);
     }
 
     /**
@@ -221,7 +369,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public void setGeologicalFeature(World world, int tileX, int tileY, int tileType) {
-
+        //TODO
     }
 
     /**
@@ -232,7 +380,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public void setMazub(World world, Mazub alien) {
-
+        world.setMazub(alien);
     }
 
     /**
@@ -245,7 +393,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public boolean isImmune(Mazub alien) {
-        return false;
+        return alien.isImune();
     }
 
     /**
@@ -260,7 +408,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Plant createPlant(int x, int y, Sprite[] sprites) {
-        return null;
+        return new Plant(x,y,sprites);
     }
 
     /**
@@ -271,7 +419,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public void addPlant(World world, Plant plant) {
-
+        world.addObject(plant);
     }
 
     /**
@@ -284,7 +432,8 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Collection<Plant> getPlants(World world) {
-        return null;
+        //TODO ask mathias
+        return (Collection<Plant>) world.getCollection(Plant.class);
     }
 
     /**
@@ -296,7 +445,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[] getLocation(Plant plant) {
-        return new int[0];
+        return plant.getLocation();
     }
 
     /**
@@ -308,7 +457,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Sprite getCurrentSprite(Plant plant) {
-        return null;
+        return plant.getCurrentSprite();
     }
 
     /**
@@ -323,7 +472,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Shark createShark(int x, int y, Sprite[] sprites) {
-        return null;
+        return new Shark(x,y,sprites);
     }
 
     /**
@@ -334,7 +483,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public void addShark(World world, Shark shark) {
-
+        world.addObject(shark);
     }
 
     /**
@@ -347,7 +496,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Collection<Shark> getSharks(World world) {
-        return null;
+        return (Collection<Shark>) world.getCollection(Shark.class);
     }
 
     /**
@@ -359,7 +508,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[] getLocation(Shark shark) {
-        return new int[0];
+        return shark.getLocation();
     }
 
     /**
@@ -371,7 +520,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Sprite getCurrentSprite(Shark shark) {
-        return null;
+        return shark.getCurrentSprite();
     }
 
     /**
@@ -381,6 +530,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public School createSchool() {
+        //TODO
         return null;
     }
 
@@ -458,151 +608,4 @@ public class Facade implements IFacadePart2 {
     public School getSchool(Slime slime) {
         return null;
     }
-
-    /**
-     * Create an instance of Mazub.
-     *
-     * @param pixelLeftX
-     *            The x-location of Mazub's bottom left pixel.
-     * @param pixelBottomY
-     *            The y-location of Mazub's bottom left pixel.
-     * @param sprites
-     *            The array of sprite images for Mazub.
-     *
-     * @return
-     */
-    Mazub createMazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites);
-
-    /**
-     * Return the current location of the given alien.
-     *
-     * @param alien
-     *            The alien of which to get the location.
-     *
-     * @return an array, consisting of 2 integers {x, y}, that represents the
-     *         coordinates of the given alien's bottom left pixel in the world.
-     */
-    int[] getLocation(Mazub alien);
-
-    /**
-     * Return the current velocity (in m/s) of the given alien.
-     *
-     * @param alien
-     *            The alien of which to get the velocity.
-     *
-     * @return an array, consisting of 2 doubles {vx, vy}, that represents the
-     *         horizontal and vertical components of the given alien's current
-     *         velocity, in units of m/s.
-     */
-    double[] getVelocity(Mazub alien);
-
-    /**
-     * Return the current acceleration (in m/s^2) of the given alien.
-     *
-     * @param alien
-     *            The alien of which to get the acceleration.
-     *
-     * @return an array, consisting of 2 doubles {ax, ay}, that represents the
-     *         horizontal and vertical components of the given alien's current
-     *         acceleration, in units of m/s^2.
-     */
-    double[] getAcceleration(Mazub alien);
-
-    /**
-     * Return the current size of the given alien.
-     *
-     * @param alien
-     *            The alien of which to get the size.
-     *
-     * @return An array, consisting of 2 integers {w, h}, that represents the
-     *         current width and height of the given alien, in number of pixels.
-     */
-    int[] getSize(Mazub alien);
-
-    /**
-     * Return the current sprite image for the given alien.
-     *
-     * @param alien
-     *            The alien for which to get the current sprite image.
-     *
-     * @return The current sprite image for the given alien, determined by its
-     *         state as defined in the assignment.
-     */
-    Sprite getCurrentSprite(Mazub alien);
-
-    /**
-     * Make the given alien jump.
-     *
-     * @param alien
-     *            The alien that has to start jumping.
-     */
-    void startJump(Mazub alien);
-
-    /**
-     * End the given alien's jump.
-     *
-     * @param alien
-     *            The alien that has to stop jumping.
-     */
-    void endJump(Mazub alien);
-
-    /**
-     * Make the given alien move left.
-     *
-     * @param alien
-     *            The alien that has to start moving left.
-     */
-    void startMoveLeft(Mazub alien);
-
-    /**
-     * End the given alien's left move.
-     *
-     * @param alien
-     *            The alien that has to stop moving left.
-     */
-    void endMoveLeft(Mazub alien);
-
-    /**
-     * Make the given alien move right.
-     *
-     * @param alien
-     *            The alien that has to start moving right.
-     */
-    void startMoveRight(Mazub alien);
-
-    /**
-     * End the given alien's right move.
-     *
-     * @param alien
-     *            The alien that has to stop moving right.
-     */
-    void endMoveRight(Mazub alien);
-
-    /**
-     * Make the given alien duck.
-     *
-     * @param alien
-     *            The alien that has to start ducking.
-     */
-    void startDuck(Mazub alien);
-
-    /**
-     * End the given alien's ducking.
-     *
-     * @param alien
-     *            The alien that has to stop ducking.
-     */
-    void endDuck(Mazub alien);
-
-    /**
-     * Advance the state of the given alien by the given time period.
-     *
-     * @param alien
-     *            The alien whose time has to be advanced.
-     * @param dt
-     *            The time interval (in seconds) by which to advance the given
-     *            alien's time.
-     */
-    void advanceTime(Mazub alien, double dt);
-
 }

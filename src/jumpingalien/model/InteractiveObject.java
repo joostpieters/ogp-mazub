@@ -21,30 +21,12 @@ public abstract class InteractiveObject {
         private Sprite[] aSprite;
         private int iCurrentSprite;
 
-    protected abstract int correctSprite();
-
-    //state var
-        protected enum enVertState{
-            jump,stand,duck
-        };
-        protected enum enHorState{
-            left,stand,right
-        };
-
-    public enVertState geteVerState() {
-        return eVerState;
-    }
-
-    public enHorState geteHorState() {
-        return eHorState;
-    }
-
-    private enVertState eVerState;
-        private enHorState eHorState;
+    protected int correctSprite(){
+        return 0;
+    };
 
     public InteractiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
         dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;
-        eVerState = enVertState.stand; eHorState = enHorState.stand;
     }
     @Basic
     public int[] getLocation(){
@@ -143,54 +125,6 @@ public abstract class InteractiveObject {
     @Basic
     public Sprite getCurrentSprite(){
         return aSprite[iCurrentSprite];
-    }
-
-    public void startJump(){
-        eVerState = enVertState.jump;
-        //recalculate sprite //TODO
-        setVelocityY(8);
-        setAccelerationY(-10);
-    }
-    public void endJump(){
-        eVerState = enVertState.stand;
-        //recalculate sprite //TODO
-        if(getVelocity()[1] < 0)setVelocityY(0);
-    }
-
-    public void startMoveLeft(){
-        eHorState = enHorState.left;
-        //recalculate sprite //TODO
-        setVelocityX(-1);
-        setAccelerationX(-0.9);
-    }
-    public void endMoveLeft(){
-        eHorState = enHorState.stand;
-        setVelocityX(0);
-        setAccelerationX(0);
-        //recalculate sprite //TODO
-    }
-
-    public void startMoveRight(){
-        eHorState = enHorState.right;
-        //recalculate sprite //TODO
-        setVelocityX(1);
-        setAccelerationX(0.9);
-    }
-
-    public void endMoveRight(){
-        eHorState = enHorState.stand;
-        setVelocityX(0);
-        setAccelerationX(0);
-        //recalculate sprite //TODO
-    }
-
-    public void startDuck(){
-        //recalculate sprite
-        eVerState = enVertState.duck;
-    }
-    public void endDuck(){
-        //recalculate sprite
-        eVerState = enVertState.stand;
     }
 
     protected void setSprite(int iCurrentSprite){
