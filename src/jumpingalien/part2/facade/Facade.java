@@ -7,9 +7,6 @@ import jumpingalien.util.Sprite;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by covert on 12/07/15.
- */
 public class Facade implements IFacadePart2 {
 
     /**
@@ -547,7 +544,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Slime createSlime(int x, int y, Sprite[] sprites, School school) {
-        return null;
+        return new Slime(x,y,sprites,school);
     }
 
     /**
@@ -558,7 +555,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public void addSlime(World world, Slime slime) {
-
+        world.addObject(slime);
     }
 
     /**
@@ -571,7 +568,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Collection<Slime> getSlimes(World world) {
-        return null;
+        return (Collection<Slime>) world.getCollection(Slime.class);
     }
 
     /**
@@ -583,7 +580,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[] getLocation(Slime slime) {
-        return new int[0];
+        return slime.getLocation();
     }
 
     /**
@@ -595,7 +592,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Sprite getCurrentSprite(Slime slime) {
-        return null;
+        return slime.getCurrentSprite();
     }
 
     /**
