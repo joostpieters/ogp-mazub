@@ -129,6 +129,8 @@ public class World {
     public void addObject(InteractiveObject obj){
         colInterActive.add(obj);
     }
+
+
     public Collection<?> getCollection(Class obj){
         ArrayList<InteractiveObject> tempCol = new ArrayList<>();
         colInterActive.stream().filter(obj::isInstance).forEach(tempCol::add);
