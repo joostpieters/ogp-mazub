@@ -5,12 +5,15 @@ import jdk.nashorn.internal.runtime.arrays.IteratorAction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.stream.Stream;
 
 /**
  * Created by covert on 12/07/15.
  */
 public class World {
     //classe invar
+    Thread collisionThread;
+    Runnable collisionRunnable;
     //collection
     LinkedList<InteractiveObject> colInterActive = new LinkedList<>();
     //omgevings var
@@ -26,7 +29,15 @@ public class World {
     public World(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight){
         iTileSize = tileSize; iNbTilesX = nbTilesX; iNbTilesY = nbTilesY;
         iVisibleWindowHeight = visibleWindowHeight; iVisibleWindowWidth = visibleWindowWidth;
+        collisionRunnable = new CollisionChecker(this);
+        this.collisionThread = new Thread(collisionRunnable);
+        collisionThread.start();
+
     }
+    public final Stream<InteractiveObject> getStream(){
+        return colInterActive.stream();
+    }
+
     public void startGame(){
         eGameState = enGameState.started;
     }
@@ -66,10 +77,6 @@ public class World {
 
     public int getTileSize(){
         return iTileSize;
-    }
-
-    public void advanceTime(double dt){
-        player.advanceTime(dt);
     }
     //left, bottom, right, top
     public int[] getVisibleWindow()throws IllegalStateException {
@@ -136,5 +143,10 @@ public class World {
         colInterActive.stream().filter(obj::isInstance).forEach(tempCol::add);
         return tempCol;
     }
-
+    public void FncRemoveFromColl(InteractiveObject obj){
+        colInterActive.remove(obj);
+    }
+    public void advanceTime(double dt){
+        player.advanceTime(dt);
+    }
 }

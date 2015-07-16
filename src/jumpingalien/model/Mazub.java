@@ -1,10 +1,8 @@
 package jumpingalien.model;
 
 import jumpingalien.util.Sprite;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-/**
- * Created by covert on 08/07/15.
- */
 public class Mazub extends InteractiveObject {
     //classe invarianten
     private boolean bImune;
@@ -16,6 +14,18 @@ public class Mazub extends InteractiveObject {
         eLastHorState = enHorState.stand;
         dtLastMove = 0;
     }
+
+    @Override
+    public void isOverlapping(InteractiveObject interObj) {
+        if (interObj instanceof Plant) {
+            FncProccesHealth(100);
+            wCaller.FncRemoveFromColl(interObj);
+            return;
+        }
+        if (interObj instanceof Shark) throw new NotImplementedException();
+        if (interObj instanceof Slime) throw new NotImplementedException();
+    }
+
     //state var
     protected enum enVertState{
         jump,stand,duck
@@ -119,7 +129,6 @@ public class Mazub extends InteractiveObject {
             if (eHorState != enHorState.stand)
                 iCounter +=3;
         }
-        System.out.println(iCounter);
         //return result
         return iCounter;
     }

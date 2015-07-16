@@ -3,6 +3,8 @@ package jumpingalien.model;
 import be.kuleuven.cs.som.annotate.Basic;
 import jumpingalien.util.Sprite;
 
+import java.util.LinkedList;
+
 /**
  * Created by covert on 08/07/15.
  */
@@ -20,10 +22,18 @@ public abstract class InteractiveObject {
         //sprite var
         private Sprite[] aSprite;
         private int iCurrentSprite;
+        //hitpoints
+        private int iHitpoints = 100;
+        //caller
+        protected World wCaller;
 
     protected int correctSprite(){
-        return 0;
+        return 0; //todo
     };
+
+    public void setWorld(World world){
+        wCaller = world;
+    }
 
     public InteractiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
         dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;
@@ -125,6 +135,13 @@ public abstract class InteractiveObject {
     @Basic
     public Sprite getCurrentSprite(){
         return aSprite[iCurrentSprite];
+    }
+
+    public abstract void isOverlapping(InteractiveObject interObj);
+    protected void FncProccesHealth(int change){
+        if (iHitpoints + change < 1) wCaller.FncRemoveFromColl(this);
+        else if (iHitpoints + change < 500) iHitpoints = 500;
+        else iHitpoints += change;
     }
 
     protected void setSprite(int iCurrentSprite){
