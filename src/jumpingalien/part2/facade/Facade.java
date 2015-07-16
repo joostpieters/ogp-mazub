@@ -4,9 +4,9 @@ import jumpingalien.model.*;
 import jumpingalien.util.ModelException;
 import jumpingalien.util.Sprite;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
+@SuppressWarnings("ALL")
 public class Facade implements IFacadePart2 {
 
     /**
