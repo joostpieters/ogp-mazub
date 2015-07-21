@@ -30,23 +30,26 @@ public class CollisionChecker implements Runnable
         {
             Thread.sleep(duration);
         }
-        catch(InterruptedException ex) {}
+        catch(InterruptedException ignored) {}
     }
 
     @Override
     public void run()
     {
+        LinkedList<InteractiveObject[]> collOverlap = new LinkedList<>();
         while(this.running())
         {
-            worldCaller.getStream().forEach(interObj -> {
+
+            worldCaller.getStream().parallel().forEach(interObj -> {
                 worldCaller.getStream().forEach(interComp -> {
                     if (interComp != interObj){
                         if (fncIsOverlap(interComp,interObj)){
-                            interComp.isOverlapping(interObj);
+                            collOverlap.add(new InteractiveObject[]{interComp, interObj});
                         }
                     }
                 });
             });
+            collOverlap.stream().forEach(object -> object[0].isOverlapping(object[0]));
             this.sleep(10);
         }
     }
@@ -56,10 +59,18 @@ public class CollisionChecker implements Runnable
         int iBX = obB.getSize()[0];
         int iBY = obB.getSize()[1];
 
-        if (obA.getLocation()[0] + iAX - 1 < obB.getLocation()[0]) return false;
-        if (obB.getLocation()[0] + iBX - 1 < obA.getLocation()[0]) return false;
-        if (obA.getLocation()[1] + iAY - 1 < obB.getLocation()[1]) return false;
-        if (obB.getLocation()[1] + iBY - 1 < obA.getLocation()[1]) return false;
+        if (obA.getLocation()[0] + iAX - 1 < obB.getLocation()[0]){
+            return false;
+        }
+        if (obB.getLocation()[0] + iBX - 1 < obA.getLocation()[0]){
+            return false;
+        }
+        if (obA.getLocation()[1] + iAY - 1 < obB.getLocation()[1]){
+            return false;
+        }
+        if (obB.getLocation()[1] + iBY - 1 < obA.getLocation()[1]){
+            return false;
+        }
         return true;
     }
 }

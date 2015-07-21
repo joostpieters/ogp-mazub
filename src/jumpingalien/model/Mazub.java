@@ -9,7 +9,7 @@ public class Mazub extends InteractiveObject {
     private enHorState eLastHorState;
     private double dtLastMove;
     public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
-        super(pixelLeftX, pixelBottomY, sprites);
+        super(pixelLeftX, pixelBottomY, sprites,250);
         eVerState = enVertState.stand; eHorState = enHorState.stand;
         eLastHorState = enHorState.stand;
         dtLastMove = 0;

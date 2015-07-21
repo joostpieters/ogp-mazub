@@ -16,7 +16,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int getNbHitPoints(Mazub alien) {
-        return 0;
+        return alien.getHealth();
     }
 
     /**

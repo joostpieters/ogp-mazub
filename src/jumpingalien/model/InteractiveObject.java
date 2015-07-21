@@ -29,14 +29,18 @@ public abstract class InteractiveObject {
 
     protected int correctSprite(){
         return 0; //todo
-    };
+    }
+
+    public int getHealth(){
+        return iHitpoints;
+    }
 
     public void setWorld(World world){
         wCaller = world;
     }
 
-    public InteractiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
-        dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;
+    public InteractiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites,int hitpoints){
+        dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
     }
     @Basic
     public int[] getLocation(){
@@ -138,6 +142,9 @@ public abstract class InteractiveObject {
     }
 
     public abstract void isOverlapping(InteractiveObject interObj);
+
+    public abstract void advanceTime(double dt);
+
     protected void FncProccesHealth(int change){
         if (iHitpoints + change < 1) wCaller.FncRemoveFromColl(this);
         else if (iHitpoints + change < 500) iHitpoints = 500;

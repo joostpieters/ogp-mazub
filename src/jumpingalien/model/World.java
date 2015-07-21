@@ -7,9 +7,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.stream.Stream;
 
-/**
- * Created by covert on 12/07/15.
- */
 public class World {
     //classe invar
     Thread collisionThread;
@@ -45,6 +42,7 @@ public class World {
     public void setMazub(Mazub alien){
         if (player != null) throw new IllegalStateException("player already set");
         player = alien;
+        addObject(alien);
     }
 
     public boolean isGameOver(){
@@ -134,6 +132,7 @@ public class World {
         return new int[]{pixelX / iTileSize, pixelY / iTileSize};
     }
     public void addObject(InteractiveObject obj){
+        obj.setWorld(this);
         colInterActive.add(obj);
     }
 
