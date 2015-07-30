@@ -1,5 +1,6 @@
 package jumpingalien.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -39,18 +40,17 @@ public class CollisionChecker implements Runnable
         LinkedList<InteractiveObject[]> collOverlap = new LinkedList<>();
         while(this.running())
         {
-
-            worldCaller.getStream().parallel().forEach(interObj -> {
-                worldCaller.getStream().forEach(interComp -> {
-                    if (interComp != interObj){
-                        if (fncIsOverlap(interComp,interObj)){
-                            collOverlap.add(new InteractiveObject[]{interComp, interObj});
-                        }
+            ArrayList<InteractiveObject> interColl = (ArrayList<InteractiveObject>) worldCaller.getCollection(InteractiveObject.class);
+            interColl.stream().forEach(interObj -> interColl.stream().forEach(interComp -> {
+                if (interComp != interObj) {
+                    if (fncIsOverlap(interComp, interObj)) {
+                        collOverlap.add(new InteractiveObject[]{interComp, interObj});
                     }
-                });
-            });
+                }
+            }));
+
             collOverlap.stream().forEach(object -> object[0].isOverlapping(object[0]));
-            this.sleep(10);
+            sleep(10);
         }
     }
     private boolean fncIsOverlap(InteractiveObject obA, InteractiveObject obB){

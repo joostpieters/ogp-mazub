@@ -31,6 +31,7 @@ public class World {
         collisionThread.start();
 
     }
+    @Deprecated
     public final Stream<InteractiveObject> getStream(){
         return colInterActive.stream();
     }
