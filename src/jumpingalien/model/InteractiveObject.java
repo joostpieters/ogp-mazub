@@ -159,6 +159,7 @@ public abstract class InteractiveObject {
         //int pixelLeft, int pixelBottom, int pixelRight, int pixelTop
         int[][] iaSurrTiles = wCaller.getTilePositionsIn(getLocation()[0],getLocation()[1],corner[0],corner[1]);
 
+
     }
 
     protected void setSprite(int iCurrentSprite){
