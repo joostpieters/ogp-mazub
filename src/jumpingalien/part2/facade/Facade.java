@@ -32,7 +32,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public World createWorld(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight, int targetTileX, int targetTileY) {
-        return new World(tileSize,nbTilesX,nbTilesY,visibleWindowWidth,visibleWindowHeight);
+        return new World(tileSize,nbTilesX,nbTilesY,visibleWindowWidth,visibleWindowHeight,targetTileX,targetTileY);
     }
 
     /**
@@ -296,7 +296,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[] getBottomLeftPixelOfTile(World world, int tileX, int tileY) {
-        return world.getBottomLeftPixelOfTile(tileX,tileY);
+        return world.getTileInArrPoss(tileX,tileY).getLocation();
     }
 
     /**
@@ -317,7 +317,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[][] getTilePositionsIn(World world, int pixelLeft, int pixelBottom, int pixelRight, int pixelTop) {
-        return world.getTilePositionsIn(pixelLeft,pixelBottom,pixelRight,pixelTop);
+        return world.translateTilePos(pixelLeft,pixelBottom,pixelRight,pixelTop);
     }
 
     /**
@@ -344,7 +344,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int getGeologicalFeature(World world, int pixelX, int pixelY) throws ModelException {
-        return 0;
+        return world.getGeologicalFeature(pixelX,pixelY);
     }
 
     /**
@@ -366,7 +366,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public void setGeologicalFeature(World world, int tileX, int tileY, int tileType) {
-        //TODO
+        world.setGeoFeature(tileX,tileY,tileType);
     }
 
     /**

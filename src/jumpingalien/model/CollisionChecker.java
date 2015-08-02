@@ -1,5 +1,7 @@
 package jumpingalien.model;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -40,20 +42,30 @@ public class CollisionChecker implements Runnable
         LinkedList<InteractiveObject[]> collOverlap = new LinkedList<>();
         while(this.running())
         {
-            ArrayList<InteractiveObject> interColl = (ArrayList<InteractiveObject>) worldCaller.getCollection(InteractiveObject.class);
-            interColl.stream().forEach(interObj -> interColl.stream().forEach(interComp -> {
-                if (interComp != interObj) {
-                    if (fncIsOverlap(interComp, interObj)) {
-                        collOverlap.add(new InteractiveObject[]{interComp, interObj});
+            try {
+                ArrayList<InteractiveObject> interColl = (ArrayList<InteractiveObject>) worldCaller.getCollection(InteractiveObject.class);
+                interColl.stream().forEach(interObj -> interColl.stream().forEach(interComp -> {
+                    if (interComp != interObj) {
+                        if (fncIsOverlap(interComp, interObj)) {
+                            collOverlap.add(new InteractiveObject[]{interComp, interObj});
+                        }
                     }
-                }
-            }));
-
-            collOverlap.stream().forEach(object -> object[0].isOverlapping(object[0]));
-            sleep(10);
+                }));
+            }
+            catch (NotImplementedException ex){
+                System.out.println("not implemented exception in collision checker");
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
+            finally {
+                collOverlap.stream().forEach(object -> object[0].isOverlapping(object[1]));
+                collOverlap.clear();
+                sleep(10);
+            }
         }
     }
-    private boolean fncIsOverlap(InteractiveObject obA, InteractiveObject obB){
+    private static boolean fncIsOverlap(InteractiveObject obA, InteractiveObject obB){
         int iAX = obA.getSize()[0];
         int iAY = obA.getSize()[1];
         int iBX = obB.getSize()[0];

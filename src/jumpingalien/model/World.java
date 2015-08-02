@@ -7,14 +7,14 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.stream.Stream;
 
-public class World {
+public class World extends TileMap{
     //classe invar
     Thread collisionThread;
-    Runnable collisionRunnable;
+    CollisionChecker collisionRunnable;
     //collection
     LinkedList<InteractiveObject> colInterActive = new LinkedList<>();
     //omgevings var
-    private int iTileSize,iNbTilesX,iNbTilesY,iVisibleWindowWidth,iVisibleWindowHeight;
+    private int iVisibleWindowWidth,iVisibleWindowHeight;
     //game state vars
     private enum enGameState{
         started,won,lost
@@ -23,8 +23,8 @@ public class World {
     //player
     private Mazub player;
 
-    public World(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight){
-        iTileSize = tileSize; iNbTilesX = nbTilesX; iNbTilesY = nbTilesY;
+    public World(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight, int targetTileX, int targetTileY){
+        super(nbTilesX,nbTilesY,tileSize,targetTileX,targetTileY);
         iVisibleWindowHeight = visibleWindowHeight; iVisibleWindowWidth = visibleWindowWidth;
         collisionRunnable = new CollisionChecker(this);
         this.collisionThread = new Thread(collisionRunnable);
@@ -47,6 +47,7 @@ public class World {
     }
 
     public boolean isGameOver(){
+        //TODO check hoe moet uitgewerktworden
         switch (eGameState){
             case started:
                 return false;
@@ -59,24 +60,10 @@ public class World {
         }
     }
     public boolean didPlayerWin(){
-        switch (eGameState){
-            case won:
-                return true;
-            default:
-                return false;
-        }
+        //TODO
+        return false;
     }
 
-    public int[] getWorldSizeInPixel(){
-        int[] iaSize = new int[2];
-        iaSize[0] = iTileSize * iNbTilesX;
-        iaSize[1] = iTileSize * iNbTilesY;
-        return iaSize;
-    }
-
-    public int getTileSize(){
-        return iTileSize;
-    }
     //left, bottom, right, top
     public int[] getVisibleWindow()throws IllegalStateException {
         int[] iaWindow = new int[4];
@@ -108,37 +95,23 @@ public class World {
         return iaWindow;
     }
 
-    public int[] getBottomLeftPixelOfTile(int tileX, int tileY) {
-        int[] pixel = new int[2];
-        pixel[0] = iTileSize * tileX;
-        pixel[1] = iTileSize * tileY;
-        return pixel;
-    }
 
-
-    public int[][] getTilePositionsIn(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop) {
-        int temp = ((pixelRight - pixelLeft) / iTileSize + 2) * ((pixelTop - pixelBottom) / iTileSize + 2);
-        int[][] iaPos = new int[temp][2];
-        int i = 0;
-        for (int x = pixelLeft; x <= pixelRight + iTileSize; x += iTileSize) {
-            for (int y = pixelBottom; y <= pixelTop + iTileSize; y += iTileSize) {
-                iaPos[i] = getTile(x, y);
-                i++;
-            }
-        }
-
-        return iaPos;
-    }
-    private int[] getTile(int pixelX, int pixelY) {
-        return new int[]{pixelX / iTileSize, pixelY / iTileSize};
-    }
     public void addObject(InteractiveObject obj){
         obj.setWorld(this);
         colInterActive.add(obj);
     }
 
+    public int[][] translateTilePos(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop){
+        Tile[] tileArr = getTilePositionsIn(pixelLeft,pixelBottom,pixelRight,pixelTop);
+        int[][] possArr = new int[tileArr.length][2];
+        for (int i = 0; i< tileArr.length;i++){
+            possArr[i] = tileArr[i].getLocation();
+        }
+        return possArr;
+    }
 
-    public Collection<?> getCollection(Class obj){
+
+    public synchronized Collection<?> getCollection(Class obj){
         ArrayList<InteractiveObject> tempCol = new ArrayList<>();
         colInterActive.stream().filter(obj::isInstance).forEach(tempCol::add);
         return tempCol;
@@ -149,4 +122,17 @@ public class World {
     public void advanceTime(double dt){
         player.advanceTime(dt);
     }
+
+    protected void finialize(){
+        //todo collisionRunnable.stop();
+        collisionRunnable.stop();
+        collisionThread.stop();
+        collisionThread.destroy();
+    }
+
+    public int[] getWorldSizeInPixel(){
+        return getMapSize();
+    }
+
+
 }
