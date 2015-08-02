@@ -1,5 +1,7 @@
 package jumpingalien.model;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -40,17 +42,25 @@ public class CollisionChecker implements Runnable
         LinkedList<InteractiveObject[]> collOverlap = new LinkedList<>();
         while(this.running())
         {
-            ArrayList<InteractiveObject> interColl = (ArrayList<InteractiveObject>) worldCaller.getCollection(InteractiveObject.class);
-            interColl.stream().forEach(interObj -> interColl.stream().forEach(interComp -> {
-                if (interComp != interObj) {
-                    if (fncIsOverlap(interComp, interObj)) {
-                        collOverlap.add(new InteractiveObject[]{interComp, interObj});
+            try {
+                ArrayList<InteractiveObject> interColl = (ArrayList<InteractiveObject>) worldCaller.getCollection(InteractiveObject.class);
+                interColl.stream().forEach(interObj -> interColl.stream().forEach(interComp -> {
+                    if (interComp != interObj) {
+                        if (fncIsOverlap(interComp, interObj)) {
+                            collOverlap.add(new InteractiveObject[]{interComp, interObj});
+                        }
                     }
-                }
-            }));
+                }));
+            }
+            catch (NotImplementedException ex){
+                System.out.print("Not implemented exception in collision checker");
+            }
+            finally {
+                collOverlap.stream().forEach(object -> object[0].isOverlapping(object[1]));
+                collOverlap.clear();
+                sleep(10);
+            }
 
-            collOverlap.stream().forEach(object -> object[0].isOverlapping(object[0]));
-            sleep(10);
         }
     }
     private boolean fncIsOverlap(InteractiveObject obA, InteractiveObject obB){

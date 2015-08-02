@@ -55,18 +55,18 @@ public abstract class InteractiveObject {
         iaLocation[1] = dPixelBottomY;
         return iaLocation;
     }
-    protected static double correctLocationX(double x){
+    protected double correctLocationX(double x){
         if (x < 0)
             x = 0;
-        if(x > 1024)
-            x = 1024;
+        if(x > wCaller.getWorldSizeInPixel()[0])
+            x = wCaller.getWorldSizeInPixel()[0];
         return x;
     }
-    protected static double correctLocationY(double y){
+    protected double correctLocationY(double y){
         if (y < 0)
             y = 0;
-        if(y > 778)
-           y = 778;
+        if(y > wCaller.getWorldSizeInPixel()[1])
+           y = wCaller.getWorldSizeInPixel()[1];
         return y;
     }
 
@@ -147,8 +147,18 @@ public abstract class InteractiveObject {
 
     protected void FncProccesHealth(int change){
         if (iHitpoints + change < 1) wCaller.FncRemoveFromColl(this);
-        else if (iHitpoints + change < 500) iHitpoints = 500;
+        else if (iHitpoints + change > 500) iHitpoints = 500;
         else iHitpoints += change;
+    }
+
+    protected void checkEnv(){
+        //calculate center
+        int[] corner = new int[2];
+        corner[0] = getLocation()[0] + getCurrentSprite().getWidth(); //pixel right
+        corner[1] = getLocation()[1] + getCurrentSprite().getHeight(); //pixel top
+        //int pixelLeft, int pixelBottom, int pixelRight, int pixelTop
+        int[][] iaSurrTiles = wCaller.getTilePositionsIn(getLocation()[0],getLocation()[1],corner[0],corner[1]);
+
     }
 
     protected void setSprite(int iCurrentSprite){

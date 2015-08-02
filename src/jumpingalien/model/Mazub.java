@@ -6,6 +6,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class Mazub extends InteractiveObject {
     //classe invarianten
     private boolean bImune;
+    //sprite counter
+    int iSpriteCounter = 0;
     private enHorState eLastHorState;
     private double dtLastMove;
     public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
@@ -18,8 +20,10 @@ public class Mazub extends InteractiveObject {
     @Override
     public void isOverlapping(InteractiveObject interObj) {
         if (interObj instanceof Plant) {
-            FncProccesHealth(100);
-            wCaller.FncRemoveFromColl(interObj);
+            if (getHealth() < 500) {
+                FncProccesHealth(100);
+                wCaller.FncRemoveFromColl(interObj);
+            }
             return;
         }
         if (interObj instanceof Shark) throw new NotImplementedException();
@@ -107,9 +111,12 @@ public class Mazub extends InteractiveObject {
     @Override
     protected int correctSprite(){
         int iCounter = 0;
-        //
-        //possible bij left en right going plus 2 en 3 //TODO
-        //
+        //sprite counter
+        if (iSpriteCounter < 10){
+            iSpriteCounter++;
+        } else {
+            iSpriteCounter = 0;
+        }
         //if ducking ++
         if (eVerState == enVertState.duck)
             iCounter++;
@@ -128,6 +135,19 @@ public class Mazub extends InteractiveObject {
         if (eVerState == enVertState.duck){
             if (eHorState != enHorState.stand)
                 iCounter +=3;
+        }
+
+        //al loopend
+        if (eHorState == enHorState.stand){
+            iSpriteCounter = 0;
+        }
+        if (getVelocity()[1] == 0 ) { //TODO check
+            if (eHorState == enHorState.left) {
+                iCounter = 19 + iSpriteCounter;
+            }
+            if (eHorState == enHorState.right){
+                iCounter = 8 + iSpriteCounter;
+            }
         }
         //return result
         return iCounter;

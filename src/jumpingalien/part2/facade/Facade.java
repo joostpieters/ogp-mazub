@@ -32,7 +32,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public World createWorld(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight, int targetTileX, int targetTileY) {
-        return new World(tileSize,nbTilesX,nbTilesY,visibleWindowWidth,visibleWindowHeight);
+        return new World(tileSize,nbTilesX,nbTilesY,visibleWindowWidth,visibleWindowHeight,targetTileX,targetTileY);
     }
 
     /**

@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 public class World {
     //classe invar
     Thread collisionThread;
-    Runnable collisionRunnable;
+    CollisionChecker collisionRunnable;
     //collection
     LinkedList<InteractiveObject> colInterActive = new LinkedList<>();
     //omgevings var
-    private int iTileSize,iNbTilesX,iNbTilesY,iVisibleWindowWidth,iVisibleWindowHeight;
+    private int iTileSize,iNbTilesX,iNbTilesY,iVisibleWindowWidth,iVisibleWindowHeight,iTargetX,iTargetY;
     //game state vars
     private enum enGameState{
         started,won,lost
@@ -23,12 +23,13 @@ public class World {
     //player
     private Mazub player;
 
-    public World(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight){
+    public World(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight, int targetX,int targetY){
         iTileSize = tileSize; iNbTilesX = nbTilesX; iNbTilesY = nbTilesY;
         iVisibleWindowHeight = visibleWindowHeight; iVisibleWindowWidth = visibleWindowWidth;
         collisionRunnable = new CollisionChecker(this);
         this.collisionThread = new Thread(collisionRunnable);
         collisionThread.start();
+        iTargetX = targetX;iTargetY = targetY;
 
     }
     @Deprecated
@@ -47,6 +48,7 @@ public class World {
     }
 
     public boolean isGameOver(){
+        //TODO
         switch (eGameState){
             case started:
                 return false;
@@ -59,12 +61,24 @@ public class World {
         }
     }
     public boolean didPlayerWin(){
-        switch (eGameState){
-            case won:
-                return true;
-            default:
-                return false;
+        int[] playerLocation = player.getLocation();
+        int[] winLocation = {getTileSize() * iTargetX,getTileSize() * iTargetY};
+        int iAX = player.getCurrentSprite().getWidth();
+        int iAY = player.getCurrentSprite().getHeight();
+
+        if (playerLocation[0] + iAX - 1 < winLocation[0]){
+            return false;
         }
+        if (winLocation[0] + getTileSize() - 1 < playerLocation[0]){
+            return false;
+        }
+        if (playerLocation[1] + iAY - 1 < winLocation[1]){
+            return false;
+        }
+        if (winLocation[1] + getTileSize() - 1 < playerLocation[1]){
+            return false;
+        }
+        return true;
     }
 
     public int[] getWorldSizeInPixel(){
@@ -138,7 +152,7 @@ public class World {
     }
 
 
-    public Collection<?> getCollection(Class obj){
+    public synchronized Collection<?> getCollection(Class obj){
         ArrayList<InteractiveObject> tempCol = new ArrayList<>();
         colInterActive.stream().filter(obj::isInstance).forEach(tempCol::add);
         return tempCol;
@@ -148,5 +162,12 @@ public class World {
     }
     public void advanceTime(double dt){
         player.advanceTime(dt);
+    }
+
+    protected void finialize(){
+        //todo collisionRunnable.stop();
+        collisionRunnable.stop();
+        collisionThread.stop();
+        collisionThread.destroy();
     }
 }
