@@ -52,11 +52,8 @@ public class CollisionChecker implements Runnable
                     }
                 }));
             }
-            catch (NotImplementedException ex){
+            catch (NotImplementedException ex) {
                 System.out.println("not implemented exception in collision checker");
-            }
-            catch (Exception ex){
-                ex.printStackTrace();
             }
             finally {
                 collOverlap.stream().forEach(object -> object[0].isOverlapping(object[1]));

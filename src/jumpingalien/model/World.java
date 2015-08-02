@@ -31,10 +31,6 @@ public class World extends TileMap{
         collisionThread.start();
 
     }
-    @Deprecated
-    public final Stream<InteractiveObject> getStream(){
-        return colInterActive.stream();
-    }
 
     public void startGame(){
         eGameState = enGameState.started;
@@ -59,6 +55,7 @@ public class World extends TileMap{
                 throw new IllegalStateException("unexpected gamestate");
         }
     }
+
     public boolean didPlayerWin(){
         //TODO
         return false;
@@ -101,15 +98,6 @@ public class World extends TileMap{
         colInterActive.add(obj);
     }
 
-    public int[][] translateTilePos(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop){
-        Tile[] tileArr = getTilePositionsIn(pixelLeft,pixelBottom,pixelRight,pixelTop);
-        int[][] possArr = new int[tileArr.length][2];
-        for (int i = 0; i< tileArr.length;i++){
-            possArr[i] = tileArr[i].getLocation();
-        }
-        return possArr;
-    }
-
 
     public synchronized Collection<?> getCollection(Class obj){
         ArrayList<InteractiveObject> tempCol = new ArrayList<>();
@@ -129,10 +117,5 @@ public class World extends TileMap{
         collisionThread.stop();
         collisionThread.destroy();
     }
-
-    public int[] getWorldSizeInPixel(){
-        return getMapSize();
-    }
-
 
 }

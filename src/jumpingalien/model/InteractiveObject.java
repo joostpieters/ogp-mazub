@@ -3,8 +3,6 @@ package jumpingalien.model;
 import be.kuleuven.cs.som.annotate.Basic;
 import jumpingalien.util.Sprite;
 
-import java.util.LinkedList;
-
 /**
  * Created by covert on 08/07/15.
  */
@@ -156,7 +154,7 @@ public abstract class InteractiveObject {
         corner[0] = getLocation()[0] + getCurrentSprite().getWidth(); //pixel right
         corner[1] = getLocation()[1] + getCurrentSprite().getHeight(); //pixel top
         //int pixelLeft, int pixelBottom, int pixelRight, int pixelTop
-        Tile[] iaSurrTiles = wCaller.getTilePositionsIn(getLocation()[0],getLocation()[1],corner[0],corner[1]);
+        Tile[] iaSurrTiles = wCaller.getTilePositionInTiles(getLocation()[0], getLocation()[1], corner[0], corner[1]);
 
     }
 

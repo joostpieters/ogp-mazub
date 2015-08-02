@@ -296,7 +296,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[] getBottomLeftPixelOfTile(World world, int tileX, int tileY) {
-        return world.getTileInArrPoss(tileX,tileY).getLocation();
+        return world.getTile(tileX,tileY).getLocation();
     }
 
     /**
@@ -317,7 +317,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[][] getTilePositionsIn(World world, int pixelLeft, int pixelBottom, int pixelRight, int pixelTop) {
-        return world.translateTilePos(pixelLeft,pixelBottom,pixelRight,pixelTop);
+        return world.getTilePositionInPixels(pixelLeft,pixelBottom,pixelRight,pixelTop);
     }
 
     /**
