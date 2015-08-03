@@ -1,5 +1,6 @@
 package jumpingalien.model;
 
+import java.security.InvalidParameterException;
 import java.util.LinkedList;
 public class TileMap {
     //collection of tiles
@@ -22,6 +23,10 @@ public class TileMap {
     public int getTileSize(){
         return iTileSize;
     }
+
+    public int[] getMaxTilePixel(){
+        return new int[]{tileMap.length * getTileSize() - getTileSize(), tileMap[0].length * getTileSize() - getTileSize()};
+    }
     public int[] getWorldSizeInPixel(){
         int[] iaSize = new int[2];
         iaSize[0] = iTileSize * tileMap.length;
@@ -36,35 +41,35 @@ public class TileMap {
     public void setGeoFeature(int tileX, int tileY, int tileType){
         tileMap[tileX][tileY].setGeoFeature(tileType);
     }
-    public Tile getTileInArrPoss(int tileX,int tileY){
+    public Tile getTileInArrPoss(int tileX,int tileY) throws ArrayIndexOutOfBoundsException{
         return tileMap[tileX][tileY];
     }
 
-    public Tile getTileinPixels(int pixelX, int pixelY) {
+    public Tile getTileinPixels(int pixelX, int pixelY) throws ArrayIndexOutOfBoundsException{
         return getTileInArrPoss((pixelX / iTileSize),(pixelY / iTileSize));
     }
 
-    public LinkedList<Tile> getTilePositionInTiles(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop) {
-        LinkedList<Tile> tileColl = new LinkedList<>();
-        for (Tile[] tmpRow: tileMap){
-            for (Tile tmpTile : tmpRow){
+    private int roundToTile(int tileCoor){
+        if (tileCoor < 0) throw new InvalidParameterException("tiles cannot be negative");
+        return (int) (Math.floor((tileCoor) / getTileSize()) * getTileSize());
+    }
 
-                if (pixelRight < tmpTile.getLocation()[0]){
-                    continue;
+    public LinkedList<Tile> getTilePositionInTiles(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop) {
+        //int grooteArray = ((pixelRight - pixelLeft) / getTileSize() + 2) * ((pixelTop - pixelBottom) / getTileSize() + 2);
+        LinkedList<Tile> tiles = new LinkedList<>();
+        pixelBottom = roundToTile(pixelBottom);
+        pixelLeft = roundToTile(pixelLeft);
+        pixelRight = roundToTile(pixelRight);
+        pixelTop = roundToTile(pixelTop);
+        for (int y = pixelBottom; y <= pixelTop ; y += getTileSize()) {
+            for (int x = pixelLeft; x <= pixelRight ; x += getTileSize()) {
+                if (x <= getMaxTilePixel()[0] && y <= getMaxTilePixel()[1]) {
+                    tiles.add(getTileinPixels(x, y));
                 }
-                if (tmpTile.getLocation()[0] + getTileSize() < pixelLeft){
-                    continue;
-                }
-                if (pixelTop < tmpTile.getLocation()[1]){
-                    continue;
-                }
-                if (tmpTile.getLocation()[1] + getTileSize() < pixelBottom){
-                    continue;
-                }
-                tileColl.add(tmpTile);
             }
         }
-        return tileColl;
+
+        return tiles;
         }
     public int[][] getTilePositionInArray(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop){
         LinkedList<Tile> tileColl = getTilePositionInTiles(pixelLeft, pixelBottom, pixelRight, pixelTop);
