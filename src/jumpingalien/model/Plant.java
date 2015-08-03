@@ -18,4 +18,9 @@ public class Plant extends ActiveObject {
 
     }
 
+    @Override
+    public void processEnv(int iEnvType) {
+
+    }
+
 }

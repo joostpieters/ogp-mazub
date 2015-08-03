@@ -46,6 +46,7 @@ public class TileMap {
     }
 
     public Tile getTileinPixels(int pixelX, int pixelY) throws ArrayIndexOutOfBoundsException{
+        roundToTile(pixelX);roundToTile(pixelY);
         return getTileInArrPoss((pixelX / iTileSize),(pixelY / iTileSize));
     }
 

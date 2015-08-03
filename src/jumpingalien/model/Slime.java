@@ -18,5 +18,10 @@ public class Slime extends ActiveObject {
     public void advanceTime(double dt) {
         throw new NotImplementedException();
     }
+
+    @Override
+    public void processEnv(int iEnvType) {
+
+    }
 }
 

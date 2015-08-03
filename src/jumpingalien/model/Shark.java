@@ -17,4 +17,9 @@ public class Shark extends ActiveObject {
     public void advanceTime(double dt) {
 
     }
+
+    @Override
+    public void processEnv(int iEnvType) {
+
+    }
 }
