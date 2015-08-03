@@ -40,44 +40,42 @@ public class TileMap {
         return tileMap[tileX][tileY];
     }
 
-    public Tile getTile(int pixelX, int pixelY) {
+    public Tile getTileinPixels(int pixelX, int pixelY) {
         return getTileInArrPoss((pixelX / iTileSize),(pixelY / iTileSize));
     }
 
-    public Tile[] getTilePositionInTiles(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop) {
+    public LinkedList<Tile> getTilePositionInTiles(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop) {
         LinkedList<Tile> tileColl = new LinkedList<>();
         for (Tile[] tmpRow: tileMap){
             for (Tile tmpTile : tmpRow){
 
-                if (pixelLeft + pixelRight - 1 < tmpTile.getLocation()[0]){
-                    tileColl.add(tmpTile);
+                if (pixelRight < tmpTile.getLocation()[0]){
                     continue;
                 }
-                if (tmpTile.getLocation()[0] + getTileSize() - 1 < pixelLeft){
-                    tileColl.add(tmpTile);
+                if (tmpTile.getLocation()[0] + getTileSize() < pixelLeft){
                     continue;
                 }
-                if (pixelBottom + pixelTop - 1 < tmpTile.getLocation()[1]){
-                    tileColl.add(tmpTile);
+                if (pixelTop < tmpTile.getLocation()[1]){
                     continue;
                 }
-                if (tmpTile.getLocation()[1] + getTileSize() - 1 < pixelBottom){
-                    tileColl.add(tmpTile);
+                if (tmpTile.getLocation()[1] + getTileSize() < pixelBottom){
+                    continue;
                 }
+                tileColl.add(tmpTile);
             }
-            }
-        return (Tile[]) tileColl.toArray();
         }
-    public int[][] getTilePositionInPixels(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop){
-        Tile[] tempArr = getTilePositionInTiles(pixelLeft, pixelBottom, pixelRight, pixelTop);
-        int[][] tileArr = new int[tempArr.length][2];
-        for (int i = 0; i < tempArr.length; i++){
-            tileArr[i] = tempArr[i].getLocation();
+        return tileColl;
+        }
+    public int[][] getTilePositionInArray(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop){
+        LinkedList<Tile> tileColl = getTilePositionInTiles(pixelLeft, pixelBottom, pixelRight, pixelTop);
+        int[][] tileArr = new int[tileColl.size()][2];
+        for (int i = 0; i < tileArr.length; i++){
+            tileArr[i] = tileColl.pop().getArrayLocation();
         }
         return tileArr;
     }
 
-    public int getGeologicalFeature(int x, int y){
-        return getTile(x,y).getGeoFeature();
+    public int getGeologicalFeature(int pixelX, int pixelY){
+        return getTileinPixels(pixelX,pixelY).getGeoFeature();
     }
 }

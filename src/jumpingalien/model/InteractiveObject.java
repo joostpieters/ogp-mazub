@@ -3,6 +3,8 @@ package jumpingalien.model;
 import be.kuleuven.cs.som.annotate.Basic;
 import jumpingalien.util.Sprite;
 
+import java.util.LinkedList;
+
 /**
  * Created by covert on 08/07/15.
  */
@@ -54,17 +56,27 @@ public abstract class InteractiveObject {
         return iaLocation;
     }
     protected double correctLocationX(double x){
-        if (x < 0)
-            x = 0;
-        if(x > wCaller.getWorldSizeInPixel()[0])
-            x = wCaller.getWorldSizeInPixel()[0];
+        try {
+            if (x < 0)
+                x = 0;
+            if (x > wCaller.getWorldSizeInPixel()[0])
+                x = wCaller.getWorldSizeInPixel()[0];
+        }
+        catch (Exception ex){
+            System.out.print("error in correction, correcting nothing");
+        }
         return x;
     }
     protected double correctLocationY(double y){
-        if (y < 0)
-            y = 0;
-        if(y > wCaller.getWorldSizeInPixel()[1])
-           y = wCaller.getWorldSizeInPixel()[1];
+        try {
+            if (y < 0)
+                y = 0;
+            if(y > wCaller.getWorldSizeInPixel()[1])
+                y = wCaller.getWorldSizeInPixel()[1];
+        }
+        catch (Exception ex){
+            System.out.print("error in correction, correcting nothing");
+        }
         return y;
     }
 
@@ -154,7 +166,7 @@ public abstract class InteractiveObject {
         corner[0] = getLocation()[0] + getCurrentSprite().getWidth(); //pixel right
         corner[1] = getLocation()[1] + getCurrentSprite().getHeight(); //pixel top
         //int pixelLeft, int pixelBottom, int pixelRight, int pixelTop
-        Tile[] iaSurrTiles = wCaller.getTilePositionInTiles(getLocation()[0], getLocation()[1], corner[0], corner[1]);
+        LinkedList<Tile> iaSurrTiles = wCaller.getTilePositionInTiles(getLocation()[0], getLocation()[1], corner[0], corner[1]);
 
     }
 

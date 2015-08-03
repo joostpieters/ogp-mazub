@@ -114,8 +114,6 @@ public class World extends TileMap{
     protected void finialize(){
         //todo collisionRunnable.stop();
         collisionRunnable.stop();
-        collisionThread.stop();
-        collisionThread.destroy();
     }
 
 }
