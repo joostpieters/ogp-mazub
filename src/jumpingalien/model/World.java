@@ -1,18 +1,15 @@
 package jumpingalien.model;
 
-import jdk.nashorn.internal.runtime.arrays.IteratorAction;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.stream.Stream;
 
 public class World extends TileMap{
     //classe invar
     Thread collisionThread;
     CollisionChecker collisionRunnable;
     //collection
-    LinkedList<InteractiveObject> colInterActive = new LinkedList<>();
+    LinkedList<ActiveObject> colInterActive = new LinkedList<>();
     //omgevings var
     private int iVisibleWindowWidth,iVisibleWindowHeight;
     //game state vars
@@ -93,18 +90,18 @@ public class World extends TileMap{
     }
 
 
-    public void addObject(InteractiveObject obj){
+    public void addObject(ActiveObject obj){
         obj.setWorld(this);
         colInterActive.add(obj);
     }
 
 
     public synchronized Collection<?> getCollection(Class obj){
-        ArrayList<InteractiveObject> tempCol = new ArrayList<>();
+        ArrayList<ActiveObject> tempCol = new ArrayList<>();
         colInterActive.stream().filter(obj::isInstance).forEach(tempCol::add);
         return tempCol;
     }
-    public void FncRemoveFromColl(InteractiveObject obj){
+    public void FncRemoveFromColl(ActiveObject obj){
         colInterActive.remove(obj);
     }
     public void advanceTime(double dt){

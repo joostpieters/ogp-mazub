@@ -5,10 +5,7 @@ import jumpingalien.util.Sprite;
 
 import java.util.LinkedList;
 
-/**
- * Created by covert on 08/07/15.
- */
-public abstract class InteractiveObject {
+public abstract class ActiveObject implements IntegratedObject{
     //classe invarianten
         //locatie var
         private double dPixelLeftX;
@@ -20,7 +17,7 @@ public abstract class InteractiveObject {
         private double dAccelerationX;
         private double dAccelerationY;
         //sprite var
-        private Sprite[] aSprite;
+        private final Sprite[] aSprite;
         private int iCurrentSprite;
         //hitpoints
         private int iHitpoints = 100;
@@ -39,7 +36,7 @@ public abstract class InteractiveObject {
         wCaller = world;
     }
 
-    public InteractiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites,int hitpoints){
+    public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints){
         dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
     }
     @Basic
@@ -151,22 +148,28 @@ public abstract class InteractiveObject {
         return aSprite[iCurrentSprite];
     }
 
-    public abstract void isOverlapping(InteractiveObject interObj);
-
-    public abstract void advanceTime(double dt);
-
     protected void FncProccesHealth(int change){
         if (iHitpoints + change < 1) wCaller.FncRemoveFromColl(this);
         else if (iHitpoints + change > 500) iHitpoints = 500;
         else iHitpoints += change;
     }
     protected void checkEnv(){
+        //in water, in lava
+        boolean[] bEnv = new boolean[2];
         //calculate center
         int[] corner = new int[2];
         corner[0] = getLocation()[0] + getCurrentSprite().getWidth(); //pixel right
         corner[1] = getLocation()[1] + getCurrentSprite().getHeight(); //pixel top
         //int pixelLeft, int pixelBottom, int pixelRight, int pixelTop
         LinkedList<Tile> iaSurrTiles = wCaller.getTilePositionInTiles(getLocation()[0], getLocation()[1], corner[0], corner[1]);
+        if (iaSurrTiles.parallelStream().anyMatch(obj -> obj.getGeoFeature() == 2)){
+            processEnv(2);
+        }
+        if (iaSurrTiles.parallelStream().anyMatch(obj -> obj.getGeoFeature() == 3)){
+            processEnv(4);
+        }
+    }
+    protected void checkSurrounding(){
 
     }
 

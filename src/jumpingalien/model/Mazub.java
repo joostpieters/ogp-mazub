@@ -3,7 +3,7 @@ package jumpingalien.model;
 import jumpingalien.util.Sprite;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Mazub extends InteractiveObject {
+public class Mazub extends ActiveObject {
     //classe invarianten
     private boolean bImune;
     //sprite counter
@@ -18,7 +18,7 @@ public class Mazub extends InteractiveObject {
     }
 
     @Override
-    public void isOverlapping(InteractiveObject interObj) {
+    public void isOverlapping(ActiveObject interObj) {
         if (interObj instanceof Plant) {
             if (getHealth() < 500) {
                 FncProccesHealth(100);
@@ -111,9 +111,19 @@ public class Mazub extends InteractiveObject {
         //calc new loc
         setLocationX(correctLocationX(getRawLocation()[0] + (getVelocity()[0] * dt) * 100));
         setLocationY(correctLocationY(getRawLocation()[1] + (getVelocity()[1] * dt) * 100));
+        //check surrounding
         //sprite
         setSprite(correctSprite());
+        //checkenv
+        checkEnv();
+
     }
+
+    @Override
+    public void processEnv(int iEnvType) {
+        //TODO
+    }
+
     @Override
     protected int correctSprite(){
         int iCounter = 0;

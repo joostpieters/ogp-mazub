@@ -22,6 +22,7 @@ public class Tile {
         iGeoFeature = GeoType;
     }
 
+
     public int getGeoFeature(){
         return iGeoFeature;
     }

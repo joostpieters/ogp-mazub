@@ -39,15 +39,15 @@ public class CollisionChecker implements Runnable
     @Override
     public void run()
     {
-        LinkedList<InteractiveObject[]> collOverlap = new LinkedList<>();
+        LinkedList<ActiveObject[]> collOverlap = new LinkedList<>();
         while(this.running())
         {
             try {
-                ArrayList<InteractiveObject> interColl = (ArrayList<InteractiveObject>) worldCaller.getCollection(InteractiveObject.class);
+                ArrayList<ActiveObject> interColl = (ArrayList<ActiveObject>) worldCaller.getCollection(ActiveObject.class);
                 interColl.stream().forEach(interObj -> interColl.stream().forEach(interComp -> {
                     if (interComp != interObj) {
                         if (fncIsOverlap(interComp, interObj)) {
-                            collOverlap.add(new InteractiveObject[]{interComp, interObj});
+                            collOverlap.add(new ActiveObject[]{interComp, interObj});
                         }
                     }
                 }));
@@ -62,7 +62,7 @@ public class CollisionChecker implements Runnable
             }
         }
     }
-    private static boolean fncIsOverlap(InteractiveObject obA, InteractiveObject obB){
+    private static boolean fncIsOverlap(ActiveObject obA, ActiveObject obB){
         int iAX = obA.getSize()[0];
         int iAY = obA.getSize()[1];
         int iBX = obB.getSize()[0];
