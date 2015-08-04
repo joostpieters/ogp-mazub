@@ -10,6 +10,9 @@ public abstract class ActiveObject implements IntegratedObject{
         //locatie var
         private double dPixelLeftX;
         private double dPixelBottomY;
+        //delta var
+        protected double dLastLeftX;
+        protected double dLastBottomY;
         //velocity var
         private double dVelocityX;
         private double dVelocityY;
@@ -25,7 +28,13 @@ public abstract class ActiveObject implements IntegratedObject{
         protected World wCaller;
 
     protected int correctSprite(){
-        return 0; //todo
+        if (getVelocity()[0] < 0){
+            return 0;
+        } else if (getVelocity()[0] > 0){
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
     public int getHealth(){
@@ -169,10 +178,57 @@ public abstract class ActiveObject implements IntegratedObject{
             processEnv(4);
         }
     }
-    protected void checkSurrounding(){
+    protected void calulateAndSetTraject(double dt){
+        //calc new vel
+        setVelocityX(getVelocity()[0] + getAcceleration()[0] * dt);
+        setVelocityY(getVelocity()[1] + getAcceleration()[1] * dt);
+        //calc new loc
+        double newLocationX = correctLocationX(getRawLocation()[0] + (getVelocity()[0] * dt) * 100);
+        double newLocationY = correctLocationY(getRawLocation()[1] + (getVelocity()[1] * dt) * 100);
 
+        setLocation(isValidLocation(newLocationX,newLocationY));
+    }
+    private double[] isValidLocation(double locationX,double locationY ) {
+        int[] corners = new int[4];
+        double[] daPos = new double[]{locationX, locationY};
+        corners[0] = wCaller.getGeologicalFeature((int) locationX + 1, (int) locationY + 1);
+        corners[1] = wCaller.getGeologicalFeature((int) locationX + getSize()[0] - 1, (int) locationY + 1);
+        corners[2] = wCaller.getGeologicalFeature((int) locationX + 1, (int) locationY + getSize()[1]);
+        corners[3] = wCaller.getGeologicalFeature((int) locationX + getSize()[0], (int) locationY + getSize()[1]);
+
+        if (corners[0] != 1 && corners[1] != 1) {
+            if (corners[2] == 1 && corners[3] == 1){
+                setVelocityY(0);
+                daPos[1] = getRawLocation()[1];
+            }
+            setAccelerationY(-10.0);
+        }
+        if (corners[0] == 1 || corners[1] == 1) {
+            setAccelerationY(0);
+            setVelocityY(0);
+            daPos[1] = getRawLocation()[1];
+        }
+        if ((wCaller.getGeologicalFeature((int) locationX + 1, (int) locationY + 3) == 1 || corners[2] == 1 || wCaller.getGeologicalFeature((int) locationX + 1, (int) locationY + (getSize()[1] / 2)) == 1) && getVelocity()[0] < 0) {
+            setAccelerationX(0);
+            setVelocityX(0);
+            daPos[0] = getRawLocation()[0];
+
+        }
+        if ((wCaller.getGeologicalFeature((int) locationX + getSize()[0], (int) locationY + 3) == 1 || wCaller.getGeologicalFeature((int) locationX + getSize()[0], (int) locationY + getSize()[1] / 2) == 1 || corners[3] == 1) && getVelocity()[0] > 0) {
+            setAccelerationX(0);
+            setVelocityX(0);
+            daPos[0] = getRawLocation()[0];
+        }
+
+        if ((corners[2] == 1 || corners[3] == 1) && getVelocity()[1] > 0) {
+            setAccelerationY(-10.0);
+        }
+        return daPos;
     }
 
+    private boolean checkForWall(int locationX,int locationY){
+        return wCaller.getTileinPixels(locationX,locationY).getGeoFeature() == 1;
+    }
     protected void setSprite(int iCurrentSprite){
         this.iCurrentSprite = iCurrentSprite;
     }

@@ -51,7 +51,7 @@ public class TileMap {
     }
 
     private int roundToTile(int tileCoor){
-        if (tileCoor < 0) throw new InvalidParameterException("tiles cannot be negative");
+        tileCoor = tileCoor < 0 ? 0 : tileCoor;
         return (int) (Math.floor((tileCoor) / getTileSize()) * getTileSize());
     }
 

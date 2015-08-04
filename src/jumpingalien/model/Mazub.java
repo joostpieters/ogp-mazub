@@ -26,8 +26,12 @@ public class Mazub extends ActiveObject {
             }
             return;
         }
-        if (interObj instanceof Shark) throw new NotImplementedException();
-        if (interObj instanceof Slime) throw new NotImplementedException();
+        if (interObj instanceof Shark){
+
+        }
+        if (interObj instanceof Slime){
+
+        }
     }
 
     //state var
@@ -45,19 +49,16 @@ public class Mazub extends ActiveObject {
 
     public void startJump(){
         eVerState = enVertState.jump;
-        //recalculate sprite //TODO
         setVelocityY(8);
         setAccelerationY(-10);
     }
     public void endJump(){
         eVerState = enVertState.stand;
-        //recalculate sprite //TODO
         if(getVelocity()[1] < 0)setVelocityY(0);
     }
 
     public void startMoveLeft(){
         eHorState = enHorState.left;
-        //recalculate sprite //TODO
         setVelocityX(-1);
         setAccelerationX(-0.9);
     }
@@ -65,12 +66,10 @@ public class Mazub extends ActiveObject {
         eHorState = enHorState.stand;
         setVelocityX(0);
         setAccelerationX(0);
-        //recalculate sprite //TODO
     }
 
     public void startMoveRight(){
         eHorState = enHorState.right;
-        //recalculate sprite //TODO
         setVelocityX(1);
         setAccelerationX(0.9);
     }
@@ -79,20 +78,18 @@ public class Mazub extends ActiveObject {
         eHorState = enHorState.stand;
         setVelocityX(0);
         setAccelerationX(0);
-        //recalculate sprite //TODO
     }
 
     public void startDuck(){
-        //recalculate sprite
         eVerState = enVertState.duck;
     }
     public void endDuck(){
-        //recalculate sprite
         eVerState = enVertState.stand;
     }
 
     public void advanceTime(double dt){
         //time en last move management
+        dLastLeftX = getRawLocation()[0];dLastBottomY = getRawLocation()[1];
         if (eHorState== eLastHorState)
             dtLastMove += dt;
         else {
@@ -105,31 +102,33 @@ public class Mazub extends ActiveObject {
         } else {
             iSpriteCounter = 0;
         }
-        //calc new vel
-        setVelocityX(getVelocity()[0] + getAcceleration()[0] * dt);
-        setVelocityY(getVelocity()[1] + getAcceleration()[1] * dt);
-        //calc new loc
-        setLocationX(correctLocationX(getRawLocation()[0] + (getVelocity()[0] * dt) * 100));
-        setLocationY(correctLocationY(getRawLocation()[1] + (getVelocity()[1] * dt) * 100));
+        //move
+        double counter = 0;
+        double newDt;
+        while (counter < dt){
+            newDt = Math.min(0.01/(Math.abs(getVelocity()[0])+Math.abs(getAcceleration()[0])*dt),0.01/(Math.abs(getVelocity()[1])+Math.abs(getAcceleration()[1])*dt));
+            if (newDt + counter > dt)
+                newDt = dt - counter;
+            counter += newDt;
+            calulateAndSetTraject(newDt);
+        }
         //check surrounding
         //sprite
         setSprite(correctSprite());
         //checkenv
         checkEnv();
+        //checkBoundry
 
     }
 
     @Override
     public void processEnv(int iEnvType) {
-        //TODO
+
     }
 
     @Override
     protected int correctSprite(){
         int iCounter = 0;
-        //
-        //possible bij left en right going plus 2 en 3 //TODO
-        //
         //if ducking ++
         if (eVerState == enVertState.duck)
             iCounter++;

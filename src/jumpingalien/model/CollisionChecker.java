@@ -5,9 +5,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-/**
- * Created by covert on 16/07/15.
- */
+
 public class CollisionChecker implements Runnable
 {
     private boolean isRunning = true;
@@ -40,7 +38,7 @@ public class CollisionChecker implements Runnable
     public void run()
     {
         LinkedList<ActiveObject[]> collOverlap = new LinkedList<>();
-        while(this.running())
+        while(running())
         {
             try {
                 ArrayList<ActiveObject> interColl = (ArrayList<ActiveObject>) worldCaller.getCollection(ActiveObject.class);

@@ -1,8 +1,5 @@
 package jumpingalien.model;
 
-/**
- * Created by covert on 02/08/15.
- */
 public class Tile {
     //class invar
     private int iPixelX,iPixelY,iNbX,iNbY,iGeoFeature;
@@ -18,7 +15,6 @@ public class Tile {
         return new int[]{iNbX,iNbY};
     }
     public void setGeoFeature(int GeoType){
-        //TODO check
         iGeoFeature = GeoType;
     }
 
