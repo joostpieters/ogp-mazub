@@ -1,15 +1,12 @@
 package jumpingalien.model;
 
 import jumpingalien.util.Sprite;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Mazub extends ActiveObject {
     //classe invarianten
-    private boolean bImune;
     //sprite counter
     private int iSpriteCounter;
     private enHorState eLastHorState;
-    private double dtLastMove;
     public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
         super(pixelLeftX, pixelBottomY, sprites,250);
         eVerState = enVertState.stand; eHorState = enHorState.stand;
@@ -21,30 +18,24 @@ public class Mazub extends ActiveObject {
     public void isOverlapping(ActiveObject interObj) {
         if (interObj instanceof Plant) {
             if (getHealth() < 500) {
-                FncProccesHealth(100);
+                FncProcessHealth(100);
                 wCaller.FncRemoveFromColl(interObj);
             }
             return;
         }
         if (interObj instanceof Shark){
-
-        }
-        if (interObj instanceof Slime){
-
+            if (jumpedOn(interObj)){
+                //TODO
+                wCaller.FncRemoveFromColl(interObj);
+            } else {
+                FncProcessHealth(-50);
+            }
         }
     }
 
-    //state var
-    protected enum enVertState{
-        jump,stand,duck
-    };
-    protected enum enHorState{
-        left,stand,right
-    };
-
-    private enVertState eVerState;
-    private enHorState eHorState;
-
+    private boolean jumpedOn(ActiveObject interObj){
+        return interObj.getLocation()[1] + interObj.getCurrentSprite().getHeight() * 0.9 <= getLocation()[1];
+    }
 
 
     public void startJump(){
@@ -87,7 +78,20 @@ public class Mazub extends ActiveObject {
         eVerState = enVertState.stand;
     }
 
+    private void processImune(double dt){
+        if (bImune){
+            dLastImune += dt;
+            if (dLastImune > 0.6){
+                System.out.println(dLastImune);
+                dLastImune = 0;
+                bImune = false;
+            }
+        }
+    }
+
     public void advanceTime(double dt){
+        //imune
+        processImune(dt);
         //time en last move management
         dLastLeftX = getRawLocation()[0];dLastBottomY = getRawLocation()[1];
         if (eHorState== eLastHorState)
@@ -116,13 +120,13 @@ public class Mazub extends ActiveObject {
         //sprite
         setSprite(correctSprite());
         //checkenv
-        checkEnv();
+        checkEnv(dt);
         //checkBoundry
 
     }
 
     @Override
-    public void processEnv(int iEnvType) {
+    public void processEnv(double dt,int iEnvType) {
 
     }
 
@@ -163,9 +167,5 @@ public class Mazub extends ActiveObject {
 
         //return result
         return iCounter;
-    }
-
-    public boolean isImune(){
-        return bImune;
     }
 }

@@ -8,18 +8,18 @@ public class Plant extends ActiveObject {
         super(x,y,sprites,100);
     }
 
-    @Override
+
     public void isOverlapping(ActiveObject interObj) {
         //Do nothing
     }
 
-    @Override
+
     public void advanceTime(double dt) {
 
     }
 
-    @Override
-    public void processEnv(int iEnvType) {
+
+    public void processEnv(double dt,int iEnvType) {
 
     }
 

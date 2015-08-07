@@ -9,19 +9,16 @@ public class Slime extends ActiveObject {
         //TODO school
     }
 
-    @Override
     public void isOverlapping(ActiveObject interObj) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        return;
     }
-
-    @Override
     public void advanceTime(double dt) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        return;
     }
-
-    @Override
-    public void processEnv(int iEnvType) {
-
+    public void processEnv(double dt,int iEnvType) {
+        return;
     }
 }
 

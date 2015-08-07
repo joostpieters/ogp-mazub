@@ -9,6 +9,6 @@ public interface IntegratedObject {
 
     public void advanceTime(double dt);
 
-    public void processEnv(int iEnvType);
+    public void processEnv(double dt,int iEnvType);
 
 }

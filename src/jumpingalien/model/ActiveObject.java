@@ -7,7 +7,18 @@ import java.util.LinkedList;
 
 public abstract class ActiveObject implements IntegratedObject{
     //classe invarianten
-        //locatie var
+        //state var
+        protected enum enVertState{
+            jump,stand,duck
+        };
+        protected enum enHorState{
+            left,stand,right
+        };
+
+        protected enVertState eVerState;
+        protected enHorState eHorState;
+        protected double dtLastMove;
+    //locatie var
         private double dPixelLeftX;
         private double dPixelBottomY;
         //delta var
@@ -23,6 +34,8 @@ public abstract class ActiveObject implements IntegratedObject{
         private final Sprite[] aSprite;
         private int iCurrentSprite;
         //hitpoints
+        protected boolean bImune = false;
+        protected double dLastImune;
         private int iHitpoints = 100;
         //caller
         protected World wCaller;
@@ -64,9 +77,9 @@ public abstract class ActiveObject implements IntegratedObject{
     protected double correctLocationX(double x){
         try {
             if (x < 0)
-                x = 0;
+                wCaller.objectDies(this);
             if (x > wCaller.getWorldSizeInPixel()[0])
-                x = wCaller.getWorldSizeInPixel()[0];
+                wCaller.objectDies(this);
         }
         catch (Exception ex){
             System.out.print("error in correction, correcting nothing");
@@ -76,9 +89,9 @@ public abstract class ActiveObject implements IntegratedObject{
     protected double correctLocationY(double y){
         try {
             if (y < 0)
-                y = 0;
+                wCaller.objectDies(this);
             if(y > wCaller.getWorldSizeInPixel()[1])
-                y = wCaller.getWorldSizeInPixel()[1];
+                wCaller.objectDies(this);
         }
         catch (Exception ex){
             System.out.print("error in correction, correcting nothing");
@@ -93,12 +106,14 @@ public abstract class ActiveObject implements IntegratedObject{
 
     protected void setLocationX(double x){
         //world check TODO
-        if (x < 0) throw new IllegalArgumentException("x is too small");
+        assert x >= 0;
+        //if (x < 0) throw new IllegalArgumentException("Object needs to die");
         dPixelLeftX = x;
     }
     protected void setLocationY(double y){
         //world check TODO
-        if(y < 0) throw new IllegalArgumentException("y is too small");
+        assert y >= 0;
+        //if(y < 0) throw new IllegalArgumentException("Object needs to die");
         dPixelBottomY = y;
     }
     @Basic
@@ -157,12 +172,16 @@ public abstract class ActiveObject implements IntegratedObject{
         return aSprite[iCurrentSprite];
     }
 
-    protected void FncProccesHealth(int change){
-        if (iHitpoints + change < 1) wCaller.FncRemoveFromColl(this);
+    protected synchronized void FncProcessHealth(int change){
+        if (change < 0) {
+            if (isImune()) return;
+            else setImune(true);
+        }
+        if (iHitpoints + change < 1) wCaller.objectDies(this);
         else if (iHitpoints + change > 500) iHitpoints = 500;
         else iHitpoints += change;
     }
-    protected void checkEnv(){
+    protected void checkEnv(double dt){
         //in water, in lava
         boolean[] bEnv = new boolean[2];
         //calculate center
@@ -172,10 +191,10 @@ public abstract class ActiveObject implements IntegratedObject{
         //int pixelLeft, int pixelBottom, int pixelRight, int pixelTop
         LinkedList<Tile> iaSurrTiles = wCaller.getTilePositionInTiles(getLocation()[0], getLocation()[1], corner[0], corner[1]);
         if (iaSurrTiles.parallelStream().anyMatch(obj -> obj.getGeoFeature() == 2)){
-            processEnv(2);
+            processEnv(dt,2);
         }
         if (iaSurrTiles.parallelStream().anyMatch(obj -> obj.getGeoFeature() == 3)){
-            processEnv(4);
+            processEnv(dt,3);
         }
     }
     protected void calulateAndSetTraject(double dt){
@@ -231,5 +250,12 @@ public abstract class ActiveObject implements IntegratedObject{
     }
     protected void setSprite(int iCurrentSprite){
         this.iCurrentSprite = iCurrentSprite;
+    }
+
+    public boolean isImune(){
+        return bImune;
+    }
+    private void setImune(boolean imune){
+        bImune = imune;
     }
 }

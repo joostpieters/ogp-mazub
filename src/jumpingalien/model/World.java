@@ -9,7 +9,7 @@ public class World extends TileMap{
     Thread collisionThread;
     CollisionChecker collisionRunnable;
     //collection
-    LinkedList<ActiveObject> colInterActive = new LinkedList<>();
+    private LinkedList<ActiveObject> colInterActive = new LinkedList<>();
     //omgevings var
     private int iVisibleWindowWidth,iVisibleWindowHeight;
     //game state vars
@@ -54,8 +54,10 @@ public class World extends TileMap{
     }
 
     public boolean didPlayerWin(){
-        //TODO
-        return false;
+        return (getTilePositionInTiles(player.getLocation()[0],player.getLocation()[1]
+                                        ,player.getLocation()[0] + player.getCurrentSprite().getWidth()
+                                        ,player.getLocation()[1] + player.getCurrentSprite().getHeight())
+                                        .stream().anyMatch(obj -> obj == getWinningTile()));
     }
 
     //left, bottom, right, top
@@ -104,8 +106,14 @@ public class World extends TileMap{
     public void FncRemoveFromColl(ActiveObject obj){
         colInterActive.remove(obj);
     }
+    public void objectDies(ActiveObject obj){
+        if (obj == player){
+            eGameState = enGameState.lost;
+        }
+        FncRemoveFromColl(obj);
+    }
     public void advanceTime(double dt){
-        player.advanceTime(dt);
+        ;
     }
 
     protected void finialize(){
