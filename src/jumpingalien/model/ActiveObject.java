@@ -210,20 +210,9 @@ public abstract class ActiveObject implements IntegratedObject{
     private double[] isValidLocation(double locationX,double locationY ) {
         //linksonder, linksboven,rechtsonder,rechtsboven
         double[] daPos = new double[]{locationX, locationY};
-
-        //onder
-        boolean linksonder = checkForWall(locationX , locationY - 1);
-        boolean rechtsonder = checkForWall(locationX + getSize()[0],locationY - 1);
-        if (linksonder || rechtsonder){
-            if (getAcceleration()[1] <= 0){
-                setAccelerationY(0);
-                setVelocityY(0);
-                daPos[1] = getRawLocation()[1];
-            }
-        }
         //boven
-        boolean linksboven = checkForWall(locationX + 1 , locationY);
-        boolean rechtsboven = checkForWall(locationX + 1 , locationY + getSize()[1]);
+        boolean linksboven = checkForWall(locationX + 1 , locationY + 1);
+        boolean rechtsboven = checkForWall(locationX + getSize()[0] - 1 , locationY + getSize()[1] - 1);
         if (linksboven || rechtsboven){
             if (bCanFall){
                 setAccelerationY(-10);
@@ -233,21 +222,36 @@ public abstract class ActiveObject implements IntegratedObject{
             setVelocityY(0);
             daPos[1] = getRawLocation()[1];
         }
+        //onder
+        boolean linksonder = checkForWall(locationX + 1, locationY - 1);
+        boolean rechtsonder = checkForWall(locationX + getSize()[0] - 1,locationY - 1);
+        if (linksonder || rechtsonder){
+            if (getVelocity()[1] <= 0){
+                setVelocityY(0);
+                daPos[1] = getRawLocation()[1];
+            }
+        }
         //links
-        boolean linksbenedenlinks = checkForWall(locationX - 1,locationY);
-        boolean linksbovenlinks = checkForWall(locationX - 1, locationY + getSize()[1]);
+        boolean linksbenedenlinks = checkForWall(locationX - 1,locationY + 1);
+        boolean linksbovenlinks = checkForWall(locationX - 1, locationY + getSize()[1] - 1);
         if (linksbenedenlinks ||linksbovenlinks){
-            setAccelerationX(0);
-            setVelocityX(0);
-            daPos[0] = getRawLocation()[0];
+            if (getVelocity()[0] < 0) {
+                setAccelerationX(0);
+                setVelocityX(0);
+                daPos[0] = getRawLocation()[0];
+            }
+
         }
         //rechts
-        boolean rechtsbenedenrechts = checkForWall(locationX + getSize()[0] + 1, locationY);
-        boolean rechtsbovenrechts = checkForWall(locationX + getSize()[0] + 1 , locationY + getSize()[1]);
+        boolean rechtsbenedenrechts = checkForWall(locationX + getSize()[0] + 1, locationY + 1);
+        boolean rechtsbovenrechts = checkForWall(locationX + getSize()[0] + 1 , locationY + getSize()[1] - 1);
         if (rechtsbenedenrechts || rechtsbovenrechts){
-            setAccelerationX(0);
-            setVelocityX(0);
-            daPos[0] = getRawLocation()[0];
+            if (getVelocity()[0] > 0){
+                setAccelerationX(0);
+                setVelocityX(0);
+                daPos[0] = getRawLocation()[0];
+            }
+
         }
 
         return daPos;
