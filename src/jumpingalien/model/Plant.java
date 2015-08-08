@@ -5,7 +5,7 @@ import jumpingalien.util.Sprite;
 public class Plant extends ActiveObject {
 
     public Plant (int x, int y, Sprite[] sprites){
-        super(x,y,sprites,100);
+        super(x,y,sprites,100,true,true);
     }
 
 

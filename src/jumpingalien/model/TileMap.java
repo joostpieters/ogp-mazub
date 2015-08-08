@@ -54,7 +54,11 @@ public class TileMap {
         tileCoor = tileCoor < 0 ? 0 : tileCoor;
         return (int) (Math.floor((tileCoor) / getTileSize()) * getTileSize());
     }
-
+    public LinkedList<Tile> getTilePositionInTiles(ActiveObject obj){
+        return getTilePositionInTiles(obj.getLocation()[0], obj.getLocation()[1]
+                ,obj.getLocation()[0] + obj.getCurrentSprite().getWidth()
+                ,obj.getLocation()[1] + obj.getCurrentSprite().getHeight());
+    }
     public LinkedList<Tile> getTilePositionInTiles(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop) {
         //int grooteArray = ((pixelRight - pixelLeft) / getTileSize() + 2) * ((pixelTop - pixelBottom) / getTileSize() + 2);
         LinkedList<Tile> tiles = new LinkedList<>();

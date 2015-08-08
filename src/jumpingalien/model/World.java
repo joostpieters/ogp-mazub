@@ -12,6 +12,11 @@ public class World extends TileMap{
     private LinkedList<ActiveObject> colInterActive = new LinkedList<>();
     //omgevings var
     private int iVisibleWindowWidth,iVisibleWindowHeight;
+
+    private synchronized LinkedList<ActiveObject> getColInterActive() {
+        return colInterActive;
+    }
+
     //game state vars
     private enum enGameState{
         started,won,lost
@@ -54,10 +59,7 @@ public class World extends TileMap{
     }
 
     public boolean didPlayerWin(){
-        return (getTilePositionInTiles(player.getLocation()[0],player.getLocation()[1]
-                                        ,player.getLocation()[0] + player.getCurrentSprite().getWidth()
-                                        ,player.getLocation()[1] + player.getCurrentSprite().getHeight())
-                                        .stream().anyMatch(obj -> obj == getWinningTile()));
+        return  (eGameState == enGameState.won);
     }
 
     //left, bottom, right, top
@@ -94,17 +96,17 @@ public class World extends TileMap{
 
     public void addObject(ActiveObject obj){
         obj.setWorld(this);
-        colInterActive.add(obj);
+        getColInterActive().add(obj);
     }
 
 
     public synchronized Collection<?> getCollection(Class obj){
         ArrayList<ActiveObject> tempCol = new ArrayList<>();
-        colInterActive.stream().filter(obj::isInstance).forEach(tempCol::add);
+        getColInterActive().stream().filter(obj::isInstance).forEach(tempCol::add);
         return tempCol;
     }
     public void FncRemoveFromColl(ActiveObject obj){
-        colInterActive.remove(obj);
+        getColInterActive().remove(obj);
     }
     public void objectDies(ActiveObject obj){
         if (obj == player){
@@ -113,7 +115,10 @@ public class World extends TileMap{
         FncRemoveFromColl(obj);
     }
     public void advanceTime(double dt){
-        ;
+        if (getTilePositionInTiles(player).stream().anyMatch(obj -> obj == getWinningTile()))
+            eGameState = enGameState.won;
+        player.advanceTime(dt);
+        //getColInterActive().stream().forEach(obj -> obj.advanceTime(dt));
     }
 
     protected void finialize(){

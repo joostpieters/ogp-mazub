@@ -5,7 +5,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Slime extends ActiveObject {
     public Slime (int x, int y, Sprite[] sprites,School school){
-        super(x,y,sprites,100);
+        super(x,y,sprites,100,false,false);
         //TODO school
     }
 

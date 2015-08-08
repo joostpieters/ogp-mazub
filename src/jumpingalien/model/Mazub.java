@@ -8,7 +8,7 @@ public class Mazub extends ActiveObject {
     private int iSpriteCounter;
     private enHorState eLastHorState;
     public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
-        super(pixelLeftX, pixelBottomY, sprites,250);
+        super(pixelLeftX, pixelBottomY, sprites,50,true,true);
         eVerState = enVertState.stand; eHorState = enHorState.stand;
         eLastHorState = enHorState.stand;
         dtLastMove = 0;
@@ -90,10 +90,9 @@ public class Mazub extends ActiveObject {
     }
 
     public void advanceTime(double dt){
+        super.advanceTime(dt);
         //imune
         processImune(dt);
-        //time en last move management
-        dLastLeftX = getRawLocation()[0];dLastBottomY = getRawLocation()[1];
         if (eHorState== eLastHorState)
             dtLastMove += dt;
         else {
@@ -106,21 +105,6 @@ public class Mazub extends ActiveObject {
         } else {
             iSpriteCounter = 0;
         }
-        //move
-        double counter = 0;
-        double newDt;
-        while (counter < dt){
-            newDt = Math.min(0.01/(Math.abs(getVelocity()[0])+Math.abs(getAcceleration()[0])*dt),0.01/(Math.abs(getVelocity()[1])+Math.abs(getAcceleration()[1])*dt));
-            if (newDt + counter > dt)
-                newDt = dt - counter;
-            counter += newDt;
-            calulateAndSetTraject(newDt);
-        }
-        //check surrounding
-        //sprite
-        setSprite(correctSprite());
-        //checkenv
-        checkEnv(dt);
         //checkBoundry
 
     }
@@ -129,7 +113,6 @@ public class Mazub extends ActiveObject {
     public void processEnv(double dt,int iEnvType) {
 
     }
-
     @Override
     protected int correctSprite(){
         int iCounter = 0;

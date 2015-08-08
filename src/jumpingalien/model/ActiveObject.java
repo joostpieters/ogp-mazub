@@ -39,14 +39,14 @@ public abstract class ActiveObject implements IntegratedObject{
         private int iHitpoints = 100;
         //caller
         protected World wCaller;
+        //env procedure
+        private final boolean bCanFall,bCanJump;
 
     protected int correctSprite(){
         if (getVelocity()[0] < 0){
             return 0;
-        } else if (getVelocity()[0] > 0){
-            return 1;
         } else {
-            return 2;
+            return 1;
         }
     }
 
@@ -58,8 +58,9 @@ public abstract class ActiveObject implements IntegratedObject{
         wCaller = world;
     }
 
-    public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints){
+    public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints,boolean canFall,boolean canJump){
         dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
+        bCanFall = canFall ;bCanJump = canJump;
     }
     @Basic
     public int[] getLocation(){
@@ -168,10 +169,12 @@ public abstract class ActiveObject implements IntegratedObject{
         return iaSize;
     }
     @Basic
+    protected void setSprite(int iCurrentSprite){
+        this.iCurrentSprite = iCurrentSprite;
+    }
     public Sprite getCurrentSprite(){
         return aSprite[iCurrentSprite];
     }
-
     protected synchronized void FncProcessHealth(int change){
         if (change < 0) {
             if (isImune()) return;
@@ -184,12 +187,8 @@ public abstract class ActiveObject implements IntegratedObject{
     protected void checkEnv(double dt){
         //in water, in lava
         boolean[] bEnv = new boolean[2];
-        //calculate center
-        int[] corner = new int[2];
-        corner[0] = getLocation()[0] + getCurrentSprite().getWidth(); //pixel right
-        corner[1] = getLocation()[1] + getCurrentSprite().getHeight(); //pixel top
         //int pixelLeft, int pixelBottom, int pixelRight, int pixelTop
-        LinkedList<Tile> iaSurrTiles = wCaller.getTilePositionInTiles(getLocation()[0], getLocation()[1], corner[0], corner[1]);
+        LinkedList<Tile> iaSurrTiles = wCaller.getTilePositionInTiles(this);
         if (iaSurrTiles.parallelStream().anyMatch(obj -> obj.getGeoFeature() == 2)){
             processEnv(dt,2);
         }
@@ -197,6 +196,7 @@ public abstract class ActiveObject implements IntegratedObject{
             processEnv(dt,3);
         }
     }
+
     protected void calulateAndSetTraject(double dt){
         //calc new vel
         setVelocityX(getVelocity()[0] + getAcceleration()[0] * dt);
@@ -208,48 +208,55 @@ public abstract class ActiveObject implements IntegratedObject{
         setLocation(isValidLocation(newLocationX,newLocationY));
     }
     private double[] isValidLocation(double locationX,double locationY ) {
-        int[] corners = new int[4];
+        //linksonder, linksboven,rechtsonder,rechtsboven
         double[] daPos = new double[]{locationX, locationY};
-        corners[0] = wCaller.getGeologicalFeature((int) locationX + 1, (int) locationY + 1);
-        corners[1] = wCaller.getGeologicalFeature((int) locationX + getSize()[0] - 1, (int) locationY + 1);
-        corners[2] = wCaller.getGeologicalFeature((int) locationX + 1, (int) locationY + getSize()[1]);
-        corners[3] = wCaller.getGeologicalFeature((int) locationX + getSize()[0], (int) locationY + getSize()[1]);
 
-        if (corners[0] != 1 && corners[1] != 1) {
-            if (corners[2] == 1 && corners[3] == 1){
+        //onder
+        boolean linksonder = checkForWall(locationX , locationY - 1);
+        boolean rechtsonder = checkForWall(locationX + getSize()[0],locationY - 1);
+        if (linksonder || rechtsonder){
+            if (getAcceleration()[1] <= 0){
+                setAccelerationY(0);
                 setVelocityY(0);
                 daPos[1] = getRawLocation()[1];
             }
-            setAccelerationY(-10.0);
         }
-        if (corners[0] == 1 || corners[1] == 1) {
-            setAccelerationY(0);
+        //boven
+        boolean linksboven = checkForWall(locationX + 1 , locationY);
+        boolean rechtsboven = checkForWall(locationX + 1 , locationY + getSize()[1]);
+        if (linksboven || rechtsboven){
+            if (bCanFall){
+                setAccelerationY(-10);
+            } else {
+                setAccelerationY(0);
+            }
             setVelocityY(0);
             daPos[1] = getRawLocation()[1];
         }
-        if ((wCaller.getGeologicalFeature((int) locationX + 1, (int) locationY + 3) == 1 || corners[2] == 1 || wCaller.getGeologicalFeature((int) locationX + 1, (int) locationY + (getSize()[1] / 2)) == 1) && getVelocity()[0] < 0) {
+        //links
+        boolean linksbenedenlinks = checkForWall(locationX - 1,locationY);
+        boolean linksbovenlinks = checkForWall(locationX - 1, locationY + getSize()[1]);
+        if (linksbenedenlinks ||linksbovenlinks){
             setAccelerationX(0);
             setVelocityX(0);
             daPos[0] = getRawLocation()[0];
-
         }
-        if ((wCaller.getGeologicalFeature((int) locationX + getSize()[0], (int) locationY + 3) == 1 || wCaller.getGeologicalFeature((int) locationX + getSize()[0], (int) locationY + getSize()[1] / 2) == 1 || corners[3] == 1) && getVelocity()[0] > 0) {
+        //rechts
+        boolean rechtsbenedenrechts = checkForWall(locationX + getSize()[0] + 1, locationY);
+        boolean rechtsbovenrechts = checkForWall(locationX + getSize()[0] + 1 , locationY + getSize()[1]);
+        if (rechtsbenedenrechts || rechtsbovenrechts){
             setAccelerationX(0);
             setVelocityX(0);
             daPos[0] = getRawLocation()[0];
         }
 
-        if ((corners[2] == 1 || corners[3] == 1) && getVelocity()[1] > 0) {
-            setAccelerationY(-10.0);
-        }
         return daPos;
     }
-
+    private boolean checkForWall(double locationx, double locationy){
+        return checkForWall((int) locationx,(int) locationy);
+    }
     private boolean checkForWall(int locationX,int locationY){
         return wCaller.getTileinPixels(locationX,locationY).getGeoFeature() == 1;
-    }
-    protected void setSprite(int iCurrentSprite){
-        this.iCurrentSprite = iCurrentSprite;
     }
 
     public boolean isImune(){
@@ -257,5 +264,22 @@ public abstract class ActiveObject implements IntegratedObject{
     }
     private void setImune(boolean imune){
         bImune = imune;
+    }
+
+    public void advanceTime(double dt){
+        double counter = 0;
+        double newDt;
+        while (counter < dt){
+            newDt = Math.min(0.01/(Math.abs(getVelocity()[0])+Math.abs(getAcceleration()[0])*dt),0.01/(Math.abs(getVelocity()[1])+Math.abs(getAcceleration()[1])*dt));
+            if (newDt + counter > dt)
+                newDt = dt - counter;
+            counter += newDt;
+            calulateAndSetTraject(newDt);
+        }
+        //check surrounding
+        //sprite
+        setSprite(correctSprite());
+        //checkenv
+        checkEnv(dt);
     }
 }

@@ -9,7 +9,7 @@ public class Shark extends ActiveObject {
     private final Random random = new Random();
 
     public Shark(int x, int y, Sprite[] sprites){
-        super(x,y,sprites,100);
+        super(x,y,sprites,100,true,true);
     }
 
 
@@ -20,26 +20,27 @@ public class Shark extends ActiveObject {
 
 
     public void advanceTime(double dt) {
-        /*if (getTimeSinceMovementChange() >= 2 + random.nextDouble() * 2) {
-            startMove(getDirection() == Direction.Left ? Direction.Right : Direction.Left);
-
-            if (isTopInWater()) {
-                setYAcceleration(random.nextDouble() * 0.4 - 0.2);
-            }
-        }*/
         int moveMultipl;
+        double dRandom = random.nextDouble();
         if (2 + random.nextDouble() * 2 <= dtLastMove){
             dtLastMove = 0;
+            //horizontal
             if (eHorState == enHorState.right){
-                moveMultipl = 1;
-            } else {
+                eHorState = enHorState.left;
                 moveMultipl = -1;
+            } else {
+                eHorState = enHorState.right;
+                moveMultipl = 1;
             }
-
+            setAccelerationX(moveMultipl * 1.5);
+            //vertical
+            if (wCaller.getTilePositionInTiles(this).parallelStream().allMatch(obj -> obj.getGeoFeature() != 0)){
+                setAccelerationY(0.4 * random.nextDouble() - 0.2);
+            }
         } else {
             dtLastMove += dt;
         }
-
+        super.advanceTime(dt);
     }
 
 
