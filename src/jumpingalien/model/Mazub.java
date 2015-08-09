@@ -4,11 +4,15 @@ import jumpingalien.util.Sprite;
 
 public class Mazub extends ActiveObject {
     //classe invarianten
+    double dInAir = 0;
+    boolean bInAir;
+    double dInMagma = 0;
+    boolean bInMagma;
     //sprite counter
     private int iSpriteCounter;
     private enHorState eLastHorState;
     public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
-        super(pixelLeftX, pixelBottomY, sprites,50,true,true);
+        super(pixelLeftX, pixelBottomY, sprites,50,true);
         eVerState = enVertState.stand; eHorState = enHorState.stand;
         eLastHorState = enHorState.stand;
         dtLastMove = 0;
@@ -109,9 +113,25 @@ public class Mazub extends ActiveObject {
 
     }
 
-    @Override
     public void processEnv(double dt,int iEnvType) {
-
+        //lucht
+        if (iEnvType == 2){
+            bInAir = true;
+            dInAir += dt;
+            if (dInAir <= 0.2){
+                dInAir -= 0.2;
+                FncProcessHealth(-6);
+            }
+        }
+        //water
+        if (iEnvType == 3){
+            bInMagma = true;
+            dInMagma += dt;
+            if (dInMagma <= 0.2){
+                dInMagma -= 0.2;
+                FncProcessHealth(-50);
+            }
+        }
     }
     @Override
     protected int correctSprite(){

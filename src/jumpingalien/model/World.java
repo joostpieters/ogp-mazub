@@ -115,10 +115,14 @@ public class World extends TileMap{
         FncRemoveFromColl(obj);
     }
     public void advanceTime(double dt){
-        if (getTilePositionInTiles(player).stream().anyMatch(obj -> obj == getWinningTile()))
-            eGameState = enGameState.won;
-        player.advanceTime(dt);
-        //getColInterActive().stream().forEach(obj -> obj.advanceTime(dt));
+        try {
+            if (getTilePositionInTiles(player).stream().anyMatch(obj -> obj == getWinningTile()))
+                eGameState = enGameState.won;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.print("no valid winning tile");
+        }
+        //player.advanceTime(dt);
+        getColInterActive().stream().forEach(obj -> obj.advanceTime(dt));
     }
 
     protected void finialize(){

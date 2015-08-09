@@ -40,7 +40,7 @@ public abstract class ActiveObject implements IntegratedObject{
         //caller
         protected World wCaller;
         //env procedure
-        private final boolean bCanFall,bCanJump;
+        private final boolean bCanFall;
 
     protected int correctSprite(){
         if (getVelocity()[0] < 0){
@@ -58,9 +58,9 @@ public abstract class ActiveObject implements IntegratedObject{
         wCaller = world;
     }
 
-    public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints,boolean canFall,boolean canJump){
+    public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints,boolean canFall){
         dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
-        bCanFall = canFall ;bCanJump = canJump;
+        bCanFall = canFall ;
     }
     @Basic
     public int[] getLocation(){
@@ -189,6 +189,9 @@ public abstract class ActiveObject implements IntegratedObject{
         boolean[] bEnv = new boolean[2];
         //int pixelLeft, int pixelBottom, int pixelRight, int pixelTop
         LinkedList<Tile> iaSurrTiles = wCaller.getTilePositionInTiles(this);
+        if (iaSurrTiles.parallelStream().anyMatch(obj -> obj.getGeoFeature() == 0)){
+            processEnv(dt,0);
+        }
         if (iaSurrTiles.parallelStream().anyMatch(obj -> obj.getGeoFeature() == 2)){
             processEnv(dt,2);
         }
@@ -211,8 +214,8 @@ public abstract class ActiveObject implements IntegratedObject{
         //linksonder, linksboven,rechtsonder,rechtsboven
         double[] daPos = new double[]{locationX, locationY};
         //boven
-        boolean linksboven = checkForWall(locationX + 1 , locationY + 1);
-        boolean rechtsboven = checkForWall(locationX + getSize()[0] - 1 , locationY + getSize()[1] - 1);
+        boolean linksboven = checkForWall(locationX + 2 , locationY + 1);
+        boolean rechtsboven = checkForWall(locationX + getSize()[0] - 2 , locationY + getSize()[1] - 1);
         if (linksboven || rechtsboven){
             if (bCanFall){
                 setAccelerationY(-10);
@@ -223,8 +226,8 @@ public abstract class ActiveObject implements IntegratedObject{
             daPos[1] = getRawLocation()[1];
         }
         //onder
-        boolean linksonder = checkForWall(locationX + 1, locationY - 1);
-        boolean rechtsonder = checkForWall(locationX + getSize()[0] - 1,locationY - 1);
+        boolean linksonder = checkForWall(locationX + 1, locationY - 2);
+        boolean rechtsonder = checkForWall(locationX + getSize()[0] - 1,locationY - 2);
         if (linksonder || rechtsonder){
             if (getVelocity()[1] <= 0){
                 setVelocityY(0);
@@ -232,8 +235,8 @@ public abstract class ActiveObject implements IntegratedObject{
             }
         }
         //links
-        boolean linksbenedenlinks = checkForWall(locationX - 1,locationY + 1);
-        boolean linksbovenlinks = checkForWall(locationX - 1, locationY + getSize()[1] - 1);
+        boolean linksbenedenlinks = checkForWall(locationX - 1,locationY + 2);
+        boolean linksbovenlinks = checkForWall(locationX - 1, locationY + getSize()[1] - 2);
         if (linksbenedenlinks ||linksbovenlinks){
             if (getVelocity()[0] < 0) {
                 setAccelerationX(0);
@@ -243,8 +246,8 @@ public abstract class ActiveObject implements IntegratedObject{
 
         }
         //rechts
-        boolean rechtsbenedenrechts = checkForWall(locationX + getSize()[0] + 1, locationY + 1);
-        boolean rechtsbovenrechts = checkForWall(locationX + getSize()[0] + 1 , locationY + getSize()[1] - 1);
+        boolean rechtsbenedenrechts = checkForWall(locationX + getSize()[0] + 1, locationY + 2);
+        boolean rechtsbovenrechts = checkForWall(locationX + getSize()[0] + 1 , locationY + getSize()[1] - 2);
         if (rechtsbenedenrechts || rechtsbovenrechts){
             if (getVelocity()[0] > 0){
                 setAccelerationX(0);

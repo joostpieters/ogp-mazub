@@ -6,10 +6,18 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.Random;
 
 public class Shark extends ActiveObject {
+    //class invar
     private final Random random = new Random();
+    double dMovePeriod = random.nextDouble() * 2 + 2;
+    double dMoveTimer = 0;
+    int iMoveMutilpr = 1;
+    double dInAir = 0;
+    boolean bInAir;
+    double dInMagma = 0;
+    boolean bInMagma;
 
     public Shark(int x, int y, Sprite[] sprites){
-        super(x,y,sprites,100,true,true);
+        super(x,y,sprites,100,true);
     }
 
 
@@ -20,31 +28,43 @@ public class Shark extends ActiveObject {
 
 
     public void advanceTime(double dt) {
-        int moveMultipl;
-        double dRandom = random.nextDouble();
-        if (2 + random.nextDouble() * 2 <= dtLastMove){
-            dtLastMove = 0;
-            //horizontal
-            if (eHorState == enHorState.right){
-                eHorState = enHorState.left;
-                moveMultipl = -1;
-            } else {
-                eHorState = enHorState.right;
-                moveMultipl = 1;
-            }
-            setAccelerationX(moveMultipl * 1.5);
-            //vertical
-            if (wCaller.getTilePositionInTiles(this).parallelStream().allMatch(obj -> obj.getGeoFeature() != 0)){
-                setAccelerationY(0.4 * random.nextDouble() - 0.2);
-            }
+        bInAir = false; bInMagma = false;
+        //horizontal movement
+        if (dMovePeriod < dMoveTimer){
+            iMoveMutilpr *= -1;
+            dMoveTimer = 0;dMovePeriod = random.nextDouble() * 2 + 2;
+            setAccelerationX(1.5 * iMoveMutilpr);
         } else {
-            dtLastMove += dt;
+            dMoveTimer += dt;
         }
+        if (wCaller.getTilePositionInTiles(this).stream().anyMatch(obj -> obj.getGeoFeature() == 2)){
+            setVelocityY(2 * Math.sin((dMoveTimer / (dMovePeriod/2)) * Math.PI));
+        }
+
         super.advanceTime(dt);
+        if(!bInAir) dInAir = 0;
+        if(!bInMagma) dInMagma = 0;
     }
 
 
     public void processEnv(double dt,int iEnvType) {
-
+        //lucht
+        if (iEnvType == 0){
+            bInAir = true;
+            dInAir += dt;
+            if (dInAir <= 0.2){
+                dInAir -= 0.2;
+                FncProcessHealth(-6);
+            }
+        }
+        //lava
+        if (iEnvType == 3){
+            bInMagma = true;
+            dInMagma += dt;
+            if (dInMagma <= 0.2){
+                dInMagma -= 0.2;
+                FncProcessHealth(-50);
+            }
+        }
     }
 }
