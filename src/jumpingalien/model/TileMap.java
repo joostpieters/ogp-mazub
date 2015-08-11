@@ -34,11 +34,11 @@ public class TileMap {
         return iaSize;
     }
 
-    public Tile getWinningTile(){
+    public Tile getWinningTile()throws ArrayIndexOutOfBoundsException{
         return tileMap[iTargetTileX][iTargetTileY];
     }
 
-    public void setGeoFeature(int tileX, int tileY, int tileType){
+    public void setGeoFeature(int tileX, int tileY, int tileType)throws ArrayIndexOutOfBoundsException{
         tileMap[tileX][tileY].setGeoFeature(tileType);
     }
     public Tile getTileInArrPoss(int tileX,int tileY) throws ArrayIndexOutOfBoundsException{

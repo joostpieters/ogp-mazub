@@ -49,6 +49,16 @@ public abstract class ActiveObject implements IntegratedObject{
             return 1;
         }
     }
+    protected void correctCollision(ActiveObject collidingObj){
+
+    }
+    private int getDirection(ActiveObject interObj) {
+        if (interObj.getLocation()[1] + interObj.getCurrentSprite().getHeight() * 0.9 <= getLocation()[1]) {
+            return 1;
+
+        }
+        return -1;
+    }
 
     public int getHealth(){
         return iHitpoints;
@@ -63,10 +73,15 @@ public abstract class ActiveObject implements IntegratedObject{
         bCanFall = canFall ;
     }
     @Basic
-    public int[] getLocation(){
+    public int[] getLocation() throws ClassCastException{
         int[] iaLocation = new int[2];
-        iaLocation[0] = (int) dPixelLeftX;
-        iaLocation[1] = (int) dPixelBottomY;
+        try {
+            iaLocation[0] = (int) dPixelLeftX;
+            iaLocation[1] = (int) dPixelBottomY;
+        }
+        catch (ClassCastException ex){
+            ex.printStackTrace();
+        }
         return iaLocation;
     }
     public double[] getRawLocation(){
@@ -147,7 +162,7 @@ public abstract class ActiveObject implements IntegratedObject{
         return daAcceleration;
     }
 
-    protected void setAcceleration(double[] daAccel){
+    protected void setAcceleration(double[] daAccel) throws IllegalArgumentException{
         if(daAccel.length != 2) throw new IllegalArgumentException("double array needs only an x & y value");
         //TODO test
         setAccelerationX(daAccel[0]);
@@ -162,10 +177,14 @@ public abstract class ActiveObject implements IntegratedObject{
         dAccelerationY = y;
     }
     @Basic
-    public int[] getSize(){
+    public int[] getSize() throws ArrayIndexOutOfBoundsException{
         int[] iaSize = new int[2];
-        iaSize[0] = aSprite[iCurrentSprite].getWidth();
-        iaSize[1] = aSprite[iCurrentSprite].getHeight();
+        try {
+            iaSize[0] = aSprite[iCurrentSprite].getWidth();
+            iaSize[1] = aSprite[iCurrentSprite].getHeight();
+        } catch (ArrayIndexOutOfBoundsException ex){
+            ex.printStackTrace();
+        }
         return iaSize;
     }
     @Basic
@@ -175,10 +194,9 @@ public abstract class ActiveObject implements IntegratedObject{
     public Sprite getCurrentSprite(){
         return aSprite[iCurrentSprite];
     }
-    protected synchronized void FncProcessHealth(int change){
+    protected synchronized void FncProcessHealth(int change, boolean isImune){
         if (change < 0) {
             if (isImune()) return;
-            else setImune(true);
         }
         if (iHitpoints + change < 1) wCaller.objectDies(this);
         else if (iHitpoints + change > 500) iHitpoints = 500;
@@ -216,12 +234,12 @@ public abstract class ActiveObject implements IntegratedObject{
         //boven
         boolean linksboven = checkForWall(locationX + 2 , locationY + 1);
         boolean rechtsboven = checkForWall(locationX + getSize()[0] - 2 , locationY + getSize()[1] - 1);
+        if (bCanFall){
+            setAccelerationY(-10);
+        } else {
+            setAccelerationY(0);
+        }
         if (linksboven || rechtsboven){
-            if (bCanFall){
-                setAccelerationY(-10);
-            } else {
-                setAccelerationY(0);
-            }
             setVelocityY(0);
             daPos[1] = getRawLocation()[1];
         }

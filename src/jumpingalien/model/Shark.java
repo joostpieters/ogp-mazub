@@ -11,6 +11,7 @@ public class Shark extends ActiveObject {
     double dMovePeriod = random.nextDouble() * 2 + 2;
     double dMoveTimer = 0;
     int iMoveMutilpr = 1;
+    int jumpTimer = 0;
     double dInAir = 0;
     boolean bInAir;
     double dInMagma = 0;
@@ -32,13 +33,15 @@ public class Shark extends ActiveObject {
         //horizontal movement
         if (dMovePeriod < dMoveTimer){
             iMoveMutilpr *= -1;
-            dMoveTimer = 0;dMovePeriod = random.nextDouble() * 2 + 2;
+            dMoveTimer = 0;dMovePeriod = random.nextDouble() * 3 + 1;
             setAccelerationX(1.5 * iMoveMutilpr);
+            jumpTimer++;
         } else {
             dMoveTimer += dt;
-        }
-        if (wCaller.getTilePositionInTiles(this).stream().anyMatch(obj -> obj.getGeoFeature() == 2)){
-            setVelocityY(2 * Math.sin((dMoveTimer / (dMovePeriod/2)) * Math.PI));
+            if (jumpTimer > 3) {
+                jumpTimer = 0;
+                setVelocityY(2);
+            }
         }
 
         super.advanceTime(dt);
@@ -54,7 +57,7 @@ public class Shark extends ActiveObject {
             dInAir += dt;
             if (dInAir <= 0.2){
                 dInAir -= 0.2;
-                FncProcessHealth(-6);
+                FncProcessHealth(-6,false);
             }
         }
         //lava
@@ -63,7 +66,7 @@ public class Shark extends ActiveObject {
             dInMagma += dt;
             if (dInMagma <= 0.2){
                 dInMagma -= 0.2;
-                FncProcessHealth(-50);
+                FncProcessHealth(-50,false);
             }
         }
     }

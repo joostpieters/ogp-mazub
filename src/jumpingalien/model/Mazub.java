@@ -22,27 +22,19 @@ public class Mazub extends ActiveObject {
     public void isOverlapping(ActiveObject interObj) {
         if (interObj instanceof Plant) {
             if (getHealth() < 500) {
-                FncProcessHealth(100);
+                FncProcessHealth(100,false);
                 wCaller.FncRemoveFromColl(interObj);
             }
             return;
         }
         if (interObj instanceof Shark){
-            if (jumpedOn(interObj)){
-                //TODO
-                wCaller.FncRemoveFromColl(interObj);
-            } else {
-                FncProcessHealth(-50);
-            }
+            FncProcessHealth(-50,isImune());
+            bImune = true;
         }
     }
 
-    private boolean jumpedOn(ActiveObject interObj){
-        return interObj.getLocation()[1] + interObj.getCurrentSprite().getHeight() * 0.9 <= getLocation()[1];
-    }
 
-
-    public void startJump(){
+    public void startJump() {
         eVerState = enVertState.jump;
         setVelocityY(8);
         setAccelerationY(-10);
@@ -114,22 +106,22 @@ public class Mazub extends ActiveObject {
     }
 
     public void processEnv(double dt,int iEnvType) {
-        //lucht
+        //water
         if (iEnvType == 2){
             bInAir = true;
             dInAir += dt;
             if (dInAir <= 0.2){
                 dInAir -= 0.2;
-                FncProcessHealth(-6);
+                FncProcessHealth(-6,false);
             }
         }
-        //water
+        //magma
         if (iEnvType == 3){
             bInMagma = true;
             dInMagma += dt;
             if (dInMagma <= 0.2){
                 dInMagma -= 0.2;
-                FncProcessHealth(-50);
+                FncProcessHealth(-50,false);
             }
         }
     }
