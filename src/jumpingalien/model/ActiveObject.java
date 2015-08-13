@@ -1,6 +1,7 @@
 package jumpingalien.model;
 
 import be.kuleuven.cs.som.annotate.Basic;
+import jumpingalien.model.programs.Program;
 import jumpingalien.util.Sprite;
 
 import java.util.LinkedList;
@@ -41,6 +42,17 @@ public abstract class ActiveObject implements IntegratedObject{
         protected World wCaller;
         //env procedure
         private final boolean bCanFall;
+        //possible programs
+        protected Program controllingProgram;
+
+    public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints,boolean canFall){
+        dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
+        bCanFall = canFall ;
+    }
+    public ActiveObject(int pixelLeftX,int pixelBottomY,Sprite[] sprites,int hitpoints,boolean canFall,Program program){
+        dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
+        bCanFall = canFall ; controllingProgram = program;
+    }
 
     protected int correctSprite(){
         if (getVelocity()[0] < 0){
@@ -68,10 +80,6 @@ public abstract class ActiveObject implements IntegratedObject{
         wCaller = world;
     }
 
-    public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints,boolean canFall){
-        dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
-        bCanFall = canFall ;
-    }
     @Basic
     public int[] getLocation() throws ClassCastException{
         int[] iaLocation = new int[2];

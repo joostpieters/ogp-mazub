@@ -30,7 +30,7 @@ public abstract class ParseOutcome<T> {
 
 	/**
 	 * Create a new ParseOutcome that denotes success.
-	 * The parse result is a Program object that represents the parsed program.
+	 * The parse result is a Program object that represents the parsed programs.
 	 */
 	public static Success success(Program program) {
 		return new Success(program);

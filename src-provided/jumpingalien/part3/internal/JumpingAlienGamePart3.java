@@ -178,7 +178,7 @@ public class JumpingAlienGamePart3 extends JumpingAlienGame {
 			if (outcome.isSuccess()) {
 				return Optional.ofNullable((Program) outcome.getResult());
 			} else {
-				System.out.println("Errors while parsing program '" + filename
+				System.out.println("Errors while parsing programs '" + filename
 						+ "':");
 				for (String error : (List<String>) outcome.getResult()) {
 					System.out.println(error);

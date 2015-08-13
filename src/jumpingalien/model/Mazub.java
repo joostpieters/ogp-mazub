@@ -1,5 +1,6 @@
 package jumpingalien.model;
 
+import jumpingalien.model.programs.Program;
 import jumpingalien.util.Sprite;
 
 public class Mazub extends ActiveObject {
@@ -11,8 +12,16 @@ public class Mazub extends ActiveObject {
     //sprite counter
     private int iSpriteCounter;
     private enHorState eLastHorState;
+
     public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
         super(pixelLeftX, pixelBottomY, sprites,50,true);
+        eVerState = enVertState.stand; eHorState = enHorState.stand;
+        eLastHorState = enHorState.stand;
+        dtLastMove = 0;
+    }
+
+    public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites, Program program){
+        super(pixelLeftX, pixelBottomY, sprites,50,true,program);
         eVerState = enVertState.stand; eHorState = enHorState.stand;
         eLastHorState = enHorState.stand;
         dtLastMove = 0;

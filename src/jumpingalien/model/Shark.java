@@ -1,7 +1,7 @@
 package jumpingalien.model;
 
+import jumpingalien.model.programs.Program;
 import jumpingalien.util.Sprite;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Random;
 
@@ -19,6 +19,10 @@ public class Shark extends ActiveObject {
 
     public Shark(int x, int y, Sprite[] sprites){
         super(x,y,sprites,100,true);
+    }
+
+    public Shark(int x, int y, Sprite[] sprites,Program program){
+        super(x,y,sprites,100,true,program);
     }
 
 

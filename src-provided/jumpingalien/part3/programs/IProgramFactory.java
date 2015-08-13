@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A interface for a factory to create a program, which consists of expressions,
+ * A interface for a factory to create a programs, which consists of expressions,
  * statements and types.
  * 
  * The generic parameters E, S, T, and P must be instantiated with the concrete
  * classes that you have written to represent an expression, a statement, a
- * type, and a program, respectively.
+ * type, and a programs, respectively.
  * 
  * When an expression, statement or type declaration is encountered by the
  * parser, this will call the corresponding factory method.
@@ -67,7 +67,7 @@ public interface IProgramFactory<E, S, T, P> {
 
 	/**
 	 * An expression that evaluates to the game object that is executing the
-	 * program
+	 * programs
 	 */
 	E createSelf(SourceLocation sourceLocation);
 
@@ -298,31 +298,31 @@ public interface IProgramFactory<E, S, T, P> {
 	S createPrint(E value, SourceLocation sourceLocation);
 
 	/**
-	 * A statement that makes the object executing the program start moving in
+	 * A statement that makes the object executing the programs start moving in
 	 * the given direction
 	 */
 	S createStartRun(E direction, SourceLocation sourceLocation);
 
 	/**
-	 * A statement that makes the object executing the program stop moving in
+	 * A statement that makes the object executing the programs stop moving in
 	 * the given direction
 	 */
 	S createStopRun(E direction, SourceLocation sourceLocation);
 
-	/** A statement that makes the object executing the program start jumping */
+	/** A statement that makes the object executing the programs start jumping */
 	S createStartJump(SourceLocation sourceLocation);
 
-	/** A statement that makes the object executing the program stop jumping */
+	/** A statement that makes the object executing the programs stop jumping */
 	S createStopJump(SourceLocation sourceLocation);
 
-	/** A statement that makes the object executing the program start ducking */
+	/** A statement that makes the object executing the programs start ducking */
 	S createStartDuck(SourceLocation sourceLocation);
 
-	/** A statement that makes the object executing the program stop ducking */
+	/** A statement that makes the object executing the programs stop ducking */
 	S createStopDuck(SourceLocation sourceLocation);
 
 	/**
-	 * A statement that suspends the execution of the program for the given
+	 * A statement that suspends the execution of the programs for the given
 	 * duration
 	 */
 	S createWait(E duration, SourceLocation sourceLocation);
@@ -350,7 +350,7 @@ public interface IProgramFactory<E, S, T, P> {
 	/* * Program * */
 
 	/**
-	 * Create a program with the given main statement and variable declarations.
+	 * Create a programs with the given main statement and variable declarations.
 	 * The globalVariables map contains the type for each declared variable,
 	 * with the name of the variable as the key.
 	 */

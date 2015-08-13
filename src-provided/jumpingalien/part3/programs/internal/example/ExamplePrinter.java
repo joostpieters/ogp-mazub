@@ -13,7 +13,7 @@ public class ExamplePrinter {
 				factory);
 
 		Optional<PrintingProgram> program = parser.parseFile("resources/programs/buzam.txt");
-		//Optional<PrintingProgram> program = parser.parseString("double d := 1.0; while d < 3 do d := d + 1; print d; done");		
+		//Optional<PrintingProgram> programs = parser.parseString("double d := 1.0; while d < 3 do d := d + 1; print d; done");
 		
 		if (program.isPresent()) {
 			System.out.println("Parsing successful");

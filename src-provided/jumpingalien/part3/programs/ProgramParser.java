@@ -44,7 +44,7 @@ import org.antlr.v4.runtime.Recognizer;
  * </pre></code>
  * 
  * If parsing is successful, <code>parseResult.isPresent()</code> returns true
- * and <code>parseResult.get()</code> returns the created program.
+ * and <code>parseResult.get()</code> returns the created programs.
  * 
  * If parsing was not successful, <code>parseResult.isPresent()</code> returns
  * false and <code>parser.getErrors()</code> can be used to retrieve the list of

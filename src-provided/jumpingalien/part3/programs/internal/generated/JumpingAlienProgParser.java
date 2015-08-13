@@ -3,10 +3,8 @@ package jumpingalien.part3.programs.internal.generated;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
@@ -42,7 +40,7 @@ public class JumpingAlienProgParser extends Parser {
 		RULE_bool_type = 23, RULE_object_type = 24, RULE_direction_type = 25, 
 		RULE_kind = 26, RULE_sortDirection = 27, RULE_direction = 28;
 	public static final String[] ruleNames = {
-		"program", "declaration", "statement", "singleStatement", "assignStatement", 
+		"programs", "declaration", "statement", "singleStatement", "assignStatement",
 		"whileStatement", "foreachStatement", "breakStatement", "ifStatement", 
 		"printStatement", "actionStatement", "startRunStatement", "stopRunStatement", 
 		"startJumpStatement", "stopJumpStatement", "startDuckStatement", "stopDuckStatement", 

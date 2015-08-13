@@ -42,7 +42,7 @@ import jumpingalien.util.Sprite;
  * <li>a class <code>School</code> for representing a slime school</li>
  * <li>a class <code>Buzam</code> for representing Buzam, the evil twin of Mazub
  * </li>
- * <li>a class <code>Program</code> for representing a program</li>
+ * <li>a class <code>Program</code> for representing a programs</li>
  * </ul>
  * You may, of course, add additional classes as you see fit.
  * 
@@ -125,8 +125,8 @@ public interface IFacadePart3 extends IFacadePart2 {
 	 *            The sprites to be used by Buzam (following the same structure
 	 *            as the table for Mazub in the assignment).
 	 * @param program
-	 *            The program to execute, or null of Buzam should not execute a
-	 *            program.
+	 *            The programs to execute, or null of Buzam should not execute a
+	 *            programs.
 	 */
 	public Buzam createBuzamWithProgram(int pixelLeftX, int pixelBottomY,
 			Sprite[] sprites, Program program);
@@ -143,7 +143,7 @@ public interface IFacadePart3 extends IFacadePart2 {
 	 * @param sprites
 	 *            An array of sprites for the new plant
 	 * @param program
-	 *            The program that this plant should execute, or null if the
+	 *            The programs that this plant should execute, or null if the
 	 *            plant should follow its default behavior.
 	 * 
 	 * @return A new plant, located at the provided location. The returned plant
@@ -163,7 +163,7 @@ public interface IFacadePart3 extends IFacadePart2 {
 	 * @param sprites
 	 *            An array of sprites for the new shark
 	 * @param program
-	 *            The program that this shark should execute, or null if the
+	 *            The programs that this shark should execute, or null if the
 	 *            shark should follow its default behavior.
 	 * 
 	 * @return A new shark, located at the provided location. The returned shark
@@ -185,7 +185,7 @@ public interface IFacadePart3 extends IFacadePart2 {
 	 * @param school
 	 *            The initial school to which the new slime belongs
 	 * @param program
-	 *            The program that this slime should execute, or null if the
+	 *            The programs that this slime should execute, or null if the
 	 *            slime should follow its default behavior.
 	 * 
 	 * @return A new slime, located at the provided location and part of the
@@ -195,7 +195,7 @@ public interface IFacadePart3 extends IFacadePart2 {
 			School school, Program program);
 
 	/**
-	 * Parse the given text into the program.
+	 * Parse the given text into the programs.
 	 * Follow the instructions given in {@link ProgramParser}.
 	 * 
 	 * @param text
@@ -208,12 +208,12 @@ public interface IFacadePart3 extends IFacadePart2 {
 	ParseOutcome<?> parse(String text);
 
 	/**
-	 * Returns whether the given program is well-formed according to the rules
+	 * Returns whether the given programs is well-formed according to the rules
 	 * in the assignment.
 	 * 
 	 * @param program
-	 *            The program to check.
-	 * @return true if the program is well-formed; false otherwise.
+	 *            The programs to check.
+	 * @return true if the programs is well-formed; false otherwise.
 	 */
 	boolean isWellFormed(Program program);
 
