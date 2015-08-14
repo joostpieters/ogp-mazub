@@ -21,7 +21,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      */
     @Override
     public Program createReadVariable(String variableName, Expression variableType, SourceLocation sourceLocation) {
-        return null;
+        return
     }
 
     /**

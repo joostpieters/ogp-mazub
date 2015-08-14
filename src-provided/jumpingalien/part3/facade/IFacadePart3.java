@@ -8,6 +8,7 @@ import jumpingalien.model.School;
 import jumpingalien.model.Shark;
 import jumpingalien.model.Slime;
 import jumpingalien.model.World;
+import jumpingalien.model.programs.Program;
 import jumpingalien.part1.facade.IFacade;
 import jumpingalien.part2.facade.IFacadePart2;
 import jumpingalien.part3.programs.ParseOutcome;
@@ -194,7 +195,9 @@ public interface IFacadePart3 extends IFacadePart2 {
 	public Slime createSlimeWithProgram(int x, int y, Sprite[] sprites,
 			School school, Program program);
 
-	/**
+    Plant createPlantWithProgram(int x, int y, Sprite[] sprites, Program program);
+
+    /**
 	 * Parse the given text into the programs.
 	 * Follow the instructions given in {@link ProgramParser}.
 	 * 
