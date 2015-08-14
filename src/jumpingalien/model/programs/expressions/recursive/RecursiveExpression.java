@@ -7,10 +7,10 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public abstract class RecursiveExpression extends Expression {
+public abstract class RecursiveExpression implements Expression {
     Expression internalExpression;
     public RecursiveExpression(SourceLocation source, Expression expression) {
-        super(source);
+        super();
         internalExpression = expression;
     }
 

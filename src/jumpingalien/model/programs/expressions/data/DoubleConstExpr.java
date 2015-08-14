@@ -6,7 +6,7 @@ import jumpingalien.part3.programs.SourceLocation;
  * Created by covert on 14/08/15.
  */
 public class DoubleConstExpr extends DataExpression<Double> {
-    public DoubleConstExpr(SourceLocation source, Double data) {
-        super(source, data);
+    public DoubleConstExpr(Double data) {
+        super(data);
     }
 }

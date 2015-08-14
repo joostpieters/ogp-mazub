@@ -7,7 +7,7 @@ import jumpingalien.part3.programs.SourceLocation;
  * Created by covert on 14/08/15.
  */
 public class DirectionConstExpr extends DataExpression<IProgramFactory.Direction> {
-    DirectionConstExpr(SourceLocation source, IProgramFactory.Direction direction) {
-        super(source,direction);
+    DirectionConstExpr(IProgramFactory.Direction direction) {
+        super(direction);
     }
 }
