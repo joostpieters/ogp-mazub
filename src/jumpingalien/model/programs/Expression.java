@@ -10,7 +10,7 @@ public abstract class Expression<dataType> {
     public Expression(SourceLocation sourceLocation){
         source = sourceLocation;
     }
-    public abstract dataType getValue();
+    public abstract dataType getValue(Environment env);
 
     public SourceLocation getSourceLocation() {
         return source;

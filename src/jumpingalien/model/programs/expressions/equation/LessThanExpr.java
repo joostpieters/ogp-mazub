@@ -12,7 +12,7 @@ public class LessThanExpr extends EquationExpression {
         super(sourceLocation, double1, double2);
     }
 
-    public boolean equate(double dOne, double dTwo) {
+    public boolean exec(double dOne, double dTwo) {
         return dOne < dTwo;
     }
 }

@@ -8,26 +8,12 @@ import java.util.LinkedList;
 /**
  * Created by covert on 14/08/15.
  */
-public class Statement {
-    private SourceLocation source;
-    private LinkedList<Statement> allStatements;
+public abstract class Statement {
+    private final SourceLocation sourceLocation;
 
-    public Statement(SourceLocation sourceLocation,LinkedList<Statement> statements) {
-        source = sourceLocation;allStatements = statements;
+    public Statement(SourceLocation sourceLocation) {
+        this.sourceLocation = sourceLocation;
     }
 
-    public void execute(JumpingAlienProgParser.ProgramContext context){
-
-    }
-
-
-    public void execute(JumpingAlienProgParser.ProgramContext context) { //NOTE: This isn't used, as ProgramContext handles StatementBlocks separately.
-        for (Statement statement : statements) {
-            statement.execute(context);
-        }
-    }
-
-    public List<Statement> getStatements() {
-        return statements;
-    }
+    public abstract void execute(Environment context);
 }

@@ -1,8 +1,8 @@
 package jumpingalien.model.programs.expressions.equation;
 
+import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.expressions.data.BoolExpr;
-import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
 import jumpingalien.part3.programs.SourceLocation;
 
 /**
@@ -14,8 +14,8 @@ public abstract class EquationExpression extends Expression<BoolExpr> {
         super(sourceLocation);
         doubleOne = double1;doubleTwo = double2;
     }
-    public abstract boolean equate(double dOne, double dTwo);
-    public BoolExpr getValue(){
-        return new BoolExpr(getSourceLocation(),equate(doubleOne.getValue(),doubleTwo.getValue()));
+    public abstract boolean exec(double dOne, double dTwo);
+    public BoolExpr getValue(Environment env){
+        return new BoolExpr(getSourceLocation(), exec(doubleOne.getValue(env), doubleTwo.getValue(env)));
     };
 }

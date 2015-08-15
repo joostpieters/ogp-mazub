@@ -13,33 +13,34 @@ import java.util.Stack;
  * Created by covert on 14/08/15.
  */
 public class Environment {
-    private ActiveObject activeCaller;
-    private Map<String, Object> allVariables = new HashMap<>();
+    private Stack<Statement> originalStatement;private HashMap<String, Object> originalVariables = new HashMap<>();
+    private ActiveObject activeCaller;private Program programCaller;
+    private HashMap<String, Object> allVariables = new HashMap<>();
     private Stack<Statement> statementStack = new Stack<>();
-    private Statement originalStatement;private Map<String, Type> originalVariables = new HashMap<>();
+    private Stack<Integer> stackCounter;
 
-    public Environment(ActiveObject activeObject, Map<String, Type> variables, Statement mainStatement) {
-        activeCaller = activeObject;originalStatement = mainStatement;originalVariables = variables;
+    public Environment(ActiveObject activeObject, HashMap<String, Type> variables, Statement mainStatement) {
+        activeCaller = activeObject;
 
-        for (Map.Entry<String, Type> variable : variables.entrySet()) {
-            String key = variable.getKey(); Type type = variable.getValue(); Object obj;
+        for (HashMap.Entry<String, Type> variable : variables.entrySet()) {
+            String key = variable.getKey(); Type type = variable.getValue();
 
             switch (type) {
                 case Boolean:
-                    obj = false;
-                    break;
-                case Direction:
-                    obj = IProgramFactory.Direction.UP;
-                    break;
+                    setVariable(key,false);
+                    continue;
                 case Double:
-                    obj = 0.0;
-                    break;
+                    setVariable(key,0.0);
+                    continue;
+                case Direction:
+                    setVariable(key,IProgramFactory.Direction.UP);
+                    continue;
                 case Object:
-                default:
-                    throw new InvalidParameterException("Unexpected type");
+                    setVariable(key,null);
+                    continue;
             }
-            setVariable(key, obj);
         }
+        originalStatement = statementStack;originalVariables = allVariables;
     }
 
 
@@ -53,41 +54,32 @@ public class Environment {
 
 
     private int getLocalStatementCount() {
-        Statement currentStatement = statementStack.peek();
-
-        if (currentStatement instanceof StatementBlock) {
-            StatementBlock block = (StatementBlock) currentStatement;
-
-            return block.getStatements().size();
-        } else {
-            return 1;
-        }
+        return statementStack.size();//TODO redo
     }
 
     public void doStep() {
-        int index = statementIndices.peek();
+        int index = stackCounter.peek();
 
-        if (index < getLocalStatementCount() - 1) {
-            statementIndices.pop();
-            statementIndices.push(index + 1);
+        if (stackCounter.peek() < getLocalStatementCount() - 1) {
+            stackCounter.push(stackCounter.pop() + 1);
         } else {
             stepOut();
         }
     }
 
     public void stepBack() {
-        statementIndices.push(statementIndices.pop() - 1);
+        stackCounter.add(stackCounter.pop() + 1);
     }
 
-    public void stepInto(Statement body) {
-        statementIndices.push(statementIndices.pop() + 1);
+    public void stepInto(Statement statement) {
+        stackCounter.push(stackCounter.pop() + 1);
 
-        statementStack.push(body);
-        statementIndices.push(-1);
+        statementStack.push(statement);
+        stackCounter.push(-1);
     }
 
     public Statement getStatement() {
-        assert (statementIndices.size() == statementStack.size());
+        assert (stackCounter.size() == statementStack.size());
 
         if (statementStack.isEmpty()) {
             reset();
@@ -109,12 +101,12 @@ public class Environment {
         }
     }
 
-    private Environment reset() {
-        return new Environment(activeCaller,originalVariables,originalStatement);
+    private void reset() {
+        statementStack = originalStatement;allVariables = originalVariables;
     }
 
     public void stepOut() {
         statementStack.pop();
-        statementIndices.pop();
+        stackCounter.pop();
     }
 }
