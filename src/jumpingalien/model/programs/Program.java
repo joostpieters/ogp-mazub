@@ -19,7 +19,7 @@ public class Program {
         return totalStatement;
     }
 
-    public void nextStep(ProgramEnvironment environment) {
-
+    public void nextStep(Environment environment) {
+        environment.doStep();
     }
 }

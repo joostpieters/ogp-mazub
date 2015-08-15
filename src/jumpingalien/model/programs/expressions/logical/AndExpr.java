@@ -1,6 +1,7 @@
 package jumpingalien.model.programs.expressions.logical;
 
 import jumpingalien.model.programs.Expression;
+import jumpingalien.model.programs.expressions.data.BoolExpr;
 import jumpingalien.part3.programs.SourceLocation;
 
 /**

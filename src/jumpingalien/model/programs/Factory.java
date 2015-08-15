@@ -1,5 +1,6 @@
 package jumpingalien.model.programs;
 
+import jumpingalien.model.programs.expressions.equation.*;
 import jumpingalien.model.programs.expressions.logical.AndExpr;
 import jumpingalien.model.programs.expressions.logical.NotExpr;
 import jumpingalien.model.programs.expressions.logical.OrExpr;
@@ -34,7 +35,12 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createReadVariable(String variableName, Type variableType, SourceLocation sourceLocation) {
-
+        return new Expression() {
+            @Override
+            public Object getValue() {
+                return getSourceLocation(); //TODO
+            }
+        };
     }
 
     /**
@@ -216,7 +222,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createLessThan(Expression left, Expression right, SourceLocation sourceLocation) {
-        return null;
+        return new LessThanExpr(sourceLocation,left,right);
     }
 
     /**
@@ -229,7 +235,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createLessThanOrEqualTo(Expression left, Expression right, SourceLocation sourceLocation) {
-        return null;
+        return new LessOrEqualExpr(sourceLocation,left,right);
     }
 
     /**
@@ -242,7 +248,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createGreaterThan(Expression left, Expression right, SourceLocation sourceLocation) {
-        return null;
+        return new GreaterThanExpr(sourceLocation,left,right);
     }
 
     /**
@@ -255,7 +261,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createGreaterThanOrEqualTo(Expression left, Expression right, SourceLocation sourceLocation) {
-        return null;
+        return new GreaterOrEqualExpr(sourceLocation,left,right);
     }
 
     /**
@@ -268,7 +274,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createEquals(Expression left, Expression right, SourceLocation sourceLocation) {
-        return null;
+        return new EqualExpr(sourceLocation,left,right);
     }
 
     /**
@@ -281,7 +287,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createNotEquals(Expression left, Expression right, SourceLocation sourceLocation) {
-        return null;
+        return new NotEqualExpr(sourceLocation,left,right);
     }
 
     /**

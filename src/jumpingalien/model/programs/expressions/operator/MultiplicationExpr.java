@@ -9,7 +9,7 @@ import jumpingalien.part3.programs.SourceLocation;
  * Created by covert on 14/08/15.
  */
 public class MultiplicationExpr extends OperatorExpression {
-    public MultiplicationExpr(SourceLocation source, Expression<Double> expr1, Expression<Double> expr2) {
+    public MultiplicationExpr(SourceLocation source,Expression<Double> expr1, Expression<Double> expr2) {
         super(source,expr1, expr2);
     }
 
