@@ -15,7 +15,7 @@ public abstract class LogicalExpression extends Expression<BoolExpr>{
         exprOne = expr1;exprTwo = expr2;
     }
 
-    public abstract Boolean exec(boolean bool1 , boolean bool2);
+    protected abstract Boolean exec(boolean bool1 , boolean bool2);
 
     public BoolExpr getValue(Environment env){
         return new BoolExpr(getSourceLocation(),exec(exprOne.getValue(env), exprTwo.getValue(env)));

@@ -13,7 +13,7 @@ public class GetXExpr extends ObjectExpression {
         super(sourceLocation, obj);
     }
 
-    public double exec(ActiveObject activeObject) {
+    protected double exec(ActiveObject activeObject) {
         return activeObject.getRawLocation()[0];
     }
 }

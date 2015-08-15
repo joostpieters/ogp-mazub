@@ -16,7 +16,7 @@ public abstract class ObjectExpression extends Expression<DoubleConstExpr> {
         activeObject = obj;
     }
 
-    public abstract double exec(ActiveObject activeObject);
+    protected abstract double exec(ActiveObject activeObject);
 
 
     public DoubleConstExpr getValue(Environment env){

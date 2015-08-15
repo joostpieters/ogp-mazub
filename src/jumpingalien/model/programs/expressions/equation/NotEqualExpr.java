@@ -12,8 +12,7 @@ public class NotEqualExpr extends EquationExpression {
         super(sourceLocation, double1, double2);
     }
 
-    @Override
-    public boolean exec(double dOne, double dTwo) {
+    protected boolean exec(double dOne, double dTwo) {
         return dOne != dTwo;
     }
 }

@@ -12,8 +12,8 @@ public class SubtractionExpr extends OperatorExpression {
         super(sourceLocation, expr1, expr2);
     }
 
-    @Override
-    public DoubleConstExpr getValue() {
-        return new DoubleConstExpr(getSourceLocation(),((double)getExprOne().getValue() - (double)getExprTwo().getValue()));
+    protected double exec(double exprOne, double exprTwo) {
+        return exprOne - exprTwo;
     }
+
 }

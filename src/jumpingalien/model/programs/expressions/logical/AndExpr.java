@@ -12,8 +12,7 @@ public class AndExpr extends LogicalExpression {
         super(sourceLocation, expr1, expr2);
     }
 
-    @Override
-    public Boolean exec(boolean bool1, boolean bool2) {
+    protected Boolean exec(boolean bool1, boolean bool2) {
         return bool1 && bool2;
     }
 }

@@ -14,7 +14,7 @@ public class EqualExpr extends EquationExpression  {
     }
 
 
-    public boolean exec(double dOne, double dTwo) {
+    protected boolean exec(double dOne, double dTwo) {
         return dOne == dTwo;
     }
 }

@@ -1,5 +1,6 @@
 package jumpingalien.model.programs.expressions.logical;
 
+import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.expressions.data.BoolExpr;
 import jumpingalien.part3.programs.SourceLocation;
@@ -17,8 +18,7 @@ public class NotExpr extends Expression<BoolExpr> {
         exprOne = expr1;
     }
 
-    @Override
-    public BoolExpr getValue() {
-        return new BoolExpr(getSourceLocation(),!exprOne.getValue());
+    public BoolExpr getValue(Environment env) {
+        return new BoolExpr(getSourceLocation(),!exprOne.getValue(env));
     }
 }

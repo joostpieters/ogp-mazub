@@ -13,7 +13,7 @@ public class GetHitPointsExpr extends ObjectExpression {
         super(sourceLocation, obj);
     }
 
-    public double exec(ActiveObject activeObject) {
+    protected double exec(ActiveObject activeObject) {
         return activeObject.getHealth();
     }
 }

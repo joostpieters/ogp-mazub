@@ -14,7 +14,10 @@ public class DivisonExpr extends OperatorExpression {
     }
 
     @Override
-    public DoubleConstExpr getValue() {
-        return new DoubleConstExpr(getSourceLocation(),((double)getExprOne().getValue() / (double) getExprTwo().getValue()));
+    protected double exec(double exprOne, double exprTwo) {
+        assert exprTwo != 0;
+        return exprOne / exprTwo;
     }
+
+
 }

@@ -13,8 +13,8 @@ public class AdditionExpr extends OperatorExpression {
         super(sourceLocation,exprOne, exprTwo);
     }
 
-    @Override
-    public DoubleConstExpr getValue() {
-        return new DoubleConstExpr(getSourceLocation(),(double) getExprOne().getValue() + ((double) getExprTwo().getValue())) ;
+    protected double exec(double exprOne, double exprTwo) {
+        return exprOne + exprTwo;
     }
+
 }

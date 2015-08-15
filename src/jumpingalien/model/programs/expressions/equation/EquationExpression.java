@@ -14,7 +14,7 @@ public abstract class EquationExpression extends Expression<BoolExpr> {
         super(sourceLocation);
         doubleOne = double1;doubleTwo = double2;
     }
-    public abstract boolean exec(double dOne, double dTwo);
+    protected abstract boolean exec(double dOne, double dTwo);
     public BoolExpr getValue(Environment env){
         return new BoolExpr(getSourceLocation(), exec(doubleOne.getValue(env), doubleTwo.getValue(env)));
     };

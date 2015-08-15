@@ -1,5 +1,6 @@
 package jumpingalien.model.programs.expressions.operator;
 
+import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.expressions.data.DataExpression;
 import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
@@ -15,13 +16,9 @@ public abstract class OperatorExpression extends Expression<DoubleConstExpr> {
         exprOne = expr1;exprTwo=expr2;
     }
 
-    public Expression getExprOne() {
-        return exprOne;
-    }
+    protected abstract double exec(double exprOne, double exprTwo);
 
-    public Expression getExprTwo() {
-        return exprTwo;
-    }
-
-    public abstract DoubleConstExpr getValue();
+    public DoubleConstExpr getValue(Environment env){
+        return new DoubleConstExpr(getSourceLocation(),exec(exprOne.getValue(env),exprTwo.getValue(env)));
+    };
 }

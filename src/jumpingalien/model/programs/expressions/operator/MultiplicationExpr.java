@@ -13,7 +13,8 @@ public class MultiplicationExpr extends OperatorExpression {
         super(source,expr1, expr2);
     }
 
-    public DoubleConstExpr getValue() {
-        return new DoubleConstExpr(getSourceLocation(),((double) getExprOne().getValue()) * ((double) getExprTwo().getValue()));
+    protected double exec(double exprOne, double exprTwo) {
+        return exprOne * exprTwo;
     }
+
 }
