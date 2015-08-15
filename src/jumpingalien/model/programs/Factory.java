@@ -1,5 +1,19 @@
 package jumpingalien.model.programs;
 
+import jumpingalien.model.programs.expressions.ReadVarExpr;
+import jumpingalien.model.programs.expressions.compare.AndExpr;
+import jumpingalien.model.programs.expressions.compare.NotExpr;
+import jumpingalien.model.programs.expressions.compare.OrExpr;
+import jumpingalien.model.programs.expressions.data.BoolExpr;
+import jumpingalien.model.programs.expressions.data.DirectionConstExpr;
+import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
+import jumpingalien.model.programs.expressions.data.NullExpr;
+import jumpingalien.model.programs.expressions.operator.AdditionExpr;
+import jumpingalien.model.programs.expressions.operator.DivisonExpr;
+import jumpingalien.model.programs.expressions.operator.MultiplicationExpr;
+import jumpingalien.model.programs.expressions.operator.SubtractionExpr;
+import jumpingalien.model.programs.expressions.recursive.RandomExpr;
+import jumpingalien.model.programs.expressions.recursive.SquareRootExpr;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 
@@ -9,7 +23,7 @@ import java.util.Map;
 /**
  * Created by covert on 14/08/15.
  */
-public class Factory implements IProgramFactory<Program, Statement, Expression, Type> {
+public class Factory implements IProgramFactory<Expression, Statement, Type, Program> {
 
     /**
      * An expression that evaluates to the value of the variable with the given
@@ -20,8 +34,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createReadVariable(String variableName, Expression variableType, SourceLocation sourceLocation) {
-        return
+    public Expression createReadVariable(String variableName, Type variableType, SourceLocation sourceLocation) {
+
     }
 
     /**
@@ -31,8 +45,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createDoubleConstant(double value, SourceLocation sourceLocation) {
-        return null;
+    public Expression createDoubleConstant(double value, SourceLocation sourceLocation) {
+        return new DoubleConstExpr(sourceLocation,value);
     }
 
     /**
@@ -41,8 +55,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createTrue(SourceLocation sourceLocation) {
-        return null;
+    public Expression createTrue(SourceLocation sourceLocation) {
+        return new BoolExpr(sourceLocation,true);
     }
 
     /**
@@ -51,8 +65,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createFalse(SourceLocation sourceLocation) {
-        return null;
+    public Expression createFalse(SourceLocation sourceLocation) {
+        return new BoolExpr(sourceLocation,true);
     }
 
     /**
@@ -61,8 +75,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createNull(SourceLocation sourceLocation) {
-        return null;
+    public Expression createNull(SourceLocation sourceLocation) {
+        return new NullExpr(sourceLocation);
     }
 
     /**
@@ -72,7 +86,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createSelf(SourceLocation sourceLocation) {
+    public Expression createSelf(SourceLocation sourceLocation) {
         return null;
     }
 
@@ -83,8 +97,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createDirectionConstant(Direction value, SourceLocation sourceLocation) {
-        return null;
+    public Expression createDirectionConstant(Direction value, SourceLocation sourceLocation) {
+        return new DirectionConstExpr(sourceLocation,value);
     }
 
     /**
@@ -95,8 +109,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createAddition(Program left, Program right, SourceLocation sourceLocation) {
-        return null;
+    public Expression createAddition(Expression left, Expression right, SourceLocation sourceLocation) {
+        return new AdditionExpr(sourceLocation,left,right);
     }
 
     /**
@@ -107,8 +121,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createSubtraction(Program left, Program right, SourceLocation sourceLocation) {
-        return null;
+    public Expression createSubtraction(Expression left, Expression right, SourceLocation sourceLocation) {
+        return new SubtractionExpr(sourceLocation,left,right);
     }
 
     /**
@@ -119,8 +133,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createMultiplication(Program left, Program right, SourceLocation sourceLocation) {
-        return null;
+    public Expression createMultiplication(Expression left, Expression right, SourceLocation sourceLocation) {
+        return new MultiplicationExpr(sourceLocation,left,right);
     }
 
     /**
@@ -131,8 +145,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createDivision(Program left, Program right, SourceLocation sourceLocation) {
-        return null;
+    public Expression createDivision(Expression left, Expression right, SourceLocation sourceLocation) {
+        return new DivisonExpr(sourceLocation,left,right);
     }
 
     /**
@@ -142,8 +156,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createSqrt(Program expr, SourceLocation sourceLocation) {
-        return null;
+    public Expression createSqrt(Expression expr, SourceLocation sourceLocation) {
+        return new SquareRootExpr(sourceLocation,expr);
     }
 
     /**
@@ -154,8 +168,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createRandom(Program maxValue, SourceLocation sourceLocation) {
-        return null;
+    public Expression createRandom(Expression maxValue, SourceLocation sourceLocation) {
+        return new RandomExpr(sourceLocation,maxValue);
     }
 
     /**
@@ -166,8 +180,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createAnd(Program left, Program right, SourceLocation sourceLocation) {
-        return null;
+    public Expression createAnd(Expression left, Expression right, SourceLocation sourceLocation) {
+        return new AndExpr(sourceLocation,left,right);
     }
 
     /**
@@ -178,8 +192,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createOr(Program left, Program right, SourceLocation sourceLocation) {
-        return null;
+    public Expression createOr(Expression left, Expression right, SourceLocation sourceLocation) {
+        return new OrExpr(sourceLocation,left,right);
     }
 
     /**
@@ -189,8 +203,8 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createNot(Program expr, SourceLocation sourceLocation) {
-        return null;
+    public Expression createNot(Expression expr, SourceLocation sourceLocation) {
+        return new NotExpr(sourceLocation,expr);
     }
 
     /**
@@ -202,7 +216,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createLessThan(Program left, Program right, SourceLocation sourceLocation) {
+    public Expression createLessThan(Expression left, Expression right, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -215,7 +229,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createLessThanOrEqualTo(Program left, Program right, SourceLocation sourceLocation) {
+    public Expression createLessThanOrEqualTo(Expression left, Expression right, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -228,7 +242,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createGreaterThan(Program left, Program right, SourceLocation sourceLocation) {
+    public Expression createGreaterThan(Expression left, Expression right, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -241,7 +255,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createGreaterThanOrEqualTo(Program left, Program right, SourceLocation sourceLocation) {
+    public Expression createGreaterThanOrEqualTo(Expression left, Expression right, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -254,7 +268,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createEquals(Program left, Program right, SourceLocation sourceLocation) {
+    public Expression createEquals(Expression left, Expression right, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -267,7 +281,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createNotEquals(Program left, Program right, SourceLocation sourceLocation) {
+    public Expression createNotEquals(Expression left, Expression right, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -279,7 +293,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createGetX(Program expr, SourceLocation sourceLocation) {
+    public Expression createGetX(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -291,7 +305,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createGetY(Program expr, SourceLocation sourceLocation) {
+    public Expression createGetY(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -303,7 +317,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createGetWidth(Program expr, SourceLocation sourceLocation) {
+    public Expression createGetWidth(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -315,7 +329,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createGetHeight(Program expr, SourceLocation sourceLocation) {
+    public Expression createGetHeight(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -327,7 +341,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createGetHitPoints(Program expr, SourceLocation sourceLocation) {
+    public Expression createGetHitPoints(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -340,7 +354,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createGetTile(Program x, Program y, SourceLocation sourceLocation) {
+    public Expression createGetTile(Expression x, Expression y, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -352,7 +366,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createSearchObject(Program direction, SourceLocation sourceLocation) {
+    public Expression createSearchObject(Expression direction, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -364,7 +378,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsMazub(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsMazub(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -376,7 +390,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsShark(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsShark(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -388,7 +402,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsSlime(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsSlime(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -400,7 +414,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsPlant(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsPlant(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -412,7 +426,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsDead(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsDead(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -424,7 +438,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsTerrain(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsTerrain(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -436,7 +450,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsPassable(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsPassable(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -448,7 +462,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsWater(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsWater(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -460,7 +474,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsMagma(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsMagma(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -472,7 +486,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsAir(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsAir(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -485,7 +499,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsMoving(Program expr, Program direction, SourceLocation sourceLocation) {
+    public Expression createIsMoving(Expression expr, Expression direction, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -497,7 +511,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsDucking(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsDucking(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -509,7 +523,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Program createIsJumping(Program expr, SourceLocation sourceLocation) {
+    public Expression createIsJumping(Expression expr, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -523,7 +537,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Statement createAssignment(String variableName, Expression variableType, Program value, SourceLocation sourceLocation) {
+    public Statement createAssignment(String variableName, Type variableType, Expression value, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -536,7 +550,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Statement createWhile(Program condition, Statement body, SourceLocation sourceLocation) {
+    public Statement createWhile(Expression condition, Statement body, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -555,7 +569,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Statement createForEach(String variableName, Kind variableKind, Program where, Program sort, SortDirection sortDirection, Statement body, SourceLocation sourceLocation) {
+    public Statement createForEach(String variableName, Kind variableKind, Expression where, Expression sort, SortDirection sortDirection, Statement body, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -580,7 +594,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Statement createIf(Program condition, Statement ifBody, Statement elseBody, SourceLocation sourceLocation) {
+    public Statement createIf(Expression condition, Statement ifBody, Statement elseBody, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -591,7 +605,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Statement createPrint(Program value, SourceLocation sourceLocation) {
+    public Statement createPrint(Expression value, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -603,7 +617,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Statement createStartRun(Program direction, SourceLocation sourceLocation) {
+    public Statement createStartRun(Expression direction, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -615,7 +629,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Statement createStopRun(Program direction, SourceLocation sourceLocation) {
+    public Statement createStopRun(Expression direction, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -667,7 +681,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param sourceLocation
      */
     @Override
-    public Statement createWait(Program duration, SourceLocation sourceLocation) {
+    public Statement createWait(Expression duration, SourceLocation sourceLocation) {
         return null;
     }
 
@@ -696,7 +710,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * The type of double values and variables
      */
     @Override
-    public Expression getDoubleType() {
+    public Type getDoubleType() {
         return null;
     }
 
@@ -704,7 +718,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * The type of boolean values and variables
      */
     @Override
-    public Expression getBoolType() {
+    public Type getBoolType() {
         return null;
     }
 
@@ -712,7 +726,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * The type of game object values and variables
      */
     @Override
-    public Expression getGameObjectType() {
+    public Type getGameObjectType() {
         return null;
     }
 
@@ -720,7 +734,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * The type of direction values and variables
      */
     @Override
-    public Expression getDirectionType() {
+    public Type getDirectionType() {
         return null;
     }
 
@@ -733,7 +747,7 @@ public class Factory implements IProgramFactory<Program, Statement, Expression, 
      * @param globalVariables
      */
     @Override
-    public Type createProgram(Statement mainStatement, Map<String, Expression> globalVariables) {
+    public Program createProgram(Statement mainStatement, Map<String, Type> globalVariables) {
         return null;
     }
 }

@@ -1,6 +1,6 @@
-package jumpingalien.model.programs.expressions;
+package jumpingalien.model.programs.expressions.object;
 
-import jumpingalien.model.programs.expressions.data.DataExpression;
+import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
 import jumpingalien.model.programs.expressions.recursive.RecursiveExpression;
 import jumpingalien.part3.programs.SourceLocation;
 
@@ -12,7 +12,8 @@ public class SelfExpr extends RecursiveExpression {
         super(source);
     }
 
-    public DataExpression getValue() {
+    public DoubleConstExpr getValue() {
 
+        return null;
     }
 }

@@ -8,9 +8,10 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public abstract class OperatorExpression implements Expression {
-    private Expression exprOne,exprTwo;
-    public OperatorExpression(Expression expr1, Expression expr2) {
+public abstract class OperatorExpression extends Expression<DoubleConstExpr> {
+    private Expression<Double> exprOne,exprTwo;
+    public OperatorExpression(SourceLocation sourceLocation,Expression<Double> expr1, Expression<Double> expr2) {
+        super(sourceLocation);
         exprOne = expr1;exprTwo=expr2;
     }
 

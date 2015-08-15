@@ -1,7 +1,6 @@
 package jumpingalien.model.programs.expressions.recursive;
 
 import jumpingalien.model.programs.Expression;
-import jumpingalien.model.programs.expressions.data.DataExpression;
 import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
 import jumpingalien.part3.programs.SourceLocation;
 
@@ -14,7 +13,7 @@ public class SquareRootExpr extends RecursiveExpression{
     }
 
     @Override
-    public DataExpression getValue() {
+    public DoubleConstExpr getValue() {
         return new DoubleConstExpr(getSourceLocation(),Math.sqrt((double) getInternalExpression().getValue()));
     }
 }

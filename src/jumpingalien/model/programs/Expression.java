@@ -5,6 +5,14 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public interface Expression<dataType> {
-    dataType getValue();
+public abstract class Expression<dataType> {
+    private SourceLocation source;
+    public Expression(SourceLocation sourceLocation){
+        source = sourceLocation;
+    }
+    public abstract dataType getValue();
+
+    public SourceLocation getSourceLocation() {
+        return source;
+    }
 }

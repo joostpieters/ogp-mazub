@@ -1,4 +1,4 @@
-package jumpingalien.model.programs.expressions;
+package jumpingalien.model.programs.expressions.object;
 
 /**
  * Created by covert on 14/08/15.
