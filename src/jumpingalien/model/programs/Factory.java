@@ -1,9 +1,8 @@
 package jumpingalien.model.programs;
 
-import jumpingalien.model.programs.expressions.ReadVarExpr;
-import jumpingalien.model.programs.expressions.compare.AndExpr;
-import jumpingalien.model.programs.expressions.compare.NotExpr;
-import jumpingalien.model.programs.expressions.compare.OrExpr;
+import jumpingalien.model.programs.expressions.logical.AndExpr;
+import jumpingalien.model.programs.expressions.logical.NotExpr;
+import jumpingalien.model.programs.expressions.logical.OrExpr;
 import jumpingalien.model.programs.expressions.data.BoolExpr;
 import jumpingalien.model.programs.expressions.data.DirectionConstExpr;
 import jumpingalien.model.programs.expressions.data.DoubleConstExpr;

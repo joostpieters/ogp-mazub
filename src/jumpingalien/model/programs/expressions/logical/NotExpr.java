@@ -1,6 +1,5 @@
-package jumpingalien.model.programs.expressions.compare;
+package jumpingalien.model.programs.expressions.logical;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.expressions.data.BoolExpr;
 import jumpingalien.part3.programs.SourceLocation;
