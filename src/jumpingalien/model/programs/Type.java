@@ -7,6 +7,6 @@ public enum Type {
     Boolean,
     Double,
     Direction,
-    Object;
+    ActiveObject;
 }
 

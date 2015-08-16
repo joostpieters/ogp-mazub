@@ -9,7 +9,7 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public abstract class ObjectExpression extends Expression<DoubleConstExpr> {
+public abstract class ObjectExpression extends Expression<Double> {
     Expression<ActiveObject> activeObject;
     public ObjectExpression(SourceLocation sourceLocation,Expression<ActiveObject> obj) {
         super(sourceLocation);
@@ -19,7 +19,7 @@ public abstract class ObjectExpression extends Expression<DoubleConstExpr> {
     protected abstract double exec(ActiveObject activeObject);
 
 
-    public DoubleConstExpr getValue(Environment env){
-        return new DoubleConstExpr(getSourceLocation(),exec(activeObject.getValue(env)));
+    public Double getValue(Environment env){
+        return exec(activeObject.getValue(env));
     };
 }

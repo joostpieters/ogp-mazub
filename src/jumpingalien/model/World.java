@@ -95,7 +95,7 @@ public class World extends TileMap{
 
 
     public void addObject(ActiveObject obj){
-        obj.setWorld(this);
+        obj.wCaller(this);
         getColInterActive().add(obj);
     }
 

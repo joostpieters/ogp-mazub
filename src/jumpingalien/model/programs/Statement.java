@@ -14,6 +14,8 @@ public abstract class Statement {
     public Statement(SourceLocation sourceLocation) {
         this.sourceLocation = sourceLocation;
     }
-
-    public abstract void execute(Environment context);
+    public SourceLocation getSourceLocation(){
+        return sourceLocation;
+    }
+    public abstract void exe(Environment env);
 }

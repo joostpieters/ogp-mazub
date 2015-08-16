@@ -1,6 +1,9 @@
 package jumpingalien.model.programs;
 
 import jumpingalien.model.ActiveObject;
+import jumpingalien.model.World;
+import jumpingalien.model.programs.statements.SequenceStatement;
+import jumpingalien.model.programs.statements.complex.ComplexStatement;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser;
 
@@ -43,7 +46,13 @@ public class Environment {
         originalStatement = statementStack;originalVariables = allVariables;
     }
 
+    public World getwCaller(){
+        return activeCaller.getwCaller();
+    }
 
+    public ActiveObject getActiveCaller(){
+        return activeCaller;
+    }
     public Object getVariable(String key) {
         return allVariables.get(key);
     }
@@ -86,16 +95,16 @@ public class Environment {
         }
 
         Statement currentStatement = statementStack.peek();
+//TODO
+        if (currentStatement instanceof SequenceStatement) {
+            SequenceStatement statement = (SequenceStatement) currentStatement;
 
-        if (currentStatement instanceof StatementBlock) {
-            StatementBlock block = (StatementBlock) currentStatement;
-
-            if (statementIndices.peek() >= block.getStatements().size()) {
+            if (stackCounter.peek() >= statement.getStatementList().size()) {
                 stepOut();
                 return getStatement();
             }
 
-            return block.getStatements().get(statementIndices.peek());
+            return statement.getStatementList().get(stackCounter.peek());
         } else {
             return statementStack.peek();
         }

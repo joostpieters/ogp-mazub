@@ -62,7 +62,7 @@ public abstract class ActiveObject implements IntegratedObject{
         }
     }
     protected void correctCollision(ActiveObject collidingObj){
-
+        //TODO
     }
     private int getDirection(ActiveObject interObj) {
         if (interObj.getLocation()[1] + interObj.getCurrentSprite().getHeight() * 0.9 <= getLocation()[1]) {
@@ -70,17 +70,26 @@ public abstract class ActiveObject implements IntegratedObject{
 
         }
         return -1;
+    }//TODO
+
+    public boolean isJumping(){
+        return (enVertState.jump == eVerState);
+    }
+    public boolean isDucking(){
+        return  (enVertState.duck == eVerState);
     }
 
     public int getHealth(){
         return iHitpoints;
     }
 
-    public void setWorld(World world){
+    public void wCaller(World world){
         wCaller = world;
     }
+    public World getwCaller(){
+        return wCaller;
+    }
 
-    @Basic
     public int[] getLocation() throws ClassCastException{
         int[] iaLocation = new int[2];
         try {

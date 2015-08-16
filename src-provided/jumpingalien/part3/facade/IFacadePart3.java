@@ -126,7 +126,7 @@ public interface IFacadePart3 extends IFacadePart2 {
 	 *            The sprites to be used by Buzam (following the same structure
 	 *            as the table for Mazub in the assignment).
 	 * @param program
-	 *            The programs to execute, or null of Buzam should not execute a
+	 *            The programs to exe, or null of Buzam should not exe a
 	 *            programs.
 	 */
 	public Buzam createBuzamWithProgram(int pixelLeftX, int pixelBottomY,
@@ -144,7 +144,7 @@ public interface IFacadePart3 extends IFacadePart2 {
 	 * @param sprites
 	 *            An array of sprites for the new plant
 	 * @param program
-	 *            The programs that this plant should execute, or null if the
+	 *            The programs that this plant should exe, or null if the
 	 *            plant should follow its default behavior.
 	 * 
 	 * @return A new plant, located at the provided location. The returned plant
@@ -164,7 +164,7 @@ public interface IFacadePart3 extends IFacadePart2 {
 	 * @param sprites
 	 *            An array of sprites for the new shark
 	 * @param program
-	 *            The programs that this shark should execute, or null if the
+	 *            The programs that this shark should exe, or null if the
 	 *            shark should follow its default behavior.
 	 * 
 	 * @return A new shark, located at the provided location. The returned shark
@@ -186,7 +186,7 @@ public interface IFacadePart3 extends IFacadePart2 {
 	 * @param school
 	 *            The initial school to which the new slime belongs
 	 * @param program
-	 *            The programs that this slime should execute, or null if the
+	 *            The programs that this slime should exe, or null if the
 	 *            slime should follow its default behavior.
 	 * 
 	 * @return A new slime, located at the provided location and part of the

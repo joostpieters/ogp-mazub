@@ -9,7 +9,7 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public class ReadVarExpr<DataType> extends Expression<DataType>{
+public class ReadVarExpr<dataType> extends Expression<dataType>{
     private String key;
     public ReadVarExpr(SourceLocation sourceLocation,String ky){
         super(sourceLocation);
@@ -17,7 +17,7 @@ public class ReadVarExpr<DataType> extends Expression<DataType>{
     }
 
 
-    public DataType getValue(Environment env) {
-        return (DataType) env.getVariable(key);
+    public dataType getValue(Environment env) {
+        return (dataType) env.getVariable(key);
     }
 }

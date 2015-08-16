@@ -8,7 +8,7 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public abstract class LogicalExpression extends Expression<BoolExpr>{
+public abstract class LogicalExpression extends Expression<Boolean>{
     private Expression<Boolean> exprOne,exprTwo;
     public LogicalExpression(SourceLocation source, Expression<Boolean> expr1, Expression<Boolean> expr2) {
         super(source);
@@ -17,7 +17,7 @@ public abstract class LogicalExpression extends Expression<BoolExpr>{
 
     protected abstract Boolean exec(boolean bool1 , boolean bool2);
 
-    public BoolExpr getValue(Environment env){
-        return new BoolExpr(getSourceLocation(),exec(exprOne.getValue(env), exprTwo.getValue(env)));
+    public Boolean getValue(Environment env){
+        return exec(exprOne.getValue(env), exprTwo.getValue(env));
     }
 }

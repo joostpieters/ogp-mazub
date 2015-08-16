@@ -1,28 +1,36 @@
 package jumpingalien.model.programs;
 
+import jumpingalien.model.programs.expressions.GetTileExpr;
+import jumpingalien.model.programs.expressions.IsStateMoving;
+import jumpingalien.model.programs.expressions.ReadVarExpr;
+import jumpingalien.model.programs.expressions.data.*;
 import jumpingalien.model.programs.expressions.equation.*;
 import jumpingalien.model.programs.expressions.logical.AndExpr;
 import jumpingalien.model.programs.expressions.logical.NotExpr;
 import jumpingalien.model.programs.expressions.logical.OrExpr;
-import jumpingalien.model.programs.expressions.data.BoolExpr;
-import jumpingalien.model.programs.expressions.data.DirectionConstExpr;
-import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
-import jumpingalien.model.programs.expressions.data.NullExpr;
+import jumpingalien.model.programs.expressions.object.*;
 import jumpingalien.model.programs.expressions.operator.AdditionExpr;
 import jumpingalien.model.programs.expressions.operator.DivisonExpr;
 import jumpingalien.model.programs.expressions.operator.MultiplicationExpr;
 import jumpingalien.model.programs.expressions.operator.SubtractionExpr;
 import jumpingalien.model.programs.expressions.recursive.RandomExpr;
 import jumpingalien.model.programs.expressions.recursive.SquareRootExpr;
+import jumpingalien.model.programs.expressions.type.*;
+import jumpingalien.model.programs.statements.SequenceStatement;
+import jumpingalien.model.programs.statements.complex.AssignmentStatement;
+import jumpingalien.model.programs.statements.complex.ForEachStatmnt;
+import jumpingalien.model.programs.statements.complex.WhileStatmnt;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by covert on 14/08/15.
  */
+@SuppressWarnings("ALL")
 public class Factory implements IProgramFactory<Expression, Statement, Type, Program> {
 
     /**
@@ -35,12 +43,16 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createReadVariable(String variableName, Type variableType, SourceLocation sourceLocation) {
-        return new Expression() {
-            @Override
-            public Object getValue() {
-                return getSourceLocation(); //TODO
-            }
-        };
+        switch (variableType){
+            case Boolean:
+                return new ReadVarExpr<Boolean>(sourceLocation,variableName);
+            case Double:
+                return new ReadVarExpr<Double>(sourceLocation,variableName);
+            case Direction:
+                return new ReadVarExpr<Direction>(sourceLocation,variableName);
+            default:
+                return new ReadVarExpr(sourceLocation,variableName);
+        }
     }
 
     /**
@@ -299,7 +311,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createGetX(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new GetXExpr(sourceLocation,expr);
     }
 
     /**
@@ -311,7 +323,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createGetY(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new GetYExpr(sourceLocation,expr);
     }
 
     /**
@@ -323,7 +335,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createGetWidth(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new GetWidthExpr(sourceLocation,expr);
     }
 
     /**
@@ -335,7 +347,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createGetHeight(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new GetHeightExpr(sourceLocation,expr);
     }
 
     /**
@@ -347,7 +359,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createGetHitPoints(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new GetHitPointsExpr(sourceLocation,expr);
     }
 
     /**
@@ -360,7 +372,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createGetTile(Expression x, Expression y, SourceLocation sourceLocation) {
-        return null;
+        return new GetTileExpr(sourceLocation,x,y);
     }
 
     /**
@@ -372,9 +384,8 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createSearchObject(Expression direction, SourceLocation sourceLocation) {
-        return null;
+        return null;//TODO
     }
-
     /**
      * An expression that evaluates to true if the object obtained from the
      * given expression is a Mazub
@@ -384,7 +395,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsMazub(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsMazubExpr(sourceLocation,expr);
     }
 
     /**
@@ -396,7 +407,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsShark(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsSharkExpr(sourceLocation,expr);
     }
 
     /**
@@ -408,7 +419,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsSlime(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsSlimeExpr(sourceLocation,expr);
     }
 
     /**
@@ -420,7 +431,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsPlant(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsPlantExpr(sourceLocation,expr);
     }
 
     /**
@@ -432,7 +443,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsDead(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsDeadExpr(sourceLocation,expr);
     }
 
     /**
@@ -444,7 +455,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsTerrain(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsTile(sourceLocation,expr);
     }
 
     /**
@@ -456,7 +467,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsPassable(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new NotExpr(sourceLocation ,new IsTileType(sourceLocation,expr,1));
     }
 
     /**
@@ -468,7 +479,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsWater(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsTileType(sourceLocation,expr,2);
     }
 
     /**
@@ -480,7 +491,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsMagma(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsTileType(sourceLocation,expr,3);
     }
 
     /**
@@ -492,7 +503,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsAir(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsTileType(sourceLocation,expr,0);
     }
 
     /**
@@ -505,7 +516,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsMoving(Expression expr, Expression direction, SourceLocation sourceLocation) {
-        return null;
+        return new IsStateMoving(sourceLocation,expr,direction);
     }
 
     /**
@@ -517,7 +528,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsDucking(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsStateDucking(sourceLocation,expr);
     }
 
     /**
@@ -529,7 +540,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Expression createIsJumping(Expression expr, SourceLocation sourceLocation) {
-        return null;
+        return new IsStateJumping(sourceLocation,expr);
     }
 
     /**
@@ -543,7 +554,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createAssignment(String variableName, Type variableType, Expression value, SourceLocation sourceLocation) {
-        return null;
+        return new AssignmentStatement(sourceLocation,variableName,variableType,value);
     }
 
     /**
@@ -556,7 +567,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createWhile(Expression condition, Statement body, SourceLocation sourceLocation) {
-        return null;
+        return new WhileStatmnt(sourceLocation,condition,body);
     }
 
     /**
@@ -574,8 +585,9 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      * @param sourceLocation
      */
     @Override
-    public Statement createForEach(String variableName, Kind variableKind, Expression where, Expression sort, SortDirection sortDirection, Statement body, SourceLocation sourceLocation) {
-        return null;
+    public Statement createForEach(String variableName, Kind variableKind, Expression where, Expression sort
+            , SortDirection sortDirection, Statement body, SourceLocation sourceLocation) {
+        return new ForEachStatmnt(sourceLocation,variableName,variableKind,where,sort,sortDirection,body);
     }
 
     /**
@@ -708,7 +720,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createSequence(List<Statement> statements, SourceLocation sourceLocation) {
-        return null;
+        return new SequenceStatement(sourceLocation,statements);
     }
 
     /**
@@ -716,7 +728,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Type getDoubleType() {
-        return null;
+        return Type.Double;
     }
 
     /**
@@ -724,7 +736,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Type getBoolType() {
-        return null;
+        return Type.Boolean;
     }
 
     /**
@@ -732,7 +744,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Type getGameObjectType() {
-        return null;
+        return Type.ActiveObject;
     }
 
     /**
@@ -740,7 +752,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Type getDirectionType() {
-        return null;
+        return Type.Direction;
     }
 
     /**
@@ -753,6 +765,6 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Program createProgram(Statement mainStatement, Map<String, Type> globalVariables) {
-        return null;
+        return new Program((HashMap<String, Type>) globalVariables,mainStatement);
     }
 }

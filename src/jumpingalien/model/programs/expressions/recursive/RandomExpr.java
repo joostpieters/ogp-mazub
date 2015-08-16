@@ -1,5 +1,6 @@
 package jumpingalien.model.programs.expressions.recursive;
 
+import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
 import jumpingalien.part3.programs.SourceLocation;
@@ -16,9 +17,7 @@ public class RandomExpr extends RecursiveExpression {
 
     }
 
-    @Override
-    public DoubleConstExpr getValue() {
-        return new DoubleConstExpr(getSourceLocation(),
-                random.nextInt((int) getInternalExpression().getValue()) - 1 + random.nextDouble());
+    public Double getValue(Environment en) {
+        return random.nextInt((int) getInternalExpression().getValue(en)) - 1 + random.nextDouble();
     }
 }
