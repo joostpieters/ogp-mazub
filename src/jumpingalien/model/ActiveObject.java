@@ -61,7 +61,7 @@ public abstract class ActiveObject implements IntegratedObject{
         this(pixelLeftX, pixelBottomY, sprites, hitpoints, canFall,initialVelocity,initialAcceleration,initialJump,maxVelocity);
         if (program == null) return;
         controllingProgram = program;
-        environment = new Environment(this,program.getAllVars(),program.getAllStatements());
+        environment = new Environment(this,program);
     }
 
     protected int correctSprite(){

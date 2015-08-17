@@ -20,6 +20,7 @@ import jumpingalien.model.programs.expressions.type.*;
 import jumpingalien.model.programs.statements.SequenceStatement;
 import jumpingalien.model.programs.statements.complex.AssignmentStatement;
 import jumpingalien.model.programs.statements.complex.ForEachStatmnt;
+import jumpingalien.model.programs.statements.complex.IfStatmnt;
 import jumpingalien.model.programs.statements.complex.WhileStatmnt;
 import jumpingalien.model.programs.statements.primitive.*;
 import jumpingalien.part3.programs.IProgramFactory;
@@ -614,7 +615,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createIf(Expression condition, Statement ifBody, Statement elseBody, SourceLocation sourceLocation) {
-        return null;
+        return new IfStatmnt(sourceLocation,condition,ifBody,elseBody);
     }
 
     /**
@@ -637,8 +638,8 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createStartRun(Expression direction, SourceLocation sourceLocation) {
+        System.out.println(direction);
         StartRunExpr startRunExpr = new StartRunExpr(sourceLocation,direction);
-        System.out.println(startRunExpr);
         return startRunExpr;
     }
 
@@ -713,11 +714,13 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createSkip(SourceLocation sourceLocation) {
-        return new Statement(sourceLocation) {
+        Statement skipStatement = new Statement(sourceLocation) {
             public void exe(Environment env) {
 
             }
         };
+        System.out.println(skipStatement);
+        return skipStatement;
     }
 
     /**

@@ -13,16 +13,16 @@ import java.util.Stack;
  * Created by covert on 14/08/15.
  */
 public class Environment {
-    private Stack<Statement> originalStatement;private HashMap<String, Object> originalVariables = new HashMap<>();
-    private ActiveObject activeCaller;
+    private ActiveObject activeCaller;private Program programCaller;
     private HashMap<String, Object> allVariables = new HashMap<>();
     private Stack<Statement> statementStack = new Stack<>();
     private Stack<Integer> stackCounter = new Stack<>();
 
-    public Environment(ActiveObject activeObject, HashMap<String, Type> variables, Statement mainStatement) {
-        activeCaller = activeObject;stackCounter.push(0);statementStack.push(mainStatement);
+    public Environment(ActiveObject activeObject,Program program) {
+        programCaller = program;
+        activeCaller = activeObject;stackCounter.push(0);statementStack.push(program.getAllStatements());
 
-        for (HashMap.Entry<String, Type> variable : variables.entrySet()) {
+        for (HashMap.Entry<String, Type> variable : program.getAllVars().entrySet()) {
             String key = variable.getKey(); Type type = variable.getValue();
 
             switch (type) {
@@ -40,7 +40,6 @@ public class Environment {
                     continue;
             }
         }
-        originalStatement = statementStack;originalVariables = allVariables;
     }
 
     public World getwCaller(){
@@ -118,7 +117,29 @@ public class Environment {
     }
 
     private void reset() {
-        statementStack = originalStatement;allVariables = originalVariables;stackCounter.push(0);
+        stackCounter.clear();
+        stackCounter.clear();
+        allVariables.clear();
+        statementStack.push(programCaller.getAllStatements());
+        stackCounter.push(0);
+        for (HashMap.Entry<String, Type> variable : programCaller.getAllVars().entrySet()) {
+            String key = variable.getKey(); Type type = variable.getValue();
+
+            switch (type) {
+                case Boolean:
+                    setVariable(key,false);
+                    continue;
+                case Double:
+                    setVariable(key,0.0);
+                    continue;
+                case Direction:
+                    setVariable(key,IProgramFactory.Direction.UP);
+                    continue;
+                case ActiveObject:
+                    setVariable(key,null);
+                    continue;
+            }
+        }
     }
 
     public void stepOut() {

@@ -12,6 +12,7 @@ public abstract class PrimitiveStatement<dataType> extends Statement {
     Expression<dataType> expression;
     public PrimitiveStatement(SourceLocation sourceLocation, Expression<dataType> exp) {
         super(sourceLocation);
+        expression = exp;
     }
 
     public PrimitiveStatement(SourceLocation sourceLocation) {
