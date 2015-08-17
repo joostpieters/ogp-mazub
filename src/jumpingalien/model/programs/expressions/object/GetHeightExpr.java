@@ -11,8 +11,8 @@ public class GetHeightExpr extends ObjectExpression
 		super(sourceLocation, obj);
 	}
 
-	protected double exec(ActiveObject activeObject)
+	protected Double exec(ActiveObject activeObject)
 	{
-		return activeObject.getCurrentSprite().getHeight();
+		return Double.valueOf(activeObject.getCurrentSprite().getHeight());
 	}
 }

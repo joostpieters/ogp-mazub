@@ -8,6 +8,17 @@ import java.util.LinkedList;
 
 public abstract class ActiveObject implements IntegratedObject
 {
+	//classe invarianten
+	//state var
+	public enum enVertState
+	{
+		jump, stand, duck
+	}
+
+	public enum enHorState
+	{
+		left, stand, right
+	}
 	//sprite var
 	private final Sprite[] aSprite;
 	//env procedure
@@ -15,9 +26,6 @@ public abstract class ActiveObject implements IntegratedObject
 	enVertState eVerState = enVertState.stand;
 	enHorState eHorState = enHorState.stand;
 	double dtLastMove;
-	//delta var
-	protected double dLastLeftX;
-	protected double dLastBottomY;
 	//hitpoints
 	boolean bImune = false;
 	double dLastImune;
@@ -49,7 +57,7 @@ public abstract class ActiveObject implements IntegratedObject
 		aSprite = sprites;
 		iHitpoints = hitpoints;
 		bCanFall = canFall;
-		dMaxVelocity = maxVelocity;
+		dMaxVelocity = (maxVelocity == -1)? Double.MAX_VALUE:maxVelocity;
 		dInitialVelocity = initialVelocity;
 		dInitialAcceleration = initialAcceleration;
 		dInitialJump = initialJump;
@@ -64,15 +72,9 @@ public abstract class ActiveObject implements IntegratedObject
 		environment = new Environment(this, program);
 	}
 
-	int correctSprite()
-	{
-		if (getVelocity()[0] < 0)
-		{
-			return 0;
-		} else
-		{
-			return 1;
-		}
+
+	protected boolean hasProgram(){
+		return (controllingProgram != null);
 	}
 
 	protected void correctCollision(ActiveObject collidingObj)
@@ -80,35 +82,12 @@ public abstract class ActiveObject implements IntegratedObject
 		//TODO
 	}
 
-	private int getDirection(ActiveObject interObj)
-	{
-		if (interObj.getLocation()[1] + interObj.getCurrentSprite().getHeight() * 0.9 <= getLocation()[1])
-		{
-			return 1;
-
-		}
-		return -1;
-	}//TODO
-
-	@Deprecated
-	public boolean isJumping()
-	{
-		return (enVertState.jump == eVerState);
-	}
-
-	@Deprecated
-	public boolean isDucking()
-	{
-		return (enVertState.duck == eVerState);
-	}
-
-	public enHorState geteHorState()
+	public enHorState getHorDirection()
 	{
 		return eHorState;
 	}
 
-	public enVertState geteVerState()
-	{
+	public enVertState getVerDirection(){
 		return eVerState;
 	}
 
@@ -119,11 +98,13 @@ public abstract class ActiveObject implements IntegratedObject
 
 	public void wCaller(World world)
 	{
+		assert (wCaller != null);
 		wCaller = world;
 	}
 
 	public World getwCaller()
 	{
+		assert (wCaller != null);
 		return wCaller;
 	}
 
@@ -139,12 +120,6 @@ public abstract class ActiveObject implements IntegratedObject
 			ex.printStackTrace();
 		}
 		return iaLocation;
-	}
-
-	private void setLocation(double[] iaLocation)
-	{
-		setLocationX(iaLocation[0]);
-		setLocationY(iaLocation[1]);
 	}
 
 	public double[] getRawLocation()
@@ -185,20 +160,33 @@ public abstract class ActiveObject implements IntegratedObject
 		return y;
 	}
 
+	private void setLocation(double[] iaLocation)
+	{
+		setLocationX(iaLocation[0]);
+		setLocationY(iaLocation[1]);
+	}
+
 	private void setLocationX(double x)
 	{
-		//world check TODO
-		assert x >= 0;
-		//if (x < 0) throw new IllegalArgumentException("Object needs to die");
+		if (x < 0 || x > wCaller.getWorldSizeInPixel()[0]) throw new IllegalArgumentException("Object needs to die");
 		dPixelLeftX = x;
 	}
 
 	private void setLocationY(double y)
 	{
-		//world check TODO
-		assert y >= 0;
-		//if(y < 0) throw new IllegalArgumentException("Object needs to die");
+		if(y < 0 || y > wCaller.getWorldSizeInPixel()[1]) throw new IllegalArgumentException("Object needs to die");
 		dPixelBottomY = y;
+	}
+
+	private double correctVelocityX(double x){
+		return (Math.abs(x) < dMaxVelocity)? x:dMaxVelocity;
+	}
+
+	private void setVelocity(double[] daVelocity)
+	{
+		if (daVelocity.length != 2) throw new IllegalArgumentException("double array needs only an x & y value");
+		setVelocityX(daVelocity[0]);
+		setVelocityY(daVelocity[1]);
 	}
 
 	@Basic
@@ -210,23 +198,14 @@ public abstract class ActiveObject implements IntegratedObject
 		return daVelocity;
 	}
 
-	public void setVelocity(double[] daVelocity)
-	{
-		if (daVelocity.length != 2) throw new IllegalArgumentException("double array needs only an x & y value");
-		//TODO test
-		setVelocityX(daVelocity[0]);
-		setVelocityY(daVelocity[1]);
-	}
-
 	private void setVelocityX(double x)
 	{
-		//TODO test def
-		dVelocityX = x;
+		if (Math.abs(x) > dMaxVelocity) throw new IllegalArgumentException("x velocity may not be more than the max velocity");
+		dVelocityX = (Math.abs(x) < dMaxVelocity)? x:dMaxVelocity;
 	}
 
 	void setVelocityY(double y)
 	{
-		//TODO test def
 		dVelocityY = y;
 	}
 
@@ -242,20 +221,17 @@ public abstract class ActiveObject implements IntegratedObject
 	protected void setAcceleration(double[] daAccel) throws IllegalArgumentException
 	{
 		if (daAccel.length != 2) throw new IllegalArgumentException("double array needs only an x & y value");
-		//TODO test
 		setAccelerationX(daAccel[0]);
 		setAccelerationY(daAccel[1]);
 	}
 
-	void setAccelerationX(double x)
+	private void setAccelerationX(double x)
 	{
-		//TODO test def
 		dAccelerationX = x;
 	}
 
 	private void setAccelerationY(double y)
 	{
-		//TODO test def
 		dAccelerationY = y;
 	}
 
@@ -274,18 +250,28 @@ public abstract class ActiveObject implements IntegratedObject
 		return iaSize;
 	}
 
+	public Sprite getCurrentSprite()
+	{
+		return aSprite[iCurrentSprite];
+	}
+	private int correctSprite()
+	{
+		if (getVelocity()[0] < 0)
+		{
+			return 0;
+		} else
+		{
+			return 1;
+		}
+	}
+
 	@Basic
 	private void setSprite(int iCurrentSprite)
 	{
 		this.iCurrentSprite = iCurrentSprite;
 	}
 
-	public Sprite getCurrentSprite()
-	{
-		return aSprite[iCurrentSprite];
-	}
-
-	synchronized void FncProcessHealth(int change, boolean isImune)
+	private synchronized void ProcessHealth(int change)
 	{
 		if (change < 0)
 		{
@@ -317,7 +303,7 @@ public abstract class ActiveObject implements IntegratedObject
 	private void calulateAndSetTraject(double dt)
 	{
 		//calc new vel
-		setVelocityX(getVelocity()[0] + getAcceleration()[0] * dt);
+		setVelocityX(correctVelocityX(getVelocity()[0] + getAcceleration()[0] * dt));
 		setVelocityY(getVelocity()[1] + getAcceleration()[1] * dt);
 		//calc new loc
 		double newLocationX = correctLocationX(getRawLocation()[0] + (getVelocity()[0] * dt) * 100);
@@ -473,17 +459,5 @@ public abstract class ActiveObject implements IntegratedObject
 		eHorState = enHorState.stand;
 		setVelocityX(0);
 		setAccelerationX(0);
-	}
-
-	//classe invarianten
-	//state var
-	protected enum enVertState
-	{
-		jump, stand, duck
-	}
-
-	protected enum enHorState
-	{
-		left, stand, right
 	}
 }

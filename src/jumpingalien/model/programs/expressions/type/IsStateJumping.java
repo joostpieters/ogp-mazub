@@ -13,6 +13,6 @@ public class IsStateJumping extends IsState
 
 	protected boolean checkState(ActiveObject activeObject)
 	{
-		return activeObject.isJumping();
+		return (activeObject.getVerDirection() == ActiveObject.enVertState.jump);
 	}
 }

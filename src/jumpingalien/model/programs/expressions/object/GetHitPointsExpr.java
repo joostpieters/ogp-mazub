@@ -11,9 +11,9 @@ public class GetHitPointsExpr extends ObjectExpression
 		super(sourceLocation, obj);
 	}
 
-	protected double exec(ActiveObject activeObject)
+	protected Double exec(ActiveObject activeObject)
 	{
-		return activeObject.getHealth();
+		return Double.valueOf(activeObject.getHealth());
 	}
 }
 

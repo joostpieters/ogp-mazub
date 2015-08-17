@@ -12,8 +12,8 @@ public class GetWidthExpr extends ObjectExpression
 	}
 
 
-	protected double exec(ActiveObject activeObject)
+	protected Double exec(ActiveObject activeObject)
 	{
-		return activeObject.getCurrentSprite().getWidth();
+		return Double.valueOf(activeObject.getCurrentSprite().getWidth());
 	}
 }

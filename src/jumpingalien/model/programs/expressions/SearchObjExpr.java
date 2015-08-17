@@ -6,6 +6,9 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 
+import java.rmi.activation.ActivationID;
+import java.util.*;
+
 public class SearchObjExpr extends Expression<ActiveObject>
 {
 	private final Expression<IProgramFactory.Direction> directionExpression;
@@ -18,7 +21,10 @@ public class SearchObjExpr extends Expression<ActiveObject>
 
 	public ActiveObject getValue(Environment env)
 	{
+		Comparator<ActiveObject> comparator = new locationComparator(env.getActiveCaller(),directionExpression.getValue(env));
+		PriorityQueue<ActiveObject> priorityQueue = new PriorityQueue<>(1,comparator);
+		priorityQueue.addAll((Collection<? extends ActiveObject>) env.getwCaller().getCollection(ActiveObject.class));
+		return priorityQueue.poll();
 
-		return null;//TODO
 	}
 }

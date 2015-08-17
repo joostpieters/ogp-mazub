@@ -5,8 +5,8 @@ import jumpingalien.util.Sprite;
 public class Mazub extends ActiveObject
 {
 	//classe invarianten
-	private double dInAir = 0;
-	private boolean bInAir;
+	private double dInWater = 0;
+	private boolean bInWater;
 	private double dInMagma = 0;
 	private boolean bInMagma;
 	//sprite counter
@@ -31,14 +31,14 @@ public class Mazub extends ActiveObject
 		{
 			if (getHealth() < 500)
 			{
-				FncProcessHealth(100, false);
+				FncProcessHealth(100);
 				getwCaller().FncRemoveFromColl(interObj);
 			}
 			return;
 		}
 		if (interObj instanceof Shark)
 		{
-			FncProcessHealth(-50, isImune());
+			FncProcessHealth(-50);
 			bImune = true;
 		}
 	}
@@ -96,12 +96,12 @@ public class Mazub extends ActiveObject
 		//water
 		if (iEnvType == 2)
 		{
-			bInAir = true;
-			dInAir += dt;
-			if (dInAir <= 0.2)
+			bInWater = true;
+			dInWater += dt;
+			if (dInWater >= 0.2)
 			{
-				dInAir -= 0.2;
-				FncProcessHealth(-6, false);
+				dInWater -= 0.2;
+				FncProcessHealth(-6);
 			}
 		}
 		//magma
@@ -109,10 +109,10 @@ public class Mazub extends ActiveObject
 		{
 			bInMagma = true;
 			dInMagma += dt;
-			if (dInMagma <= 0.2)
+			if (dInMagma >= 0.2)
 			{
 				dInMagma -= 0.2;
-				FncProcessHealth(-50, false);
+				FncProcessHealth(-50);
 			}
 		}
 	}
@@ -142,11 +142,11 @@ public class Mazub extends ActiveObject
 				iCounter += 3;
 		}
 		//al loopend
-		if (eHorState == enHorState.stand)
-		{
-			iSpriteCounter = 0;
-		}
-		if (getVelocity()[1] == 0)
+//		if (eHorState == enHorState.stand)
+//		{
+//			iSpriteCounter = 0;
+//		}
+		if (getVelocity()[1] == 0 && (getVerDirection() != enVertState.duck))
 		{ //TODO check
 			if (eHorState == enHorState.left)
 			{

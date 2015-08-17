@@ -18,32 +18,22 @@ public class IsStateMoving extends Expression<Boolean>
 		obj = activeObjectExpression;
 	}
 
-	@Override
 	public Boolean getValue(Environment en)
 	{
-		return exec(obj, en);
+		return exec(obj.getValue(en), en);
 	}
 
-	private boolean exec(Object obj, Environment en)
-	{
-		assert obj instanceof ActiveObject;
-		ActiveObject activeObject = (ActiveObject) obj;
-		return checkState(activeObject, en);
-	}
-
-	private boolean checkState(ActiveObject activeObject, Environment en)
+	private boolean exec(ActiveObject obj, Environment en)
 	{
 		switch (di.getValue(en))
-		{
-
-			case LEFT:
-				return (activeObject.getVelocity()[0] < 0);
+		{case LEFT:
+				return (en.getActiveCaller().getHorDirection() == ActiveObject.enHorState.left);
 			case RIGHT:
-				return (activeObject.getVelocity()[0] > 0);
+				return (en.getActiveCaller().getHorDirection() == ActiveObject.enHorState.right);
 			case UP:
-				return (activeObject.getVelocity()[1] > 0);
+				return (en.getActiveCaller().getVerDirection() == ActiveObject.enVertState.jump);
 			case DOWN:
-				return (activeObject.getVelocity()[1] < 0);
+				return (en.getActiveCaller().getVerDirection() == ActiveObject.enVertState.duck);
 			default:
 				return false;
 		}

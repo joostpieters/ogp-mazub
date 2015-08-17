@@ -12,7 +12,7 @@ public class GetYExpr extends ObjectExpression
 	}
 
 
-	protected double exec(ActiveObject activeObject)
+	protected Double exec(ActiveObject activeObject)
 	{
 		return activeObject.getRawLocation()[1];
 	}

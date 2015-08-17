@@ -1,19 +1,24 @@
 package jumpingalien.model.programs.expressions.equation;
 
+import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
+import jumpingalien.model.programs.Statement;
+import jumpingalien.model.programs.expressions.equation.EquationExpression;
 import jumpingalien.part3.programs.SourceLocation;
 
-public class EqualExpr extends EquationExpression
+public class EqualExpr extends Expression<Boolean>
 {
-
-	public EqualExpr(SourceLocation sourceLocation, Expression<Double> double1, Expression<Double> double2)
+	private Expression exprOne,exprTwo;
+	public EqualExpr(SourceLocation sourceLocation, Expression expr1, Expression expr2)
 	{
-		super(sourceLocation, double1, double2);
+		super(sourceLocation);
+		exprOne = expr1;exprTwo = expr2;
 	}
 
 
-	protected boolean exec(double dOne, double dTwo)
+	@Override
+	public Boolean getValue(Environment env)
 	{
-		return dOne == dTwo;
+		return (exprOne.getValue(env) == exprTwo.getValue(env));
 	}
 }

@@ -1,17 +1,22 @@
 package jumpingalien.model.programs.expressions.equation;
 
+import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-public class NotEqualExpr extends EquationExpression
+public class NotEqualExpr extends Expression<Boolean>
 {
-	public NotEqualExpr(SourceLocation sourceLocation, Expression<Double> double1, Expression<Double> double2)
+	private Expression exprOne,exprTwo;
+	public NotEqualExpr(SourceLocation sourceLocation, Expression expr1, Expression expr2)
 	{
-		super(sourceLocation, double1, double2);
+		super(sourceLocation);
+		exprOne = expr1;exprTwo = expr2;
 	}
 
-	protected boolean exec(double dOne, double dTwo)
+
+	@Override
+	public Boolean getValue(Environment env)
 	{
-		return dOne != dTwo;
+		return (exprOne.getValue(env) != exprTwo.getValue(env));
 	}
 }

@@ -15,11 +15,12 @@ public abstract class ObjectExpression extends Expression<Double>
 		activeObject = obj;
 	}
 
-	protected abstract double exec(ActiveObject activeObject);
+	protected abstract Double exec(ActiveObject activeObject);
 
 
 	public Double getValue(Environment env)
 	{
+		if(!(activeObject.getValue(env) instanceof ActiveObject)) return 0.0;
 		return exec(activeObject.getValue(env));
 	}
 }

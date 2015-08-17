@@ -109,7 +109,7 @@ public class World extends TileMap
 		getColInterActive().add(obj);
 	}
 
-	public synchronized Collection getCollection(Class obj)
+	public synchronized Collection<?> getCollection(Class obj)
 	{
 		ArrayList<ActiveObject> tempCol = new ArrayList<>();
 		getColInterActive().stream().filter(obj::isInstance).forEach(tempCol::add);

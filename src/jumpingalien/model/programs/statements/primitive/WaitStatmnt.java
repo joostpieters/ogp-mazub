@@ -15,7 +15,7 @@ public class WaitStatmnt extends PrimitiveStatement<Double>
 
 	protected void doAction(Environment env, Expression<Double> expression)
 	{
-		if (waited - expression.getValue(env) < 0)
+		if (waited < expression.getValue(env))
 		{
 			waited++;
 			env.stepBack();

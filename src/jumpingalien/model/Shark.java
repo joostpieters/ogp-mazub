@@ -50,23 +50,25 @@ public class Shark extends ActiveObject
 		bInAir = false;
 		bInMagma = false;
 		//horizontal movement
-		if (dMovePeriod < dMoveTimer)
+		if (hasProgram())
 		{
-			iMoveMutilpr *= -1;
-			dMoveTimer = 0;
-			dMovePeriod = random.nextDouble() * 3 + 1;
-			setAccelerationX(1.5 * iMoveMutilpr);
-			jumpTimer++;
-		} else
-		{
-			dMoveTimer += dt;
-			if (jumpTimer > 3)
+			if (dMovePeriod < dMoveTimer)
 			{
-				jumpTimer = 0;
-				setVelocityY(2);
+				iMoveMutilpr *= -1;
+				dMoveTimer = 0;
+				dMovePeriod = random.nextDouble() * 3 + 1;
+				setAccelerationX(1.5 * iMoveMutilpr);
+				jumpTimer++;
+			} else
+			{
+				dMoveTimer += dt;
+				if (jumpTimer > 3)
+				{
+					jumpTimer = 0;
+					setVelocityY(2);
+				}
 			}
 		}
-
 		super.advanceTime(dt);
 		if (!bInAir) dInAir = 0;
 		if (!bInMagma) dInMagma = 0;
@@ -83,7 +85,7 @@ public class Shark extends ActiveObject
 			if (dInAir <= 0.2)
 			{
 				dInAir -= 0.2;
-				FncProcessHealth(-6, false);
+				FncProcessHealth(-6);
 			}
 		}
 		//lava
@@ -94,7 +96,7 @@ public class Shark extends ActiveObject
 			if (dInMagma <= 0.2)
 			{
 				dInMagma -= 0.2;
-				FncProcessHealth(-50, false);
+				FncProcessHealth(-50);
 			}
 		}
 	}

@@ -1,18 +1,21 @@
 package jumpingalien.model.programs.expressions;
 
+import jumpingalien.model.ActiveObject;
+import jumpingalien.model.programs.Environment;
+import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
 import jumpingalien.part3.programs.SourceLocation;
 
-class SelfExpr
+class SelfExpr extends Expression<ActiveObject>
 {
-	public SelfExpr(SourceLocation source)
+	protected SelfExpr(SourceLocation sourceLocation)
 	{
-
+		super(sourceLocation);
 	}
 
-	public DoubleConstExpr getValue()
+	@Override
+	public ActiveObject getValue(Environment env)
 	{
-//TODO
-		return null;
+		return env.getActiveCaller();
 	}
 }

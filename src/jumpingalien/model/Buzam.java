@@ -17,6 +17,6 @@ public class Buzam extends Mazub
 	@Override
 	public void advanceTime(double dt)
 	{
-
+		super.advanceTime(dt);
 	}
 }

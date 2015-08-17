@@ -11,7 +11,7 @@ public class GetXExpr extends ObjectExpression
 		super(sourceLocation, obj);
 	}
 
-	protected double exec(ActiveObject activeObject)
+	protected Double exec(ActiveObject activeObject)
 	{
 		return activeObject.getRawLocation()[0];
 	}

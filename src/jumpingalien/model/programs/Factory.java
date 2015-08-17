@@ -1,6 +1,9 @@
 package jumpingalien.model.programs;
 
+import jumpingalien.model.ActiveObject;
 import jumpingalien.model.Program;
+import jumpingalien.model.programs.expressions.SearchObjExpr;
+import jumpingalien.model.programs.expressions.equation.EqualExpr;
 import jumpingalien.model.programs.expressions.GetTileExpr;
 import jumpingalien.model.programs.expressions.IsStateMoving;
 import jumpingalien.model.programs.expressions.ReadVarExpr;
@@ -59,6 +62,8 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
 				return new ReadVarExpr<Double>(sourceLocation, variableName);
 			case Direction:
 				return new ReadVarExpr<Direction>(sourceLocation, variableName);
+			case ActiveObject:
+				return new ReadVarExpr<ActiveObject>(sourceLocation,variableName);
 			default:
 				return new ReadVarExpr(sourceLocation, variableName);
 		}
@@ -118,7 +123,13 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
 	@Override
 	public Expression createSelf(SourceLocation sourceLocation)
 	{
-		return null;
+		return new Expression<ActiveObject>(sourceLocation)
+		{
+			public ActiveObject getValue(Environment env)
+			{
+				return env.getActiveCaller();
+			}
+		};
 	}
 
 	/**
@@ -421,7 +432,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
 	@Override
 	public Expression createSearchObject(Expression direction, SourceLocation sourceLocation)
 	{
-		return null;//TODO
+		return new SearchObjExpr(sourceLocation,direction);
 	}
 
 	/**
@@ -565,6 +576,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
 	@Override
 	public Expression createIsMoving(Expression expr, Expression direction, SourceLocation sourceLocation)
 	{
+		System.out.println(expr);
 		return new IsStateMoving(sourceLocation, expr, direction);
 	}
 
@@ -693,9 +705,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
 	@Override
 	public Statement createStartRun(Expression direction, SourceLocation sourceLocation)
 	{
-		System.out.println(direction);
-		StartRunExpr startRunExpr = new StartRunExpr(sourceLocation, direction);
-		return startRunExpr;
+		return new StartRunExpr(sourceLocation, direction);
 	}
 
 	/**
