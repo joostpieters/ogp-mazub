@@ -5,9 +5,6 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 16/08/15.
- */
 public class StopRunExpr extends PrimitiveStatement<IProgramFactory.Direction>
 {
 	public StopRunExpr(SourceLocation sourceLocation, Expression<IProgramFactory.Direction> exp)

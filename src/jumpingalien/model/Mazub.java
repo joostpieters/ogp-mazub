@@ -5,10 +5,10 @@ import jumpingalien.util.Sprite;
 public class Mazub extends ActiveObject
 {
 	//classe invarianten
-	double dInAir = 0;
-	boolean bInAir;
-	double dInMagma = 0;
-	boolean bInMagma;
+	private double dInAir = 0;
+	private boolean bInAir;
+	private double dInMagma = 0;
+	private boolean bInMagma;
 	//sprite counter
 	private int iSpriteCounter;
 	private enHorState eLastHorState = enHorState.stand;
@@ -18,7 +18,7 @@ public class Mazub extends ActiveObject
 		this(pixelLeftX, pixelBottomY, sprites, null);
 	}
 
-	public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites, Program program)
+	Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites, Program program)
 	{
 		super(pixelLeftX, pixelBottomY, sprites, 50, true, 1, 0.9,
 				8, 3, program);
@@ -32,7 +32,7 @@ public class Mazub extends ActiveObject
 			if (getHealth() < 500)
 			{
 				FncProcessHealth(100, false);
-				wCaller.FncRemoveFromColl(interObj);
+				getwCaller().FncRemoveFromColl(interObj);
 			}
 			return;
 		}

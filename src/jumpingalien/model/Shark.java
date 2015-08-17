@@ -8,14 +8,14 @@ public class Shark extends ActiveObject
 {
 	//class invar
 	private final Random random = new Random();
-	double dMovePeriod = random.nextDouble() * 2 + 2;
-	double dMoveTimer = 0;
-	int iMoveMutilpr = 1;
-	int jumpTimer = 0;
-	double dInAir = 0;
-	boolean bInAir;
-	double dInMagma = 0;
-	boolean bInMagma;
+	private double dMovePeriod = random.nextDouble() * 2 + 2;
+	private double dMoveTimer = 0;
+	private int iMoveMutilpr = 1;
+	private int jumpTimer = 0;
+	private double dInAir = 0;
+	private boolean bInAir;
+	private double dInMagma = 0;
+	private boolean bInMagma;
 
 	public Shark(int x, int y, Sprite[] sprites)
 	{

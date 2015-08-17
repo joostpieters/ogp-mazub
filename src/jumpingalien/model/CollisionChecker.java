@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 
-public class CollisionChecker implements Runnable
+class CollisionChecker implements Runnable
 {
 	private boolean isRunning = true;
-	private World worldCaller;
+	private final World worldCaller;
 
 	public CollisionChecker(World world)
 	{
@@ -38,7 +38,7 @@ public class CollisionChecker implements Runnable
 		return obB.getLocation()[1] + iBY - 1 >= obA.getLocation()[1];
 	}
 
-	public synchronized boolean running()
+	private synchronized boolean running()
 	{
 		return this.isRunning;
 	}

@@ -4,9 +4,6 @@ import jumpingalien.model.ActiveObject;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 16/08/15.
- */
 public class IsDeadExpr extends TypeExpression
 {
 	public IsDeadExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)

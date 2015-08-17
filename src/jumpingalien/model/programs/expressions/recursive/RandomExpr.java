@@ -6,12 +6,9 @@ import jumpingalien.part3.programs.SourceLocation;
 
 import java.util.Random;
 
-/**
- * Created by covert on 14/08/15.
- */
 public class RandomExpr extends RecursiveExpression
 {
-	Random random = new Random();
+	private final Random random = new Random();
 
 	public RandomExpr(SourceLocation source, Expression<Double> expression)
 	{

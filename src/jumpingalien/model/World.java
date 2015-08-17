@@ -7,12 +7,13 @@ import java.util.LinkedList;
 public class World extends TileMap
 {
 	//classe invar
-	Thread collisionThread;
-	CollisionChecker collisionRunnable;
+	private final Thread collisionThread;
+	private final CollisionChecker collisionRunnable;
 	//collection
-	private LinkedList<ActiveObject> colInterActive = new LinkedList<>();
+	private final LinkedList<ActiveObject> colInterActive = new LinkedList<>();
 	//omgevings var
-	private int iVisibleWindowWidth, iVisibleWindowHeight;
+	private final int iVisibleWindowWidth;
+	private final int iVisibleWindowHeight;
 	private enGameState eGameState;
 	//player
 	private Mazub player;
@@ -108,7 +109,7 @@ public class World extends TileMap
 		getColInterActive().add(obj);
 	}
 
-	public synchronized Collection<?> getCollection(Class obj)
+	public synchronized Collection getCollection(Class obj)
 	{
 		ArrayList<ActiveObject> tempCol = new ArrayList<>();
 		getColInterActive().stream().filter(obj::isInstance).forEach(tempCol::add);

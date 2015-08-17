@@ -4,12 +4,9 @@ import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public abstract class DataExpression<dataType> extends Expression<dataType>
 {
-	private dataType dtValue;
+	private final dataType dtValue;
 
 	DataExpression(SourceLocation source, dataType data)
 	{

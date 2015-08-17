@@ -4,9 +4,6 @@ import jumpingalien.model.ActiveObject;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public class GetYExpr extends ObjectExpression
 {
 	public GetYExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)

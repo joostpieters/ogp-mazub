@@ -9,16 +9,13 @@ import jumpingalien.part3.programs.IProgramFactory;
 import java.util.HashMap;
 import java.util.Stack;
 
-/**
- * Created by covert on 14/08/15.
- */
 public class Environment
 {
-	private ActiveObject activeCaller;
-	private Program programCaller;
-	private HashMap<String, Object> allVariables = new HashMap<>();
-	private Stack<Statement> statementStack = new Stack<>();
-	private Stack<Integer> stackCounter = new Stack<>();
+	private final ActiveObject activeCaller;
+	private final Program programCaller;
+	private final HashMap<String, Object> allVariables = new HashMap<>();
+	private final Stack<Statement> statementStack = new Stack<>();
+	private final Stack<Integer> stackCounter = new Stack<>();
 
 	public Environment(ActiveObject activeObject, Program program)
 	{
@@ -172,7 +169,7 @@ public class Environment
 		}
 	}
 
-	public void stepOut()
+	private void stepOut()
 	{
 		statementStack.pop();
 		stackCounter.pop();

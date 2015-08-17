@@ -3,9 +3,6 @@ package jumpingalien.part1.facade;
 import jumpingalien.model.Mazub;
 import jumpingalien.util.Sprite;
 
-/**
- * Created by covert on 08/07/15.
- */
 public class Facade implements IFacade
 {
 	/**

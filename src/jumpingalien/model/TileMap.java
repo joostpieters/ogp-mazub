@@ -10,7 +10,7 @@ public class TileMap
 	private final int iTargetTileX;
 	private final int iTargetTileY;
 
-	public TileMap(int nbTileX, int nbTileY, int tileSize, int targetTileX, int targetTileY)
+	TileMap(int nbTileX, int nbTileY, int tileSize, int targetTileX, int targetTileY)
 	{
 		tileMap = new Tile[nbTileX][nbTileY];
 		for (int i = 0; i < nbTileX; i++)
@@ -32,7 +32,7 @@ public class TileMap
 		return iTileSize;
 	}
 
-	public int[] getMaxTilePixel()
+	private int[] getMaxTilePixel()
 	{
 		return new int[]{tileMap.length * getTileSize() - getTileSize(), tileMap[0].length * getTileSize() - getTileSize()};
 	}
@@ -45,7 +45,7 @@ public class TileMap
 		return iaSize;
 	}
 
-	public Tile getWinningTile() throws ArrayIndexOutOfBoundsException
+	Tile getWinningTile() throws ArrayIndexOutOfBoundsException
 	{
 		return tileMap[iTargetTileX][iTargetTileY];
 	}
@@ -80,7 +80,7 @@ public class TileMap
 				, obj.getLocation()[1] + obj.getCurrentSprite().getHeight());
 	}
 
-	public LinkedList<Tile> getTilePositionInTiles(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop)
+	private LinkedList<Tile> getTilePositionInTiles(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop)
 	{
 		//int grooteArray = ((pixelRight - pixelLeft) / getTileSize() + 2) * ((pixelTop - pixelBottom) / getTileSize() + 2);
 		LinkedList<Tile> tiles = new LinkedList<>();

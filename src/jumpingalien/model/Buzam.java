@@ -2,9 +2,6 @@ package jumpingalien.model;
 
 import jumpingalien.util.Sprite;
 
-/**
- * Created by covert on 13/08/15.
- */
 public class Buzam extends Mazub
 {
 	public Buzam(int pixelLeftX, int pixelBottomY, Sprite[] sprites)

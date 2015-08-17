@@ -6,12 +6,9 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public class SearchObjExpr extends Expression<ActiveObject>
 {
-	Expression<IProgramFactory.Direction> directionExpression;
+	private final Expression<IProgramFactory.Direction> directionExpression;
 
 	public SearchObjExpr(SourceLocation sourceLocation, Expression<IProgramFactory.Direction> direction)
 	{

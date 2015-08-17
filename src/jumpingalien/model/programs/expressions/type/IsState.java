@@ -4,12 +4,9 @@ import jumpingalien.model.ActiveObject;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 16/08/15.
- */
 public abstract class IsState extends TypeExpression
 {
-	public IsState(SourceLocation sourceLocation, Expression obj)
+	IsState(SourceLocation sourceLocation, Expression obj)
 	{
 		super(sourceLocation, obj);
 	}

@@ -5,9 +5,6 @@ import jumpingalien.model.Plant;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 16/08/15.
- */
 public class IsPlantExpr extends TypeExpression
 {
 	public IsPlantExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)

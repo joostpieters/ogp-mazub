@@ -5,14 +5,11 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.Type;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 16/08/15.
- */
 public class AssignmentStatement extends ComplexStatement
 {
-	String key;
-	Type type;
-	Expression value;
+	private final String key;
+	private final Type type;
+	private final Expression value;
 
 	public AssignmentStatement(SourceLocation sourceLocation, String variableName, Type variableType, Expression valueExpression)
 	{

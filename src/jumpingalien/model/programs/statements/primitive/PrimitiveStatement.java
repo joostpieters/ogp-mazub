@@ -5,20 +5,17 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.Statement;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 16/08/15.
- */
 public abstract class PrimitiveStatement<dataType> extends Statement
 {
-	Expression<dataType> expression;
+	private Expression<dataType> expression;
 
-	public PrimitiveStatement(SourceLocation sourceLocation, Expression<dataType> exp)
+	PrimitiveStatement(SourceLocation sourceLocation, Expression<dataType> exp)
 	{
 		super(sourceLocation);
 		expression = exp;
 	}
 
-	public PrimitiveStatement(SourceLocation sourceLocation)
+	PrimitiveStatement(SourceLocation sourceLocation)
 	{
 		super(sourceLocation);
 	}

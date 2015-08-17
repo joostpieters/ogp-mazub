@@ -3,7 +3,11 @@ package jumpingalien.model;
 public class Tile
 {
 	//class invar
-	private int iPixelX, iPixelY, iNbX, iNbY, iGeoFeature;
+	private final int iPixelX;
+	private final int iPixelY;
+	private final int iNbX;
+	private final int iNbY;
+	private int iGeoFeature;
 
 	public Tile(int pixelX, int pixelY, int x, int y)
 	{

@@ -4,12 +4,9 @@ import jumpingalien.model.Tile;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 16/08/15.
- */
 public class IsTileType extends TypeExpression
 {
-	int type;
+	private final int type;
 
 	public IsTileType(SourceLocation sourceLocation, Expression obj, int geotype)
 	{

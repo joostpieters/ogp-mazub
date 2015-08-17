@@ -5,15 +5,9 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.expressions.data.BoolExpr;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public class NotExpr extends Expression<BoolExpr>
 {
-	//TODO !!!
-	//TODO met anonymouse class
-	//TODO !!!
-	Expression<Boolean> exprOne;
+	private final Expression<Boolean> exprOne;
 
 	public NotExpr(SourceLocation source, Expression<Boolean> expr1)
 	{

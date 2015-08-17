@@ -11,9 +11,6 @@ import jumpingalien.util.Sprite;
 import java.util.Collection;
 import java.util.Optional;
 
-/**
- * Created by covert on 13/08/15.
- */
 public class Facade implements IFacadePart3
 {
 	/**

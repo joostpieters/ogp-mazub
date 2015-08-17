@@ -5,14 +5,11 @@ import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public abstract class ObjectExpression extends Expression<Double>
 {
-	Expression<ActiveObject> activeObject;
+	private final Expression<ActiveObject> activeObject;
 
-	public ObjectExpression(SourceLocation sourceLocation, Expression<ActiveObject> obj)
+	ObjectExpression(SourceLocation sourceLocation, Expression<ActiveObject> obj)
 	{
 		super(sourceLocation);
 		activeObject = obj;

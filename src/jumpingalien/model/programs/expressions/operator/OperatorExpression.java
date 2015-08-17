@@ -4,14 +4,12 @@ import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public abstract class OperatorExpression extends Expression<Double>
 {
-	private Expression<Double> exprOne, exprTwo;
+	private final Expression<Double> exprOne;
+	private final Expression<Double> exprTwo;
 
-	public OperatorExpression(SourceLocation sourceLocation, Expression<Double> expr1, Expression<Double> expr2)
+	OperatorExpression(SourceLocation sourceLocation, Expression<Double> expr1, Expression<Double> expr2)
 	{
 		super(sourceLocation);
 		exprOne = expr1;

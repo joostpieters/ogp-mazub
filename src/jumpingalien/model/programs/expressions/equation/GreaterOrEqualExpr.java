@@ -3,9 +3,6 @@ package jumpingalien.model.programs.expressions.equation;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public class GreaterOrEqualExpr extends EquationExpression
 {
 	public GreaterOrEqualExpr(SourceLocation sourceLocation, Expression<Double> double1, Expression<Double> double2)

@@ -5,12 +5,10 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.model.programs.Statement;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 16/08/15.
- */
 public class IfStatmnt extends ConditionStatmnt
 {
-	private Statement ifExpr, elseExpr;
+	private final Statement ifExpr;
+	private final Statement elseExpr;
 
 	public IfStatmnt(SourceLocation sourceLocation, Expression<Boolean> conditionExpression
 			, Statement ifBody, Statement elseBody)

@@ -4,14 +4,12 @@ import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public abstract class LogicalExpression extends Expression<Boolean>
 {
-	private Expression<Boolean> exprOne, exprTwo;
+	private final Expression<Boolean> exprOne;
+	private final Expression<Boolean> exprTwo;
 
-	public LogicalExpression(SourceLocation source, Expression<Boolean> expr1, Expression<Boolean> expr2)
+	LogicalExpression(SourceLocation source, Expression<Boolean> expr1, Expression<Boolean> expr2)
 	{
 		super(source);
 		exprOne = expr1;

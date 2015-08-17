@@ -4,14 +4,12 @@ import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 15/08/15.
- */
 public abstract class EquationExpression extends Expression<Boolean>
 {
-	private Expression<Double> doubleOne, doubleTwo;
+	private final Expression<Double> doubleOne;
+	private final Expression<Double> doubleTwo;
 
-	public EquationExpression(SourceLocation sourceLocation, Expression<Double> double1, Expression<Double> double2)
+	EquationExpression(SourceLocation sourceLocation, Expression<Double> double1, Expression<Double> double2)
 	{
 		super(sourceLocation);
 		doubleOne = double1;

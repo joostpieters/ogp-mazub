@@ -12,32 +12,32 @@ public abstract class ActiveObject implements IntegratedObject
 	private final Sprite[] aSprite;
 	//env procedure
 	private final boolean bCanFall;
-	protected enVertState eVerState = enVertState.stand;
-	protected enHorState eHorState = enHorState.stand;
-	protected double dtLastMove;
+	enVertState eVerState = enVertState.stand;
+	enHorState eHorState = enHorState.stand;
+	double dtLastMove;
 	//delta var
 	protected double dLastLeftX;
 	protected double dLastBottomY;
 	//hitpoints
-	protected boolean bImune = false;
-	protected double dLastImune;
+	boolean bImune = false;
+	double dLastImune;
 	//caller
-	protected World wCaller;
+	private World wCaller;
 	//possible programs
-	protected Program controllingProgram;
+	private Program controllingProgram;
 	//locatie var
 	private double dPixelLeftX;
 	private double dPixelBottomY;
 	//velocity var
 	private double dVelocityX;
 	private double dVelocityY;
-	private double dInitialVelocity;
-	private double dMaxVelocity;
-	private double dInitialJump;
+	private final double dInitialVelocity;
+	private final double dMaxVelocity;
+	private final double dInitialJump;
 	//acceleration var
 	private double dAccelerationX;
 	private double dAccelerationY;
-	private double dInitialAcceleration;
+	private final double dInitialAcceleration;
 	private int iCurrentSprite;
 	private int iHitpoints;
 	private Environment environment;
@@ -64,7 +64,7 @@ public abstract class ActiveObject implements IntegratedObject
 		environment = new Environment(this, program);
 	}
 
-	protected int correctSprite()
+	int correctSprite()
 	{
 		if (getVelocity()[0] < 0)
 		{
@@ -218,13 +218,13 @@ public abstract class ActiveObject implements IntegratedObject
 		setVelocityY(daVelocity[1]);
 	}
 
-	protected void setVelocityX(double x)
+	private void setVelocityX(double x)
 	{
 		//TODO test def
 		dVelocityX = x;
 	}
 
-	protected void setVelocityY(double y)
+	void setVelocityY(double y)
 	{
 		//TODO test def
 		dVelocityY = y;
@@ -247,13 +247,13 @@ public abstract class ActiveObject implements IntegratedObject
 		setAccelerationY(daAccel[1]);
 	}
 
-	protected void setAccelerationX(double x)
+	void setAccelerationX(double x)
 	{
 		//TODO test def
 		dAccelerationX = x;
 	}
 
-	protected void setAccelerationY(double y)
+	private void setAccelerationY(double y)
 	{
 		//TODO test def
 		dAccelerationY = y;
@@ -285,7 +285,7 @@ public abstract class ActiveObject implements IntegratedObject
 		return aSprite[iCurrentSprite];
 	}
 
-	protected synchronized void FncProcessHealth(int change, boolean isImune)
+	synchronized void FncProcessHealth(int change, boolean isImune)
 	{
 		if (change < 0)
 		{

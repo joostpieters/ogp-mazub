@@ -4,12 +4,9 @@ import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public class ReadVarExpr<dataType> extends Expression<dataType>
 {
-	private String key;
+	private final String key;
 
 	public ReadVarExpr(SourceLocation sourceLocation, String ky)
 	{

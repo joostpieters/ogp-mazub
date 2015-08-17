@@ -5,12 +5,10 @@ import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 14/08/15.
- */
 public class GetTileExpr extends Expression<Tile>
 {
-	Expression<Double> x, y;
+	private final Expression<Double> x;
+	private final Expression<Double> y;
 
 	public GetTileExpr(SourceLocation source, Expression<Double> dx, Expression<Double> dy)
 	{

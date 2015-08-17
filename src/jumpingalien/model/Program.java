@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 public class Program
 {
-	private HashMap<String, Type> globalVars;
-	private Statement totalStatement;
+	private final HashMap<String, Type> globalVars;
+	private final Statement totalStatement;
 
 	public Program(HashMap<String, Type> vars, Statement statements)
 	{

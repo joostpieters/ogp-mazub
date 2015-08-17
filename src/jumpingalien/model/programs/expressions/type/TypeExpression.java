@@ -4,14 +4,11 @@ import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 15/08/15.
- */
 public abstract class TypeExpression extends Expression<Boolean>
 {
-	private Expression ObjectExpression;
+	private final Expression ObjectExpression;
 
-	public TypeExpression(SourceLocation sourceLocation, Expression obj)
+	TypeExpression(SourceLocation sourceLocation, Expression obj)
 	{
 		super(sourceLocation);
 		ObjectExpression = obj;

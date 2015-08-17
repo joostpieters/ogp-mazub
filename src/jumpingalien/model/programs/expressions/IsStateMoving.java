@@ -6,13 +6,10 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 
-/**
- * Created by covert on 16/08/15.
- */
 public class IsStateMoving extends Expression<Boolean>
 {
-	Expression<IProgramFactory.Direction> di;
-	Expression<ActiveObject> obj;
+	private final Expression<IProgramFactory.Direction> di;
+	private final Expression<ActiveObject> obj;
 
 	public IsStateMoving(SourceLocation sourceLocation, Expression<ActiveObject> activeObjectExpression, Expression<IProgramFactory.Direction> direction)
 	{
@@ -24,8 +21,6 @@ public class IsStateMoving extends Expression<Boolean>
 	@Override
 	public Boolean getValue(Environment en)
 	{
-		assert obj.getValue(en) instanceof ActiveObject;
-		ActiveObject activeObject = obj.getValue(en);
 		return exec(obj, en);
 	}
 
