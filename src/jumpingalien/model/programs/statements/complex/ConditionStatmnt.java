@@ -7,16 +7,20 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 16/08/15.
  */
-public abstract class ConditionStatmnt extends ComplexStatement {
-    Expression<Boolean> condition;
-    public ConditionStatmnt(SourceLocation sourceLocation, Expression<Boolean> conditionExpression) {
-        super(sourceLocation);
-        condition = conditionExpression;
-    }
+public abstract class ConditionStatmnt extends ComplexStatement
+{
+	Expression<Boolean> condition;
 
-    protected boolean testCondition(Environment env){
-        return condition.getValue(env);
-    }
+	public ConditionStatmnt(SourceLocation sourceLocation, Expression<Boolean> conditionExpression)
+	{
+		super(sourceLocation);
+		condition = conditionExpression;
+	}
 
-    public abstract void exe(Environment env);
+	protected boolean testCondition(Environment env)
+	{
+		return condition.getValue(env);
+	}
+
+	public abstract void exe(Environment env);
 }

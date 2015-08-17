@@ -9,15 +9,19 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public class SearchObjExpr extends Expression<ActiveObject> {
-    Expression<IProgramFactory.Direction> directionExpression;
-    public SearchObjExpr(SourceLocation sourceLocation,Expression<IProgramFactory.Direction> direction) {
-        super(sourceLocation);
-        directionExpression = direction;
-    }
+public class SearchObjExpr extends Expression<ActiveObject>
+{
+	Expression<IProgramFactory.Direction> directionExpression;
 
-    public ActiveObject getValue(Environment env) {
+	public SearchObjExpr(SourceLocation sourceLocation, Expression<IProgramFactory.Direction> direction)
+	{
+		super(sourceLocation);
+		directionExpression = direction;
+	}
 
-        return null;//TODO
-    }
+	public ActiveObject getValue(Environment env)
+	{
+
+		return null;//TODO
+	}
 }

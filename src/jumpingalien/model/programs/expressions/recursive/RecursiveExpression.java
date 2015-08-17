@@ -7,16 +7,20 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public abstract class RecursiveExpression extends Expression<Double> {
-    Expression<Double> internalExpression;
-    public RecursiveExpression(SourceLocation source, Expression<Double> expression) {
-        super(source);
-        internalExpression = expression;
-    }
+public abstract class RecursiveExpression extends Expression<Double>
+{
+	Expression<Double> internalExpression;
 
-    protected Expression<Double> getInternalExpression(){
-        return internalExpression;
-    }
+	public RecursiveExpression(SourceLocation source, Expression<Double> expression)
+	{
+		super(source);
+		internalExpression = expression;
+	}
 
-    public abstract Double getValue(Environment env);
+	protected Expression<Double> getInternalExpression()
+	{
+		return internalExpression;
+	}
+
+	public abstract Double getValue(Environment env);
 }

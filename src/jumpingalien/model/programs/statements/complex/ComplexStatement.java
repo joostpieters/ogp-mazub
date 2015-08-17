@@ -9,11 +9,14 @@ import java.util.Iterator;
 /**
  * Created by covert on 16/08/15.
  */
-public abstract class ComplexStatement extends Statement {
-    Iterator<Statement> statementIterator;//TODO
-    public ComplexStatement(SourceLocation sourceLocation) {
-        super(sourceLocation);
-    }
+public abstract class ComplexStatement extends Statement
+{
+	Iterator<Statement> statementIterator;//TODO
 
-    public abstract void exe(Environment env);
+	public ComplexStatement(SourceLocation sourceLocation)
+	{
+		super(sourceLocation);
+	}
+
+	public abstract void exe(Environment env);
 }

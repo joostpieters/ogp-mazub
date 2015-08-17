@@ -7,12 +7,15 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public class SquareRootExpr extends RecursiveExpression{
-    public SquareRootExpr(SourceLocation source, Expression<Double> expression) {
-        super(source, expression);
-    }
+public class SquareRootExpr extends RecursiveExpression
+{
+	public SquareRootExpr(SourceLocation source, Expression<Double> expression)
+	{
+		super(source, expression);
+	}
 
-    public Double getValue(Environment en) {
-        return Math.sqrt((double) getInternalExpression().getValue(en));
-    }
+	public Double getValue(Environment en)
+	{
+		return Math.sqrt(getInternalExpression().getValue(en));
+	}
 }

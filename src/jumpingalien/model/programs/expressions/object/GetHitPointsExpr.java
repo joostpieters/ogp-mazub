@@ -7,13 +7,16 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public class GetHitPointsExpr extends ObjectExpression {
-    public GetHitPointsExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj) {
-        super(sourceLocation, obj);
-    }
+public class GetHitPointsExpr extends ObjectExpression
+{
+	public GetHitPointsExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)
+	{
+		super(sourceLocation, obj);
+	}
 
-    protected double exec(ActiveObject activeObject) {
-        return activeObject.getHealth();
-    }
+	protected double exec(ActiveObject activeObject)
+	{
+		return activeObject.getHealth();
+	}
 }
 

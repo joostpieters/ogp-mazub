@@ -7,13 +7,16 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 16/08/15.
  */
-public class StartJumpStatmnt extends PrimitiveStatement {
-    public StartJumpStatmnt(SourceLocation sourceLocation) {
-        super(sourceLocation);
+public class StartJumpStatmnt extends PrimitiveStatement
+{
+	public StartJumpStatmnt(SourceLocation sourceLocation)
+	{
+		super(sourceLocation);
 
-    }
+	}
 
-    protected void doAction(Environment env, Expression expression) {
-        env.getActiveCaller().startJump();
-    }
+	protected void doAction(Environment env, Expression expression)
+	{
+		env.getActiveCaller().startJump();
+	}
 }

@@ -7,12 +7,15 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 16/08/15.
  */
-public class StopDuckStatmnt extends PrimitiveStatement {
-    public StopDuckStatmnt(SourceLocation sourceLocation) {
-        super(sourceLocation);
-    }
+public class StopDuckStatmnt extends PrimitiveStatement
+{
+	public StopDuckStatmnt(SourceLocation sourceLocation)
+	{
+		super(sourceLocation);
+	}
 
-    protected void doAction(Environment env, Expression expression) {
-        env.getActiveCaller().endDuck();
-    }
+	protected void doAction(Environment env, Expression expression)
+	{
+		env.getActiveCaller().endDuck();
+	}
 }

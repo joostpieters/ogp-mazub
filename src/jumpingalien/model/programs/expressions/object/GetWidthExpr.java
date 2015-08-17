@@ -7,13 +7,16 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public class GetWidthExpr extends ObjectExpression {
-    public GetWidthExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj) {
-        super(sourceLocation, obj);
-    }
+public class GetWidthExpr extends ObjectExpression
+{
+	public GetWidthExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)
+	{
+		super(sourceLocation, obj);
+	}
 
 
-    protected double exec(ActiveObject activeObject) {
-        return activeObject.getCurrentSprite().getWidth();
-    }
+	protected double exec(ActiveObject activeObject)
+	{
+		return activeObject.getCurrentSprite().getWidth();
+	}
 }

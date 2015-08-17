@@ -7,20 +7,25 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 15/08/15.
  */
-public abstract class TypeExpression extends Expression<Boolean> {
-    private Expression ObjectExpression;
-    public TypeExpression(SourceLocation sourceLocation,Expression obj) {
-        super(sourceLocation);
-        ObjectExpression = obj;
-    }
+public abstract class TypeExpression extends Expression<Boolean>
+{
+	private Expression ObjectExpression;
 
-    protected Expression getObjectExpression() {
-        return ObjectExpression;
-    }
+	public TypeExpression(SourceLocation sourceLocation, Expression obj)
+	{
+		super(sourceLocation);
+		ObjectExpression = obj;
+	}
 
-    protected abstract boolean exec(Object obj);
+	protected Expression getObjectExpression()
+	{
+		return ObjectExpression;
+	}
 
-    public Boolean getValue(Environment env) {
-        return exec(ObjectExpression.getValue(env));
-    }
+	protected abstract boolean exec(Object obj);
+
+	public Boolean getValue(Environment env)
+	{
+		return exec(ObjectExpression.getValue(env));
+	}
 }

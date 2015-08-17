@@ -8,12 +8,15 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 15/08/15.
  */
-public class IsSharkExpr extends TypeExpression {
-    public IsSharkExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj) {
-        super(sourceLocation, obj);
-    }
+public class IsSharkExpr extends TypeExpression
+{
+	public IsSharkExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)
+	{
+		super(sourceLocation, obj);
+	}
 
-    protected boolean exec(Object obj) {
-        return obj instanceof Shark;
-    }
+	protected boolean exec(Object obj)
+	{
+		return obj instanceof Shark;
+	}
 }

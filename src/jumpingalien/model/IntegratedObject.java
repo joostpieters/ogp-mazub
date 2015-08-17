@@ -3,25 +3,29 @@ package jumpingalien.model;
 /**
  * Created by covert on 04/08/15.
  */
-public interface IntegratedObject {
+public interface IntegratedObject
+{
 
-    void startJump();
-    void endJump();
+	void startJump();
 
-    void startMoveLeft();
-    void endMoveLeft();
+	void endJump();
 
-    void startMoveRight();
+	void startMoveLeft();
 
-    void endMoveRight();
+	void endMoveLeft();
 
-    void startDuck();
-    void endDuck();
+	void startMoveRight();
 
-    void isOverlapping(ActiveObject interObj);
+	void endMoveRight();
 
-    void advanceTime(double dt);
+	void startDuck();
 
-    void processEnv(double dt, int iEnvType);
+	void endDuck();
+
+	void isOverlapping(ActiveObject interObj);
+
+	void advanceTime(double dt);
+
+	void processEnv(double dt, int iEnvType);
 
 }

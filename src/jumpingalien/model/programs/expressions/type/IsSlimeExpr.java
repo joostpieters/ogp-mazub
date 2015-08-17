@@ -8,13 +8,16 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 16/08/15.
  */
-public class IsSlimeExpr extends TypeExpression {
-    public IsSlimeExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj) {
-        super(sourceLocation, obj);
-    }
+public class IsSlimeExpr extends TypeExpression
+{
+	public IsSlimeExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)
+	{
+		super(sourceLocation, obj);
+	}
 
 
-    protected boolean exec(Object obj) {
-        return obj instanceof Slime;
-    }
+	protected boolean exec(Object obj)
+	{
+		return obj instanceof Slime;
+	}
 }

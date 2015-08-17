@@ -7,12 +7,15 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public class GetHeightExpr extends ObjectExpression {
-    public GetHeightExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj) {
-        super(sourceLocation, obj);
-    }
+public class GetHeightExpr extends ObjectExpression
+{
+	public GetHeightExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)
+	{
+		super(sourceLocation, obj);
+	}
 
-    protected double exec(ActiveObject activeObject) {
-        return activeObject.getCurrentSprite().getHeight();
-    }
+	protected double exec(ActiveObject activeObject)
+	{
+		return activeObject.getCurrentSprite().getHeight();
+	}
 }

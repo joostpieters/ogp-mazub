@@ -7,12 +7,15 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 14/08/15.
  */
-public class GetXExpr extends ObjectExpression {
-    public GetXExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj) {
-        super(sourceLocation, obj);
-    }
+public class GetXExpr extends ObjectExpression
+{
+	public GetXExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)
+	{
+		super(sourceLocation, obj);
+	}
 
-    protected double exec(ActiveObject activeObject) {
-        return activeObject.getRawLocation()[0];
-    }
+	protected double exec(ActiveObject activeObject)
+	{
+		return activeObject.getRawLocation()[0];
+	}
 }

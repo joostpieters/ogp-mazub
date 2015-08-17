@@ -8,12 +8,15 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 16/08/15.
  */
-public class IsPlantExpr extends TypeExpression {
-    public IsPlantExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj) {
-        super(sourceLocation, obj);
-    }
+public class IsPlantExpr extends TypeExpression
+{
+	public IsPlantExpr(SourceLocation sourceLocation, Expression<ActiveObject> obj)
+	{
+		super(sourceLocation, obj);
+	}
 
-    protected boolean exec(Object obj) {
-        return obj instanceof Plant;
-    }
+	protected boolean exec(Object obj)
+	{
+		return obj instanceof Plant;
+	}
 }

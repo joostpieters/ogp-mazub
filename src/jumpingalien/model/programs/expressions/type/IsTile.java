@@ -7,13 +7,16 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 16/08/15.
  */
-public class IsTile extends TypeExpression {
-    public IsTile(SourceLocation sourceLocation, Expression obj) {
-        super(sourceLocation, obj);
-    }
+public class IsTile extends TypeExpression
+{
+	public IsTile(SourceLocation sourceLocation, Expression obj)
+	{
+		super(sourceLocation, obj);
+	}
 
 
-    protected boolean exec(Object obj) {
-        return obj instanceof Tile;
-    }
+	protected boolean exec(Object obj)
+	{
+		return obj instanceof Tile;
+	}
 }
