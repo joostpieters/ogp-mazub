@@ -1,15 +1,12 @@
 package jumpingalien.model.programs;
 
 import jumpingalien.model.ActiveObject;
+import jumpingalien.model.Program;
 import jumpingalien.model.World;
 import jumpingalien.model.programs.statements.SequenceStatement;
-import jumpingalien.model.programs.statements.complex.ComplexStatement;
 import jumpingalien.part3.programs.IProgramFactory;
-import jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser;
 
-import java.security.InvalidParameterException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -17,13 +14,13 @@ import java.util.Stack;
  */
 public class Environment {
     private Stack<Statement> originalStatement;private HashMap<String, Object> originalVariables = new HashMap<>();
-    private ActiveObject activeCaller;private Program programCaller;
+    private ActiveObject activeCaller;
     private HashMap<String, Object> allVariables = new HashMap<>();
     private Stack<Statement> statementStack = new Stack<>();
-    private Stack<Integer> stackCounter;
+    private Stack<Integer> stackCounter = new Stack<>();
 
     public Environment(ActiveObject activeObject, HashMap<String, Type> variables, Statement mainStatement) {
-        activeCaller = activeObject;
+        activeCaller = activeObject;stackCounter.push(0);
 
         for (HashMap.Entry<String, Type> variable : variables.entrySet()) {
             String key = variable.getKey(); Type type = variable.getValue();
@@ -38,7 +35,7 @@ public class Environment {
                 case Direction:
                     setVariable(key,IProgramFactory.Direction.UP);
                     continue;
-                case Object:
+                case ActiveObject:
                     setVariable(key,null);
                     continue;
             }

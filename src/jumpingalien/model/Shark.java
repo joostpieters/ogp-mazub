@@ -1,6 +1,5 @@
 package jumpingalien.model;
 
-import jumpingalien.model.programs.Program;
 import jumpingalien.util.Sprite;
 
 import java.util.Random;
@@ -18,13 +17,22 @@ public class Shark extends ActiveObject {
     boolean bInMagma;
 
     public Shark(int x, int y, Sprite[] sprites){
-        super(x,y,sprites,100,true);
+        this(x,y,sprites,null);
     }
 
     public Shark(int x, int y, Sprite[] sprites,Program program){
-        super(x,y,sprites,100,true,program);
+        super(x,y,sprites,100,true,0,1.5,2,4,program);
     }
 
+
+
+    public void startDuck() {
+
+    }
+
+    public void endDuck() {
+
+    }
 
     public void isOverlapping(ActiveObject interObj) {
         //throw new NotImplementedException();

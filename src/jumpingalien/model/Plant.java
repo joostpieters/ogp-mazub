@@ -1,15 +1,22 @@
 package jumpingalien.model;
 
-import jumpingalien.model.programs.Program;
 import jumpingalien.util.Sprite;
 
 public class Plant extends ActiveObject {
 
     public Plant (int x, int y, Sprite[] sprites){
-        super(x,y,sprites,100,true);
+        this(x,y,sprites,null);
     }
     public Plant (int x, int y, Sprite[] sprites,Program program){
-        super(x,y,sprites,100,true,program);
+        super(x,y,sprites,100,false,0.5,0,0,0.5,program);
+    }
+
+
+    public void startDuck() {
+    }
+
+    public void endDuck() {
+
     }
 
     public void isOverlapping(ActiveObject interObj) {
@@ -18,7 +25,7 @@ public class Plant extends ActiveObject {
 
 
     public void advanceTime(double dt) {
-
+        super.advanceTime(dt);
     }
 
 

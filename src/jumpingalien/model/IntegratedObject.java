@@ -5,10 +5,23 @@ package jumpingalien.model;
  */
 public interface IntegratedObject {
 
-    public void isOverlapping(ActiveObject interObj);
+    void startJump();
+    void endJump();
 
-    public void advanceTime(double dt);
+    void startMoveLeft();
+    void endMoveLeft();
 
-    public void processEnv(double dt,int iEnvType);
+    void startMoveRight();
+
+    void endMoveRight();
+
+    void startDuck();
+    void endDuck();
+
+    void isOverlapping(ActiveObject interObj);
+
+    void advanceTime(double dt);
+
+    void processEnv(double dt, int iEnvType);
 
 }

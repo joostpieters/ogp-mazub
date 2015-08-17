@@ -1,6 +1,5 @@
 package jumpingalien.model;
 
-import jumpingalien.model.programs.Program;
 import jumpingalien.util.Sprite;
 
 public class Mazub extends ActiveObject {
@@ -11,20 +10,15 @@ public class Mazub extends ActiveObject {
     boolean bInMagma;
     //sprite counter
     private int iSpriteCounter;
-    private enHorState eLastHorState;
+    private enHorState eLastHorState = enHorState.stand;
 
-    public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites){
-        super(pixelLeftX, pixelBottomY, sprites,50,true);
-        eVerState = enVertState.stand; eHorState = enHorState.stand;
-        eLastHorState = enHorState.stand;
-        dtLastMove = 0;
+    public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites) {
+        this(pixelLeftX, pixelBottomY, sprites,null);
     }
 
-    public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites, Program program){
-        super(pixelLeftX, pixelBottomY, sprites,50,true,program);
-        eVerState = enVertState.stand; eHorState = enHorState.stand;
-        eLastHorState = enHorState.stand;
-        dtLastMove = 0;
+    public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites,Program program) {
+        super(pixelLeftX, pixelBottomY, sprites, 50, true, 1, 0.9,
+                8, 3,program);
     }
 
     @Override
@@ -40,40 +34,6 @@ public class Mazub extends ActiveObject {
             FncProcessHealth(-50,isImune());
             bImune = true;
         }
-    }
-
-
-    public void startJump() {
-        eVerState = enVertState.jump;
-        setVelocityY(8);
-        setAccelerationY(-10);
-    }
-    public void endJump(){
-        eVerState = enVertState.stand;
-        if(getVelocity()[1] < 0)setVelocityY(0);
-    }
-
-    public void startMoveLeft(){
-        eHorState = enHorState.left;
-        setVelocityX(-1);
-        setAccelerationX(-0.9);
-    }
-    public void endMoveLeft(){
-        eHorState = enHorState.stand;
-        setVelocityX(0);
-        setAccelerationX(0);
-    }
-
-    public void startMoveRight(){
-        eHorState = enHorState.right;
-        setVelocityX(1);
-        setAccelerationX(0.9);
-    }
-
-    public void endMoveRight(){
-        eHorState = enHorState.stand;
-        setVelocityX(0);
-        setAccelerationX(0);
     }
 
     public void startDuck(){

@@ -1,4 +1,8 @@
-package jumpingalien.model.programs;
+package jumpingalien.model;
+
+import jumpingalien.model.programs.Environment;
+import jumpingalien.model.programs.Statement;
+import jumpingalien.model.programs.Type;
 
 import java.util.HashMap;
 import java.util.Map;

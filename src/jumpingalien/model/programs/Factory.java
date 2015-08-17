@@ -1,5 +1,6 @@
 package jumpingalien.model.programs;
 
+import jumpingalien.model.Program;
 import jumpingalien.model.programs.expressions.GetTileExpr;
 import jumpingalien.model.programs.expressions.IsStateMoving;
 import jumpingalien.model.programs.expressions.ReadVarExpr;
@@ -20,6 +21,7 @@ import jumpingalien.model.programs.statements.SequenceStatement;
 import jumpingalien.model.programs.statements.complex.AssignmentStatement;
 import jumpingalien.model.programs.statements.complex.ForEachStatmnt;
 import jumpingalien.model.programs.statements.complex.WhileStatmnt;
+import jumpingalien.model.programs.statements.primitive.*;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 
@@ -623,7 +625,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createPrint(Expression value, SourceLocation sourceLocation) {
-        return null;
+        return new PrintStatmnt(sourceLocation,value);
     }
 
     /**
@@ -635,7 +637,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createStartRun(Expression direction, SourceLocation sourceLocation) {
-        return null;
+        return new StatRunExpr(sourceLocation,direction);
     }
 
     /**
@@ -647,7 +649,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createStopRun(Expression direction, SourceLocation sourceLocation) {
-        return null;
+        return new StopRunExpr(sourceLocation,direction);
     }
 
     /**
@@ -657,7 +659,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createStartJump(SourceLocation sourceLocation) {
-        return null;
+        return new StartJumpStatmnt(sourceLocation);
     }
 
     /**
@@ -667,7 +669,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createStopJump(SourceLocation sourceLocation) {
-        return null;
+        return new StopJumpStatmnt(sourceLocation);
     }
 
     /**
@@ -677,7 +679,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createStartDuck(SourceLocation sourceLocation) {
-        return null;
+        return new StartDuckStatmnt(sourceLocation);
     }
 
     /**
@@ -687,7 +689,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createStopDuck(SourceLocation sourceLocation) {
-        return null;
+        return new StopDuckStatmnt(sourceLocation);
     }
 
     /**
@@ -699,7 +701,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createWait(Expression duration, SourceLocation sourceLocation) {
-        return null;
+        return new WaitStatmnt(sourceLocation,duration);
     }
 
     /**
@@ -709,7 +711,11 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createSkip(SourceLocation sourceLocation) {
-        return null;
+        return new Statement(sourceLocation) {
+            public void exe(Environment env) {
+
+            }
+        };
     }
 
     /**

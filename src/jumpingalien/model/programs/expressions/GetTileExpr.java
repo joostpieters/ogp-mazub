@@ -18,6 +18,6 @@ public class GetTileExpr extends Expression<Tile> {
     }
 
     public Tile getValue(Environment env) {
-        return env.getWorld().getTileinPixels(x.getValue(env).intValue(),y.getValue(env).intValue());
+        return env.getwCaller().getTileinPixels(x.getValue(env).intValue(),y.getValue(env).intValue());
     }
 }

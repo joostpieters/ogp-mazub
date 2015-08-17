@@ -1,6 +1,5 @@
 package jumpingalien.model;
 
-import jumpingalien.model.programs.Program;
 import jumpingalien.util.Sprite;
 
 /**
@@ -14,7 +13,6 @@ public class Buzam extends Mazub {
     public Buzam(int pixelLeftX, int pixelBottomY, Sprite[] sprites,Program program) {
         super(pixelLeftX, pixelBottomY, sprites,program);
     }
-
 
     @Override
     public void advanceTime(double dt){

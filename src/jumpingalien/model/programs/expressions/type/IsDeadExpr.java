@@ -14,7 +14,7 @@ public class IsDeadExpr extends TypeExpression {
 
 
     protected boolean exec(Object obj) {
-        ActiveObject obj = (ActiveObject) obj;
-        return obj.getHealth() < 1;
+        ActiveObject activeObject = (ActiveObject) obj;
+        return activeObject.getHealth() < 1;
     }
 }

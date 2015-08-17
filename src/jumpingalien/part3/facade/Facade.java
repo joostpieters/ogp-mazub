@@ -1,7 +1,8 @@
 package jumpingalien.part3.facade;
 
 import jumpingalien.model.*;
-import jumpingalien.model.programs.Program;
+import jumpingalien.model.Program;
+import jumpingalien.model.programs.Factory;
 import jumpingalien.part2.facade.IFacadePart2;
 import jumpingalien.part3.programs.ParseOutcome;
 import jumpingalien.part3.programs.ProgramParser;
@@ -9,6 +10,7 @@ import jumpingalien.util.ModelException;
 import jumpingalien.util.Sprite;
 
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Created by covert on 13/08/15.
@@ -585,7 +587,8 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public int[] getLocation(Slime slime) {
-        return slime.getLocation();
+        return null;
+        //return slime.getLocation();
     }
 
     /**
@@ -597,7 +600,8 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public Sprite getCurrentSprite(Slime slime) {
-        return slime.getCurrentSprite();
+        return null;
+        //return slime.getCurrentSprite();
     }
 
     /**
@@ -652,7 +656,6 @@ public class Facade implements IFacadePart3{
      * @return A new plant, located at the provided location. The returned plant
      * should not belong to a world.
      */
-    @Override
     public Plant createPlantWithProgram(int x, int y, Sprite[] sprites, Program program) {
         return new Plant(x,y,sprites,program);
     }
@@ -703,7 +706,12 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public ParseOutcome<?> parse(String text) {
-        return null;
+        ProgramParser programParser = new ProgramParser<>(new Factory());
+
+       Optional parseResult = programParser.parseString(text);
+
+        return parseResult.isPresent() ? ParseOutcome.success((Program) parseResult.get()) :
+                ParseOutcome.failure(programParser.getErrors()); //TODO refactor
     }
 
     /**
@@ -714,7 +722,7 @@ public class Facade implements IFacadePart3{
      * @return true if the programs is well-formed; false otherwise.
      */
     public boolean isWellFormed(Program program) {
-        return false;
+        return true;
     }
 
     /**
@@ -725,7 +733,7 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public void addBuzam(World world, Buzam buzam) {
-
+        world.addObject(buzam);
     }
 
     /**
@@ -737,7 +745,7 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public int[] getLocation(Buzam alien) {
-        return new int[0];
+        return alien.getLocation();
     }
 
     /**
@@ -750,7 +758,7 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public double[] getVelocity(Buzam alien) {
-        return new double[0];
+        return alien.getVelocity();
     }
 
     /**
@@ -763,7 +771,7 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public double[] getAcceleration(Buzam alien) {
-        return new double[0];
+        return alien.getAcceleration();
     }
 
     /**
@@ -775,7 +783,7 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public int[] getSize(Buzam alien) {
-        return new int[0];
+        return alien.getSize();
     }
 
     /**
@@ -788,7 +796,7 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public Sprite getCurrentSprite(Buzam alien) {
-        return null;
+        return alien.getCurrentSprite();
     }
 
     /**
@@ -798,6 +806,6 @@ public class Facade implements IFacadePart3{
      */
     @Override
     public int getNbHitPoints(Buzam alien) {
-        return 0;
+        return alien.getHealth();
     }
 }

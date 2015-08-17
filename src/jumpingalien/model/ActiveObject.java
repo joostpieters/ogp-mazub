@@ -1,7 +1,7 @@
 package jumpingalien.model;
 
 import be.kuleuven.cs.som.annotate.Basic;
-import jumpingalien.model.programs.Program;
+import jumpingalien.model.programs.Environment;
 import jumpingalien.util.Sprite;
 
 import java.util.LinkedList;
@@ -11,13 +11,14 @@ public abstract class ActiveObject implements IntegratedObject{
         //state var
         protected enum enVertState{
             jump,stand,duck
-        };
-        protected enum enHorState{
-            left,stand,right
-        };
+        }
 
-        protected enVertState eVerState;
-        protected enHorState eHorState;
+    protected enum enHorState{
+            left,stand,right
+        }
+
+    protected enVertState eVerState = enVertState.stand;
+        protected enHorState eHorState = enHorState.stand;
         protected double dtLastMove;
     //locatie var
         private double dPixelLeftX;
@@ -28,30 +29,39 @@ public abstract class ActiveObject implements IntegratedObject{
         //velocity var
         private double dVelocityX;
         private double dVelocityY;
+        private double dInitialVelocity;
+        private double dMaxVelocity;
         //acceleration var
         private double dAccelerationX;
         private double dAccelerationY;
+        private double dInitialAcceleration;
         //sprite var
         private final Sprite[] aSprite;
         private int iCurrentSprite;
         //hitpoints
         protected boolean bImune = false;
         protected double dLastImune;
-        private int iHitpoints = 100;
+        private int iHitpoints;
         //caller
         protected World wCaller;
         //env procedure
         private final boolean bCanFall;
         //possible programs
         protected Program controllingProgram;
+        private Environment environment;
 
-    public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints,boolean canFall){
+    public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints,boolean canFall
+                        ,double initialVelocity,double initialAcceleration,double initialJump,double maxVelocity){
         dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
-        bCanFall = canFall ;
+        bCanFall = canFall ;dMaxVelocity = maxVelocity;
     }
-    public ActiveObject(int pixelLeftX,int pixelBottomY,Sprite[] sprites,int hitpoints,boolean canFall,Program program){
-        dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
-        bCanFall = canFall ; controllingProgram = program;
+    public ActiveObject(int pixelLeftX,int pixelBottomY,Sprite[] sprites,int hitpoints,boolean canFall,
+                        double initialVelocity,double initialAcceleration,double initialJump,double maxVelocity,
+                        Program program){
+        this(pixelLeftX, pixelBottomY, sprites, hitpoints, canFall,initialVelocity,initialAcceleration,initialJump,maxVelocity);
+        if (program == null) return;
+        controllingProgram = program;
+        environment = new Environment(this,program.getAllVars(),program.getAllStatements());
     }
 
     protected int correctSprite(){
@@ -72,11 +82,21 @@ public abstract class ActiveObject implements IntegratedObject{
         return -1;
     }//TODO
 
+    @Deprecated
     public boolean isJumping(){
         return (enVertState.jump == eVerState);
     }
+    @Deprecated
     public boolean isDucking(){
         return  (enVertState.duck == eVerState);
+    }
+
+    public enHorState geteHorState() {
+        return eHorState;
+    }
+
+    public enVertState geteVerState() {
+        return eVerState;
     }
 
     public int getHealth(){
@@ -107,7 +127,7 @@ public abstract class ActiveObject implements IntegratedObject{
         iaLocation[1] = dPixelBottomY;
         return iaLocation;
     }
-    protected double correctLocationX(double x){
+    private double correctLocationX(double x){
         try {
             if (x < 0)
                 wCaller.objectDies(this);
@@ -119,7 +139,7 @@ public abstract class ActiveObject implements IntegratedObject{
         }
         return x;
     }
-    protected double correctLocationY(double y){
+    private double correctLocationY(double y){
         try {
             if (y < 0)
                 wCaller.objectDies(this);
@@ -137,13 +157,13 @@ public abstract class ActiveObject implements IntegratedObject{
         setLocationY(iaLocation[1]);
     }
 
-    protected void setLocationX(double x){
+    private void setLocationX(double x){
         //world check TODO
         assert x >= 0;
         //if (x < 0) throw new IllegalArgumentException("Object needs to die");
         dPixelLeftX = x;
     }
-    protected void setLocationY(double y){
+    private void setLocationY(double y){
         //world check TODO
         assert y >= 0;
         //if(y < 0) throw new IllegalArgumentException("Object needs to die");
@@ -205,7 +225,7 @@ public abstract class ActiveObject implements IntegratedObject{
         return iaSize;
     }
     @Basic
-    protected void setSprite(int iCurrentSprite){
+    private void setSprite(int iCurrentSprite){
         this.iCurrentSprite = iCurrentSprite;
     }
     public Sprite getCurrentSprite(){
@@ -219,9 +239,7 @@ public abstract class ActiveObject implements IntegratedObject{
         else if (iHitpoints + change > 500) iHitpoints = 500;
         else iHitpoints += change;
     }
-    protected void checkEnv(double dt){
-        //in water, in lava
-        boolean[] bEnv = new boolean[2];
+    private void checkEnv(double dt){
         //int pixelLeft, int pixelBottom, int pixelRight, int pixelTop
         LinkedList<Tile> iaSurrTiles = wCaller.getTilePositionInTiles(this);
         if (iaSurrTiles.parallelStream().anyMatch(obj -> obj.getGeoFeature() == 0)){
@@ -235,7 +253,7 @@ public abstract class ActiveObject implements IntegratedObject{
         }
     }
 
-    protected void calulateAndSetTraject(double dt){
+    private void calulateAndSetTraject(double dt){
         //calc new vel
         setVelocityX(getVelocity()[0] + getAcceleration()[0] * dt);
         setVelocityY(getVelocity()[1] + getAcceleration()[1] * dt);
@@ -309,6 +327,9 @@ public abstract class ActiveObject implements IntegratedObject{
     }
 
     public void advanceTime(double dt){
+        if (controllingProgram != null){
+            controllingProgram.doStep(environment);
+        }
         double counter = 0;
         double newDt;
         while (counter < dt){
@@ -323,5 +344,43 @@ public abstract class ActiveObject implements IntegratedObject{
         setSprite(correctSprite());
         //checkenv
         checkEnv(dt);
+    }
+
+    public void startJump() {
+        eVerState = enVertState.jump;
+        setVelocityY(dInitialAcceleration);
+        setAccelerationY(-10);
+    }
+    public void endJump(){
+        eVerState = enVertState.stand;
+        if(getVelocity()[1] < 0)setVelocityY(0);
+    }
+
+    public void startMoveLeft(){
+        eHorState = enHorState.left;
+        setVelocityX(-dInitialVelocity);
+        setAccelerationX(-dInitialAcceleration);
+    }
+
+    @Deprecated
+    public void endMoveLeft(){
+        endHorMove();
+    }
+
+    public void startMoveRight(){
+        eHorState = enHorState.right;
+        setVelocityX(dInitialVelocity);
+        setAccelerationX(dInitialAcceleration);
+    }
+
+    @Deprecated
+    public void endMoveRight(){
+        endHorMove();
+    }
+
+    public void endHorMove(){
+        eHorState = enHorState.stand;
+        setVelocityX(0);
+        setAccelerationX(0);
     }
 }

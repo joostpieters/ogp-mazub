@@ -544,7 +544,7 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Slime createSlime(int x, int y, Sprite[] sprites, School school) {
-        return new Slime(x,y,sprites,school);
+        return null;
     }
 
     /**
@@ -580,7 +580,8 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public int[] getLocation(Slime slime) {
-        return slime.getLocation();
+        //return slime.getLocation();
+        return null;
     }
 
     /**
@@ -592,7 +593,8 @@ public class Facade implements IFacadePart2 {
      */
     @Override
     public Sprite getCurrentSprite(Slime slime) {
-        return slime.getCurrentSprite();
+        return null;
+        //return slime.getCurrentSprite();
     }
 
     /**

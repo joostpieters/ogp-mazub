@@ -8,15 +8,20 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 16/08/15.
  */
-public abstract class PrimitiveStatement extends Statement {
-    Expression expression;
-    public PrimitiveStatement(SourceLocation sourceLocation, Expression exp) {
+public abstract class PrimitiveStatement<dataType> extends Statement {
+    Expression<dataType> expression;
+    public PrimitiveStatement(SourceLocation sourceLocation, Expression<dataType> exp) {
         super(sourceLocation);
     }
 
-    protected abstract void doAction(Environment env, Expression expression);
+    public PrimitiveStatement(SourceLocation sourceLocation) {
+        super(sourceLocation);
+    }
 
+    protected abstract void doAction(Environment env, Expression<dataType> expression);
     public void exe(Environment env){
-        doAction(env,expression);
+
+            doAction(env,expression);
+
     }
 }
