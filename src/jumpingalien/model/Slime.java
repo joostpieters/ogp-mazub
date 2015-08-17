@@ -1,7 +1,6 @@
 package jumpingalien.model;
 
 import jumpingalien.util.Sprite;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Slime{
 

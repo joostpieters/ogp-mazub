@@ -6,8 +6,6 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 
-import java.util.LinkedList;
-
 /**
  * Created by covert on 14/08/15.
  */

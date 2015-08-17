@@ -5,7 +5,6 @@ import jumpingalien.model.programs.Statement;
 import jumpingalien.model.programs.Type;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Program {
     private HashMap<String, Type> globalVars;

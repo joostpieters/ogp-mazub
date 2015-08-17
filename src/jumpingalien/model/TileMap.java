@@ -1,6 +1,5 @@
 package jumpingalien.model;
 
-import java.security.InvalidParameterException;
 import java.util.LinkedList;
 public class TileMap {
     //collection of tiles

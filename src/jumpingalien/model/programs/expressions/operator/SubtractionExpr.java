@@ -1,7 +1,6 @@
 package jumpingalien.model.programs.expressions.operator;
 
 import jumpingalien.model.programs.Expression;
-import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
 import jumpingalien.part3.programs.SourceLocation;
 
 /**

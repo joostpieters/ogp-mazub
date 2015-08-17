@@ -3,7 +3,6 @@ package jumpingalien.model.programs.expressions;
 import jumpingalien.model.ActiveObject;
 import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
-import jumpingalien.model.programs.Type;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 

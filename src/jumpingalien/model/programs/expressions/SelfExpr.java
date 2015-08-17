@@ -1,7 +1,6 @@
 package jumpingalien.model.programs.expressions;
 
 import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
-import jumpingalien.model.programs.expressions.recursive.RecursiveExpression;
 import jumpingalien.part3.programs.SourceLocation;
 
 /**

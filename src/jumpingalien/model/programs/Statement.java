@@ -1,9 +1,6 @@
 package jumpingalien.model.programs;
 
 import jumpingalien.part3.programs.SourceLocation;
-import jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser;
-
-import java.util.LinkedList;
 
 /**
  * Created by covert on 14/08/15.

@@ -2,7 +2,6 @@ package jumpingalien.model.programs.statements.complex;
 
 import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
-import jumpingalien.model.programs.Statement;
 import jumpingalien.model.programs.Type;
 import jumpingalien.part3.programs.SourceLocation;
 

@@ -1,10 +1,8 @@
 package jumpingalien.model.programs.expressions;
 
 import jumpingalien.model.Tile;
-import jumpingalien.model.World;
 import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
-import jumpingalien.model.programs.expressions.data.DataExpression;
 import jumpingalien.part3.programs.SourceLocation;
 
 /**
