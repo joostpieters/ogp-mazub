@@ -31,6 +31,7 @@ public abstract class ActiveObject implements IntegratedObject{
         private double dVelocityY;
         private double dInitialVelocity;
         private double dMaxVelocity;
+        private double dInitialJump;
         //acceleration var
         private double dAccelerationX;
         private double dAccelerationY;
@@ -53,7 +54,8 @@ public abstract class ActiveObject implements IntegratedObject{
     public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints,boolean canFall
                         ,double initialVelocity,double initialAcceleration,double initialJump,double maxVelocity){
         dPixelLeftX = pixelLeftX; dPixelBottomY = pixelBottomY; aSprite = sprites;iHitpoints = hitpoints;
-        bCanFall = canFall ;dMaxVelocity = maxVelocity;
+        bCanFall = canFall ;dMaxVelocity = maxVelocity;dInitialVelocity = initialVelocity;
+        dInitialAcceleration = initialAcceleration;dInitialJump = initialJump;
     }
     public ActiveObject(int pixelLeftX,int pixelBottomY,Sprite[] sprites,int hitpoints,boolean canFall,
                         double initialVelocity,double initialAcceleration,double initialJump,double maxVelocity,
@@ -348,7 +350,7 @@ public abstract class ActiveObject implements IntegratedObject{
 
     public void startJump() {
         eVerState = enVertState.jump;
-        setVelocityY(dInitialAcceleration);
+        setVelocityY(dInitialJump);
         setAccelerationY(-10);
     }
     public void endJump(){
