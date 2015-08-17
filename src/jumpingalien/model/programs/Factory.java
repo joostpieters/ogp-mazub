@@ -637,7 +637,9 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
      */
     @Override
     public Statement createStartRun(Expression direction, SourceLocation sourceLocation) {
-        return new StatRunExpr(sourceLocation,direction);
+        StartRunExpr startRunExpr = new StartRunExpr(sourceLocation,direction);
+        System.out.println(startRunExpr);
+        return startRunExpr;
     }
 
     /**

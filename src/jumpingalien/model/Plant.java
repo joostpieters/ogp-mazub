@@ -8,7 +8,7 @@ public class Plant extends ActiveObject {
         this(x,y,sprites,null);
     }
     public Plant (int x, int y, Sprite[] sprites,Program program){
-        super(x,y,sprites,100,false,0.5,0,0,0.5,program);
+        super(x,y,sprites,100,false,0.5,0,0,0.5,null);
     }
 
 

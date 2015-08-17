@@ -14,16 +14,25 @@ double oy;
 double distance;
 object o;
 
-
+double runtime := -1;
 while true do
 
-
+  runtime := runtime - 1;
   currentxdir := up;
+
   if (ismoving (self, left)) then currentxdir := left; fi
   if (ismoving (self, right)) then currentxdir := right; fi
 
+  if (! isjumping self &&
+      ispassable(gettile((getx self) - 1, (gety self) + 2))) then
+    newxdir := left;
+  fi
+  if (! isjumping self &&
+      ispassable(gettile((getx self) + (getwidth self), (gety self) + 2))) then
+    newxdir := right;
+  fi
 
-  if (nearestSS != null && distanceToNearestSS <= 100) then
+  if (nearestSS != null && distanceToNearestSS <= 500) then
     haveenemy := true;
     if (gety nearestSS > gety self) then
       newydir := up;
@@ -34,31 +43,23 @@ while true do
     if (getx nearestSS > getx self) then
       newxdir := right;
     fi
-    if (getx nearestSS < gety self) then
-      newydir := left;
+    if (getx nearestSS < getx self) then
+      newxdir := left;
     fi
   else
     haveenemy := false;
   fi
-
-
-  if (! isjumping self &&
-      ispassable(gettile(getx self, gety self))) then
-    newxdir := right;
-  fi
-  if (! isjumping self &&
-      ispassable(gettile((getx self) + (getwidth self) - 1, gety self))) then
-    newxdir := left;
-  fi
-
-
+  
   if (isjumping self && (! haveenemy || ismoving (self, down))) then
     stop_jump;
   fi
-  if (currentxdir != up && currentxdir != newxdir) then
+  
+  
+  if ((haveenemy || runtime < 0) && currentxdir != up && currentxdir != newxdir) then
     stop_run currentxdir;
-    if (! haveenemy) then
+    if (! haveenemy ) then
       wait (random 2);
+      runtime := random 100;
     fi
     start_run newxdir;
     currentxdir := newxdir;
@@ -77,7 +78,7 @@ while true do
   x := getx self;
   y := gety self;
   nearestSS := null;
-  foreach (any, o) where (isshark o || isslime o) do
+  foreach (any, o) where (isshark o || ismazub o) do
     if (! isdead (o)) then
       ox := getx o;
       oy := gety o;

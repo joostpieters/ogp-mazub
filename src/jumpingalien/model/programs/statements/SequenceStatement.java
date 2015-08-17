@@ -18,7 +18,10 @@ public class SequenceStatement extends Statement {
     }
 
     public void exe(Environment env) {
-        statementList.stream().forEach(obj -> obj.exe(env));
+        for(Statement statement:statementList){
+            statement.exe(env);
+        }
+        //statementList.stream().forEach(obj -> obj.exe(env));
     }
 
     public List<Statement> getStatementList() {

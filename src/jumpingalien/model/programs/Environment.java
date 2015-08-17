@@ -20,7 +20,7 @@ public class Environment {
     private Stack<Integer> stackCounter = new Stack<>();
 
     public Environment(ActiveObject activeObject, HashMap<String, Type> variables, Statement mainStatement) {
-        activeCaller = activeObject;stackCounter.push(0);
+        activeCaller = activeObject;stackCounter.push(0);statementStack.push(mainStatement);
 
         for (HashMap.Entry<String, Type> variable : variables.entrySet()) {
             String key = variable.getKey(); Type type = variable.getValue();
@@ -60,14 +60,24 @@ public class Environment {
 
 
     private int getLocalStatementCount() {
-        return statementStack.size();//TODO redo
+        Statement currentStatement = statementStack.peek();
+
+        if (currentStatement instanceof SequenceStatement) {
+            SequenceStatement block = (SequenceStatement) currentStatement;
+
+            return block.getStatementList().size();
+        } else {
+            return 1;
+        }
     }
 
     public void doStep() {
+
         int index = stackCounter.peek();
 
-        if (stackCounter.peek() < getLocalStatementCount() - 1) {
-            stackCounter.push(stackCounter.pop() + 1);
+        if (stackCounter.peek() <= getLocalStatementCount() - 1) {//TODO refactor
+            stackCounter.pop();
+            stackCounter.push(index + 1);
         } else {
             stepOut();
         }
@@ -108,7 +118,7 @@ public class Environment {
     }
 
     private void reset() {
-        statementStack = originalStatement;allVariables = originalVariables;
+        statementStack = originalStatement;allVariables = originalVariables;stackCounter.push(0);
     }
 
     public void stepOut() {

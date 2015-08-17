@@ -8,8 +8,8 @@ import jumpingalien.part3.programs.SourceLocation;
 /**
  * Created by covert on 16/08/15.
  */
-public class StatRunExpr extends PrimitiveStatement<IProgramFactory.Direction> {
-    public StatRunExpr(SourceLocation sourceLocation, Expression<IProgramFactory.Direction> exp) {
+public class StartRunExpr extends PrimitiveStatement<IProgramFactory.Direction> {
+    public StartRunExpr(SourceLocation sourceLocation, Expression<IProgramFactory.Direction> exp) {
         super(sourceLocation, exp);
     }
 

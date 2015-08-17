@@ -18,6 +18,6 @@ public class RandomExpr extends RecursiveExpression {
     }
 
     public Double getValue(Environment en) {
-        return random.nextInt((int) getInternalExpression().getValue(en)) - 1 + random.nextDouble();
+        return random.nextInt(getInternalExpression().getValue(en).intValue()) - 1 + random.nextDouble();
     }
 }

@@ -8,9 +8,8 @@ double jn := 0;
 
 while true do
   t := -1;
-
   while (t < 1) do
-    t := random 4;
+    t := random 3 + 1;
   done
 
   d := random 2;
@@ -38,5 +37,6 @@ while true do
     stop_jump;
   fi
   stop_run dir;
+  jn := jn + 1;
 done
 

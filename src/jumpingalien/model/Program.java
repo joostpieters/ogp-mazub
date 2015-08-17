@@ -25,6 +25,10 @@ public class Program {
     }
 
     public void doStep(Environment environment) {
+        Statement statement = environment.getStatement();
+
+        statement.exe(environment);
+
         environment.doStep();
     }
 }
