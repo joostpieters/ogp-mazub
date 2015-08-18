@@ -236,7 +236,7 @@ public class Facade implements IFacadePart2
 	@Override
 	public void endMoveLeft(Mazub alien)
 	{
-		alien.endMoveLeft();
+		alien.endHorMove();
 	}
 
 	/**

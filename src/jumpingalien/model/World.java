@@ -1,12 +1,16 @@
 package jumpingalien.model;
 
+import be.kuleuven.cs.som.annotate.Basic;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
+/**
+ * A class representing the game world
+ */
 public class World extends TileMap
 {
-	//classe invar
 	private final Thread collisionThread;
 	private final CollisionChecker collisionRunnable;
 	//collection
@@ -18,6 +22,27 @@ public class World extends TileMap
 	//player
 	private Mazub player;
 
+	/**
+	 * Contructor of a World
+	 *
+	 * @param tileSize The size of the Game Tiles
+	 * @param nbTilesX The number of tiles on the x-axis
+	 * @param nbTilesY The number of tiles on the y-axis
+	 * @param visibleWindowWidth The width of the visible window
+	 * @param visibleWindowHeight The Height of the visible window
+	 * @param targetTileX The tile number of the winning tile on the x-axis
+	 * @param targetTileY The tile number of the winning tile on the y-axis
+	 *
+	 * @post Sets the iTileSize to the given value
+	 * | iTileSize = tileSize
+	 * @effect Initialises the given number of tiles in the tile array
+	 * |tileArray = new Tile[nbTilesX][nbTilesY]
+	 * @post The visible windows size is set to the given value
+	 * |iVisibleWindowHeigt = visibleWindowHeight
+	 * |iVisibleWindowWidth = visibleWindowWidth
+	 * @post
+	 */
+	//todo collision
 	public World(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight, int targetTileX, int targetTileY)
 	{
 		super(nbTilesX, nbTilesY, tileSize, targetTileX, targetTileY);
@@ -33,12 +58,12 @@ public class World extends TileMap
 	{
 		return colInterActive;
 	}
-
+	@Basic
 	public void startGame()
 	{
 		eGameState = enGameState.started;
 	}
-
+	@Basic
 	public void setMazub(Mazub alien)
 	{
 		if (player != null) throw new IllegalStateException("player already set");
@@ -46,6 +71,11 @@ public class World extends TileMap
 		addObject(alien);
 	}
 
+	/**
+	 * Checks if the game has ended or not
+	 *
+	 * @return The value indicating if the game has ended or not
+	 */
 	public boolean isGameOver()
 	{
 		//TODO check hoe moet uitgewerktworden
@@ -62,14 +92,28 @@ public class World extends TileMap
 		}
 	}
 
+	@Basic
 	public boolean didPlayerWin()
 	{
 		return (eGameState == enGameState.won);
 	}
 
-	//left, bottom, right, top
-	public int[] getVisibleWindow() throws IllegalStateException
+	/**
+	 * Calculates a rectangle representing the visible window
+	 *
+	 * @return An integer array being the left,bottom,right and top pixel of said window
+	 * | if (InRangeOfGameWorld(middelOfPlayer - iVisibleWindowWidth / 2)) {
+	 * 	left = middelOfPlayer + iVisibleWindowWidth / 2
+	 *  } else {
+	 *     left = 0
+	 *     right = iVisibleWindowWidth
+	 * }
+	 *
+	 */
+	//TODO
+	public int[] getVisibleWindow()
 	{
+		//left, bottom, right, top
 		int[] iaWindow = new int[4];
 		int iMidX = player.getLocation()[0] + player.getSize()[0] / 2;
 		int iMidY = player.getLocation()[1] + player.getSize()[1] / 2;
@@ -103,12 +147,14 @@ public class World extends TileMap
 		return iaWindow;
 	}
 
+	@Basic
 	public void addObject(ActiveObject obj)
 	{
 		obj.wCaller(this);
 		getColInterActive().add(obj);
 	}
 
+	@Basic
 	public synchronized Collection<?> getCollection(Class obj)
 	{
 		ArrayList<ActiveObject> tempCol = new ArrayList<>();
@@ -116,11 +162,13 @@ public class World extends TileMap
 		return tempCol;
 	}
 
-	public void FncRemoveFromColl(ActiveObject obj)
+	@Basic
+	private void FncRemoveFromColl(ActiveObject obj)
 	{
 		getColInterActive().remove(obj);
 	}
 
+	@Basic
 	public void objectDies(ActiveObject obj)
 	{
 		if (obj == player)

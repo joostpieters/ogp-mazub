@@ -30,12 +30,12 @@ public class Shark extends ActiveObject
 
 	public void startDuck()
 	{
-
+		//Do nothing
 	}
 
 	public void endDuck()
 	{
-
+		//Do nothing
 	}
 
 	public void isOverlapping(ActiveObject interObj)
@@ -85,7 +85,7 @@ public class Shark extends ActiveObject
 			if (dInAir <= 0.2)
 			{
 				dInAir -= 0.2;
-				FncProcessHealth(-6);
+				ProcessHealth(-6);
 			}
 		}
 		//lava
@@ -96,7 +96,7 @@ public class Shark extends ActiveObject
 			if (dInMagma <= 0.2)
 			{
 				dInMagma -= 0.2;
-				FncProcessHealth(-50);
+				ProcessHealth(-50);
 			}
 		}
 	}

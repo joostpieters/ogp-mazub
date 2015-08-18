@@ -18,11 +18,12 @@ public class Plant extends ActiveObject
 
 	public void startDuck()
 	{
+		//Do nothing
 	}
 
 	public void endDuck()
 	{
-
+		//Do nothing
 	}
 
 	public void isOverlapping(ActiveObject interObj)
@@ -40,7 +41,7 @@ public class Plant extends ActiveObject
 
 	public void processEnv(double dt, int iEnvType)
 	{
-
+		//Do nothing
 	}
 
 }

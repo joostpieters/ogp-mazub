@@ -13,10 +13,4 @@ public class Buzam extends Mazub
 	{
 		super(pixelLeftX, pixelBottomY, sprites, program);
 	}
-
-	@Override
-	public void advanceTime(double dt)
-	{
-		super.advanceTime(dt);
-	}
 }

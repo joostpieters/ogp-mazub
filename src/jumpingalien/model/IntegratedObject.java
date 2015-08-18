@@ -9,11 +9,9 @@ public interface IntegratedObject
 
 	void startMoveLeft();
 
-	void endMoveLeft();
-
 	void startMoveRight();
 
-	void endMoveRight();
+	void endHorMove();
 
 	void startDuck();
 
