@@ -14,6 +14,6 @@ public class IsStateDucking extends IsState
 
 	protected boolean checkState(ActiveObject activeObject)
 	{
-		return (activeObject.isDucking());
+		return (activeObject.getVerDirection() == ActiveObject.enVertState.duck);
 	}
 }

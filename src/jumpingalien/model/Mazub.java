@@ -31,14 +31,14 @@ public class Mazub extends ActiveObject
 		{
 			if (getHealth() < 500)
 			{
-				FncProcessHealth(100);
-				getwCaller().FncRemoveFromColl(interObj);
+				ProcessHealth(100);
+				getwCaller().objectDies(interObj);
 			}
 			return;
 		}
 		if (interObj instanceof Shark)
 		{
-			FncProcessHealth(-50);
+			ProcessHealth(-50);
 			bImune = true;
 		}
 	}
@@ -101,7 +101,7 @@ public class Mazub extends ActiveObject
 			if (dInWater >= 0.2)
 			{
 				dInWater -= 0.2;
-				FncProcessHealth(-6);
+				ProcessHealth(-6);
 			}
 		}
 		//magma
@@ -112,11 +112,10 @@ public class Mazub extends ActiveObject
 			if (dInMagma >= 0.2)
 			{
 				dInMagma -= 0.2;
-				FncProcessHealth(-50);
+				ProcessHealth(-50);
 			}
 		}
 	}
-
 	@Override
 	protected int correctSprite()
 	{
@@ -126,39 +125,33 @@ public class Mazub extends ActiveObject
 			iCounter++;
 		//was going left
 		if (dtLastMove < 1 && eLastHorState == enHorState.right)
-			iCounter += 2;
+			iCounter +=2;
 		//was going right
 		if (dtLastMove < 1 && eLastHorState == enHorState.left)
-			iCounter += 3;
+			iCounter +=3;
 		//is jumping
 		if (eVerState == enVertState.jump && eHorState != enHorState.stand)
-			iCounter += 2;
-		/*if (geteHorState() != enHorState.stand)
+			iCounter +=2;
+        /*if (geteHorState() != enHorState.stand)
             iCounter +=2;
 */
-		if (eVerState == enVertState.duck)
-		{
+		if (eVerState == enVertState.duck){
 			if (eHorState != enHorState.stand)
-				iCounter += 3;
+				iCounter +=3;
 		}
 		//al loopend
-//		if (eHorState == enHorState.stand)
-//		{
-//			iSpriteCounter = 0;
-//		}
-		if (getVelocity()[1] == 0 && (getVerDirection() != enVertState.duck))
-		{ //TODO check
-			if (eHorState == enHorState.left)
-			{
+		if (eHorState == enHorState.stand){
+			iSpriteCounter = 0;
+		}
+		if (getVelocity()[1] == 0 ) { //TODO check
+			if (eHorState == enHorState.left) {
 				iCounter = 19 + iSpriteCounter;
 			}
-			if (eHorState == enHorState.right)
-			{
+			if (eHorState == enHorState.right){
 				iCounter = 8 + iSpriteCounter;
 			}
 		}
 
 		//return result
-		return iCounter;
-	}
+		return iCounter;	}
 }

@@ -158,7 +158,7 @@ public class World extends TileMap
 	public synchronized Collection<?> getCollection(Class obj)
 	{
 		ArrayList<ActiveObject> tempCol = new ArrayList<>();
-		getColInterActive().stream().filter(obj::isInstance).forEach(tempCol::add);
+		getColInterActive().stream().filter(ActiveObject::isAlive).filter(obj::isInstance).forEach(tempCol::add);
 		return tempCol;
 	}
 
@@ -175,7 +175,7 @@ public class World extends TileMap
 		{
 			eGameState = enGameState.lost;
 		}
-		FncRemoveFromColl(obj);
+		obj.dies();
 	}
 
 	public void advanceTime(double dt)
@@ -189,7 +189,7 @@ public class World extends TileMap
 			System.out.print("no valid winning tile");
 		}
 		//player.advanceTime(dt);
-		getColInterActive().stream().forEach(obj -> obj.advanceTime(dt));
+		getColInterActive().stream().filter(ActiveObject::isAlive).forEach(obj -> obj.advanceTime(dt));
 	}
 
 	protected void finialize()

@@ -35,6 +35,7 @@ public abstract class ActiveObject implements IntegratedObject
 	//hitpoints
 	boolean bImune = false;
 	double dLastImune;
+	boolean bHasDied = false;
 	//caller
 	private World wCaller;
 	//possible programs
@@ -113,6 +114,15 @@ public abstract class ActiveObject implements IntegratedObject
 	protected boolean hasProgram(){
 		return (controllingProgram != null);
 	}
+
+	public boolean isAlive(){
+		return !bHasDied;
+	}
+
+	public void dies(){
+		bHasDied = true;
+	}
+
 
 	protected void correctCollision(ActiveObject collidingObj)
 	{
@@ -312,7 +322,7 @@ public abstract class ActiveObject implements IntegratedObject
 		return aSprite[iCurrentSprite];
 	}
 
-	private int correctSprite()
+	protected int correctSprite()
 	{
 		if (getVelocity()[0] < 0)
 		{
