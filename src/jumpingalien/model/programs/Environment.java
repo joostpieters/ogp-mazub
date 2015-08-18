@@ -16,7 +16,7 @@ public class Environment
 	private final HashMap<String, Object> allVariables = new HashMap<>();
 	private final Stack<Statement> statementStack = new Stack<>();
 	private final Stack<Integer> stackCounter = new Stack<>();
-
+	private final HashMap<String, Statement> allFunctions = new HashMap<>();
 	public Environment(ActiveObject activeObject, Program program)
 	{
 		programCaller = program;
@@ -67,6 +67,13 @@ public class Environment
 		allVariables.put(name, value);
 	}
 
+	public void setFunction(String name,Statement expression){
+		allFunctions.put(name,expression);
+	}
+
+	public Statement getFunction(String name){
+		return allFunctions.get(name);
+	}
 
 	private int getLocalStatementCount()
 	{

@@ -33,7 +33,7 @@ public abstract class ActiveObject implements IntegratedObject
 	enHorState eHorState = enHorState.stand;
 	double dtLastMove;
 	//hitpoints
-	boolean bImune = false;
+	private boolean bImune = false;
 	double dLastImune;
 	boolean bHasDied = false;
 	//caller
@@ -239,7 +239,9 @@ public abstract class ActiveObject implements IntegratedObject
 	}
 
 	private double correctVelocityX(double x){
-		return (Math.abs(x) < dMaxVelocity)? x:dMaxVelocity;
+		x =  (x < dMaxVelocity)? x:dMaxVelocity;
+		x =  (x > -dMaxVelocity)? x:-dMaxVelocity;
+		return x;
 	}
 
 	@Basic
@@ -263,7 +265,7 @@ public abstract class ActiveObject implements IntegratedObject
 	private void setVelocityX(double x)
 	{
 		if (Math.abs(x) > dMaxVelocity) throw new IllegalArgumentException("x velocity may not be more than the max velocity");
-		dVelocityX = (Math.abs(x) < dMaxVelocity)? x:dMaxVelocity;
+		dVelocityX = x;
 	}
 
 	@Basic
@@ -465,12 +467,18 @@ public abstract class ActiveObject implements IntegratedObject
 	}
 
 	@Basic
-	@Deprecated
 	public boolean isImune()
 	{
 		return bImune;
 	}
-
+	@Basic
+	public void becomsImune(){
+		bImune = true;
+	}
+	@Basic
+	public void isNoLongerImune(){
+		bImune = false;
+	}
 	@Deprecated
 	 @Basic
 	private void setImune(boolean imune)
@@ -537,6 +545,7 @@ public abstract class ActiveObject implements IntegratedObject
 	 *     setVelocityY(0)
 	 * }
 	 */
+	@Immutable
 	public void endJump()
 	{
 		if (eVerState == enVertState.stand) throw new IllegalStateException("the object is already standing");

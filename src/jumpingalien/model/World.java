@@ -163,6 +163,7 @@ public class World extends TileMap
 	}
 
 	@Basic
+	@Deprecated
 	private void FncRemoveFromColl(ActiveObject obj)
 	{
 		getColInterActive().remove(obj);
@@ -188,11 +189,10 @@ public class World extends TileMap
 		{
 			System.out.print("no valid winning tile");
 		}
-		//player.advanceTime(dt);
 		getColInterActive().stream().filter(ActiveObject::isAlive).forEach(obj -> obj.advanceTime(dt));
 	}
 
-	protected void finialize()
+	public void finialize()
 	{
 		//todo collisionRunnable.stop();
 		collisionRunnable.stop();

@@ -24,7 +24,7 @@ import jumpingalien.model.programs.expressions.recursive.RandomExpr;
 import jumpingalien.model.programs.expressions.recursive.SquareRootExpr;
 import jumpingalien.model.programs.expressions.type.*;
 import jumpingalien.model.programs.statements.SequenceStatement;
-import jumpingalien.model.programs.statements.complex.AssignmentStatement;
+import jumpingalien.model.programs.statements.complex.AssignmentStatmnt;
 import jumpingalien.model.programs.statements.complex.ForEachStatmnt;
 import jumpingalien.model.programs.statements.complex.IfStatmnt;
 import jumpingalien.model.programs.statements.complex.WhileStatmnt;
@@ -618,7 +618,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
 	@Override
 	public Statement createAssignment(String variableName, Type variableType, Expression value, SourceLocation sourceLocation)
 	{
-		return new AssignmentStatement(sourceLocation, variableName, variableType, value);
+		return new AssignmentStatmnt(sourceLocation, variableName, variableType, value);
 	}
 
 	/**

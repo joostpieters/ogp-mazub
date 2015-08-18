@@ -22,7 +22,7 @@ public class ForEachStatmnt extends ConditionStatmnt
 	private LinkedList<ActiveObject> activeObjetcs;
 	private int activeIterate;
 
-	public ForEachStatmnt(SourceLocation sourceLocation, String name, IProgramFactory.Kind variableKind, Expression where, Expression sort
+	public ForEachStatmnt(SourceLocation sourceLocation, String name, IProgramFactory.Kind variableKind, Expression<Boolean> where, Expression sort
 			, IProgramFactory.SortDirection sortDir, Statement body)
 	{
 		super(sourceLocation, where);
@@ -35,7 +35,7 @@ public class ForEachStatmnt extends ConditionStatmnt
 
 	public void exe(Environment env)
 	{
-
+//TODO
 	}
 
 	private void initialiseObjects(Environment env) {

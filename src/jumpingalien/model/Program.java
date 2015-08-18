@@ -17,7 +17,6 @@ public class Program
 		totalStatement = statements;
 	}
 
-
 	public Statement getAllStatements()
 	{
 		return totalStatement;

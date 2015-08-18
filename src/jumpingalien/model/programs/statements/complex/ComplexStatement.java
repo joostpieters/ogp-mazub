@@ -8,8 +8,6 @@ import java.util.Iterator;
 
 public abstract class ComplexStatement extends Statement
 {
-	Iterator<Statement> statementIterator;//TODO
-
 	ComplexStatement(SourceLocation sourceLocation)
 	{
 		super(sourceLocation);

@@ -36,10 +36,16 @@ public class Mazub extends ActiveObject
 			}
 			return;
 		}
+		if (interObj instanceof Potion)
+		{
+			ProcessHealth(interObj.getHealth());
+			getwCaller().objectDies(interObj);
+		}
+
 		if (interObj instanceof Shark)
 		{
 			ProcessHealth(-50);
-			bImune = true;
+			becomsImune();
 		}
 	}
 
@@ -55,14 +61,14 @@ public class Mazub extends ActiveObject
 
 	private void processImune(double dt)
 	{
-		if (bImune)
+		if (isImune())
 		{
 			dLastImune += dt;
 			if (dLastImune > 0.6)
 			{
 				System.out.println(dLastImune);
 				dLastImune = 0;
-				bImune = false;
+				isNoLongerImune();
 			}
 		}
 	}
