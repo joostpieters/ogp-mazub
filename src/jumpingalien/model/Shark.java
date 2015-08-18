@@ -40,8 +40,6 @@ public class Shark extends ActiveObject
 
 	public void isOverlapping(ActiveObject interObj)
 	{
-		//throw new NotImplementedException();
-		//TODO
 	}
 
 

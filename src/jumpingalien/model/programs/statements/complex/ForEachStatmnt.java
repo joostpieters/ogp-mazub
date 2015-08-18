@@ -10,7 +10,6 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.stream.Collectors;
 
 public class ForEachStatmnt extends ConditionStatmnt
 {
@@ -86,15 +85,15 @@ public class ForEachStatmnt extends ConditionStatmnt
 		env.setVariable(key, activeObjetcs.get(activeIterate));
 
 		if (activeIterate < activeObjetcs.size() - 1) {
-			env.stepBack();
+			env.backStack();
 			activeIterate++;
 		} else {
 			initialiseObjects(env);
 		}
 
 		if (testCondition(env)) {
-			env.stepBack();
-			env.stepInto(bodyStatement);
+			env.backStack();
+			env.intoStack(bodyStatement);
 		}
 	}
 }

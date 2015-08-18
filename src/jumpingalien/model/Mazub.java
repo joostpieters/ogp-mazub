@@ -20,7 +20,7 @@ public class Mazub extends ActiveObject
 
 	Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites, Program program)
 	{
-		super(pixelLeftX, pixelBottomY, sprites, 50, true, 1, 0.9,
+		super(pixelLeftX, pixelBottomY, sprites, 100, true, 1, 0.9,
 				8, 3, program);
 	}
 
@@ -149,7 +149,7 @@ public class Mazub extends ActiveObject
 		if (eHorState == enHorState.stand){
 			iSpriteCounter = 0;
 		}
-		if (getVelocity()[1] == 0 ) { //TODO check
+		if (getVelocity()[1] == 0 ) {
 			if (eHorState == enHorState.left) {
 				iCounter = 19 + iSpriteCounter;
 			}

@@ -33,6 +33,6 @@ public class Program
 
 		statement.exe(environment);
 
-		environment.doStep();
+		environment.continueStack();
 	}
 }

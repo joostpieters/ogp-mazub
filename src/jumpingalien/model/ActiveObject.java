@@ -9,9 +9,10 @@ import java.util.LinkedList;
 /**
  * The supper-class for all interoperable game objects
  * @invar The absolute velocity on the x-axis is always smaller or equal to the maxium velocity on said x-axis
- * 		Math.abs(this.getVelocity()[0]) <= dMaxVelocity
- * 	//TODO change sentence and inplement max hitpoints
- * @invar The amount of hit points is always smaller than the maximum amount of hit points. | getHitPoints() <= getMaximumHitPoints()
+ * |Math.abs(this.getVelocity()[0]) <= dMaxVelocity
+ * @invar The number of hitpoints is always between 1 and 500, if the hitpoints become lower than 1 it dies
+ * | getHealth() > 1 else wcaller.objecDies(this)
+ *   getHealth() <= 500
  */
 public abstract class ActiveObject implements IntegratedObject
 {
@@ -114,19 +115,23 @@ public abstract class ActiveObject implements IntegratedObject
 	protected boolean hasProgram(){
 		return (controllingProgram != null);
 	}
-
+	@Basic
 	public boolean isAlive(){
 		return !bHasDied;
 	}
-
+	@Basic
 	public void dies(){
 		bHasDied = true;
 	}
 
-
+	/**
+	 * Corrects the location when a collision ocurs between two ActiveObject
+	 *
+	 * @param collidingObj The ActiveObject that is colliding with this one
+	 */
 	protected void correctCollision(ActiveObject collidingObj)
 	{
-		//TODO
+		setVelocity(new double[]{0,0});
 	}
 
 	@Basic
@@ -239,8 +244,9 @@ public abstract class ActiveObject implements IntegratedObject
 	}
 
 	private double correctVelocityX(double x){
-		x =  (x < dMaxVelocity)? x:dMaxVelocity;
-		x =  (x > -dMaxVelocity)? x:-dMaxVelocity;
+		double max = (eVerState == enVertState.duck)? 1:dMaxVelocity;
+		x =  (x < max)? x:max;
+		x =  (x > -max)? x:-max;
 		return x;
 	}
 

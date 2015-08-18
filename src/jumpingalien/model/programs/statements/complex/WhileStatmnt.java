@@ -19,8 +19,8 @@ public class WhileStatmnt extends ConditionStatmnt
 	{
 		if (testCondition(env))
 		{
-			env.stepBack();
-			env.stepInto(whileBody);//TODO refactor
+			env.backStack();
+			env.intoStack(whileBody);//TODO refactor
 		}
 	}
 }

@@ -17,6 +17,7 @@ public class Environment
 	private final Stack<Statement> statementStack = new Stack<>();
 	private final Stack<Integer> stackCounter = new Stack<>();
 	private final HashMap<String, Statement> allFunctions = new HashMap<>();
+
 	public Environment(ActiveObject activeObject, Program program)
 	{
 		programCaller = program;
@@ -28,20 +29,19 @@ public class Environment
 		{
 			String key = variable.getKey();
 			Type type = variable.getValue();
-
 			switch (type)
 			{
+				case ActiveObject:
+					setVariable(key, null);
+					continue;
 				case Boolean:
 					setVariable(key, false);
 					continue;
+				case Direction:
+					setVariable(key, IProgramFactory.Direction.RIGHT);
+					continue;
 				case Double:
 					setVariable(key, 0.0);
-					continue;
-				case Direction:
-					setVariable(key, IProgramFactory.Direction.UP);
-					continue;
-				case ActiveObject:
-					setVariable(key, null);
 					continue;
 			}
 		}
@@ -57,15 +57,15 @@ public class Environment
 		return activeCaller;
 	}
 
+	public void setVariable(String name, Object value)
+	{
+		allVariables.put(name, value);
+	}
 	public Object getVariable(String key)
 	{
 		return allVariables.get(key);
 	}
 
-	public void setVariable(String name, Object value)
-	{
-		allVariables.put(name, value);
-	}
 
 	public void setFunction(String name,Statement expression){
 		allFunctions.put(name,expression);
@@ -75,76 +75,56 @@ public class Environment
 		return allFunctions.get(name);
 	}
 
+	public Statement getStatement()
+	{
+		if (statementStack.isEmpty()) reset();
+		if ( statementStack.peek() instanceof SequenceStatement)
+		{
+			SequenceStatement sequence = (SequenceStatement)  statementStack.peek();
+			if (stackCounter.peek() >= sequence.getStatementList().size())
+			{
+				statementStack.pop();
+				stackCounter.pop();
+				return getStatement();
+			} else
+			{
+				return sequence.getStatementList().get(stackCounter.peek());
+			}
+		} else
+		{
+			return statementStack.peek();
+		}
+	}
 	private int getLocalStatementCount()
 	{
-		Statement currentStatement = statementStack.peek();
-
-		if (currentStatement instanceof SequenceStatement)
+		if (statementStack.peek() instanceof SequenceStatement)
 		{
-			SequenceStatement block = (SequenceStatement) currentStatement;
-
-			return block.getStatementList().size();
+			SequenceStatement sequence = (SequenceStatement) statementStack.peek();
+			return sequence.getStatementList().size();
 		} else
 		{
 			return 1;
 		}
 	}
 
-	public void doStep()
+	public void continueStack()
 	{
-
-		int index = stackCounter.peek();
-
-		if (stackCounter.peek() <= getLocalStatementCount() - 1)
-		{//TODO refactor
-			stackCounter.pop();
-			stackCounter.push(index + 1);
-		} else
-		{
-			stepOut();
-		}
+		if (stackCounter.peek() <= getLocalStatementCount() -1) stackCounter.push(stackCounter.pop() + 1);
+		else statementStack.pop(); stackCounter.pop();
 	}
 
-	public void stepBack()
+	public void backStack()
 	{
 		stackCounter.add(stackCounter.pop() + 1);
 	}
 
-	public void stepInto(Statement statement)
+	public void intoStack(Statement statement)
 	{
 		stackCounter.push(stackCounter.pop() + 1);
-
-		statementStack.push(statement);
 		stackCounter.push(-1);
+		statementStack.push(statement);
 	}
 
-	public Statement getStatement()
-	{
-		assert (stackCounter.size() == statementStack.size());
-
-		if (statementStack.isEmpty())
-		{
-			reset();
-		}
-
-		Statement currentStatement = statementStack.peek();
-//TODO
-		if (currentStatement instanceof SequenceStatement)
-		{
-			SequenceStatement statement = (SequenceStatement) currentStatement;
-
-			if (stackCounter.peek() >= statement.getStatementList().size())
-			{
-				stepOut();
-				return getStatement();
-			}
-
-			return statement.getStatementList().get(stackCounter.peek());
-		} else
-		{
-			return statementStack.peek();
-		}
-	}
 
 	private void reset()
 	{
@@ -160,25 +140,19 @@ public class Environment
 
 			switch (type)
 			{
+				case ActiveObject:
+					setVariable(key, null);
+					continue;
 				case Boolean:
 					setVariable(key, false);
+					continue;
+				case Direction:
+					setVariable(key, IProgramFactory.Direction.RIGHT);
 					continue;
 				case Double:
 					setVariable(key, 0.0);
 					continue;
-				case Direction:
-					setVariable(key, IProgramFactory.Direction.UP);
-					continue;
-				case ActiveObject:
-					setVariable(key, null);
-					continue;
 			}
 		}
-	}
-
-	private void stepOut()
-	{
-		statementStack.pop();
-		stackCounter.pop();
 	}
 }
