@@ -6,8 +6,9 @@ import jumpingalien.model.programs.Expression;
 import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 
-import java.rmi.activation.ActivationID;
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class SearchObjExpr extends Expression<ActiveObject>
 {
@@ -21,8 +22,8 @@ public class SearchObjExpr extends Expression<ActiveObject>
 
 	public ActiveObject getValue(Environment env)
 	{
-		Comparator<ActiveObject> comparator = new locationComparator(env.getActiveCaller(),directionExpression.getValue(env));
-		PriorityQueue<ActiveObject> priorityQueue = new PriorityQueue<>(1,comparator);
+		Comparator<ActiveObject> comparator = new locationComparator(env.getActiveCaller(), directionExpression.getValue(env));
+		PriorityQueue<ActiveObject> priorityQueue = new PriorityQueue<>(1, comparator);
 		priorityQueue.addAll((Collection<? extends ActiveObject>) env.getwCaller().getCollection(ActiveObject.class));
 		return priorityQueue.poll();
 

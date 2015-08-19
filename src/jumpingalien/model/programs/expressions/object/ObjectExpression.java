@@ -20,7 +20,7 @@ public abstract class ObjectExpression extends Expression<Double>
 
 	public Double getValue(Environment env)
 	{
-		if(!(activeObject.getValue(env) instanceof ActiveObject)) return 0.0;
+		if (!(activeObject.getValue(env) instanceof ActiveObject)) return 0.0;
 		return exec(activeObject.getValue(env));
 	}
 }

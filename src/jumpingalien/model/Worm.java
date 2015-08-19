@@ -10,10 +10,9 @@ public class Worm extends ActiveObject
 	/**
 	 * Constructor of a Worm extends an ActiveObject
 	 *
-	 * @param x The location of the ActiveObject on the x-axis
-	 * @param y The location of the ActiveObject on the y-axis
+	 * @param x       The location of the ActiveObject on the x-axis
+	 * @param y       The location of the ActiveObject on the y-axis
 	 * @param sprites The Array of sprites that wil be used by the ActiveObject
-	 *
 	 * @effect Sets the x-axis location to the given value
 	 * | setLocationX(pixelLeftX)
 	 * @effect Sets the y-axis location to the given value
@@ -46,23 +45,26 @@ public class Worm extends ActiveObject
 
 	/**
 	 * Handels changes to Worm when overlapping with an other ActiveObject
-	 * @param interObj The ActiveObject which the Worm is collided with
 	 *
+	 * @param interObj The ActiveObject which the Worm is collided with
 	 * @effect when the worm overlaps with another worm the other worm dies and its health get added to the caller
-	 * 			the caller also changes direction
+	 * the caller also changes direction
 	 * |if (interObj instanceof Worm)
-	 * 	this.addHealth(interObj.getHealth)
-	 * 	interObj.dies()
-	 * 	this.direction.reverse
+	 * this.addHealth(interObj.getHealth)
+	 * interObj.dies()
+	 * this.direction.reverse
 	 */
 	public void isOverlapping(ActiveObject interObj)
 	{
-		if (interObj instanceof Worm){
+		if (interObj instanceof Worm)
+		{
 			processHealth(interObj.getHealth());
 			getwCaller().objectDies(interObj);
-			if (getHorDirection() == enHorState.left){
+			if (getHorDirection() == enHorState.left)
+			{
 				startMoveLeft();
-			} else {
+			} else
+			{
 				startMoveRight();
 			}
 		}
@@ -77,16 +79,17 @@ public class Worm extends ActiveObject
 
 	/**
 	 * Processes environment
-	 * @param dt The duration that the Worm in in the given EnvType
-	 * @param iEnvType The type of tile the Worm was in for dt time
 	 *
+	 * @param dt       The duration that the Worm in in the given EnvType
+	 * @param iEnvType The type of tile the Worm was in for dt time
 	 * @effect If the worm is in water(2) or magma(3) the worm dies
 	 * |if iEnvType == 2 || iEnvType == 3
-	 *  this.dies
+	 * this.dies
 	 */
 	public void processEnv(double dt, int iEnvType)
 	{
-		if (iEnvType == 3 || iEnvType == 2){
+		if (iEnvType == 3 || iEnvType == 2)
+		{
 			getwCaller().objectDies(this);
 		}
 	}

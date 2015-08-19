@@ -39,13 +39,15 @@ public class ForEachStatmnt extends ConditionStatmnt
 		assert (activeObjetcs.size() - 1 > activeIterate);
 		env.backStack();
 		activeIterate++;
-		if (testCondition(env)) {
+		if (testCondition(env))
+		{
 			env.backStack();
 			env.intoStack(bodyStatement);
 		}
 	}
 
-	private void getActiveObjects(Environment env) {
+	private void getActiveObjects(Environment env)
+	{
 		if (activeObjetcs == null || activeObjetcs.size() < 1)
 		{
 			activeIterate = 0;

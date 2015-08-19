@@ -20,10 +20,9 @@ public class Mazub extends ActiveObject
 	/**
 	 * Constructor of a Mazub extends an ActiveObject
 	 *
-	 * @param pixelLeftX The location of the ActiveObject on the x-axis
+	 * @param pixelLeftX   The location of the ActiveObject on the x-axis
 	 * @param pixelBottomY The location of the ActiveObject on the y-axis
-	 * @param sprites The Array of sprites that wil be used by the ActiveObject
-	 *
+	 * @param sprites      The Array of sprites that wil be used by the ActiveObject
 	 * @effect Sets the x-axis location to the given value
 	 * | setLocationX(pixelLeftX)
 	 * @effect Sets the y-axis location to the given value
@@ -52,19 +51,18 @@ public class Mazub extends ActiveObject
 	 * pocesses overlapping between mazub and other ActiveObject
 	 *
 	 * @param interObj The ActiveObject mazub is colliding with
-	 *
 	 * @effect if interObject is a plant then mazub absorbs it
 	 * | if interObj instance of plant
-	 *   mazub.addHealth(100)
-	 *   plant.dies
+	 * mazub.addHealth(100)
+	 * plant.dies
 	 * @effect if interObject is a potion then mazub absorbs it
 	 * | if interObj instance of potion
-	 * 	mazub.addHealth(potion.getHealth)
-	 * 	potion.dies
+	 * mazub.addHealth(potion.getHealth)
+	 * potion.dies
 	 * @effect if interObject is a Shark then mazub takes 50 damage and becoms imune
 	 * | if interObj instance of Shark
-	 *  mazub.subtractHealth(50)
-	 *  mazub.becomsImune()
+	 * mazub.subtractHealth(50)
+	 * mazub.becomsImune()
 	 */
 	@Override
 	public void isOverlapping(ActiveObject interObj)
@@ -105,11 +103,11 @@ public class Mazub extends ActiveObject
 
 	/**
 	 * processes imune to become no longer imune after 0.6 seconds
-	 * @param dt The amout of time since the last check in
 	 *
+	 * @param dt The amout of time since the last check in
 	 * @effect afthter 0.6 seconds of being imune mazubs nolonger becoms imune
 	 * | if (dLastImune > 0.6)
-	 *  isNoLongerImune()
+	 * isNoLongerImune()
 	 */
 	private void processImune(double dt)
 	{
@@ -151,13 +149,13 @@ public class Mazub extends ActiveObject
 
 	/**
 	 * Processes environment
-	 * @param dt The duration that the Worm in in the given EnvType
-	 * @param iEnvType The type of tile the Worm was in for dt time
 	 *
+	 * @param dt       The duration that the Worm in in the given EnvType
+	 * @param iEnvType The type of tile the Worm was in for dt time
 	 * @effect If mazub is in water(2) or magma(3) the mazub recieves damage
 	 * |if iEnvType == 2
-	 *  if dInWater >= 0.2
-	 *  mazub.subtractHealth(6)
+	 * if dInWater >= 0.2
+	 * mazub.subtractHealth(6)
 	 * |if iEnvType == 3
 	 * if dInLava >= 0.2
 	 * mazub.subtractHealth(50)
@@ -187,6 +185,7 @@ public class Mazub extends ActiveObject
 			}
 		}
 	}
+
 	@Override
 	protected int correctSprite()
 	{
@@ -196,33 +195,39 @@ public class Mazub extends ActiveObject
 			iCounter++;
 		//was going left
 		if (dtLastMove < 1 && eLastHorState == enHorState.right)
-			iCounter +=2;
+			iCounter += 2;
 		//was going right
 		if (dtLastMove < 1 && eLastHorState == enHorState.left)
-			iCounter +=3;
+			iCounter += 3;
 		//is jumping
 		if (eVerState == enVertState.jump && eHorState != enHorState.stand)
-			iCounter +=2;
-        /*if (geteHorState() != enHorState.stand)
+			iCounter += 2;
+		/*if (geteHorState() != enHorState.stand)
             iCounter +=2;
 */
-		if (eVerState == enVertState.duck){
+		if (eVerState == enVertState.duck)
+		{
 			if (eHorState != enHorState.stand)
-				iCounter +=3;
+				iCounter += 3;
 		}
 		//al loopend
-		if (eHorState == enHorState.stand){
+		if (eHorState == enHorState.stand)
+		{
 			iSpriteCounter = 0;
 		}
-		if (getVelocity()[1] == 0 ) {
-			if (eHorState == enHorState.left) {
+		if (getVelocity()[1] == 0)
+		{
+			if (eHorState == enHorState.left)
+			{
 				iCounter = 19 + iSpriteCounter;
 			}
-			if (eHorState == enHorState.right){
+			if (eHorState == enHorState.right)
+			{
 				iCounter = 8 + iSpriteCounter;
 			}
 		}
 
 		//return result
-		return iCounter;	}
+		return iCounter;
+	}
 }

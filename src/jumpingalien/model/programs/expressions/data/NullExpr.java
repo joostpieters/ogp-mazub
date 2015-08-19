@@ -6,6 +6,6 @@ public class NullExpr extends DataExpression
 {
 	public NullExpr(SourceLocation sourceLocation)
 	{
-		super(sourceLocation,0.0);
+		super(sourceLocation, 0.0);
 	}
 }

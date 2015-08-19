@@ -61,26 +61,29 @@ public class Environment
 	{
 		allVariables.put(name, value);
 	}
+
 	public Object getVariable(String key)
 	{
 		return allVariables.get(key);
 	}
 
 
-	public void setFunction(String name,Statement expression){
-		allFunctions.put(name,expression);
+	public void setFunction(String name, Statement expression)
+	{
+		allFunctions.put(name, expression);
 	}
 
-	public Statement getFunction(String name){
+	public Statement getFunction(String name)
+	{
 		return allFunctions.get(name);
 	}
 
 	public Statement getStatement()
 	{
 		if (statementStack.isEmpty()) reset();
-		if ( statementStack.peek() instanceof SequenceStatement)
+		if (statementStack.peek() instanceof SequenceStatement)
 		{
-			SequenceStatement sequence = (SequenceStatement)  statementStack.peek();
+			SequenceStatement sequence = (SequenceStatement) statementStack.peek();
 			if (stackCounter.peek() >= sequence.getStatementList().size())
 			{
 				statementStack.pop();
@@ -95,6 +98,7 @@ public class Environment
 			return statementStack.peek();
 		}
 	}
+
 	private int getStatementCount()
 	{
 		if (statementStack.peek() instanceof SequenceStatement)

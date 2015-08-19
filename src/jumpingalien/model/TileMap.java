@@ -18,17 +18,16 @@ public class TileMap
 	/**
 	 * The constructor of a TileMap
 	 *
-	 * @param nbTileX The number of tiles in the width of the TileMap
-	 * @param nbTileY The number of tiles in the Height of the TileMap
-	 * @param tileSize The size of Tiles to be created
+	 * @param nbTileX     The number of tiles in the width of the TileMap
+	 * @param nbTileY     The number of tiles in the Height of the TileMap
+	 * @param tileSize    The size of Tiles to be created
 	 * @param targetTileX The array location in the first dimention of the tile array of the winning tile
 	 * @param targetTileY The array location in the second dimention of the tile array of the winning tile
-	 *
 	 * @post The tilemap is initialised with its new tiles
 	 * |tilemap[tileLocationX][tileLocationY] = new Tile(tileLocationX,tileLocationY,pixelYLocation,pixelXLocation)
 	 * @post The winning tile is set to the given value
 	 * |iTargetTileX = targetTileX
-	 *  iTargetTiley = targetTiley
+	 * iTargetTiley = targetTiley
 	 */
 	TileMap(int nbTileX, int nbTileY, int tileSize, int targetTileX, int targetTileY)
 	{
@@ -46,11 +45,13 @@ public class TileMap
 		iTargetTileY = targetTileY;
 
 	}
+
 	@Basic
 	public int getTileSize()
 	{
 		return iTileSize;
 	}
+
 	@Basic
 	private int[] getMaxTilePixel()
 	{
@@ -94,8 +95,8 @@ public class TileMap
 
 	/**
 	 * Rounds down to the nearest tile
-	 * @param tileCoor The coordinate on eighter the x or y-axis
 	 *
+	 * @param tileCoor The coordinate on eighter the x or y-axis
 	 * @return The x or y coordinate of the nearest tile lower than the tileCoor
 	 */
 	private int roundToTile(int tileCoor)
@@ -106,8 +107,8 @@ public class TileMap
 
 	/**
 	 * Gets all tile in the area of the given ActiveObject
-	 * @param obj The ActiveObject of in the area you want the tiles from
 	 *
+	 * @param obj The ActiveObject of in the area you want the tiles from
 	 * @return A list of tiles in the area of the ActiveObject
 	 */
 	public LinkedList<Tile> getTilePositionInTiles(ActiveObject obj)
@@ -119,11 +120,11 @@ public class TileMap
 
 	/**
 	 * Gets all tile in an area
-	 * @param pixelLeft The left pixel in the area
-	 * @param pixelBottom The bottom pixel in the area
-	 * @param pixelRight The right pixel in the area
-	 * @param pixelTop The top pixel in the area
 	 *
+	 * @param pixelLeft   The left pixel in the area
+	 * @param pixelBottom The bottom pixel in the area
+	 * @param pixelRight  The right pixel in the area
+	 * @param pixelTop    The top pixel in the area
 	 * @return A list of tiles in the given area
 	 */
 	private LinkedList<Tile> getTilePositionInTiles(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop)
@@ -150,11 +151,11 @@ public class TileMap
 
 	/**
 	 * Gets all tile in an area
-	 * @param pixelLeft The left pixel in the area
-	 * @param pixelBottom The bottom pixel in the area
-	 * @param pixelRight The right pixel in the area
-	 * @param pixelTop The top pixel in the area
 	 *
+	 * @param pixelLeft   The left pixel in the area
+	 * @param pixelBottom The bottom pixel in the area
+	 * @param pixelRight  The right pixel in the area
+	 * @param pixelTop    The top pixel in the area
 	 * @return An array of array locations of the tiles in the given area
 	 */
 	public int[][] getTilePositionInArray(int pixelLeft, int pixelBottom, int pixelRight, int pixelTop)

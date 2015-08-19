@@ -2,11 +2,10 @@ package jumpingalien.model.programs;
 
 import jumpingalien.model.ActiveObject;
 import jumpingalien.model.Program;
-import jumpingalien.model.programs.expressions.SearchObjExpr;
-import jumpingalien.model.programs.expressions.equation.EqualExpr;
 import jumpingalien.model.programs.expressions.GetTileExpr;
 import jumpingalien.model.programs.expressions.IsStateMoving;
 import jumpingalien.model.programs.expressions.ReadVarExpr;
+import jumpingalien.model.programs.expressions.SearchObjExpr;
 import jumpingalien.model.programs.expressions.data.BoolExpr;
 import jumpingalien.model.programs.expressions.data.DirectionConstExpr;
 import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
@@ -63,7 +62,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
 			case Direction:
 				return new ReadVarExpr<Direction>(sourceLocation, variableName);
 			case ActiveObject:
-				return new ReadVarExpr<ActiveObject>(sourceLocation,variableName);
+				return new ReadVarExpr<ActiveObject>(sourceLocation, variableName);
 			default:
 				return new ReadVarExpr(sourceLocation, variableName);
 		}
@@ -432,7 +431,7 @@ public class Factory implements IProgramFactory<Expression, Statement, Type, Pro
 	@Override
 	public Expression createSearchObject(Expression direction, SourceLocation sourceLocation)
 	{
-		return new SearchObjExpr(sourceLocation,direction);
+		return new SearchObjExpr(sourceLocation, direction);
 	}
 
 	/**

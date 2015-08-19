@@ -6,11 +6,13 @@ import jumpingalien.part3.programs.SourceLocation;
 
 public class NotEqualExpr extends Expression<Boolean>
 {
-	private Expression exprOne,exprTwo;
+	private Expression exprOne, exprTwo;
+
 	public NotEqualExpr(SourceLocation sourceLocation, Expression expr1, Expression expr2)
 	{
 		super(sourceLocation);
-		exprOne = expr1;exprTwo = expr2;
+		exprOne = expr1;
+		exprTwo = expr2;
 	}
 
 

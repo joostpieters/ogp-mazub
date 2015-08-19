@@ -10,13 +10,14 @@ import java.util.LinkedList;
  */
 class CollisionChecker implements Runnable
 {
-	private boolean isRunning = true;
 	private final World worldCaller;
+	private boolean isRunning = true;
 
 	public CollisionChecker(World world)
 	{
 		worldCaller = world;
 	}
+
 	private static boolean fncIsOverlap(ActiveObject obA, ActiveObject obB)
 	{
 		int iAX = obA.getSize()[0];

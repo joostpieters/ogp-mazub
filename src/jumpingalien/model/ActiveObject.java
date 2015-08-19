@@ -6,37 +6,34 @@ import jumpingalien.model.programs.Environment;
 import jumpingalien.util.Sprite;
 
 import java.util.LinkedList;
+
 /**
  * The supper-class for all interoperable game objects
+ *
  * @invar The absolute velocity on the x-axis is always smaller or equal to the maxium velocity on said x-axis
  * |Math.abs(this.getVelocity()[0]) <= dMaxVelocity
  * @invar The number of hitpoints is always between 1 and 500, if the hitpoints become lower than 1 it dies
  * | getHealth() > 1 else wcaller.objecDies(this)
- *   getHealth() <= 500
+ * getHealth() <= 500
  */
 public abstract class ActiveObject implements IntegratedObject
 {
 
-	public enum enVertState
-	{
-		jump, stand, duck
-	}
-
-	public enum enHorState
-	{
-		left, stand, right
-	}
 	//sprite var
 	private final Sprite[] aSprite;
 	//env procedure
 	private final boolean bCanFall;
+	private final double dInitialVelocity;
+	private final double dMaxVelocity;
+	private final double dInitialJump;
+	private final double dInitialAcceleration;
 	enVertState eVerState = enVertState.stand;
 	enHorState eHorState = enHorState.stand;
 	double dtLastMove;
-	//hitpoints
-	private boolean bImune = false;
 	double dLastImune;
 	boolean bHasDied = false;
+	//hitpoints
+	private boolean bImune = false;
 	//caller
 	private World wCaller;
 	//possible programs
@@ -47,30 +44,24 @@ public abstract class ActiveObject implements IntegratedObject
 	//velocity var
 	private double dVelocityX;
 	private double dVelocityY;
-	private final double dInitialVelocity;
-	private final double dMaxVelocity;
-	private final double dInitialJump;
 	//acceleration var
 	private double dAccelerationX;
 	private double dAccelerationY;
-	private final double dInitialAcceleration;
 	private int iCurrentSprite;
 	private int iHitpoints;
 	private Environment environment;
-
 	/**
 	 * Constructor of an ActiveObject
 	 *
-	 * @param pixelLeftX The location of the ActiveObject on the x-axis
-	 * @param pixelBottomY The location of the ActiveObject on the y-axis
-	 * @param sprites The Array of sprites that wil be used by the ActiveObject
-	 * @param hitpoints The initial amout of hitpoints of the ActiveObject
-	 * @param canFall The variable that indicates if the ActiveObject can fall
+	 * @param pixelLeftX          The location of the ActiveObject on the x-axis
+	 * @param pixelBottomY        The location of the ActiveObject on the y-axis
+	 * @param sprites             The Array of sprites that wil be used by the ActiveObject
+	 * @param hitpoints           The initial amout of hitpoints of the ActiveObject
+	 * @param canFall             The variable that indicates if the ActiveObject can fall
 	 * @param initialAcceleration The horizontal acceleration to be set when moving
-	 * @param initialJump The jump velocity to be set when jumping
-	 * @param initialVelocity The horizontal velocity to be set when starting a move
-	 * @param maxVelocity The maximum horizontal velocity the ActiveObject can achieve
-	 *
+	 * @param initialJump         The jump velocity to be set when jumping
+	 * @param initialVelocity     The horizontal velocity to be set when starting a move
+	 * @param maxVelocity         The maximum horizontal velocity the ActiveObject can achieve
 	 * @post Sets the x-axis location to the given value
 	 * | setLocationX(pixelLeftX)
 	 * @post Sets the y-axis location to the given value
@@ -83,9 +74,9 @@ public abstract class ActiveObject implements IntegratedObject
 	 * dCanFall = canFall
 	 * @post Sets the maximum velocity to the given value if given
 	 * | if (maxVelocity == -1){
-	 *     dMaxVelocity == Double.MAX_VALUE
+	 * dMaxVelocity == Double.MAX_VALUE
 	 * } else {
-	 *  	dMaxVelocity = maxVelocity
+	 * dMaxVelocity = maxVelocity
 	 * }
 	 */
 	public ActiveObject(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints, boolean canFall
@@ -96,7 +87,7 @@ public abstract class ActiveObject implements IntegratedObject
 		aSprite = sprites;
 		iHitpoints = hitpoints;
 		bCanFall = canFall;
-		dMaxVelocity = (maxVelocity == -1)? Double.MAX_VALUE:maxVelocity;
+		dMaxVelocity = (maxVelocity == -1) ? Double.MAX_VALUE : maxVelocity;
 		dInitialVelocity = initialVelocity;
 		dInitialAcceleration = initialAcceleration;
 		dInitialJump = initialJump;
@@ -112,15 +103,20 @@ public abstract class ActiveObject implements IntegratedObject
 	}
 
 	@Basic
-	protected boolean hasProgram(){
+	protected boolean hasProgram()
+	{
 		return (controllingProgram != null);
 	}
+
 	@Basic
-	public boolean isAlive(){
+	public boolean isAlive()
+	{
 		return !bHasDied;
 	}
+
 	@Basic
-	public void dies(){
+	public void dies()
+	{
 		bHasDied = true;
 	}
 
@@ -131,7 +127,7 @@ public abstract class ActiveObject implements IntegratedObject
 	 */
 	protected void correctCollision(ActiveObject collidingObj)
 	{
-		setVelocity(new double[]{0,0});
+		setVelocity(new double[]{0, 0});
 	}
 
 	@Basic
@@ -141,7 +137,8 @@ public abstract class ActiveObject implements IntegratedObject
 	}
 
 	@Basic
-	public enVertState getVerDirection(){
+	public enVertState getVerDirection()
+	{
 		return eVerState;
 	}
 
@@ -184,6 +181,13 @@ public abstract class ActiveObject implements IntegratedObject
 	}
 
 	@Basic
+	private void setLocation(double[] iaLocation)
+	{
+		setLocationX(iaLocation[0]);
+		setLocationY(iaLocation[1]);
+	}
+
+	@Basic
 	public double[] getRawLocation()
 	{
 		double[] iaLocation = new double[2];
@@ -223,13 +227,6 @@ public abstract class ActiveObject implements IntegratedObject
 	}
 
 	@Basic
-	private void setLocation(double[] iaLocation)
-	{
-		setLocationX(iaLocation[0]);
-		setLocationY(iaLocation[1]);
-	}
-
-	@Basic
 	private void setLocationX(double x)
 	{
 		if (x < 0 || x > wCaller.getWorldSizeInPixel()[0]) throw new IllegalArgumentException("Object needs to die");
@@ -239,23 +236,16 @@ public abstract class ActiveObject implements IntegratedObject
 	@Basic
 	private void setLocationY(double y)
 	{
-		if(y < 0 || y > wCaller.getWorldSizeInPixel()[1]) throw new IllegalArgumentException("Object needs to die");
+		if (y < 0 || y > wCaller.getWorldSizeInPixel()[1]) throw new IllegalArgumentException("Object needs to die");
 		dPixelBottomY = y;
 	}
 
-	private double correctVelocityX(double x){
-		double max = (eVerState == enVertState.duck)? 1:dMaxVelocity;
-		x =  (x < max)? x:max;
-		x =  (x > -max)? x:-max;
-		return x;
-	}
-
-	@Basic
-	private void setVelocity(double[] daVelocity)
+	private double correctVelocityX(double x)
 	{
-		if (daVelocity.length != 2) throw new IllegalArgumentException("double array needs only an x & y value");
-		setVelocityX(daVelocity[0]);
-		setVelocityY(daVelocity[1]);
+		double max = (eVerState == enVertState.duck) ? 1 : dMaxVelocity;
+		x = (x < max) ? x : max;
+		x = (x > -max) ? x : -max;
+		return x;
 	}
 
 	@Basic
@@ -268,9 +258,18 @@ public abstract class ActiveObject implements IntegratedObject
 	}
 
 	@Basic
+	private void setVelocity(double[] daVelocity)
+	{
+		if (daVelocity.length != 2) throw new IllegalArgumentException("double array needs only an x & y value");
+		setVelocityX(daVelocity[0]);
+		setVelocityY(daVelocity[1]);
+	}
+
+	@Basic
 	private void setVelocityX(double x)
 	{
-		if (Math.abs(x) > dMaxVelocity) throw new IllegalArgumentException("x velocity may not be more than the max velocity");
+		if (Math.abs(x) > dMaxVelocity)
+			throw new IllegalArgumentException("x velocity may not be more than the max velocity");
 		dVelocityX = x;
 	}
 
@@ -351,15 +350,14 @@ public abstract class ActiveObject implements IntegratedObject
 	 * Operates the iHitpoints variable and "kills" the ActiveObject if necessary
 	 *
 	 * @param change The mount that needs to be added or subtracted from the hitpoints
-	 *
 	 * @post The amount of hitpoint wil be calculated and if this reaches below 0
-	 * 				the ActiveObject wil die | if (iHitpoints + change > iMaxHitpoints) {
-	 * 				 							   iHitpoints = MaxHitpoints
-	 * 											} else if (iHitpoints + change < 0){
-	 * 											 	   getwCaller().objecDies(this)
-	 * 											} else {
-	 * 											 	iHitpoints = iHitpoints + change
-	 * 											}
+	 * the ActiveObject wil die | if (iHitpoints + change > iMaxHitpoints) {
+	 * iHitpoints = MaxHitpoints
+	 * } else if (iHitpoints + change < 0){
+	 * getwCaller().objecDies(this)
+	 * } else {
+	 * iHitpoints = iHitpoints + change
+	 * }
 	 */
 	protected synchronized void processHealth(int change)
 	{
@@ -367,18 +365,20 @@ public abstract class ActiveObject implements IntegratedObject
 		{
 			if (isImune()) return;
 		}
-		if (iHitpoints + change < 1){ iHitpoints = 0; getwCaller().objectDies(this);}
-		else if (iHitpoints + change > 500) iHitpoints = 500;
+		if (iHitpoints + change < 1)
+		{
+			iHitpoints = 0;
+			getwCaller().objectDies(this);
+		} else if (iHitpoints + change > 500) iHitpoints = 500;
 		else iHitpoints += change;
 	}
 
 	/**
 	 * checks if the ActiveObject is in air,water of magma and gives that info to processEnv function
-	 * @param dt the amount of time since last checkin
 	 *
-	 * @effect
-	 * | if wCaller.getTilePositionInTiles(this).stream.anyMatch(AIR(0) || WATER(2) || MAGMA(3))
-	 * 	proccessEnv(dt,AIR||WATER||MAGMA)
+	 * @param dt the amount of time since last checkin
+	 * @effect | if wCaller.getTilePositionInTiles(this).stream.anyMatch(AIR(0) || WATER(2) || MAGMA(3))
+	 * proccessEnv(dt,AIR||WATER||MAGMA)
 	 */
 	private void checkEnv(double dt)
 	{
@@ -486,21 +486,25 @@ public abstract class ActiveObject implements IntegratedObject
 	{
 		return bImune;
 	}
-	@Basic
-	public void becomsImune(){
-		bImune = true;
-	}
-	@Basic
-	public void isNoLongerImune(){
-		bImune = false;
-	}
+
 	@Deprecated
-	 @Basic
+	@Basic
 	private void setImune(boolean imune)
 	{
 		bImune = imune;
 	}
 
+	@Basic
+	public void becomsImune()
+	{
+		bImune = true;
+	}
+
+	@Basic
+	public void isNoLongerImune()
+	{
+		bImune = false;
+	}
 
 	public void advanceTime(double dt)
 	{
@@ -528,15 +532,11 @@ public abstract class ActiveObject implements IntegratedObject
 	/**
 	 * Starts the jump of the ActiveObject
 	 *
-	 * @throws IllegalStateException
-	 * | if the ActiveObject is already jumping it throws an IllegalStateException
-	 *
+	 * @throws IllegalStateException | if the ActiveObject is already jumping it throws an IllegalStateException
 	 * @post The ActiveObject's state is set to jump
 	 * | eVerState = enVerState.jump
-	 *
 	 * @effect The vertical velocity is set to the inital jumping velocity
 	 * | setVelocityY(dInitalJump)
-	 *
 	 * @effect The Vertical velocity is set to the normall falling speed
 	 * | setAccelerationY(-10)
 	 */
@@ -552,13 +552,11 @@ public abstract class ActiveObject implements IntegratedObject
 	 * Ends the jump of the active object
 	 *
 	 * @throws IllegalStateException | if the ActiveObject is already jumping it throws an IllegalStateException
-	 *
 	 * @post The ActiveObject's state is set to stand
 	 * | eVerState = enVertState.stand
-	 *
 	 * @effect if the ActiveObject is not already falling it's vertical velocity wil be set to 0
 	 * | if (getVelocity[0] < 0) {
-	 *     setVelocityY(0)
+	 * setVelocityY(0)
 	 * }
 	 */
 	@Immutable
@@ -574,10 +572,8 @@ public abstract class ActiveObject implements IntegratedObject
 	 *
 	 * @Post The ActiveObject's stat is set to left
 	 * | eHorState = enHorState.left
-	 *
 	 * @effect The horizontal velocity is set to the oposite of the initial velocity
 	 * | setVelocityX(-dInitialVelocity)
-	 *
 	 * @effect The horizontal Acceleratoin is set to the oposite of the initial acceleration
 	 * | setAcceleratoin(-dInitialAcceleratoin
 	 */
@@ -593,10 +589,8 @@ public abstract class ActiveObject implements IntegratedObject
 	 *
 	 * @Post The ActiveObject's stat is set to right
 	 * | eHorState = enHorState.right
-	 *
 	 * @effect The horizontal velocity is set to the initial velocity
 	 * | setVelocityX(dInitialVelocity)
-	 *
 	 * @effect The horizontal Acceleratoin is set to initial acceleration
 	 * | setAcceleratoin(dInitialAcceleratoin
 	 */
@@ -612,7 +606,6 @@ public abstract class ActiveObject implements IntegratedObject
 	 *
 	 * @post The ActiveObject's stat is set to stand
 	 * | eHorState = enHorState.stand
-	 *
 	 * @effect Sets the horizontal velocity to 0
 	 * | setVelocityX(0)
 	 * @effect Sets the horizontal acceleration to 0
@@ -624,5 +617,15 @@ public abstract class ActiveObject implements IntegratedObject
 		eHorState = enHorState.stand;
 		setVelocityX(0);
 		setAccelerationX(0);
+	}
+
+	public enum enVertState
+	{
+		jump, stand, duck
+	}
+
+	public enum enHorState
+	{
+		left, stand, right
 	}
 }

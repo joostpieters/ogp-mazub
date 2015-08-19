@@ -5,6 +5,7 @@ import jumpingalien.util.Sprite;
 public class Plant extends ActiveObject
 {
 	double dtTimer;
+
 	public Plant(int x, int y, Sprite[] sprites)
 	{
 		this(x, y, sprites, null);
@@ -42,12 +43,16 @@ public class Plant extends ActiveObject
 
 	public void advanceTime(double dt)
 	{
-		if (!hasProgram()){
-			if (dtTimer > 0.5){
+		if (!hasProgram())
+		{
+			if (dtTimer > 0.5)
+			{
 				dtTimer = 0;
-				if (getHorDirection() == enHorState.left){
+				if (getHorDirection() == enHorState.left)
+				{
 					startMoveRight();
-				} else {
+				} else
+				{
 					startMoveLeft();
 				}
 			}

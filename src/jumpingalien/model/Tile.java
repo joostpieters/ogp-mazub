@@ -15,11 +15,10 @@ public class Tile
 	private int iGeoFeature;
 
 	/**
-	 *
 	 * @param pixelX The location of the tile on the x-axis
 	 * @param pixelY The location of the tile on the y-axis
-	 * @param x The index of the tile in the first dimention of the TileMap tiles array
-	 * @param y The index of the tile in the second dimention of the TileMap tiles array
+	 * @param x      The index of the tile in the first dimention of the TileMap tiles array
+	 * @param y      The index of the tile in the second dimention of the TileMap tiles array
 	 */
 	public Tile(int pixelX, int pixelY, int x, int y)
 	{
@@ -28,21 +27,25 @@ public class Tile
 		iNbX = x;
 		iNbY = y;
 	}
+
 	@Basic
 	public int[] getLocation()
 	{
 		return new int[]{iPixelX, iPixelY};
 	}
+
 	@Basic
 	public int[] getArrayLocation()
 	{
 		return new int[]{iNbX, iNbY};
 	}
+
 	@Basic
 	public int getGeoFeature()
 	{
 		return iGeoFeature;
 	}
+
 	@Basic
 	public void setGeoFeature(int GeoType)
 	{

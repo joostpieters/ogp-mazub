@@ -15,8 +15,14 @@ public class WaitStatmnt extends PrimitiveStatement<Double>
 
 	protected void exec(Environment env, Expression<Double> expression)
 	{
-		if (waited > expression.getValue(env)){waited = 1;}
-		else {waited++;env.backStack();}
+		if (waited > expression.getValue(env))
+		{
+			waited = 1;
+		} else
+		{
+			waited++;
+			env.backStack();
+		}
 
 	}
 }

@@ -2,7 +2,6 @@ package jumpingalien.model.programs.expressions.equation;
 
 import jumpingalien.model.programs.Environment;
 import jumpingalien.model.programs.Expression;
-import jumpingalien.model.programs.expressions.data.DoubleConstExpr;
 import jumpingalien.part3.programs.SourceLocation;
 
 public abstract class EquationExpression extends Expression<Boolean>

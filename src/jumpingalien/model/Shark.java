@@ -24,10 +24,9 @@ public class Shark extends ActiveObject
 	/**
 	 * Constructor of a Shark extends an ActiveObject
 	 *
-	 * @param x The location of the ActiveObject on the x-axis
-	 * @param y The location of the ActiveObject on the y-axis
+	 * @param x       The location of the ActiveObject on the x-axis
+	 * @param y       The location of the ActiveObject on the y-axis
 	 * @param sprites The Array of sprites that wil be used by the ActiveObject
-	 *
 	 * @effect Sets the x-axis location to the given value
 	 * | setLocationX(pixelLeftX)
 	 * @effect Sets the y-axis location to the given value
@@ -65,6 +64,7 @@ public class Shark extends ActiveObject
 
 	/**
 	 * does nothing
+	 *
 	 * @param interObj
 	 */
 	public void isOverlapping(ActiveObject interObj)
@@ -104,13 +104,13 @@ public class Shark extends ActiveObject
 
 	/**
 	 * Processes environment
-	 * @param dt The duration that the Worm in in the given EnvType
-	 * @param iEnvType The type of tile the Worm was in for dt time
 	 *
+	 * @param dt       The duration that the Worm in in the given EnvType
+	 * @param iEnvType The type of tile the Worm was in for dt time
 	 * @effect If the shark is in air(0) or magma(3) the shark recieves damage
 	 * |if iEnvType == 2
-	 *  if dInAir >= 0.2
-	 *  shark.subtractHealth(6)
+	 * if dInAir >= 0.2
+	 * shark.subtractHealth(6)
 	 * |if iEnvType == 3
 	 * if dInMagma >= 0.2
 	 * shark.subtractHealth(50)

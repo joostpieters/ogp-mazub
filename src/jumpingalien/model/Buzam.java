@@ -19,13 +19,15 @@ public class Buzam extends Mazub
 
 	/**
 	 * Handels changes to Buzam when overlapping with an other ActiveObject
+	 *
 	 * @param interObj
 	 */
 	@Override
 	public void isOverlapping(ActiveObject interObj)
 	{
-		assert(getwCaller().getCollection(Mazub.class).size() == 2);
-		if (interObj instanceof Mazub || interObj instanceof Shark){
+		assert (getwCaller().getCollection(Mazub.class).size() == 2);
+		if (interObj instanceof Mazub || interObj instanceof Shark)
+		{
 			processHealth(-50);
 			becomsImune();
 		}

@@ -25,14 +25,13 @@ public class World extends TileMap
 	/**
 	 * Contructor of a World
 	 *
-	 * @param tileSize The size of the Game Tiles
-	 * @param nbTilesX The number of tiles on the x-axis
-	 * @param nbTilesY The number of tiles on the y-axis
-	 * @param visibleWindowWidth The width of the visible window
+	 * @param tileSize            The size of the Game Tiles
+	 * @param nbTilesX            The number of tiles on the x-axis
+	 * @param nbTilesY            The number of tiles on the y-axis
+	 * @param visibleWindowWidth  The width of the visible window
 	 * @param visibleWindowHeight The Height of the visible window
-	 * @param targetTileX The tile number of the winning tile on the x-axis
-	 * @param targetTileY The tile number of the winning tile on the y-axis
-	 *
+	 * @param targetTileX         The tile number of the winning tile on the x-axis
+	 * @param targetTileY         The tile number of the winning tile on the y-axis
 	 * @post Sets the iTileSize to the given value
 	 * | iTileSize = tileSize
 	 * @effect Initialises the given number of tiles in the tile array
@@ -57,11 +56,13 @@ public class World extends TileMap
 	{
 		return colInterActive;
 	}
+
 	@Basic
 	public void startGame()
 	{
 		eGameState = enGameState.started;
 	}
+
 	@Basic
 	public void setMazub(Mazub alien)
 	{
@@ -101,12 +102,11 @@ public class World extends TileMap
 	 *
 	 * @return An integer array being the left,bottom,right and top pixel of said window
 	 * | if (InRangeOfGameWorld(middelOfPlayer - iVisibleWindowWidth / 2)) {
-	 * 	left = middelOfPlayer + iVisibleWindowWidth / 2
-	 *  } else {
-	 *     left = 0
-	 *     right = iVisibleWindowWidth
+	 * left = middelOfPlayer + iVisibleWindowWidth / 2
+	 * } else {
+	 * left = 0
+	 * right = iVisibleWindowWidth
 	 * }
-	 *
 	 */
 	public int[] getVisibleWindow()
 	{

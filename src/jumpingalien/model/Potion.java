@@ -11,8 +11,7 @@ public class Potion extends ActiveObject
 	 * @param pixelLeftX          The location of the ActiveObject on the x-axis
 	 * @param pixelBottomY        The location of the ActiveObject on the y-axis
 	 * @param sprites             The Array of sprites that wil be used by the ActiveObject
-	 * @param type				  The boolean indicating if the potions is poisoned or not
-	 *
+	 * @param type                  The boolean indicating if the potions is poisoned or not
 	 * @post Sets the type information to the given value
 	 * | harmfull = type;
 	 * @effect Sets the x-axis location to the given value
@@ -35,9 +34,10 @@ public class Potion extends ActiveObject
 	private boolean harmfull;
 	private double dtTimer;
 	private enHorState enHorState = ActiveObject.enHorState.left;
-	public Potion(int pixelLeftX, int pixelBottomY, Sprite[] sprites,int hitpoints,Program program)
+
+	public Potion(int pixelLeftX, int pixelBottomY, Sprite[] sprites, int hitpoints, Program program)
 	{
-		super(pixelLeftX, pixelBottomY, sprites, hitpoints , false, 0.25, 0, 0, -1,program);
+		super(pixelLeftX, pixelBottomY, sprites, hitpoints, false, 0.25, 0, 0, -1, program);
 	}
 
 	@Basic
@@ -74,15 +74,20 @@ public class Potion extends ActiveObject
 	}
 
 	@Override
-	public void advanceTime(double dt){
-		if (dtTimer > 1){
+	public void advanceTime(double dt)
+	{
+		if (dtTimer > 1)
+		{
 			dtTimer = 0;
-			if (eHorState == ActiveObject.enHorState.left){
+			if (eHorState == ActiveObject.enHorState.left)
+			{
 				startMoveRight();
-			} else {
+			} else
+			{
 				startMoveLeft();
 			}
-		} else {
+		} else
+		{
 			dtTimer += dt;
 		}
 	}

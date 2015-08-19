@@ -26,7 +26,8 @@ public class IsStateMoving extends Expression<Boolean>
 	private boolean exec(ActiveObject obj, Environment en)
 	{
 		switch (di.getValue(en))
-		{case LEFT:
+		{
+			case LEFT:
 				return (en.getActiveCaller().getHorDirection() == ActiveObject.enHorState.left);
 			case RIGHT:
 				return (en.getActiveCaller().getHorDirection() == ActiveObject.enHorState.right);
