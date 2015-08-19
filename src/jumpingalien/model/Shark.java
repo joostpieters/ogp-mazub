@@ -1,9 +1,13 @@
 package jumpingalien.model;
 
+import be.kuleuven.cs.som.annotate.Basic;
 import jumpingalien.util.Sprite;
 
 import java.util.Random;
 
+/**
+ * a class representing a shark in the game worl
+ */
 public class Shark extends ActiveObject
 {
 	//class invar
@@ -17,6 +21,26 @@ public class Shark extends ActiveObject
 	private double dInMagma = 0;
 	private boolean bInMagma;
 
+	/**
+	 * Constructor of a Shark extends an ActiveObject
+	 *
+	 * @param x The location of the ActiveObject on the x-axis
+	 * @param y The location of the ActiveObject on the y-axis
+	 * @param sprites The Array of sprites that wil be used by the ActiveObject
+	 *
+	 * @effect Sets the x-axis location to the given value
+	 * | setLocationX(pixelLeftX)
+	 * @effect Sets the y-axis location to the given value
+	 * | setLocationX(pixelBottomY)
+	 * @effect Sets the sprite array to the given array
+	 * | aSprite = sprites
+	 * @effect Sets the number of hitpoints to 20
+	 * | iHitpoints = 20
+	 * @effect Sets the fall flag to true |
+	 * dCanFall = true
+	 * @effect Sets the maximum velocity to infinite
+	 * | maxVelocity = double.MAX_Value
+	 */
 	public Shark(int x, int y, Sprite[] sprites)
 	{
 		this(x, y, sprites, null);
@@ -27,17 +51,22 @@ public class Shark extends ActiveObject
 		super(x, y, sprites, 100, true, 0, 1.5, 2, 4, program);
 	}
 
-
+	@Basic
 	public void startDuck()
 	{
 		//Do nothing
 	}
 
+	@Basic
 	public void endDuck()
 	{
 		//Do nothing
 	}
 
+	/**
+	 * does nothing
+	 * @param interObj
+	 */
 	public void isOverlapping(ActiveObject interObj)
 	{
 	}
@@ -73,6 +102,19 @@ public class Shark extends ActiveObject
 	}
 
 
+	/**
+	 * Processes environment
+	 * @param dt The duration that the Worm in in the given EnvType
+	 * @param iEnvType The type of tile the Worm was in for dt time
+	 *
+	 * @effect If the shark is in air(0) or magma(3) the shark recieves damage
+	 * |if iEnvType == 2
+	 *  if dInAir >= 0.2
+	 *  shark.subtractHealth(6)
+	 * |if iEnvType == 3
+	 * if dInMagma >= 0.2
+	 * shark.subtractHealth(50)
+	 */
 	public void processEnv(double dt, int iEnvType)
 	{
 		//lucht

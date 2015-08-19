@@ -1,7 +1,11 @@
 package jumpingalien.model;
 
+import be.kuleuven.cs.som.annotate.Basic;
 import jumpingalien.util.Sprite;
 
+/**
+ * a class representing Mazub in the game world
+ */
 public class Mazub extends ActiveObject
 {
 	//classe invarianten
@@ -13,6 +17,26 @@ public class Mazub extends ActiveObject
 	private int iSpriteCounter;
 	private enHorState eLastHorState = enHorState.stand;
 
+	/**
+	 * Constructor of a Mazub extends an ActiveObject
+	 *
+	 * @param pixelLeftX The location of the ActiveObject on the x-axis
+	 * @param pixelBottomY The location of the ActiveObject on the y-axis
+	 * @param sprites The Array of sprites that wil be used by the ActiveObject
+	 *
+	 * @effect Sets the x-axis location to the given value
+	 * | setLocationX(pixelLeftX)
+	 * @effect Sets the y-axis location to the given value
+	 * | setLocationX(pixelBottomY)
+	 * @effect Sets the sprite array to the given array
+	 * | aSprite = sprites
+	 * @effect Sets the number of hitpoints to 20
+	 * | iHitpoints = 20
+	 * @effect Sets the fall flag to true |
+	 * dCanFall = true
+	 * @effect Sets the maximum velocity to infinite
+	 * | maxVelocity = double.MAX_Value
+	 */
 	public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites)
 	{
 		this(pixelLeftX, pixelBottomY, sprites, null);
@@ -24,6 +48,24 @@ public class Mazub extends ActiveObject
 				8, 3, program);
 	}
 
+	/**
+	 * pocesses overlapping between mazub and other ActiveObject
+	 *
+	 * @param interObj The ActiveObject mazub is colliding with
+	 *
+	 * @effect if interObject is a plant then mazub absorbs it
+	 * | if interObj instance of plant
+	 *   mazub.addHealth(100)
+	 *   plant.dies
+	 * @effect if interObject is a potion then mazub absorbs it
+	 * | if interObj instance of potion
+	 * 	mazub.addHealth(potion.getHealth)
+	 * 	potion.dies
+	 * @effect if interObject is a Shark then mazub takes 50 damage and becoms imune
+	 * | if interObj instance of Shark
+	 *  mazub.subtractHealth(50)
+	 *  mazub.becomsImune()
+	 */
 	@Override
 	public void isOverlapping(ActiveObject interObj)
 	{
@@ -49,16 +91,26 @@ public class Mazub extends ActiveObject
 		}
 	}
 
+	@Basic
 	public void startDuck()
 	{
 		eVerState = enVertState.duck;
 	}
 
+	@Basic
 	public void endDuck()
 	{
 		eVerState = enVertState.stand;
 	}
 
+	/**
+	 * processes imune to become no longer imune after 0.6 seconds
+	 * @param dt The amout of time since the last check in
+	 *
+	 * @effect afthter 0.6 seconds of being imune mazubs nolonger becoms imune
+	 * | if (dLastImune > 0.6)
+	 *  isNoLongerImune()
+	 */
 	private void processImune(double dt)
 	{
 		if (isImune())
@@ -97,6 +149,19 @@ public class Mazub extends ActiveObject
 
 	}
 
+	/**
+	 * Processes environment
+	 * @param dt The duration that the Worm in in the given EnvType
+	 * @param iEnvType The type of tile the Worm was in for dt time
+	 *
+	 * @effect If mazub is in water(2) or magma(3) the mazub recieves damage
+	 * |if iEnvType == 2
+	 *  if dInWater >= 0.2
+	 *  mazub.subtractHealth(6)
+	 * |if iEnvType == 3
+	 * if dInLava >= 0.2
+	 * mazub.subtractHealth(50)
+	 */
 	public void processEnv(double dt, int iEnvType)
 	{
 		//water

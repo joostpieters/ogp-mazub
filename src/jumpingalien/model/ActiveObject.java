@@ -372,6 +372,14 @@ public abstract class ActiveObject implements IntegratedObject
 		else iHitpoints += change;
 	}
 
+	/**
+	 * checks if the ActiveObject is in air,water of magma and gives that info to processEnv function
+	 * @param dt the amount of time since last checkin
+	 *
+	 * @effect
+	 * | if wCaller.getTilePositionInTiles(this).stream.anyMatch(AIR(0) || WATER(2) || MAGMA(3))
+	 * 	proccessEnv(dt,AIR||WATER||MAGMA)
+	 */
 	private void checkEnv(double dt)
 	{
 		LinkedList<Tile> iaSurrTiles = wCaller.getTilePositionInTiles(this);
@@ -461,11 +469,13 @@ public abstract class ActiveObject implements IntegratedObject
 		return daPos;
 	}
 
+	@Basic
 	private boolean checkForWall(double locationx, double locationy)
 	{
 		return checkForWall((int) locationx, (int) locationy);
 	}
 
+	@Basic
 	private boolean checkForWall(int locationX, int locationY)
 	{
 		return wCaller.getTileinPixels(locationX, locationY).getGeoFeature() == 1;
@@ -490,6 +500,7 @@ public abstract class ActiveObject implements IntegratedObject
 	{
 		bImune = imune;
 	}
+
 
 	public void advanceTime(double dt)
 	{
@@ -598,6 +609,9 @@ public abstract class ActiveObject implements IntegratedObject
 
 	/**
 	 * End the horizontal movement
+	 *
+	 * @post The ActiveObject's stat is set to stand
+	 * | eHorState = enHorState.stand
 	 *
 	 * @effect Sets the horizontal velocity to 0
 	 * | setVelocityX(0)
