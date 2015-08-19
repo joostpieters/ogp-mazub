@@ -8,8 +8,7 @@ import jumpingalien.part3.programs.IProgramFactory;
 import jumpingalien.part3.programs.SourceLocation;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class ForEachStatmnt extends ConditionStatmnt
 {
@@ -18,7 +17,7 @@ public class ForEachStatmnt extends ConditionStatmnt
 	private final IProgramFactory.SortDirection sortDirection;
 	private final IProgramFactory.Kind kind;
 	private final Statement bodyStatement;
-	private LinkedList<ActiveObject> activeObjetcs;
+	private ArrayList<ActiveObject> activeObjetcs;
 	private int activeIterate;
 
 	public ForEachStatmnt(SourceLocation sourceLocation, String name, IProgramFactory.Kind variableKind, Expression<Boolean> where, Expression sort
@@ -34,66 +33,52 @@ public class ForEachStatmnt extends ConditionStatmnt
 
 	public void exe(Environment env)
 	{
-//TODO
-	}
-
-	private void initialiseObjects(Environment env) {
-		activeIterate = 0;
-
-		Collection<ActiveObject> activeObjectsColl = new LinkedList<>();
-
-		switch (kind) {
-			case MAZUB:
-				final LinkedList<ActiveObject> finalActiveObjects = new LinkedList<>();
-				env.getwCaller().getCollection(Mazub.class).parallelStream().filter(obj ->
-					!(obj instanceof Buzam)
-						).forEach(obj -> {
-					finalActiveObjects.add((ActiveObject) obj);
-				});
-				activeObjectsColl = finalActiveObjects;
-				break;
-			case BUZAM:
-				activeObjectsColl = (Collection<ActiveObject>) env.getwCaller().getCollection(Buzam.class);
-				break;
-			case SLIME:
-				break;
-			case SHARK:
-				activeObjectsColl = (Collection<ActiveObject>) env.getwCaller().getCollection(Shark.class);
-				break;
-			case PLANT:
-				activeObjectsColl = (Collection<ActiveObject>) env.getwCaller().getCollection(Plant.class);
-				break;
-			case TERRAIN:
-				throw new NotImplementedException();
-			case ANY:
-				System.out.println("ANY Kind required, continue to default");
-			default:
-				activeObjectsColl = (Collection<ActiveObject>) env.getwCaller().getCollection(ActiveObject.class);
-				break;
-		}
-
-		if (activeObjectsColl != null) {
-			activeObjetcs = (LinkedList<ActiveObject>) activeObjectsColl;
-		}
-	}
-	private void doLoop(Environment env) {
-		if (activeObjetcs == null || activeObjetcs.size() < 1) {
-			initialiseObjects(env);
-			return;
-		}
-
+		getActiveObjects(env);
 		env.setVariable(key, activeObjetcs.get(activeIterate));
 
-		if (activeIterate < activeObjetcs.size() - 1) {
-			env.backStack();
-			activeIterate++;
-		} else {
-			initialiseObjects(env);
-		}
-
+		assert (activeObjetcs.size() - 1 > activeIterate);
+		env.backStack();
+		activeIterate++;
 		if (testCondition(env)) {
 			env.backStack();
 			env.intoStack(bodyStatement);
+		}
+	}
+
+	private void getActiveObjects(Environment env) {
+		if (activeObjetcs == null || activeObjetcs.size() < 1)
+		{
+			activeIterate = 0;
+			switch (kind)
+			{
+				case MAZUB:
+					final ArrayList<ActiveObject> finalActiveObjects = new ArrayList<>();
+					env.getwCaller().getCollection(Mazub.class).parallelStream().filter(obj ->
+									!(obj instanceof Buzam)
+					).forEach(obj -> {
+						finalActiveObjects.add((ActiveObject) obj);
+					});
+					activeObjetcs = finalActiveObjects;
+					break;
+				case BUZAM:
+					activeObjetcs = (ArrayList<ActiveObject>) env.getwCaller().getCollection(Buzam.class);
+					break;
+				case SLIME:
+					break;
+				case SHARK:
+					activeObjetcs = (ArrayList<ActiveObject>) env.getwCaller().getCollection(Shark.class);
+					break;
+				case PLANT:
+					activeObjetcs = (ArrayList<ActiveObject>) env.getwCaller().getCollection(Plant.class);
+					break;
+				case TERRAIN:
+					throw new NotImplementedException();
+				case ANY:
+					System.out.println("ANY Kind required, continue to default");
+				default:
+					activeObjetcs = (ArrayList<ActiveObject>) env.getwCaller().getCollection(ActiveObject.class);
+					break;
+			}
 		}
 	}
 }

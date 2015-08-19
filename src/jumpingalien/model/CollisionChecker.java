@@ -5,7 +5,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-
+/**
+ * A class identifying collisions between ActiveObjects
+ */
 class CollisionChecker implements Runnable
 {
 	private boolean isRunning = true;
@@ -15,7 +17,6 @@ class CollisionChecker implements Runnable
 	{
 		worldCaller = world;
 	}
-
 	private static boolean fncIsOverlap(ActiveObject obA, ActiveObject obB)
 	{
 		int iAX = obA.getSize()[0];
@@ -72,6 +73,7 @@ class CollisionChecker implements Runnable
 					{
 						if (fncIsOverlap(interComp, interObj))
 						{
+							if (interComp instanceof Buzam) System.out.println("cheked buzam");
 							collOverlap.add(new ActiveObject[]{interComp, interObj});
 						}
 					}

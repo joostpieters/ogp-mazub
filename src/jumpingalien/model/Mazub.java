@@ -31,20 +31,20 @@ public class Mazub extends ActiveObject
 		{
 			if (getHealth() < 500)
 			{
-				ProcessHealth(100);
+				processHealth(100);
 				getwCaller().objectDies(interObj);
 			}
 			return;
 		}
 		if (interObj instanceof Potion)
 		{
-			ProcessHealth(interObj.getHealth());
+			processHealth(interObj.getHealth());
 			getwCaller().objectDies(interObj);
 		}
 
 		if (interObj instanceof Shark)
 		{
-			ProcessHealth(-50);
+			processHealth(-50);
 			becomsImune();
 		}
 	}
@@ -107,7 +107,7 @@ public class Mazub extends ActiveObject
 			if (dInWater >= 0.2)
 			{
 				dInWater -= 0.2;
-				ProcessHealth(-6);
+				processHealth(-6);
 			}
 		}
 		//magma
@@ -118,7 +118,7 @@ public class Mazub extends ActiveObject
 			if (dInMagma >= 0.2)
 			{
 				dInMagma -= 0.2;
-				ProcessHealth(-50);
+				processHealth(-50);
 			}
 		}
 	}

@@ -15,17 +15,25 @@ public class Plant extends ActiveObject
 		super(x, y, sprites, 100, false, 0.5, 0, 0, 0.5, null);
 	}
 
-
+	/**
+	 * Does nothing
+	 */
 	public void startDuck()
 	{
 		//Do nothing
 	}
 
+	/**
+	 * Does nothing
+	 */
 	public void endDuck()
 	{
 		//Do nothing
 	}
 
+	/**
+	 * Does nothing
+	 */
 	public void isOverlapping(ActiveObject interObj)
 	{
 		//Do nothing
@@ -48,7 +56,9 @@ public class Plant extends ActiveObject
 		super.advanceTime(dt);
 	}
 
-
+	/**
+	 * Does nothing
+	 */
 	public void processEnv(double dt, int iEnvType)
 	{
 		//Do nothing

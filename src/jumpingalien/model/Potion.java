@@ -6,7 +6,7 @@ import jumpingalien.util.Sprite;
 public class Potion extends ActiveObject
 {
 	/**
-	 * Constructor of an ActiveObject
+	 * Constructor of a Plant
 	 *
 	 * @param pixelLeftX          The location of the ActiveObject on the x-axis
 	 * @param pixelBottomY        The location of the ActiveObject on the y-axis

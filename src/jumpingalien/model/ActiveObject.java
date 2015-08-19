@@ -361,17 +361,16 @@ public abstract class ActiveObject implements IntegratedObject
 	 * 											 	iHitpoints = iHitpoints + change
 	 * 											}
 	 */
-	protected synchronized void ProcessHealth(int change)
+	protected synchronized void processHealth(int change)
 	{
 		if (change < 0)
 		{
 			if (isImune()) return;
 		}
-		if (iHitpoints + change < 1) getwCaller().objectDies(this);
+		if (iHitpoints + change < 1){ iHitpoints = 0; getwCaller().objectDies(this);}
 		else if (iHitpoints + change > 500) iHitpoints = 500;
 		else iHitpoints += change;
 	}
-
 
 	private void checkEnv(double dt)
 	{

@@ -192,9 +192,14 @@ public class World extends TileMap
 		getColInterActive().stream().filter(ActiveObject::isAlive).forEach(obj -> obj.advanceTime(dt));
 	}
 
+	/**
+	 * Stop the collision decetion from running
+	 *
+	 * @effect stops the runnable detecting collisions
+	 * | collisionRunnable.stop
+	 */
 	public void finialize()
 	{
-		//todo collisionRunnable.stop();
 		collisionRunnable.stop();
 	}
 

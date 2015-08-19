@@ -83,7 +83,7 @@ public class Shark extends ActiveObject
 			if (dInAir <= 0.2)
 			{
 				dInAir -= 0.2;
-				ProcessHealth(-6);
+				processHealth(-6);
 			}
 		}
 		//lava
@@ -94,7 +94,7 @@ public class Shark extends ActiveObject
 			if (dInMagma <= 0.2)
 			{
 				dInMagma -= 0.2;
-				ProcessHealth(-50);
+				processHealth(-50);
 			}
 		}
 	}

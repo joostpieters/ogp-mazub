@@ -109,8 +109,14 @@ public class Environment
 
 	public void continueStack()
 	{
-		if (stackCounter.peek() <= getLocalStatementCount() -1) stackCounter.push(stackCounter.pop() + 1);
-		else statementStack.pop(); stackCounter.pop();
+		if (stackCounter.peek() <= getLocalStatementCount() - 1)
+		{
+			int i = stackCounter.pop();
+			stackCounter.push(i + 1);
+		} else
+		{
+			backStack();
+		}
 	}
 
 	public void backStack()

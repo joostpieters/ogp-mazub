@@ -1,7 +1,5 @@
 package jumpingalien.model;
 
-import jumpingalien.model.Plant;
-import jumpingalien.model.Program;
 import jumpingalien.util.Sprite;
 
 public class Worm extends ActiveObject
@@ -26,7 +24,7 @@ public class Worm extends ActiveObject
 	public void isOverlapping(ActiveObject interObj)
 	{
 		if (interObj instanceof Worm){
-			ProcessHealth(interObj.getHealth());
+			processHealth(interObj.getHealth());
 			getwCaller().objectDies(interObj);
 			if (getHorDirection() == enHorState.left){
 				startMoveLeft();
