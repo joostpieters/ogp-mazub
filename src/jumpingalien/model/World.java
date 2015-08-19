@@ -42,7 +42,6 @@ public class World extends TileMap
 	 * |iVisibleWindowWidth = visibleWindowWidth
 	 * @post
 	 */
-	//todo collision
 	public World(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight, int targetTileX, int targetTileY)
 	{
 		super(nbTilesX, nbTilesY, tileSize, targetTileX, targetTileY);
@@ -78,7 +77,6 @@ public class World extends TileMap
 	 */
 	public boolean isGameOver()
 	{
-		//TODO check hoe moet uitgewerktworden
 		switch (eGameState)
 		{
 			case started:
@@ -110,7 +108,6 @@ public class World extends TileMap
 	 * }
 	 *
 	 */
-	//TODO
 	public int[] getVisibleWindow()
 	{
 		//left, bottom, right, top

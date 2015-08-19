@@ -20,12 +20,12 @@ public abstract class PrimitiveStatement<dataType> extends Statement
 		super(sourceLocation);
 	}
 
-	protected abstract void doAction(Environment env, Expression<dataType> expression);
+	protected abstract void exec(Environment env, Expression<dataType> expression);
 
 	public void exe(Environment env)
 	{
 
-		doAction(env, expression);
+		exec(env, expression);
 
 	}
 }

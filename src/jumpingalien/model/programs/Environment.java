@@ -95,7 +95,7 @@ public class Environment
 			return statementStack.peek();
 		}
 	}
-	private int getLocalStatementCount()
+	private int getStatementCount()
 	{
 		if (statementStack.peek() instanceof SequenceStatement)
 		{
@@ -109,7 +109,7 @@ public class Environment
 
 	public void continueStack()
 	{
-		if (stackCounter.peek() <= getLocalStatementCount() - 1)
+		if (stackCounter.peek() <= getStatementCount() - 1)
 		{
 			int i = stackCounter.pop();
 			stackCounter.push(i + 1);

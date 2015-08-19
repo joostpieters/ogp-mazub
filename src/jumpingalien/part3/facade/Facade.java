@@ -467,7 +467,6 @@ public class Facade implements IFacadePart3
 	@Override
 	public Collection<Plant> getPlants(World world)
 	{
-		//TODO ask mathias
 		return (Collection<Plant>) world.getCollection(Plant.class);
 	}
 
@@ -573,7 +572,6 @@ public class Facade implements IFacadePart3
 	@Override
 	public School createSchool()
 	{
-		//TODO
 		return null;
 	}
 

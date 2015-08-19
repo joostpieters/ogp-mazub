@@ -69,6 +69,4 @@ public class PartialFacadeTest {
 
 		assertEquals(sprites[8+m], facade.getCurrentSprite(alien));
 	}
-
-	// TODO: add more tests
 }

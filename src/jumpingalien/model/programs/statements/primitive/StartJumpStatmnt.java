@@ -12,7 +12,7 @@ public class StartJumpStatmnt extends PrimitiveStatement
 
 	}
 
-	protected void doAction(Environment env, Expression expression)
+	protected void exec(Environment env, Expression expression)
 	{
 		env.getActiveCaller().startJump();
 	}

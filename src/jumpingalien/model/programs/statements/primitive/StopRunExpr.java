@@ -12,7 +12,7 @@ public class StopRunExpr extends PrimitiveStatement<IProgramFactory.Direction>
 		super(sourceLocation, exp);
 	}
 
-	protected void doAction(Environment env, Expression<IProgramFactory.Direction> expression)
+	protected void exec(Environment env, Expression<IProgramFactory.Direction> expression)
 	{
 		env.getActiveCaller().endHorMove();
 	}

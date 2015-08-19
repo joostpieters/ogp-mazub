@@ -11,7 +11,7 @@ public class PrintStatmnt extends PrimitiveStatement
 		super(sourceLocation, exp);
 	}
 
-	protected void doAction(Environment env, Expression expression)
+	protected void exec(Environment env, Expression expression)
 	{
 		System.out.println(expression.getValue(env));
 	}
