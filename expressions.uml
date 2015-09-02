@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>jumpingalien.model.programs.expressions</OriginalElement>
+  <nodes>
+    <node x="2947.75" y="228.0">jumpingalien.model.programs.expressions.type.IsTileType</node>
+    <node x="933.75" y="228.0">jumpingalien.model.programs.expressions.recursive.SquareRootExpr</node>
+    <node x="693.0" y="228.0">jumpingalien.model.programs.expressions.logical.OrExpr</node>
+    <node x="1486.75" y="228.0">jumpingalien.model.programs.expressions.equation.LessOrEqualExpr</node>
+    <node x="2495.75" y="228.0">jumpingalien.model.programs.expressions.data.DoubleConstExpr</node>
+    <node x="2092.9375" y="129.0">jumpingalien.model.programs.expressions.GetTileExpr</node>
+    <node x="100.0" y="228.0">jumpingalien.model.programs.expressions.object.GetYExpr</node>
+    <node x="2639.75" y="228.0">jumpingalien.model.programs.expressions.type.IsState</node>
+    <node x="3119.0" y="129.0">jumpingalien.model.programs.expressions.equation.EqualExpr</node>
+    <node x="1363.75" y="228.0">jumpingalien.model.programs.expressions.equation.LessThanExpr</node>
+    <node x="1069.75" y="228.0">jumpingalien.model.programs.expressions.equation.GreaterThanExpr</node>
+    <node x="2733.21875" y="129.0">jumpingalien.model.programs.expressions.equation.NotEqualExpr</node>
+    <node x="596.0" y="228.0">jumpingalien.model.programs.expressions.logical.AndExpr</node>
+    <node x="617.75" y="129.0">jumpingalien.model.programs.expressions.logical.LogicalExpression</node>
+    <node x="2725.75" y="228.0">jumpingalien.model.programs.expressions.type.IsDeadExpr</node>
+    <node x="2145.75" y="228.0">jumpingalien.model.programs.expressions.data.DirectionConstExpr</node>
+    <node x="3272.75" y="228.0">jumpingalien.model.programs.expressions.type.IsTile</node>
+    <node x="3350.75" y="228.0">jumpingalien.model.programs.expressions.type.IsMazubExpr</node>
+    <node x="2986.0" y="129.0">jumpingalien.model.programs.expressions.type.TypeExpression</node>
+    <node x="3223.0" y="129.0">jumpingalien.model.programs.expressions.SelfExpr</node>
+    <node x="3050.75" y="228.0">jumpingalien.model.programs.expressions.type.IsPlantExpr</node>
+    <node x="763.75" y="129.0">jumpingalien.model.programs.expressions.logical.NotExpr</node>
+    <node x="1208.75" y="228.0">jumpingalien.model.programs.expressions.equation.GreaterOrEqualExpr</node>
+    <node x="0.0" y="228.0">jumpingalien.model.programs.expressions.object.GetXExpr</node>
+    <node x="191.0" y="129.0">jumpingalien.model.programs.expressions.object.ObjectExpression</node>
+    <node x="467.0" y="228.0">jumpingalien.model.programs.expressions.object.GetHeightExpr</node>
+    <node x="200.0" y="228.0">jumpingalien.model.programs.expressions.object.GetWidthExpr</node>
+    <node x="325.0" y="228.0">jumpingalien.model.programs.expressions.object.GetHitPointsExpr</node>
+    <node x="2604.21875" y="129.0">jumpingalien.model.programs.expressions.SearchObjExpr</node>
+    <node x="2398.75" y="228.0">jumpingalien.model.programs.expressions.data.NullExpr</node>
+    <node x="2299.75" y="228.0">jumpingalien.model.programs.expressions.data.BoolExpr</node>
+    <node x="1774.75" y="228.0">jumpingalien.model.programs.expressions.operator.AdditionExpr</node>
+    <node x="2835.75" y="228.0">jumpingalien.model.programs.expressions.type.IsSharkExpr</node>
+    <node x="1895.75" y="228.0">jumpingalien.model.programs.expressions.operator.SubtractionExpr</node>
+    <node x="858.75" y="129.0">jumpingalien.model.programs.expressions.recursive.RecursiveExpression</node>
+    <node x="2552.25" y="307.0">jumpingalien.model.programs.expressions.type.IsStateDucking</node>
+    <node x="2031.75" y="228.0">jumpingalien.model.programs.expressions.operator.DivisonExpr</node>
+    <node x="1566.0" y="129.0">jumpingalien.model.programs.expressions.ReadVarExpr</node>
+    <node x="3160.75" y="228.0">jumpingalien.model.programs.expressions.type.IsSlimeExpr</node>
+    <node x="1845.5" y="0.0">jumpingalien.model.programs.Expression</node>
+    <node x="1822.0" y="129.0">jumpingalien.model.programs.expressions.operator.OperatorExpression</node>
+    <node x="2682.25" y="307.0">jumpingalien.model.programs.expressions.type.IsStateJumping</node>
+    <node x="1625.75" y="228.0">jumpingalien.model.programs.expressions.operator.MultiplicationExpr</node>
+    <node x="1131.485726950354" y="129.0">jumpingalien.model.programs.expressions.IsStateMoving</node>
+    <node x="2332.25" y="129.0">jumpingalien.model.programs.expressions.data.DataExpression</node>
+    <node x="813.75" y="228.0">jumpingalien.model.programs.expressions.recursive.RandomExpr</node>
+    <node x="1278.25" y="129.0">jumpingalien.model.programs.expressions.equation.EquationExpression</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="jumpingalien.model.programs.expressions.type.IsTile" target="jumpingalien.model.programs.expressions.type.TypeExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="3301.75" y="188.0" />
+      <point x="3077.8125" y="188.0" />
+      <point x="35.3125" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.equation.GreaterOrEqualExpr" target="jumpingalien.model.programs.expressions.equation.EquationExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="1276.25" y="208.0" />
+      <point x="1328.875" y="208.0" />
+      <point x="-16.875" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.object.GetHeightExpr" target="jumpingalien.model.programs.expressions.object.ObjectExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="521.5" y="198.0" />
+      <point x="301.70000000000005" y="198.0" />
+      <point x="49.19999999999999" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.data.DataExpression" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="2388.25" y="99.0" />
+      <point x="1901.2333333333333" y="99.0" />
+      <point x="11.733333333333348" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.IsStateDucking" target="jumpingalien.model.programs.expressions.type.IsState">
+      <point x="0.0" y="-14.5" />
+      <point x="2607.25" y="282.0" />
+      <point x="2656.25" y="282.0" />
+      <point x="-16.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.data.DoubleConstExpr" target="jumpingalien.model.programs.expressions.data.DataExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="2557.75" y="198.0" />
+      <point x="2430.25" y="198.0" />
+      <point x="42.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.logical.AndExpr" target="jumpingalien.model.programs.expressions.logical.LogicalExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="634.5" y="208.0" />
+      <point x="649.25" y="208.0" />
+      <point x="-31.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.recursive.RandomExpr" target="jumpingalien.model.programs.expressions.recursive.RecursiveExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="863.75" y="208.0" />
+      <point x="893.25" y="208.0" />
+      <point x="-34.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.SelfExpr" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="3260.0" y="49.0" />
+      <point x="1930.5666666666666" y="49.0" />
+      <point x="41.066666666666606" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.logical.LogicalExpression" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="680.75" y="59.0" />
+      <point x="1854.3" y="59.0" />
+      <point x="-35.200000000000045" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.equation.LessOrEqualExpr" target="jumpingalien.model.programs.expressions.equation.EquationExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="1546.25" y="198.0" />
+      <point x="1396.375" y="198.0" />
+      <point x="50.625" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.object.GetYExpr" target="jumpingalien.model.programs.expressions.object.ObjectExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="140.0" y="208.0" />
+      <point x="227.9000000000001" y="208.0" />
+      <point x="-24.599999999999994" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.IsState" target="jumpingalien.model.programs.expressions.type.TypeExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="2672.75" y="178.0" />
+      <point x="2993.0625" y="178.0" />
+      <point x="-49.4375" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.object.ObjectExpression" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="252.5" y="49.0" />
+      <point x="1848.4333333333334" y="49.0" />
+      <point x="-41.066666666666606" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.IsPlantExpr" target="jumpingalien.model.programs.expressions.type.TypeExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="3095.75" y="208.0" />
+      <point x="3049.5625" y="208.0" />
+      <point x="7.0625" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.operator.AdditionExpr" target="jumpingalien.model.programs.expressions.operator.OperatorExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="1825.25" y="208.0" />
+      <point x="1872.625" y="208.0" />
+      <point x="-16.875" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.equation.NotEqualExpr" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="2785.21875" y="79.0" />
+      <point x="1912.9666666666667" y="79.0" />
+      <point x="23.466666666666697" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.data.DirectionConstExpr" target="jumpingalien.model.programs.expressions.data.DataExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="2212.75" y="198.0" />
+      <point x="2346.25" y="198.0" />
+      <point x="-42.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.logical.OrExpr" target="jumpingalien.model.programs.expressions.logical.LogicalExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="727.0" y="208.0" />
+      <point x="712.25" y="208.0" />
+      <point x="31.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.operator.MultiplicationExpr" target="jumpingalien.model.programs.expressions.operator.OperatorExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="1690.25" y="198.0" />
+      <point x="1838.875" y="198.0" />
+      <point x="-50.625" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.IsStateJumping" target="jumpingalien.model.programs.expressions.type.IsState">
+      <point x="0.0" y="-14.5" />
+      <point x="2738.25" y="282.0" />
+      <point x="2689.25" y="282.0" />
+      <point x="16.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.operator.SubtractionExpr" target="jumpingalien.model.programs.expressions.operator.OperatorExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="1953.75" y="208.0" />
+      <point x="1906.375" y="208.0" />
+      <point x="16.875" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.equation.EqualExpr" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="3161.0" y="59.0" />
+      <point x="1924.7" y="59.0" />
+      <point x="35.200000000000045" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.GetTileExpr" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="2138.4375" y="109.0" />
+      <point x="1895.3666666666668" y="109.0" />
+      <point x="5.866666666666788" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.IsSharkExpr" target="jumpingalien.model.programs.expressions.type.TypeExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="2881.75" y="198.0" />
+      <point x="3021.3125" y="198.0" />
+      <point x="-21.1875" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.object.GetXExpr" target="jumpingalien.model.programs.expressions.object.ObjectExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="40.0" y="198.0" />
+      <point x="203.29999999999995" y="198.0" />
+      <point x="-49.19999999999999" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.operator.DivisonExpr" target="jumpingalien.model.programs.expressions.operator.OperatorExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="2078.75" y="198.0" />
+      <point x="1940.125" y="198.0" />
+      <point x="50.625" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.object.GetHitPointsExpr" target="jumpingalien.model.programs.expressions.object.ObjectExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="386.0" y="208.0" />
+      <point x="277.10000000000014" y="208.0" />
+      <point x="24.600000000000023" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.object.GetWidthExpr" target="jumpingalien.model.programs.expressions.object.ObjectExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.logical.NotExpr" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="801.25" y="69.0" />
+      <point x="1860.1666666666667" y="69.0" />
+      <point x="-29.333333333333258" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.recursive.RecursiveExpression" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="927.75" y="79.0" />
+      <point x="1866.0333333333333" y="79.0" />
+      <point x="-23.466666666666697" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.IsDeadExpr" target="jumpingalien.model.programs.expressions.type.TypeExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="2770.75" y="188.0" />
+      <point x="3007.1875" y="188.0" />
+      <point x="-35.3125" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.data.BoolExpr" target="jumpingalien.model.programs.expressions.data.DataExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="2339.25" y="208.0" />
+      <point x="2374.25" y="208.0" />
+      <point x="-14.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.recursive.SquareRootExpr" target="jumpingalien.model.programs.expressions.recursive.RecursiveExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="991.75" y="208.0" />
+      <point x="962.25" y="208.0" />
+      <point x="34.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.equation.LessThanExpr" target="jumpingalien.model.programs.expressions.equation.EquationExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="1415.25" y="208.0" />
+      <point x="1362.625" y="208.0" />
+      <point x="16.875" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.IsMazubExpr" target="jumpingalien.model.programs.expressions.type.TypeExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="3400.25" y="178.0" />
+      <point x="3091.9375" y="178.0" />
+      <point x="49.4375" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.equation.EquationExpression" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="1345.75" y="99.0" />
+      <point x="1877.7666666666667" y="99.0" />
+      <point x="-11.733333333333348" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.IsStateMoving" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="1184.985726950354" y="89.0" />
+      <point x="1871.9" y="89.0" />
+      <point x="-17.59999999999991" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.TypeExpression" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="3042.5" y="69.0" />
+      <point x="1918.8333333333333" y="69.0" />
+      <point x="29.333333333333258" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.equation.GreaterThanExpr" target="jumpingalien.model.programs.expressions.equation.EquationExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="1129.25" y="198.0" />
+      <point x="1295.125" y="198.0" />
+      <point x="-50.625" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.data.NullExpr" target="jumpingalien.model.programs.expressions.data.DataExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="2437.25" y="208.0" />
+      <point x="2402.25" y="208.0" />
+      <point x="14.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.ReadVarExpr" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="1615.0" y="109.0" />
+      <point x="1883.6333333333334" y="109.0" />
+      <point x="-5.866666666666561" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.IsSlimeExpr" target="jumpingalien.model.programs.expressions.type.TypeExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="3206.75" y="198.0" />
+      <point x="3063.6875" y="198.0" />
+      <point x="21.1875" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.type.IsTileType" target="jumpingalien.model.programs.expressions.type.TypeExpression">
+      <point x="0.0" y="-14.5" />
+      <point x="2989.25" y="208.0" />
+      <point x="3035.4375" y="208.0" />
+      <point x="-7.0625" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.SearchObjExpr" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="2658.71875" y="89.0" />
+      <point x="1907.1" y="89.0" />
+      <point x="17.59999999999991" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.expressions.operator.OperatorExpression" target="jumpingalien.model.programs.Expression">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9" x="1982.3333333333335" y="177.92063492063508" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

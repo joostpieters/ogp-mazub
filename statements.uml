@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>jumpingalien.model.programs.statements</OriginalElement>
+  <nodes>
+    <node x="1196.5" y="257.0">jumpingalien.model.programs.statements.complex.ForEachStatmnt</node>
+    <node x="1367.0" y="178.0">jumpingalien.model.programs.statements.complex.FunctionAssignmentStatmnt</node>
+    <node x="677.0" y="178.0">jumpingalien.model.programs.statements.primitive.StopDuckStatmnt</node>
+    <node x="0.0" y="178.0">jumpingalien.model.programs.statements.primitive.StopJumpStatmnt</node>
+    <node x="1072.5" y="257.0">jumpingalien.model.programs.statements.complex.WhileStatmnt</node>
+    <node x="1571.0" y="178.0">jumpingalien.model.programs.statements.complex.AssignmentStatmnt</node>
+    <node x="1301.25" y="79.0">jumpingalien.model.programs.statements.complex.ComplexStatement</node>
+    <node x="1061.0" y="178.0">jumpingalien.model.programs.statements.complex.ConditionStatmnt</node>
+    <node x="147.0" y="178.0">jumpingalien.model.programs.statements.primitive.StartJumpStatmnt</node>
+    <node x="1208.0" y="178.0">jumpingalien.model.programs.statements.complex.FunctionExeStatmnt</node>
+    <node x="532.0" y="178.0">jumpingalien.model.programs.statements.primitive.StartDuckStatmnt</node>
+    <node x="1455.25" y="79.0">jumpingalien.model.programs.statements.SequenceStatement</node>
+    <node x="1325.25" y="0.0">jumpingalien.model.programs.Statement</node>
+    <node x="971.5" y="257.0">jumpingalien.model.programs.statements.complex.IfStatmnt</node>
+    <node x="294.0" y="178.0">jumpingalien.model.programs.statements.primitive.WaitStatmnt</node>
+    <node x="942.0" y="178.0">jumpingalien.model.programs.statements.primitive.PrintStatmnt</node>
+    <node x="461.75" y="79.0">jumpingalien.model.programs.statements.primitive.PrimitiveStatement</node>
+    <node x="822.0" y="178.0">jumpingalien.model.programs.statements.primitive.StartRunExpr</node>
+    <node x="412.0" y="178.0">jumpingalien.model.programs.statements.primitive.StopRunExpr</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="jumpingalien.model.programs.statements.SequenceStatement" target="jumpingalien.model.programs.Statement">
+      <point x="0.0" y="-14.5" />
+      <point x="1523.75" y="54.0" />
+      <point x="1396.9166666666667" y="54.0" />
+      <point x="28.66666666666667" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.complex.WhileStatmnt" target="jumpingalien.model.programs.statements.complex.ConditionStatmnt">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.complex.FunctionExeStatmnt" target="jumpingalien.model.programs.statements.complex.ComplexStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="1277.5" y="158.0" />
+      <point x="1351.5" y="158.0" />
+      <point x="-16.75" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.primitive.StartRunExpr" target="jumpingalien.model.programs.statements.primitive.PrimitiveStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="872.0" y="138.0" />
+      <point x="569.8125" y="138.0" />
+      <point x="41.5625" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.primitive.WaitStatmnt" target="jumpingalien.model.programs.statements.primitive.PrimitiveStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="343.0" y="148.0" />
+      <point x="503.3125" y="148.0" />
+      <point x="-24.9375" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.complex.AssignmentStatmnt" target="jumpingalien.model.programs.statements.complex.ComplexStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="1639.5" y="148.0" />
+      <point x="1418.5" y="148.0" />
+      <point x="50.25" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.complex.ConditionStatmnt" target="jumpingalien.model.programs.statements.complex.ComplexStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="1124.5" y="148.0" />
+      <point x="1318.0" y="148.0" />
+      <point x="-50.25" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.primitive.StopDuckStatmnt" target="jumpingalien.model.programs.statements.primitive.PrimitiveStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="739.5" y="148.0" />
+      <point x="553.1875" y="148.0" />
+      <point x="24.9375" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.primitive.StartDuckStatmnt" target="jumpingalien.model.programs.statements.primitive.PrimitiveStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="594.5" y="158.0" />
+      <point x="536.5625" y="158.0" />
+      <point x="8.3125" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.primitive.StopRunExpr" target="jumpingalien.model.programs.statements.primitive.PrimitiveStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="462.0" y="158.0" />
+      <point x="519.9375" y="158.0" />
+      <point x="-8.3125" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.primitive.PrimitiveStatement" target="jumpingalien.model.programs.Statement">
+      <point x="0.0" y="-14.5" />
+      <point x="528.25" y="54.0" />
+      <point x="1339.5833333333335" y="54.0" />
+      <point x="-28.666666666666657" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.primitive.PrintStatmnt" target="jumpingalien.model.programs.statements.primitive.PrimitiveStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="991.5" y="128.0" />
+      <point x="586.4375" y="128.0" />
+      <point x="58.1875" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.complex.FunctionAssignmentStatmnt" target="jumpingalien.model.programs.statements.complex.ComplexStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="1459.0" y="158.0" />
+      <point x="1385.0" y="158.0" />
+      <point x="16.75" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.primitive.StartJumpStatmnt" target="jumpingalien.model.programs.statements.primitive.PrimitiveStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="210.5" y="138.0" />
+      <point x="486.6875" y="138.0" />
+      <point x="-41.5625" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.complex.ComplexStatement" target="jumpingalien.model.programs.Statement">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.complex.IfStatmnt" target="jumpingalien.model.programs.statements.complex.ConditionStatmnt">
+      <point x="0.0" y="-14.5" />
+      <point x="1012.0" y="232.0" />
+      <point x="1082.1666666666667" y="232.0" />
+      <point x="-42.33333333333334" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.primitive.StopJumpStatmnt" target="jumpingalien.model.programs.statements.primitive.PrimitiveStatement">
+      <point x="0.0" y="-14.5" />
+      <point x="63.5" y="128.0" />
+      <point x="470.0625" y="128.0" />
+      <point x="-58.1875" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs.statements.complex.ForEachStatmnt" target="jumpingalien.model.programs.statements.complex.ConditionStatmnt">
+      <point x="0.0" y="-14.5" />
+      <point x="1254.5" y="232.0" />
+      <point x="1166.8333333333333" y="232.0" />
+      <point x="42.33333333333334" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6753472222222222" x="854.0" y="-103.33029189278511" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

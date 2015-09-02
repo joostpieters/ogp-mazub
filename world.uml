@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="26.225000000000023" y="79.0">jumpingalien.model.Program</node>
+    <node x="50.5" y="178.0">jumpingalien.model.programs</node>
+    <node x="697.9491969696969" y="178.0">jumpingalien.model.ActiveObject.enVertState</node>
+    <node x="208.28253030303028" y="426.0">jumpingalien.model.Shark</node>
+    <node x="168.66666666666669" y="79.0">jumpingalien.model.CollisionChecker</node>
+    <node x="287.8015909090909" y="178.0">jumpingalien.model.World</node>
+    <node x="283.7825303030303" y="347.0">jumpingalien.model.ActiveObject</node>
+    <node x="403.6666666666667" y="79.0">jumpingalien.model.World.enGameState</node>
+    <node x="374.2825303030303" y="426.0">jumpingalien.model.Plant</node>
+    <node x="315.6666666666667" y="0.0">jumpingalien.model.Tile</node>
+    <node x="309.6666666666667" y="79.0">jumpingalien.model.TileMap</node>
+    <node x="555.9491969696969" y="178.0">jumpingalien.model.IntegratedObject</node>
+    <node x="776.6159848484849" y="426.0">jumpingalien.model.Potion</node>
+    <node x="525.6666666666666" y="79.0">jumpingalien.model.Mazub</node>
+    <node x="467.9491969696969" y="178.0">jumpingalien.model.Buzam</node>
+    <node x="694.5125909090908" y="0.0">jumpingalien.model.ActiveObject.enHorState</node>
+    <node x="289.2825303030303" y="426.0">jumpingalien.model.Worm</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="jumpingalien.model.CollisionChecker" target="jumpingalien.model.ActiveObject">
+      <point x="-45.375" y="14.5" />
+      <point x="183.79166666666669" y="158.0" />
+      <point x="218.87766666666658" y="158.0" />
+      <point x="218.87766666666658" y="287.0" />
+      <point x="324.69162121212116" y="287.0" />
+      <point x="-9.090909090909122" y="-14.5" />
+    </edge>
+    <edge source="jumpingalien.model.Buzam" target="jumpingalien.model.Mazub">
+      <point x="0.0" y="-14.5" />
+      <point x="501.9491969696969" y="158.0" />
+      <point x="559.6666666666666" y="158.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.Plant" target="jumpingalien.model.ActiveObject">
+      <point x="0.0" y="-14.5" />
+      <point x="403.7825303030303" y="406.0" />
+      <point x="346.2825303030303" y="406.0" />
+      <point x="12.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.Potion" target="jumpingalien.model.ActiveObject.enHorState">
+      <point x="16.75" y="-14.5" />
+      <point x="826.8659848484849" y="49.0" />
+      <point x="770.3459242424242" y="49.0" />
+      <point x="30.33333333333337" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.World" target="jumpingalien.model.ActiveObject">
+      <point x="16.0" y="14.5" />
+      <point x="335.8015909090909" y="267.0" />
+      <point x="342.8734393939394" y="267.0" />
+      <point x="9.090909090909065" y="-14.5" />
+    </edge>
+    <edge source="jumpingalien.model.Mazub" target="jumpingalien.model.ActiveObject.enHorState">
+      <point x="0.0" y="-14.5" />
+      <point x="559.6666666666666" y="59.0" />
+      <point x="709.6792575757574" y="59.0" />
+      <point x="-30.33333333333337" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.TileMap" target="jumpingalien.model.Tile">
+      <point x="-18.5" y="-14.5" />
+      <point x="-12.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.ActiveObject" target="jumpingalien.model.ActiveObject.enHorState">
+      <point x="45.45454545454544" y="-14.5" />
+      <point x="379.2370757575758" y="327.0" />
+      <point x="800.4491969696969" y="327.0" />
+      <point x="800.4491969696969" y="59.0" />
+      <point x="740.0125909090908" y="59.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.World" target="jumpingalien.model.TileMap">
+      <point x="5.333333333333314" y="-14.5" />
+      <point x="325.1349242424243" y="128.0" />
+      <point x="346.6666666666667" y="128.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs" target="jumpingalien.model.programs">
+      <point x="-32.5" y="14.5" />
+      <point x="83.0" y="237.0" />
+      <point x="20.5" y="237.0" />
+      <point x="20.5" y="192.5" />
+      <point x="-65.0" y="-0.0" />
+    </edge>
+    <edge source="jumpingalien.model.World" target="jumpingalien.model.World.enGameState">
+      <point x="16.0" y="-14.5" />
+      <point x="335.8015909090909" y="138.0" />
+      <point x="454.6666666666667" y="138.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.ActiveObject" target="jumpingalien.model.IntegratedObject">
+      <point x="18.181818181818187" y="-14.5" />
+      <point x="351.96434848484853" y="297.0" />
+      <point x="616.4491969696969" y="297.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.Potion" target="jumpingalien.model.ActiveObject">
+      <point x="-16.75" y="-14.5" />
+      <point x="793.3659848484849" y="396.0" />
+      <point x="371.2825303030303" y="396.0" />
+      <point x="37.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.ActiveObject" target="jumpingalien.model.Program">
+      <point x="-45.454545454545496" y="-14.5" />
+      <point x="288.3279848484848" y="327.0" />
+      <point x="0.0" y="327.0" />
+      <point x="0.0" y="158.0" />
+      <point x="34.025000000000034" y="158.0" />
+      <point x="-31.19999999999999" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.Worm" target="jumpingalien.model.ActiveObject">
+      <point x="0.0" y="-14.5" />
+      <point x="-12.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.World" target="jumpingalien.model.Mazub">
+      <point x="26.666666666666686" y="-14.5" />
+      <point x="346.46825757575766" y="148.0" />
+      <point x="537.0" y="148.0" />
+      <point x="-22.66666666666663" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs" target="jumpingalien.model.ActiveObject">
+      <point x="54.16666666666663" y="14.5" />
+      <point x="169.66666666666663" y="297.0" />
+      <point x="315.60071212121215" y="297.0" />
+      <point x="-18.181818181818187" y="-14.5" />
+    </edge>
+    <edge source="jumpingalien.model.ActiveObject" target="jumpingalien.model.programs">
+      <point x="-36.363636363636374" y="-14.5" />
+      <point x="297.4188939393939" y="317.0" />
+      <point x="126.33333333333331" y="317.0" />
+      <point x="10.833333333333329" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.CollisionChecker" target="jumpingalien.model.World">
+      <point x="45.375" y="14.5" />
+      <point x="274.5416666666667" y="128.0" />
+      <point x="314.46825757575766" y="128.0" />
+      <point x="-5.333333333333314" y="-14.5" />
+    </edge>
+    <edge source="jumpingalien.model.Program" target="jumpingalien.model.programs">
+      <point x="31.19999999999999" y="14.5" />
+      <point x="96.42500000000001" y="128.0" />
+      <point x="164.25" y="128.0" />
+      <point x="48.75" y="-14.5" />
+    </edge>
+    <edge source="jumpingalien.model.ActiveObject" target="jumpingalien.model.ActiveObject.enVertState">
+      <point x="36.363636363636374" y="-14.5" />
+      <point x="370.14616666666666" y="317.0" />
+      <point x="743.9491969696969" y="317.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.Mazub" target="jumpingalien.model.ActiveObject">
+      <point x="22.66666666666663" y="14.5" />
+      <point x="582.3333333333333" y="158.0" />
+      <point x="687.4491969696969" y="158.0" />
+      <point x="687.4491969696969" y="307.0" />
+      <point x="361.05525757575754" y="307.0" />
+      <point x="27.272727272727252" y="-14.5" />
+    </edge>
+    <edge source="jumpingalien.model.Shark" target="jumpingalien.model.ActiveObject">
+      <point x="0.0" y="-14.5" />
+      <point x="238.78253030303028" y="406.0" />
+      <point x="296.2825303030303" y="406.0" />
+      <point x="-37.5" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.programs" target="jumpingalien.model.Program">
+      <point x="-48.75" y="-14.5" />
+      <point x="66.75" y="158.0" />
+      <point x="49.625" y="158.0" />
+      <point x="-15.599999999999994" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.World" target="jumpingalien.model.CollisionChecker">
+      <point x="-26.66666666666663" y="-14.5" />
+      <point x="293.1349242424243" y="148.0" />
+      <point x="214.04166666666669" y="148.0" />
+      <point x="-15.125" y="14.5" />
+    </edge>
+    <edge source="jumpingalien.model.ActiveObject" target="jumpingalien.model.World">
+      <point x="0.0" y="-14.5" />
+      <point x="333.7825303030303" y="277.0" />
+      <point x="303.8015909090909" y="277.0" />
+      <point x="-16.0" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.2000000000000002" x="451.24999999999994" y="248.34090909090924" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
