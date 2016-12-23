@@ -1,0 +1,108 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LogicalExpression</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.model.programs.expressions.logical</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LogicalExpression (jumpingalien.model.programs.expressions.logical)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LogicalExpression</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.model.programs.expressions.logical;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import jumpingalien.model.programs.Environment;
+<i>4</i>&nbsp;import jumpingalien.model.programs.Expression;
+<i>5</i>&nbsp;import jumpingalien.part3.programs.SourceLocation;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public abstract class LogicalExpression extends Expression&lt;Boolean&gt;
+<i>8</i>&nbsp;{
+<i>9</i>&nbsp;	private final Expression&lt;Boolean&gt; exprOne;
+<i>10</i>&nbsp;	private final Expression&lt;Boolean&gt; exprTwo;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;	LogicalExpression(SourceLocation source, Expression&lt;Boolean&gt; expr1, Expression&lt;Boolean&gt; expr2)
+<i>13</i>&nbsp;	{
+<b class="nc"><i>14</i>&nbsp;		super(source);</b>
+<b class="nc"><i>15</i>&nbsp;		exprOne = expr1;</b>
+<b class="nc"><i>16</i>&nbsp;		exprTwo = expr2;</b>
+<b class="nc"><i>17</i>&nbsp;	}</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;	protected abstract Boolean exec(boolean bool1, boolean bool2);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;	public Boolean getValue(Environment env)
+<i>22</i>&nbsp;	{
+<b class="nc"><i>23</i>&nbsp;		return exec(exprOne.getValue(env), exprTwo.getValue(env));</b>
+<i>24</i>&nbsp;	}
+<i>25</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

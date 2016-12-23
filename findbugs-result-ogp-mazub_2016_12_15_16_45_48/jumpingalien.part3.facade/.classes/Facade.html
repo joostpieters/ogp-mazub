@@ -1,0 +1,951 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Facade</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part3.facade</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Facade (jumpingalien.part3.facade)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Facade</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    4.8%
+  </span>
+  <span class="absValue">
+    (3/ 62)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    7.4%
+  </span>
+  <span class="absValue">
+    (6/ 81)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part3.facade;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import jumpingalien.model.*;
+<i>4</i>&nbsp;import jumpingalien.model.programs.Factory;
+<i>5</i>&nbsp;import jumpingalien.part2.facade.IFacadePart2;
+<i>6</i>&nbsp;import jumpingalien.part3.programs.ParseOutcome;
+<i>7</i>&nbsp;import jumpingalien.part3.programs.ProgramParser;
+<i>8</i>&nbsp;import jumpingalien.util.ModelException;
+<i>9</i>&nbsp;import jumpingalien.util.Sprite;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import java.util.Collection;
+<i>12</i>&nbsp;import java.util.Optional;
+<i>13</i>&nbsp;
+<b class="fc"><i>14</i>&nbsp;public class Facade implements IFacadePart3</b>
+<i>15</i>&nbsp;{
+<i>16</i>&nbsp;	/**
+<i>17</i>&nbsp;	 * Returns the current number of hitpoints of the given alien.
+<i>18</i>&nbsp;	 *
+<i>19</i>&nbsp;	 * @param alien
+<i>20</i>&nbsp;	 */
+<i>21</i>&nbsp;	@Override
+<i>22</i>&nbsp;	public int getNbHitPoints(Mazub alien)
+<i>23</i>&nbsp;	{
+<b class="nc"><i>24</i>&nbsp;		return alien.getHealth();</b>
+<i>25</i>&nbsp;	}
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;	/**
+<i>28</i>&nbsp;	 * Create a new game world with the given parameters.
+<i>29</i>&nbsp;	 *
+<i>30</i>&nbsp;	 * @param tileSize            Length (in pixels) of a side of each square tile in the world
+<i>31</i>&nbsp;	 * @param nbTilesX            Number of tiles in the horizontal direction
+<i>32</i>&nbsp;	 * @param nbTilesY            Number of tiles in the vertical direction
+<i>33</i>&nbsp;	 * @param visibleWindowWidth  Width of the visible window, in pixels
+<i>34</i>&nbsp;	 * @param visibleWindowHeight Height of the visible window, in pixels
+<i>35</i>&nbsp;	 * @param targetTileX         Tile x-coordinate of the target tile of the created world
+<i>36</i>&nbsp;	 * @param targetTileY
+<i>37</i>&nbsp;	 */
+<i>38</i>&nbsp;	@Override
+<i>39</i>&nbsp;	public World createWorld(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight, int targetTileX, int targetTileY)
+<i>40</i>&nbsp;	{
+<b class="nc"><i>41</i>&nbsp;		return new World(tileSize, nbTilesX, nbTilesY, visibleWindowWidth, visibleWindowHeight, targetTileX, targetTileY);</b>
+<i>42</i>&nbsp;	}
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;	/**
+<i>45</i>&nbsp;	 * Returns the size of the given game world, in number of pixels.
+<i>46</i>&nbsp;	 *
+<i>47</i>&nbsp;	 * @param world The world for which to return the size.
+<i>48</i>&nbsp;	 * @return The size of the game world, in pixels, as an array of two
+<i>49</i>&nbsp;	 * elements: width (X) and height (Y), in that order.
+<i>50</i>&nbsp;	 */
+<i>51</i>&nbsp;	@Override
+<i>52</i>&nbsp;	public int[] getWorldSizeInPixels(World world)
+<i>53</i>&nbsp;	{
+<b class="nc"><i>54</i>&nbsp;		return world.getWorldSizeInPixel();</b>
+<i>55</i>&nbsp;	}
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;	/**
+<i>58</i>&nbsp;	 * Returns the length of a square tile side in the given world.
+<i>59</i>&nbsp;	 *
+<i>60</i>&nbsp;	 * @param world The game world for which to retrieve the tile length
+<i>61</i>&nbsp;	 * @return The length of a square tile side, expressed as a number of
+<i>62</i>&nbsp;	 * pixels.
+<i>63</i>&nbsp;	 */
+<i>64</i>&nbsp;	@Override
+<i>65</i>&nbsp;	public int getTileLength(World world)
+<i>66</i>&nbsp;	{
+<b class="nc"><i>67</i>&nbsp;		return world.getTileSize();</b>
+<i>68</i>&nbsp;	}
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;	/**
+<i>71</i>&nbsp;	 * Starts the game that is played in the given world.
+<i>72</i>&nbsp;	 * After this method has been invoked, no further game objects will be added
+<i>73</i>&nbsp;	 * via {@link IFacadePart2#addPlant(World, Plant)},
+<i>74</i>&nbsp;	 * {@link IFacadePart2#addShark(World, Shark)},
+<i>75</i>&nbsp;	 * {@link IFacadePart2#addSlime(World, Slime)}, or
+<i>76</i>&nbsp;	 * {@link IFacadePart2#setMazub(World, Mazub)}), and no geological features
+<i>77</i>&nbsp;	 * will be changed via
+<i>78</i>&nbsp;	 * {@link IFacadePart2#setGeologicalFeature(World, int, int, int)}.
+<i>79</i>&nbsp;	 *
+<i>80</i>&nbsp;	 * @param world
+<i>81</i>&nbsp;	 */
+<i>82</i>&nbsp;	@Override
+<i>83</i>&nbsp;	public void startGame(World world)
+<i>84</i>&nbsp;	{
+<b class="nc"><i>85</i>&nbsp;		world.startGame();</b>
+<b class="nc"><i>86</i>&nbsp;	}</b>
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;	/**
+<i>89</i>&nbsp;	 * Returns whether the game, played in the given game world, is over.
+<i>90</i>&nbsp;	 * The game is over when Mazub has died, or has reached the target tile.
+<i>91</i>&nbsp;	 *
+<i>92</i>&nbsp;	 * @param world The world for which to check whether the game is over
+<i>93</i>&nbsp;	 * @return true if the game is over, false otherwise.
+<i>94</i>&nbsp;	 */
+<i>95</i>&nbsp;	@Override
+<i>96</i>&nbsp;	public boolean isGameOver(World world)
+<i>97</i>&nbsp;	{
+<b class="nc"><i>98</i>&nbsp;		return world.isGameOver();</b>
+<i>99</i>&nbsp;	}
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;	/**
+<i>102</i>&nbsp;	 * Returns whether the game played in the given world has finished and the
+<i>103</i>&nbsp;	 * player has won. The player wins when Mazub has reached the target tile.
+<i>104</i>&nbsp;	 *
+<i>105</i>&nbsp;	 * @param world The world for which to check whether the player won
+<i>106</i>&nbsp;	 * @return true if the game is over and the player has won; false otherwise.
+<i>107</i>&nbsp;	 */
+<i>108</i>&nbsp;	@Override
+<i>109</i>&nbsp;	public boolean didPlayerWin(World world)
+<i>110</i>&nbsp;	{
+<b class="nc"><i>111</i>&nbsp;		return world.didPlayerWin();</b>
+<i>112</i>&nbsp;	}
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;	/**
+<i>115</i>&nbsp;	 * Advance the time for the world and all its objects by the given amount.
+<i>116</i>&nbsp;	 * &lt;p&gt;
+<i>117</i>&nbsp;	 * This method replaces {@link IFacadePart2#advanceTime(Mazub, double)}.
+<i>118</i>&nbsp;	 *
+<i>119</i>&nbsp;	 * @param world The world whose time needs to advance
+<i>120</i>&nbsp;	 * @param dt    The time interval (in seconds) by which to advance the given
+<i>121</i>&nbsp;	 */
+<i>122</i>&nbsp;	@Override
+<i>123</i>&nbsp;	public void advanceTime(World world, double dt)
+<i>124</i>&nbsp;	{
+<b class="nc"><i>125</i>&nbsp;		world.advanceTime(dt);</b>
+<b class="nc"><i>126</i>&nbsp;	}</b>
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;	/**
+<i>129</i>&nbsp;	 * Create an instance of Mazub.
+<i>130</i>&nbsp;	 *
+<i>131</i>&nbsp;	 * @param pixelLeftX   The x-location of Mazub&#39;s bottom left pixel.
+<i>132</i>&nbsp;	 * @param pixelBottomY The y-location of Mazub&#39;s bottom left pixel.
+<i>133</i>&nbsp;	 * @param sprites      The array of sprite images for Mazub.
+<i>134</i>&nbsp;	 * @return
+<i>135</i>&nbsp;	 */
+<i>136</i>&nbsp;	@Override
+<i>137</i>&nbsp;	public Mazub createMazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites)
+<i>138</i>&nbsp;	{
+<b class="nc"><i>139</i>&nbsp;		return new Mazub(pixelLeftX, pixelBottomY, sprites);</b>
+<i>140</i>&nbsp;	}
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;	/**
+<i>143</i>&nbsp;	 * Return the current location of the given alien.
+<i>144</i>&nbsp;	 *
+<i>145</i>&nbsp;	 * @param alien The alien of which to get the location.
+<i>146</i>&nbsp;	 * @return an array, consisting of 2 integers {x, y}, that represents the
+<i>147</i>&nbsp;	 * coordinates of the given alien&#39;s bottom left pixel in the world.
+<i>148</i>&nbsp;	 */
+<i>149</i>&nbsp;	@Override
+<i>150</i>&nbsp;	public int[] getLocation(Mazub alien)
+<i>151</i>&nbsp;	{
+<b class="nc"><i>152</i>&nbsp;		return alien.getLocation();</b>
+<i>153</i>&nbsp;	}
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;	/**
+<i>156</i>&nbsp;	 * Return the current velocity (in m/s) of the given alien.
+<i>157</i>&nbsp;	 *
+<i>158</i>&nbsp;	 * @param alien The alien of which to get the velocity.
+<i>159</i>&nbsp;	 * @return an array, consisting of 2 doubles {vx, vy}, that represents the
+<i>160</i>&nbsp;	 * horizontal and vertical components of the given alien&#39;s current
+<i>161</i>&nbsp;	 * velocity, in units of m/s.
+<i>162</i>&nbsp;	 */
+<i>163</i>&nbsp;	@Override
+<i>164</i>&nbsp;	public double[] getVelocity(Mazub alien)
+<i>165</i>&nbsp;	{
+<b class="nc"><i>166</i>&nbsp;		return alien.getVelocity();</b>
+<i>167</i>&nbsp;	}
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;	/**
+<i>170</i>&nbsp;	 * Return the current acceleration (in m/s^2) of the given alien.
+<i>171</i>&nbsp;	 *
+<i>172</i>&nbsp;	 * @param alien The alien of which to get the acceleration.
+<i>173</i>&nbsp;	 * @return an array, consisting of 2 doubles {ax, ay}, that represents the
+<i>174</i>&nbsp;	 * horizontal and vertical components of the given alien&#39;s current
+<i>175</i>&nbsp;	 * acceleration, in units of m/s^2.
+<i>176</i>&nbsp;	 */
+<i>177</i>&nbsp;	@Override
+<i>178</i>&nbsp;	public double[] getAcceleration(Mazub alien)
+<i>179</i>&nbsp;	{
+<b class="nc"><i>180</i>&nbsp;		return alien.getAcceleration();</b>
+<i>181</i>&nbsp;	}
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;	/**
+<i>184</i>&nbsp;	 * Return the current size of the given alien.
+<i>185</i>&nbsp;	 *
+<i>186</i>&nbsp;	 * @param alien The alien of which to get the size.
+<i>187</i>&nbsp;	 * @return An array, consisting of 2 integers {w, h}, that represents the
+<i>188</i>&nbsp;	 * current width and height of the given alien, in number of pixels.
+<i>189</i>&nbsp;	 */
+<i>190</i>&nbsp;	@Override
+<i>191</i>&nbsp;	public int[] getSize(Mazub alien)
+<i>192</i>&nbsp;	{
+<b class="nc"><i>193</i>&nbsp;		return alien.getSize();</b>
+<i>194</i>&nbsp;	}
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;	public Sprite getCurrentSprite(Mazub alien)
+<i>197</i>&nbsp;	{
+<b class="nc"><i>198</i>&nbsp;		return alien.getCurrentSprite();</b>
+<i>199</i>&nbsp;	}
+<i>200</i>&nbsp;
+<i>201</i>&nbsp;	/**
+<i>202</i>&nbsp;	 * Make the given alien jump.
+<i>203</i>&nbsp;	 *
+<i>204</i>&nbsp;	 * @param alien The alien that has to start jumping.
+<i>205</i>&nbsp;	 */
+<i>206</i>&nbsp;	@Override
+<i>207</i>&nbsp;	public void startJump(Mazub alien)
+<i>208</i>&nbsp;	{
+<b class="nc"><i>209</i>&nbsp;		alien.startJump();</b>
+<b class="nc"><i>210</i>&nbsp;	}</b>
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;	/**
+<i>213</i>&nbsp;	 * End the given alien&#39;s jump.
+<i>214</i>&nbsp;	 *
+<i>215</i>&nbsp;	 * @param alien The alien that has to stop jumping.
+<i>216</i>&nbsp;	 */
+<i>217</i>&nbsp;	@Override
+<i>218</i>&nbsp;	public void endJump(Mazub alien)
+<i>219</i>&nbsp;	{
+<b class="nc"><i>220</i>&nbsp;		alien.endJump();</b>
+<b class="nc"><i>221</i>&nbsp;	}</b>
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;	/**
+<i>224</i>&nbsp;	 * Make the given alien move left.
+<i>225</i>&nbsp;	 *
+<i>226</i>&nbsp;	 * @param alien The alien that has to start moving left.
+<i>227</i>&nbsp;	 */
+<i>228</i>&nbsp;	@Override
+<i>229</i>&nbsp;	public void startMoveLeft(Mazub alien)
+<i>230</i>&nbsp;	{
+<b class="nc"><i>231</i>&nbsp;		alien.startMoveLeft();</b>
+<b class="nc"><i>232</i>&nbsp;	}</b>
+<i>233</i>&nbsp;
+<i>234</i>&nbsp;	/**
+<i>235</i>&nbsp;	 * End the given alien&#39;s left move.
+<i>236</i>&nbsp;	 *
+<i>237</i>&nbsp;	 * @param alien The alien that has to stop moving left.
+<i>238</i>&nbsp;	 */
+<i>239</i>&nbsp;	@Override
+<i>240</i>&nbsp;	public void endMoveLeft(Mazub alien)
+<i>241</i>&nbsp;	{
+<b class="nc"><i>242</i>&nbsp;		alien.endHorMove();</b>
+<b class="nc"><i>243</i>&nbsp;	}</b>
+<i>244</i>&nbsp;
+<i>245</i>&nbsp;	/**
+<i>246</i>&nbsp;	 * Make the given alien move right.
+<i>247</i>&nbsp;	 *
+<i>248</i>&nbsp;	 * @param alien The alien that has to start moving right.
+<i>249</i>&nbsp;	 */
+<i>250</i>&nbsp;	@Override
+<i>251</i>&nbsp;	public void startMoveRight(Mazub alien)
+<i>252</i>&nbsp;	{
+<b class="nc"><i>253</i>&nbsp;		alien.startMoveRight();</b>
+<b class="nc"><i>254</i>&nbsp;	}</b>
+<i>255</i>&nbsp;
+<i>256</i>&nbsp;	/**
+<i>257</i>&nbsp;	 * End the given alien&#39;s right move.
+<i>258</i>&nbsp;	 *
+<i>259</i>&nbsp;	 * @param alien The alien that has to stop moving right.
+<i>260</i>&nbsp;	 */
+<i>261</i>&nbsp;	@Override
+<i>262</i>&nbsp;	public void endMoveRight(Mazub alien)
+<i>263</i>&nbsp;	{
+<b class="nc"><i>264</i>&nbsp;		alien.endHorMove();</b>
+<b class="nc"><i>265</i>&nbsp;	}</b>
+<i>266</i>&nbsp;
+<i>267</i>&nbsp;	/**
+<i>268</i>&nbsp;	 * Make the given alien duck.
+<i>269</i>&nbsp;	 *
+<i>270</i>&nbsp;	 * @param alien The alien that has to start ducking.
+<i>271</i>&nbsp;	 */
+<i>272</i>&nbsp;	@Override
+<i>273</i>&nbsp;	public void startDuck(Mazub alien)
+<i>274</i>&nbsp;	{
+<b class="nc"><i>275</i>&nbsp;		alien.startDuck();</b>
+<b class="nc"><i>276</i>&nbsp;	}</b>
+<i>277</i>&nbsp;
+<i>278</i>&nbsp;	/**
+<i>279</i>&nbsp;	 * End the given alien&#39;s ducking.
+<i>280</i>&nbsp;	 *
+<i>281</i>&nbsp;	 * @param alien The alien that has to stop ducking.
+<i>282</i>&nbsp;	 */
+<i>283</i>&nbsp;	@Override
+<i>284</i>&nbsp;	public void endDuck(Mazub alien)
+<i>285</i>&nbsp;	{
+<b class="nc"><i>286</i>&nbsp;		alien.endDuck();</b>
+<b class="nc"><i>287</i>&nbsp;	}</b>
+<i>288</i>&nbsp;
+<i>289</i>&nbsp;	/**
+<i>290</i>&nbsp;	 * @param alien
+<i>291</i>&nbsp;	 * @param dt
+<i>292</i>&nbsp;	 * @deprecated This method no longer needs to be implemented in your facade.
+<i>293</i>&nbsp;	 * It has been replaced by
+<i>294</i>&nbsp;	 * {@link IFacadePart2#advanceTime(World, double)}.
+<i>295</i>&nbsp;	 */
+<i>296</i>&nbsp;	@Override
+<i>297</i>&nbsp;	public void advanceTime(Mazub alien, double dt)
+<i>298</i>&nbsp;	{
+<b class="nc"><i>299</i>&nbsp;		alien.advanceTime(dt);</b>
+<b class="nc"><i>300</i>&nbsp;	}</b>
+<i>301</i>&nbsp;
+<i>302</i>&nbsp;	/**
+<i>303</i>&nbsp;	 * Return the coordinates of the rectangular visible window that moves
+<i>304</i>&nbsp;	 * together with Mazub.
+<i>305</i>&nbsp;	 *
+<i>306</i>&nbsp;	 * @param world
+<i>307</i>&nbsp;	 * @return The pixel coordinates of the visible window, in the order
+<i>308</i>&nbsp;	 * &lt;b&gt;left, bottom, right, top&lt;/b&gt;.
+<i>309</i>&nbsp;	 */
+<i>310</i>&nbsp;	@Override
+<i>311</i>&nbsp;	public int[] getVisibleWindow(World world)
+<i>312</i>&nbsp;	{
+<b class="nc"><i>313</i>&nbsp;		return world.getVisibleWindow();</b>
+<i>314</i>&nbsp;	}
+<i>315</i>&nbsp;
+<i>316</i>&nbsp;	/**
+<i>317</i>&nbsp;	 * Returns the bottom left pixel coordinate of the tile at the given tile
+<i>318</i>&nbsp;	 * position.
+<i>319</i>&nbsp;	 *
+<i>320</i>&nbsp;	 * @param world The world from which to retrieve the tile.
+<i>321</i>&nbsp;	 * @param tileX The x-position x_T of the tile
+<i>322</i>&nbsp;	 * @param tileY The y-position y_T of the tile
+<i>323</i>&nbsp;	 * @return An array which contains the x-coordinate and y-coordinate of the
+<i>324</i>&nbsp;	 * bottom left pixel of the given tile, in that order.
+<i>325</i>&nbsp;	 */
+<i>326</i>&nbsp;	@Override
+<i>327</i>&nbsp;	public int[] getBottomLeftPixelOfTile(World world, int tileX, int tileY)
+<i>328</i>&nbsp;	{
+<b class="nc"><i>329</i>&nbsp;		return world.getTileInArrPoss(tileX, tileY).getLocation();</b>
+<i>330</i>&nbsp;	}
+<i>331</i>&nbsp;
+<i>332</i>&nbsp;	/**
+<i>333</i>&nbsp;	 * Returns the tile positions of all tiles within the given rectangular
+<i>334</i>&nbsp;	 * region.
+<i>335</i>&nbsp;	 *
+<i>336</i>&nbsp;	 * @param world       The world from which the tile positions should be returned.
+<i>337</i>&nbsp;	 * @param pixelLeft   The x-coordinate of the left side of the rectangular region.
+<i>338</i>&nbsp;	 * @param pixelBottom The y-coordinate of the bottom side of the rectangular region.
+<i>339</i>&nbsp;	 * @param pixelRight  The x-coordinate of the right side of the rectangular region.
+<i>340</i>&nbsp;	 * @param pixelTop    The y-coordinate of the top side of the rectangular region.
+<i>341</i>&nbsp;	 * @return An array of tile positions, where each position (x_T, y_T) is
+<i>342</i>&nbsp;	 * represented as an array of 2 elements, containing the horizontal
+<i>343</i>&nbsp;	 * (x_T) and vertical (y_T) coordinate of a tile in that order.
+<i>344</i>&nbsp;	 * The returned array is ordered from left to right,
+<i>345</i>&nbsp;	 * bottom to top: all positions of the bottom row (ordered from
+<i>346</i>&nbsp;	 * small to large x_T) precede the positions of the row above that.
+<i>347</i>&nbsp;	 */
+<i>348</i>&nbsp;	@Override
+<i>349</i>&nbsp;	public int[][] getTilePositionsIn(World world, int pixelLeft, int pixelBottom, int pixelRight, int pixelTop)
+<i>350</i>&nbsp;	{
+<b class="nc"><i>351</i>&nbsp;		return world.getTilePositionInArray(pixelLeft, pixelBottom, pixelRight, pixelTop);</b>
+<i>352</i>&nbsp;	}
+<i>353</i>&nbsp;
+<i>354</i>&nbsp;	/**
+<i>355</i>&nbsp;	 * Returns the geological feature of the tile with its bottom left pixel at
+<i>356</i>&nbsp;	 * the given position.
+<i>357</i>&nbsp;	 *
+<i>358</i>&nbsp;	 * @param world  The world containing the tile for which the
+<i>359</i>&nbsp;	 *               geological feature should be returned.
+<i>360</i>&nbsp;	 * @param pixelX The x-position of the pixel at the bottom left of the tile for
+<i>361</i>&nbsp;	 *               which the geological feature should be returned.
+<i>362</i>&nbsp;	 * @param pixelY The y-position of the pixel at the bottom left of the tile for
+<i>363</i>&nbsp;	 *               which the geological feature should be returned.
+<i>364</i>&nbsp;	 * @return The type of the tile with the given bottom left pixel position,
+<i>365</i>&nbsp;	 * where
+<i>366</i>&nbsp;	 * &lt;ul&gt;
+<i>367</i>&nbsp;	 * &lt;li&gt;the value 0 is returned for an &lt;b&gt;air&lt;/b&gt; tile;&lt;/li&gt;
+<i>368</i>&nbsp;	 * &lt;li&gt;the value 1 is returned for a &lt;b&gt;solid ground&lt;/b&gt; tile;&lt;/li&gt;
+<i>369</i>&nbsp;	 * &lt;li&gt;the value 2 is returned for a &lt;b&gt;water&lt;/b&gt; tile;&lt;/li&gt;
+<i>370</i>&nbsp;	 * &lt;li&gt;the value 3 is returned for a &lt;b&gt;magma&lt;/b&gt; tile.&lt;/li&gt;
+<i>371</i>&nbsp;	 * &lt;/ul&gt;
+<i>372</i>&nbsp;	 * @note This method must return its result in constant time.
+<i>373</i>&nbsp;	 * @throw ModelException if the given position does not correspond to the
+<i>374</i>&nbsp;	 * bottom left pixel of a tile.
+<i>375</i>&nbsp;	 */
+<i>376</i>&nbsp;	@Override
+<i>377</i>&nbsp;	public int getGeologicalFeature(World world, int pixelX, int pixelY) throws ModelException
+<i>378</i>&nbsp;	{
+<b class="nc"><i>379</i>&nbsp;		return world.getGeologicalFeature(pixelX, pixelY);</b>
+<i>380</i>&nbsp;	}
+<i>381</i>&nbsp;
+<i>382</i>&nbsp;	/**
+<i>383</i>&nbsp;	 * Modify the geological type of a specific tile in the given world to a
+<i>384</i>&nbsp;	 * given type.
+<i>385</i>&nbsp;	 *
+<i>386</i>&nbsp;	 * @param world    The world in which the geological type of a tile needs to be
+<i>387</i>&nbsp;	 *                 modified
+<i>388</i>&nbsp;	 * @param tileX    The x-position x_T of the tile for which the type needs to be
+<i>389</i>&nbsp;	 *                 modified
+<i>390</i>&nbsp;	 * @param tileY    The y-position y_T of the tile for which the type needs to be
+<i>391</i>&nbsp;	 *                 modified
+<i>392</i>&nbsp;	 * @param tileType The new type for the given tile, where
+<i>393</i>&nbsp;	 *                 &lt;ul&gt;
+<i>394</i>&nbsp;	 *                 &lt;li&gt;the value 0 is provided for an &lt;b&gt;air&lt;/b&gt; tile;&lt;/li&gt;
+<i>395</i>&nbsp;	 *                 &lt;li&gt;the value 1 is provided for a &lt;b&gt;solid ground&lt;/b&gt; tile;&lt;/li&gt;
+<i>396</i>&nbsp;	 *                 &lt;li&gt;the value 2 is provided for a &lt;b&gt;water&lt;/b&gt; tile;&lt;/li&gt;
+<i>397</i>&nbsp;	 *                 &lt;li&gt;the value 3 is provided for a &lt;b&gt;magma&lt;/b&gt; tile.&lt;/li&gt;
+<i>398</i>&nbsp;	 */
+<i>399</i>&nbsp;	@Override
+<i>400</i>&nbsp;	public void setGeologicalFeature(World world, int tileX, int tileY, int tileType)
+<i>401</i>&nbsp;	{
+<b class="nc"><i>402</i>&nbsp;		world.setGeoFeature(tileX, tileY, tileType);</b>
+<b class="nc"><i>403</i>&nbsp;	}</b>
+<i>404</i>&nbsp;
+<i>405</i>&nbsp;	/**
+<i>406</i>&nbsp;	 * Sets the given alien as the player&#39;s character in the given world.
+<i>407</i>&nbsp;	 *
+<i>408</i>&nbsp;	 * @param world The world for which to set the player&#39;s character.
+<i>409</i>&nbsp;	 * @param alien
+<i>410</i>&nbsp;	 */
+<i>411</i>&nbsp;	@Override
+<i>412</i>&nbsp;	public void setMazub(World world, Mazub alien)
+<i>413</i>&nbsp;	{
+<b class="nc"><i>414</i>&nbsp;		world.setMazub(alien);</b>
+<b class="nc"><i>415</i>&nbsp;	}</b>
+<i>416</i>&nbsp;
+<i>417</i>&nbsp;	/**
+<i>418</i>&nbsp;	 * Returns whether the given alien is currently immune against enemies (see
+<i>419</i>&nbsp;	 * section 1.2.5 of the assignment).
+<i>420</i>&nbsp;	 *
+<i>421</i>&nbsp;	 * @param alien The alien for which to retrieve the immunity status.
+<i>422</i>&nbsp;	 * @return True if the given alien is immune against other enemies (i.e.,
+<i>423</i>&nbsp;	 * there are no interactions between the alien and enemy objects).
+<i>424</i>&nbsp;	 */
+<i>425</i>&nbsp;	@Override
+<i>426</i>&nbsp;	public boolean isImmune(Mazub alien)
+<i>427</i>&nbsp;	{
+<b class="nc"><i>428</i>&nbsp;		return alien.isImune();</b>
+<i>429</i>&nbsp;	}
+<i>430</i>&nbsp;
+<i>431</i>&nbsp;	/**
+<i>432</i>&nbsp;	 * Creates a new plant, located at the provided pixel location (x, y).
+<i>433</i>&nbsp;	 * The returned plant should not belong to a world.
+<i>434</i>&nbsp;	 *
+<i>435</i>&nbsp;	 * @param x       The x-coordinate of the plant&#39;s initial position
+<i>436</i>&nbsp;	 * @param y       The y-coordinate of the plant&#39;s initial position
+<i>437</i>&nbsp;	 * @param sprites An array of sprites for the new plant
+<i>438</i>&nbsp;	 * @return A new plant, located at the provided location. The returned plant
+<i>439</i>&nbsp;	 * should not belong to a world.
+<i>440</i>&nbsp;	 */
+<i>441</i>&nbsp;	@Override
+<i>442</i>&nbsp;	public Plant createPlant(int x, int y, Sprite[] sprites)
+<i>443</i>&nbsp;	{
+<b class="nc"><i>444</i>&nbsp;		return new Plant(x, y, sprites);</b>
+<i>445</i>&nbsp;	}
+<i>446</i>&nbsp;
+<i>447</i>&nbsp;	/**
+<i>448</i>&nbsp;	 * Add the given plant as a game object to the given world.
+<i>449</i>&nbsp;	 *
+<i>450</i>&nbsp;	 * @param world The world to which the plant should be added.
+<i>451</i>&nbsp;	 * @param plant
+<i>452</i>&nbsp;	 */
+<i>453</i>&nbsp;	@Override
+<i>454</i>&nbsp;	public void addPlant(World world, Plant plant)
+<i>455</i>&nbsp;	{
+<b class="nc"><i>456</i>&nbsp;		world.addObject(plant);</b>
+<b class="nc"><i>457</i>&nbsp;	}</b>
+<i>458</i>&nbsp;
+<i>459</i>&nbsp;	/**
+<i>460</i>&nbsp;	 * Returns all the plants currently located in the given world.
+<i>461</i>&nbsp;	 *
+<i>462</i>&nbsp;	 * @param world The world for which to retrieve all plants.
+<i>463</i>&nbsp;	 * @return All plants that are located somewhere in the given world. There
+<i>464</i>&nbsp;	 * are no restrictions on the type or order of the returned
+<i>465</i>&nbsp;	 * collection, but each plant may only be returned once.
+<i>466</i>&nbsp;	 */
+<i>467</i>&nbsp;	@Override
+<i>468</i>&nbsp;	public Collection&lt;Plant&gt; getPlants(World world)
+<i>469</i>&nbsp;	{
+<b class="nc"><i>470</i>&nbsp;		return (Collection&lt;Plant&gt;) world.getCollection(Plant.class);</b>
+<i>471</i>&nbsp;	}
+<i>472</i>&nbsp;
+<i>473</i>&nbsp;	/**
+<i>474</i>&nbsp;	 * Returns the current location of the given plant.
+<i>475</i>&nbsp;	 *
+<i>476</i>&nbsp;	 * @param plant The plant of which to find the location
+<i>477</i>&nbsp;	 * @return An array, consisting of 2 integers {x, y}, that represents the
+<i>478</i>&nbsp;	 * coordinates of the given plant&#39;s bottom left pixel in the world.
+<i>479</i>&nbsp;	 */
+<i>480</i>&nbsp;	@Override
+<i>481</i>&nbsp;	public int[] getLocation(Plant plant)
+<i>482</i>&nbsp;	{
+<b class="nc"><i>483</i>&nbsp;		return plant.getLocation();</b>
+<i>484</i>&nbsp;	}
+<i>485</i>&nbsp;
+<i>486</i>&nbsp;	/**
+<i>487</i>&nbsp;	 * Return the current sprite image for the given plant.
+<i>488</i>&nbsp;	 *
+<i>489</i>&nbsp;	 * @param plant The plant for which to get the current sprite image.
+<i>490</i>&nbsp;	 * @return The current sprite image for the given plant, determined by its
+<i>491</i>&nbsp;	 * orientation as defined in the assignment.
+<i>492</i>&nbsp;	 */
+<i>493</i>&nbsp;	@Override
+<i>494</i>&nbsp;	public Sprite getCurrentSprite(Plant plant)
+<i>495</i>&nbsp;	{
+<b class="nc"><i>496</i>&nbsp;		return plant.getCurrentSprite();</b>
+<i>497</i>&nbsp;	}
+<i>498</i>&nbsp;
+<i>499</i>&nbsp;	/**
+<i>500</i>&nbsp;	 * Creates a new shark, located at the provided pixel location (x, y).
+<i>501</i>&nbsp;	 * The returned shark should not belong to a world.
+<i>502</i>&nbsp;	 *
+<i>503</i>&nbsp;	 * @param x       The x-coordinate of the shark&#39;s initial position
+<i>504</i>&nbsp;	 * @param y       The y-coordinate of the shark&#39;s initial position
+<i>505</i>&nbsp;	 * @param sprites An array of sprites for the new shark
+<i>506</i>&nbsp;	 * @return A new shark, located at the provided location. The returned shark
+<i>507</i>&nbsp;	 * should not belong to a world.
+<i>508</i>&nbsp;	 */
+<i>509</i>&nbsp;	@Override
+<i>510</i>&nbsp;	public Shark createShark(int x, int y, Sprite[] sprites)
+<i>511</i>&nbsp;	{
+<b class="nc"><i>512</i>&nbsp;		return new Shark(x, y, sprites);</b>
+<i>513</i>&nbsp;	}
+<i>514</i>&nbsp;
+<i>515</i>&nbsp;	/**
+<i>516</i>&nbsp;	 * Add the given shark as a game object to the given world.
+<i>517</i>&nbsp;	 *
+<i>518</i>&nbsp;	 * @param world The world to which the shark should be added.
+<i>519</i>&nbsp;	 * @param shark
+<i>520</i>&nbsp;	 */
+<i>521</i>&nbsp;	@Override
+<i>522</i>&nbsp;	public void addShark(World world, Shark shark)
+<i>523</i>&nbsp;	{
+<b class="nc"><i>524</i>&nbsp;		world.addObject(shark);</b>
+<b class="nc"><i>525</i>&nbsp;	}</b>
+<i>526</i>&nbsp;
+<i>527</i>&nbsp;	/**
+<i>528</i>&nbsp;	 * Returns all the sharks currently located in the given world.
+<i>529</i>&nbsp;	 *
+<i>530</i>&nbsp;	 * @param world The world for which to retrieve all sharks.
+<i>531</i>&nbsp;	 * @return All sharks that are located somewhere in the given world. There
+<i>532</i>&nbsp;	 * are no restrictions on the type or order of the returned
+<i>533</i>&nbsp;	 * collection, but each shark may only be returned once.
+<i>534</i>&nbsp;	 */
+<i>535</i>&nbsp;	@Override
+<i>536</i>&nbsp;	public Collection&lt;Shark&gt; getSharks(World world)
+<i>537</i>&nbsp;	{
+<b class="nc"><i>538</i>&nbsp;		return (Collection&lt;Shark&gt;) world.getCollection(Shark.class);</b>
+<i>539</i>&nbsp;	}
+<i>540</i>&nbsp;
+<i>541</i>&nbsp;	/**
+<i>542</i>&nbsp;	 * Returns the current location of the given shark.
+<i>543</i>&nbsp;	 *
+<i>544</i>&nbsp;	 * @param shark The shark of which to find the location
+<i>545</i>&nbsp;	 * @return An array, consisting of 2 integers {x, y}, that represents the
+<i>546</i>&nbsp;	 * coordinates of the given shark&#39;s bottom left pixel in the world.
+<i>547</i>&nbsp;	 */
+<i>548</i>&nbsp;	@Override
+<i>549</i>&nbsp;	public int[] getLocation(Shark shark)
+<i>550</i>&nbsp;	{
+<b class="nc"><i>551</i>&nbsp;		return shark.getLocation();</b>
+<i>552</i>&nbsp;	}
+<i>553</i>&nbsp;
+<i>554</i>&nbsp;	/**
+<i>555</i>&nbsp;	 * Return the current sprite image for the given shark.
+<i>556</i>&nbsp;	 *
+<i>557</i>&nbsp;	 * @param shark The shark for which to get the current sprite image.
+<i>558</i>&nbsp;	 * @return The current sprite image for the given shark, determined by its
+<i>559</i>&nbsp;	 * orientation as defined in the assignment.
+<i>560</i>&nbsp;	 */
+<i>561</i>&nbsp;	@Override
+<i>562</i>&nbsp;	public Sprite getCurrentSprite(Shark shark)
+<i>563</i>&nbsp;	{
+<b class="nc"><i>564</i>&nbsp;		return shark.getCurrentSprite();</b>
+<i>565</i>&nbsp;	}
+<i>566</i>&nbsp;
+<i>567</i>&nbsp;	/**
+<i>568</i>&nbsp;	 * Creates a new slime school.
+<i>569</i>&nbsp;	 *
+<i>570</i>&nbsp;	 * @return A new school for slimes, without any members.
+<i>571</i>&nbsp;	 */
+<i>572</i>&nbsp;	@Override
+<i>573</i>&nbsp;	public School createSchool()
+<i>574</i>&nbsp;	{
+<b class="nc"><i>575</i>&nbsp;		return null;</b>
+<i>576</i>&nbsp;	}
+<i>577</i>&nbsp;
+<i>578</i>&nbsp;	/**
+<i>579</i>&nbsp;	 * Creates a new slime, located at the provided pixel location (x, y).
+<i>580</i>&nbsp;	 * The returned slime should not belong to a world.
+<i>581</i>&nbsp;	 *
+<i>582</i>&nbsp;	 * @param x       The x-coordinate of the slime&#39;s initial position
+<i>583</i>&nbsp;	 * @param y       The y-coordinate of the slime&#39;s initial position
+<i>584</i>&nbsp;	 * @param sprites An array of sprites for the new slime
+<i>585</i>&nbsp;	 * @param school  The initial school to which the new slime belongs
+<i>586</i>&nbsp;	 * @return A new slime, located at the provided location and part of the
+<i>587</i>&nbsp;	 * given school. The returned slime should not belong to a world.
+<i>588</i>&nbsp;	 */
+<i>589</i>&nbsp;	@Override
+<i>590</i>&nbsp;	public Slime createSlime(int x, int y, Sprite[] sprites, School school)
+<i>591</i>&nbsp;	{
+<b class="nc"><i>592</i>&nbsp;		return new Slime(x, y, sprites, school);</b>
+<i>593</i>&nbsp;	}
+<i>594</i>&nbsp;
+<i>595</i>&nbsp;	/**
+<i>596</i>&nbsp;	 * Add the given slime as a game object to the given world.
+<i>597</i>&nbsp;	 *
+<i>598</i>&nbsp;	 * @param world The world to which the slime should be added.
+<i>599</i>&nbsp;	 * @param slime
+<i>600</i>&nbsp;	 */
+<i>601</i>&nbsp;	@Override
+<i>602</i>&nbsp;	public void addSlime(World world, Slime slime)
+<i>603</i>&nbsp;	{
+<i>604</i>&nbsp;		//world.addObject(slime);
+<b class="nc"><i>605</i>&nbsp;	}</b>
+<i>606</i>&nbsp;
+<i>607</i>&nbsp;	/**
+<i>608</i>&nbsp;	 * Returns all the slimes currently located in the given world.
+<i>609</i>&nbsp;	 *
+<i>610</i>&nbsp;	 * @param world The world for which to retrieve all slimes.
+<i>611</i>&nbsp;	 * @return All slimes that are located somewhere in the given world. There
+<i>612</i>&nbsp;	 * are no restrictions on the type or order of the returned
+<i>613</i>&nbsp;	 * collection, but each slime may only be returned once.
+<i>614</i>&nbsp;	 */
+<i>615</i>&nbsp;	@Override
+<i>616</i>&nbsp;	public Collection&lt;Slime&gt; getSlimes(World world)
+<i>617</i>&nbsp;	{
+<b class="nc"><i>618</i>&nbsp;		return (Collection&lt;Slime&gt;) world.getCollection(Slime.class);</b>
+<i>619</i>&nbsp;	}
+<i>620</i>&nbsp;
+<i>621</i>&nbsp;	/**
+<i>622</i>&nbsp;	 * Returns the current location of the given slime.
+<i>623</i>&nbsp;	 *
+<i>624</i>&nbsp;	 * @param slime The slime of which to find the location
+<i>625</i>&nbsp;	 * @return An array, consisting of 2 integers {x, y}, that represents the
+<i>626</i>&nbsp;	 * coordinates of the given slime&#39;s bottom left pixel in the world.
+<i>627</i>&nbsp;	 */
+<i>628</i>&nbsp;	@Override
+<i>629</i>&nbsp;	public int[] getLocation(Slime slime)
+<i>630</i>&nbsp;	{
+<b class="nc"><i>631</i>&nbsp;		return null;</b>
+<i>632</i>&nbsp;		//return slime.getLocation();
+<i>633</i>&nbsp;	}
+<i>634</i>&nbsp;
+<i>635</i>&nbsp;	/**
+<i>636</i>&nbsp;	 * Return the current sprite image for the given slime.
+<i>637</i>&nbsp;	 *
+<i>638</i>&nbsp;	 * @param slime The slime for which to get the current sprite image.
+<i>639</i>&nbsp;	 * @return The current sprite image for the given slime, determined by its
+<i>640</i>&nbsp;	 * orientation as defined in the assignment.
+<i>641</i>&nbsp;	 */
+<i>642</i>&nbsp;	@Override
+<i>643</i>&nbsp;	public Sprite getCurrentSprite(Slime slime)
+<i>644</i>&nbsp;	{
+<b class="nc"><i>645</i>&nbsp;		return null;</b>
+<i>646</i>&nbsp;		//return slime.getCurrentSprite();
+<i>647</i>&nbsp;	}
+<i>648</i>&nbsp;
+<i>649</i>&nbsp;	/**
+<i>650</i>&nbsp;	 * Returns the current school to which the given slime belongs.
+<i>651</i>&nbsp;	 *
+<i>652</i>&nbsp;	 * @param slime The slime for which to retrieve the school.
+<i>653</i>&nbsp;	 * @return The current school of the given slime.
+<i>654</i>&nbsp;	 */
+<i>655</i>&nbsp;	@Override
+<i>656</i>&nbsp;	public School getSchool(Slime slime)
+<i>657</i>&nbsp;	{
+<b class="nc"><i>658</i>&nbsp;		return null;</b>
+<i>659</i>&nbsp;	}
+<i>660</i>&nbsp;
+<i>661</i>&nbsp;	/**
+<i>662</i>&nbsp;	 * Create a new instance of Buzam, at the specified location, and with the
+<i>663</i>&nbsp;	 * specified sprites.
+<i>664</i>&nbsp;	 *
+<i>665</i>&nbsp;	 * @param pixelLeftX   The x location of the bottom left pixel of Buzam
+<i>666</i>&nbsp;	 * @param pixelBottomY The y location of the bottom left pixel of Buzam
+<i>667</i>&nbsp;	 * @param sprites      The sprites to be used by Buzam (following the same structure
+<i>668</i>&nbsp;	 */
+<i>669</i>&nbsp;	@Override
+<i>670</i>&nbsp;	public Buzam createBuzam(int pixelLeftX, int pixelBottomY, Sprite[] sprites)
+<i>671</i>&nbsp;	{
+<b class="nc"><i>672</i>&nbsp;		return new Buzam(pixelLeftX, pixelBottomY, sprites);</b>
+<i>673</i>&nbsp;	}
+<i>674</i>&nbsp;
+<i>675</i>&nbsp;	/**
+<i>676</i>&nbsp;	 * Create a new instance of Buzam, at the specified location, and with the
+<i>677</i>&nbsp;	 * specified sprites.
+<i>678</i>&nbsp;	 *
+<i>679</i>&nbsp;	 * @param pixelLeftX   The x location of the bottom left pixel of Buzam
+<i>680</i>&nbsp;	 * @param pixelBottomY The y location of the bottom left pixel of Buzam
+<i>681</i>&nbsp;	 * @param sprites      The sprites to be used by Buzam (following the same structure
+<i>682</i>&nbsp;	 *                     as the table for Mazub in the assignment).
+<i>683</i>&nbsp;	 * @param program      The programs to execute, or null of Buzam should not execute a
+<i>684</i>&nbsp;	 */
+<i>685</i>&nbsp;	@Override
+<i>686</i>&nbsp;	public Buzam createBuzamWithProgram(int pixelLeftX, int pixelBottomY, Sprite[] sprites, Program program)
+<i>687</i>&nbsp;	{
+<b class="nc"><i>688</i>&nbsp;		return new Buzam(pixelLeftX, pixelBottomY, sprites, program);</b>
+<i>689</i>&nbsp;	}
+<i>690</i>&nbsp;
+<i>691</i>&nbsp;	/**
+<i>692</i>&nbsp;	 * /**
+<i>693</i>&nbsp;	 * Creates a new plant, located at the provided pixel location (x, y).
+<i>694</i>&nbsp;	 * The returned plant should not belong to a world.
+<i>695</i>&nbsp;	 *
+<i>696</i>&nbsp;	 * @param x       The x-coordinate of the plant&#39;s initial position
+<i>697</i>&nbsp;	 * @param y       The y-coordinate of the plant&#39;s initial position
+<i>698</i>&nbsp;	 * @param sprites An array of sprites for the new plant
+<i>699</i>&nbsp;	 * @param program The programs that this plant should execute, or null if the
+<i>700</i>&nbsp;	 *                plant should follow its default behavior.
+<i>701</i>&nbsp;	 * @return A new plant, located at the provided location. The returned plant
+<i>702</i>&nbsp;	 * should not belong to a world.
+<i>703</i>&nbsp;	 */
+<i>704</i>&nbsp;	public Plant createPlantWithProgram(int x, int y, Sprite[] sprites, Program program)
+<i>705</i>&nbsp;	{
+<b class="nc"><i>706</i>&nbsp;		return new Plant(x, y, sprites, program);</b>
+<i>707</i>&nbsp;	}
+<i>708</i>&nbsp;
+<i>709</i>&nbsp;	/**
+<i>710</i>&nbsp;	 * Creates a new shark, located at the provided pixel location (x, y).
+<i>711</i>&nbsp;	 * The returned shark should not belong to a world.
+<i>712</i>&nbsp;	 *
+<i>713</i>&nbsp;	 * @param x       The x-coordinate of the shark&#39;s initial position
+<i>714</i>&nbsp;	 * @param y       The y-coordinate of the shark&#39;s initial position
+<i>715</i>&nbsp;	 * @param sprites An array of sprites for the new shark
+<i>716</i>&nbsp;	 * @param program The programs that this shark should execute, or null if the
+<i>717</i>&nbsp;	 *                shark should follow its default behavior.
+<i>718</i>&nbsp;	 * @return A new shark, located at the provided location. The returned shark
+<i>719</i>&nbsp;	 * should not belong to a world.
+<i>720</i>&nbsp;	 */
+<i>721</i>&nbsp;	@Override
+<i>722</i>&nbsp;	public Shark createSharkWithProgram(int x, int y, Sprite[] sprites, Program program)
+<i>723</i>&nbsp;	{
+<b class="nc"><i>724</i>&nbsp;		return new Shark(x, y, sprites, program);</b>
+<i>725</i>&nbsp;	}
+<i>726</i>&nbsp;
+<i>727</i>&nbsp;	/**
+<i>728</i>&nbsp;	 * Creates a new slime, located at the provided pixel location (x, y).
+<i>729</i>&nbsp;	 * The returned slime should not belong to a world.
+<i>730</i>&nbsp;	 *
+<i>731</i>&nbsp;	 * @param x       The x-coordinate of the slime&#39;s initial position
+<i>732</i>&nbsp;	 * @param y       The y-coordinate of the slime&#39;s initial position
+<i>733</i>&nbsp;	 * @param sprites An array of sprites for the new slime
+<i>734</i>&nbsp;	 * @param school  The initial school to which the new slime belongs
+<i>735</i>&nbsp;	 * @param program The programs that this slime should execute, or null if the
+<i>736</i>&nbsp;	 *                slime should follow its default behavior.
+<i>737</i>&nbsp;	 * @return A new slime, located at the provided location and part of the
+<i>738</i>&nbsp;	 * given school. The returned slime should not belong to a world.
+<i>739</i>&nbsp;	 */
+<i>740</i>&nbsp;	@Override
+<i>741</i>&nbsp;	public Slime createSlimeWithProgram(int x, int y, Sprite[] sprites, School school, Program program)
+<i>742</i>&nbsp;	{
+<b class="nc"><i>743</i>&nbsp;		return null;</b>
+<i>744</i>&nbsp;	}
+<i>745</i>&nbsp;
+<i>746</i>&nbsp;	/**
+<i>747</i>&nbsp;	 * Parse the given text into the programs.
+<i>748</i>&nbsp;	 * Follow the instructions given in {@link ProgramParser}.
+<i>749</i>&nbsp;	 *
+<i>750</i>&nbsp;	 * @param text The text to parse
+<i>751</i>&nbsp;	 * @return A {@link ParseOutcome}, namely
+<i>752</i>&nbsp;	 * ParseOutcome.Success if parsing was successful, or
+<i>753</i>&nbsp;	 * ParseOutcome.Failure if parsing was not successful.
+<i>754</i>&nbsp;	 */
+<i>755</i>&nbsp;	@Override
+<i>756</i>&nbsp;	public ParseOutcome&lt;?&gt; parse(String text)
+<i>757</i>&nbsp;	{
+<b class="fc"><i>758</i>&nbsp;		ProgramParser programParser = new ProgramParser&lt;&gt;(new Factory());</b>
+<i>759</i>&nbsp;
+<b class="fc"><i>760</i>&nbsp;		Optional parseResult = programParser.parseString(text);</b>
+<i>761</i>&nbsp;
+<b class="fc"><i>762</i>&nbsp;		return parseResult.isPresent() ? ParseOutcome.success((Program) parseResult.get()) :</b>
+<b class="fc"><i>763</i>&nbsp;				ParseOutcome.failure(programParser.getErrors()); //TODO refactor</b>
+<i>764</i>&nbsp;	}
+<i>765</i>&nbsp;
+<i>766</i>&nbsp;	/**
+<i>767</i>&nbsp;	 * Returns whether the given programs is well-formed according to the rules
+<i>768</i>&nbsp;	 * in the assignment.
+<i>769</i>&nbsp;	 *
+<i>770</i>&nbsp;	 * @param program The programs to check.
+<i>771</i>&nbsp;	 * @return true if the programs is well-formed; false otherwise.
+<i>772</i>&nbsp;	 */
+<i>773</i>&nbsp;	public boolean isWellFormed(Program program)
+<i>774</i>&nbsp;	{
+<b class="fc"><i>775</i>&nbsp;		return true;</b>
+<i>776</i>&nbsp;	}
+<i>777</i>&nbsp;
+<i>778</i>&nbsp;	/**
+<i>779</i>&nbsp;	 * Add the given Buzam to the given world.
+<i>780</i>&nbsp;	 *
+<i>781</i>&nbsp;	 * @param world The world to which Buzam should be added.
+<i>782</i>&nbsp;	 * @param buzam
+<i>783</i>&nbsp;	 */
+<i>784</i>&nbsp;	@Override
+<i>785</i>&nbsp;	public void addBuzam(World world, Buzam buzam)
+<i>786</i>&nbsp;	{
+<b class="nc"><i>787</i>&nbsp;		world.addObject(buzam);</b>
+<b class="nc"><i>788</i>&nbsp;	}</b>
+<i>789</i>&nbsp;
+<i>790</i>&nbsp;	/**
+<i>791</i>&nbsp;	 * Returns the current location of the given Buzam object.
+<i>792</i>&nbsp;	 *
+<i>793</i>&nbsp;	 * @param alien The alien of which to find the location
+<i>794</i>&nbsp;	 * @return An array, consisting of 2 integers {x, y}, that represents the
+<i>795</i>&nbsp;	 * coordinates of the given alien&#39;s bottom left pixel in the world.
+<i>796</i>&nbsp;	 */
+<i>797</i>&nbsp;	@Override
+<i>798</i>&nbsp;	public int[] getLocation(Buzam alien)
+<i>799</i>&nbsp;	{
+<b class="nc"><i>800</i>&nbsp;		return alien.getLocation();</b>
+<i>801</i>&nbsp;	}
+<i>802</i>&nbsp;
+<i>803</i>&nbsp;	/**
+<i>804</i>&nbsp;	 * Return the current velocity (in m/s) of the given alien.
+<i>805</i>&nbsp;	 *
+<i>806</i>&nbsp;	 * @param alien The alien of which to get the velocity.
+<i>807</i>&nbsp;	 * @return an array, consisting of 2 doubles {vx, vy}, that represents the
+<i>808</i>&nbsp;	 * horizontal and vertical components of the given alien&#39;s current
+<i>809</i>&nbsp;	 * velocity, in units of m/s.
+<i>810</i>&nbsp;	 */
+<i>811</i>&nbsp;	@Override
+<i>812</i>&nbsp;	public double[] getVelocity(Buzam alien)
+<i>813</i>&nbsp;	{
+<b class="nc"><i>814</i>&nbsp;		return alien.getVelocity();</b>
+<i>815</i>&nbsp;	}
+<i>816</i>&nbsp;
+<i>817</i>&nbsp;	/**
+<i>818</i>&nbsp;	 * Return the current acceleration (in m/s^2) of the given alien.
+<i>819</i>&nbsp;	 *
+<i>820</i>&nbsp;	 * @param alien The alien of which to get the acceleration.
+<i>821</i>&nbsp;	 * @return an array, consisting of 2 doubles {ax, ay}, that represents the
+<i>822</i>&nbsp;	 * horizontal and vertical components of the given alien&#39;s current
+<i>823</i>&nbsp;	 * acceleration, in units of m/s^2.
+<i>824</i>&nbsp;	 */
+<i>825</i>&nbsp;	@Override
+<i>826</i>&nbsp;	public double[] getAcceleration(Buzam alien)
+<i>827</i>&nbsp;	{
+<b class="nc"><i>828</i>&nbsp;		return alien.getAcceleration();</b>
+<i>829</i>&nbsp;	}
+<i>830</i>&nbsp;
+<i>831</i>&nbsp;	/**
+<i>832</i>&nbsp;	 * Return the current size of the given alien.
+<i>833</i>&nbsp;	 *
+<i>834</i>&nbsp;	 * @param alien The alien of which to get the size.
+<i>835</i>&nbsp;	 * @return An array, consisting of 2 integers {w, h}, that represents the
+<i>836</i>&nbsp;	 * current width and height of the given alien, in number of pixels.
+<i>837</i>&nbsp;	 */
+<i>838</i>&nbsp;	@Override
+<i>839</i>&nbsp;	public int[] getSize(Buzam alien)
+<i>840</i>&nbsp;	{
+<b class="nc"><i>841</i>&nbsp;		return alien.getSize();</b>
+<i>842</i>&nbsp;	}
+<i>843</i>&nbsp;
+<i>844</i>&nbsp;	/**
+<i>845</i>&nbsp;	 * Return the current sprite image for the given alien.
+<i>846</i>&nbsp;	 *
+<i>847</i>&nbsp;	 * @param alien The alien for which to get the current sprite image.
+<i>848</i>&nbsp;	 * @return The current sprite image for the given alien. Buzam, the evil
+<i>849</i>&nbsp;	 * twin of Mazub, follows the same rules as Mazub with respect to
+<i>850</i>&nbsp;	 * its sprites.
+<i>851</i>&nbsp;	 */
+<i>852</i>&nbsp;	@Override
+<i>853</i>&nbsp;	public Sprite getCurrentSprite(Buzam alien)
+<i>854</i>&nbsp;	{
+<b class="nc"><i>855</i>&nbsp;		return alien.getCurrentSprite();</b>
+<i>856</i>&nbsp;	}
+<i>857</i>&nbsp;
+<i>858</i>&nbsp;	/**
+<i>859</i>&nbsp;	 * Returns the current number of hitpoints of the given alien.
+<i>860</i>&nbsp;	 *
+<i>861</i>&nbsp;	 * @param alien
+<i>862</i>&nbsp;	 */
+<i>863</i>&nbsp;	@Override
+<i>864</i>&nbsp;	public int getNbHitPoints(Buzam alien)
+<i>865</i>&nbsp;	{
+<b class="nc"><i>866</i>&nbsp;		return alien.getHealth();</b>
+<i>867</i>&nbsp;	}
+<i>868</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

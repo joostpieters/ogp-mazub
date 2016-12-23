@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: JumpingAlienSprites</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.common.sprites</a> ]
+</div>
+
+<h1>Coverage Summary for Class: JumpingAlienSprites (jumpingalien.common.sprites)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JumpingAlienSprites</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.3%
+  </span>
+  <span class="absValue">
+    (26/ 27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.common.sprites;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import static jumpingalien.common.sprites.ImageSprite.*;
+<i>4</i>&nbsp;import jumpingalien.util.Sprite;
+<i>5</i>&nbsp;
+<b class="nc"><i>6</i>&nbsp;public class JumpingAlienSprites {</b>
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;	protected static final int WIDTH = 70;
+<i>9</i>&nbsp;	protected static final int FULL_HEIGHT = 97;
+<i>10</i>&nbsp;	protected static final int DUCK_HEIGHT = 70;
+<i>11</i>&nbsp;
+<b class="fc"><i>12</i>&nbsp;	public static final Sprite[] ALIEN_SPRITESET = new Sprite[30];</b>
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;	static {
+<i>15</i>&nbsp;		/* 0: stand, not ducking, front */
+<b class="fc"><i>16</i>&nbsp;		ALIEN_SPRITESET[0] = createSprite(&quot;levels/player/p1_front.png&quot;)</b>
+<b class="fc"><i>17</i>&nbsp;				.resizeTo(WIDTH, FULL_HEIGHT);</b>
+<i>18</i>&nbsp;		/* 1: stand, ducking, front */
+<b class="fc"><i>19</i>&nbsp;		ALIEN_SPRITESET[1] = createSprite(&quot;levels/player/p1_duck_front.png&quot;)</b>
+<b class="fc"><i>20</i>&nbsp;				.resizeTo(WIDTH, DUCK_HEIGHT);</b>
+<i>21</i>&nbsp;		/* 2: stand, not ducking, right */
+<b class="fc"><i>22</i>&nbsp;		ALIEN_SPRITESET[2] = createSprite(&quot;levels/player/p1_stand.png&quot;)</b>
+<b class="fc"><i>23</i>&nbsp;				.resizeTo(WIDTH, FULL_HEIGHT);</b>
+<i>24</i>&nbsp;		/* 3: stand, not ducking, left */
+<b class="fc"><i>25</i>&nbsp;		ALIEN_SPRITESET[3] = createHFlippedSprite(&quot;levels/player/p1_stand.png&quot;)</b>
+<b class="fc"><i>26</i>&nbsp;				.resizeTo(WIDTH, FULL_HEIGHT);</b>
+<i>27</i>&nbsp;		/* 4: jump, not ducking, right */
+<b class="fc"><i>28</i>&nbsp;		ALIEN_SPRITESET[4] = createSprite(&quot;levels/player/p1_jump.png&quot;)</b>
+<b class="fc"><i>29</i>&nbsp;				.resizeTo(WIDTH, FULL_HEIGHT);</b>
+<i>30</i>&nbsp;		/* 5: jump, not ducking, left */
+<b class="fc"><i>31</i>&nbsp;		ALIEN_SPRITESET[5] = createHFlippedSprite(&quot;levels/player/p1_jump.png&quot;)</b>
+<b class="fc"><i>32</i>&nbsp;				.resizeTo(WIDTH, FULL_HEIGHT);</b>
+<i>33</i>&nbsp;		/* 6: ducking, right */
+<b class="fc"><i>34</i>&nbsp;		ALIEN_SPRITESET[6] = createSprite(&quot;levels/player/p1_duck.png&quot;)</b>
+<b class="fc"><i>35</i>&nbsp;				.resizeTo(WIDTH, DUCK_HEIGHT);</b>
+<i>36</i>&nbsp;		/* 7: ducking, left */
+<b class="fc"><i>37</i>&nbsp;		ALIEN_SPRITESET[7] = createHFlippedSprite(&quot;levels/player/p1_duck.png&quot;)</b>
+<b class="fc"><i>38</i>&nbsp;				.resizeTo(WIDTH, DUCK_HEIGHT);</b>
+<i>39</i>&nbsp;		/* 8..18: moving, not ducking, right */
+<b class="fc"><i>40</i>&nbsp;		for (int i = 0; i &lt; 11; i++) {</b>
+<i>41</i>&nbsp;			/* walk right */
+<b class="fc"><i>42</i>&nbsp;			ALIEN_SPRITESET[8 + i] = createSprite(</b>
+<b class="fc"><i>43</i>&nbsp;					String.format(&quot;levels/player/p1_walk/PNG/p1_walk%02d.png&quot;,</b>
+<b class="fc"><i>44</i>&nbsp;							i + 1)).resizeTo(WIDTH, FULL_HEIGHT);</b>
+<i>45</i>&nbsp;		}
+<i>46</i>&nbsp;		/* 19..29: moving, not ducking, right */
+<b class="fc"><i>47</i>&nbsp;		for (int i = 0; i &lt; 11; i++) {</b>
+<i>48</i>&nbsp;			/* walk left */
+<b class="fc"><i>49</i>&nbsp;			ALIEN_SPRITESET[19 + i] = createHFlippedSprite(</b>
+<b class="fc"><i>50</i>&nbsp;					String.format(&quot;levels/player/p1_walk/PNG/p1_walk%02d.png&quot;,</b>
+<b class="fc"><i>51</i>&nbsp;							i + 1)).resizeTo(WIDTH, FULL_HEIGHT);</b>
+<i>52</i>&nbsp;		}
+<i>53</i>&nbsp;
+<b class="fc"><i>54</i>&nbsp;	}</b>
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

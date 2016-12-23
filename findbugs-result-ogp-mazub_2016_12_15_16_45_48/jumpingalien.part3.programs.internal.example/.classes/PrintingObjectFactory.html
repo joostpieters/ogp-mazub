@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PrintingObjectFactory</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part3.programs.internal.example</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PrintingObjectFactory (jumpingalien.part3.programs.internal.example)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrintingObjectFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PrintingObjectFactory$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part3.programs.internal.example;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.lang.reflect.InvocationHandler;
+<i>4</i>&nbsp;import java.lang.reflect.Method;
+<i>5</i>&nbsp;import java.lang.reflect.Proxy;
+<i>6</i>&nbsp;import java.util.Arrays;
+<i>7</i>&nbsp;import java.util.Map;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import jumpingalien.part3.programs.IProgramFactory;
+<i>10</i>&nbsp;import jumpingalien.part3.programs.SourceLocation;
+<i>11</i>&nbsp;
+<b class="nc"><i>12</i>&nbsp;public class PrintingObjectFactory {</b>
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;	/**
+<i>15</i>&nbsp;	 * Creates an implementation of IProgramFactory where the implementation of
+<i>16</i>&nbsp;	 * each interface method (except createProgram) just creates a
+<i>17</i>&nbsp;	 * PrintingObject with all arguments.
+<i>18</i>&nbsp;	 */
+<i>19</i>&nbsp;	@SuppressWarnings(&quot;unchecked&quot;)
+<i>20</i>&nbsp;	public static IProgramFactory&lt;PrintingObject, PrintingObject, PrintingObject, PrintingProgram&gt; create() {
+<i>21</i>&nbsp;
+<b class="nc"><i>22</i>&nbsp;		InvocationHandler handler = new InvocationHandler() {</b>
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;			@Override
+<i>25</i>&nbsp;			public Object invoke(Object proxy, Method method, Object[] args)
+<i>26</i>&nbsp;					throws Throwable {
+<b class="nc"><i>27</i>&nbsp;				if (method.getName().equals(&quot;createProgram&quot;)) {</b>
+<b class="nc"><i>28</i>&nbsp;					return new PrintingProgram((PrintingObject) args[0],</b>
+<i>29</i>&nbsp;							(Map&lt;String, PrintingObject&gt;) args[1]);
+<i>30</i>&nbsp;				}
+<b class="nc"><i>31</i>&nbsp;				if (args != null) {</b>
+<b class="nc"><i>32</i>&nbsp;					SourceLocation sourceLocation = (SourceLocation) args[args.length - 1];</b>
+<b class="nc"><i>33</i>&nbsp;					if (args.length &gt;= 1) {</b>
+<b class="nc"><i>34</i>&nbsp;						return new PrintingObject(sourceLocation,</b>
+<b class="nc"><i>35</i>&nbsp;								method.getName(), Arrays.copyOfRange(args, 0,</b>
+<i>36</i>&nbsp;										args.length - 1));
+<i>37</i>&nbsp;					} else {
+<b class="nc"><i>38</i>&nbsp;						return new PrintingObject(sourceLocation,</b>
+<b class="nc"><i>39</i>&nbsp;								method.getName());</b>
+<i>40</i>&nbsp;					}
+<i>41</i>&nbsp;				} else {
+<b class="nc"><i>42</i>&nbsp;					return new PrintingObject(null, method.getName());</b>
+<i>43</i>&nbsp;				}
+<i>44</i>&nbsp;			}
+<i>45</i>&nbsp;		};
+<i>46</i>&nbsp;
+<b class="nc"><i>47</i>&nbsp;		return (IProgramFactory&lt;PrintingObject, PrintingObject, PrintingObject, PrintingProgram&gt;) Proxy</b>
+<b class="nc"><i>48</i>&nbsp;				.newProxyInstance(IProgramFactory.class.getClassLoader(),</b>
+<i>49</i>&nbsp;						new Class[] { IProgramFactory.class }, handler);
+<i>50</i>&nbsp;	}
+<i>51</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

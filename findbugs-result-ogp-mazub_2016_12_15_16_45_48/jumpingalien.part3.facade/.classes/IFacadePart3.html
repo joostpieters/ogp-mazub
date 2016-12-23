@@ -1,0 +1,338 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: IFacadePart3</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part3.facade</a> ]
+</div>
+
+<h1>Coverage Summary for Class: IFacadePart3 (jumpingalien.part3.facade)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">IFacadePart3</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part3.facade;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import jumpingalien.model.Buzam;
+<i>4</i>&nbsp;import jumpingalien.model.Mazub;
+<i>5</i>&nbsp;import jumpingalien.model.Plant;
+<i>6</i>&nbsp;import jumpingalien.model.Program;
+<i>7</i>&nbsp;import jumpingalien.model.School;
+<i>8</i>&nbsp;import jumpingalien.model.Shark;
+<i>9</i>&nbsp;import jumpingalien.model.Slime;
+<i>10</i>&nbsp;import jumpingalien.model.World;
+<i>11</i>&nbsp;import jumpingalien.part1.facade.IFacade;
+<i>12</i>&nbsp;import jumpingalien.part2.facade.IFacadePart2;
+<i>13</i>&nbsp;import jumpingalien.part3.programs.ParseOutcome;
+<i>14</i>&nbsp;import jumpingalien.part3.programs.ProgramParser;
+<i>15</i>&nbsp;import jumpingalien.util.Sprite;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;/**
+<i>18</i>&nbsp; * Implement this interface to connect your code to the graphical user interface
+<i>19</i>&nbsp; * (GUI).
+<i>20</i>&nbsp; * 
+<i>21</i>&nbsp; * &lt;ul&gt;
+<i>22</i>&nbsp; * &lt;li&gt;For separating the code that you wrote from the code that was provided to
+<i>23</i>&nbsp; * you, put &lt;b&gt;ALL your code in the &lt;code&gt;src&lt;/code&gt; folder&lt;/b&gt; and &lt;b&gt;ALL your
+<i>24</i>&nbsp; * tests in the &lt;code&gt;tests&lt;/code&gt; folder&lt;/b&gt;. The code that is provided to you
+<i>25</i>&nbsp; * stays in the &lt;code&gt;src-provided&lt;/code&gt; folder. Only if you modify the
+<i>26</i>&nbsp; * provided code, it&#39;s advised to move the modified code to the &lt;code&gt;src&lt;/code&gt;
+<i>27</i>&nbsp; * folder, so that your changes cannot be accidentally overwritten by an updated
+<i>28</i>&nbsp; * version of the provided code.&lt;br&gt;
+<i>29</i>&nbsp; * Note: classes that belong to some package can be spread over multiple source
+<i>30</i>&nbsp; * folders. For example, two classes, one in &lt;code&gt;src&lt;/code&gt; and one in
+<i>31</i>&nbsp; * &lt;code&gt;src-provided&lt;/code&gt;, can be declared to belong to the same package,
+<i>32</i>&nbsp; * even though they are not located in the same source folder.&lt;/li&gt;
+<i>33</i>&nbsp; * 
+<i>34</i>&nbsp; * &lt;li&gt;You should at least &lt;b&gt;create the following classes&lt;/b&gt; in the package
+<i>35</i>&nbsp; * &lt;code&gt;jumpingalien.model&lt;/code&gt;:
+<i>36</i>&nbsp; * &lt;ul&gt;
+<i>37</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Mazub&lt;/code&gt; for representing Mazub the alien&lt;/li&gt;
+<i>38</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;World&lt;/code&gt; for representing the game world&lt;/li&gt;
+<i>39</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Plant&lt;/code&gt; for representing a plant&lt;/li&gt;
+<i>40</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Shark&lt;/code&gt; for representing a shark enemy&lt;/li&gt;
+<i>41</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Slime&lt;/code&gt; for representing a slime enemy&lt;/li&gt;
+<i>42</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;School&lt;/code&gt; for representing a slime school&lt;/li&gt;
+<i>43</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Buzam&lt;/code&gt; for representing Buzam, the evil twin of Mazub
+<i>44</i>&nbsp; * &lt;/li&gt;
+<i>45</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Program&lt;/code&gt; for representing a programs&lt;/li&gt;
+<i>46</i>&nbsp; * &lt;/ul&gt;
+<i>47</i>&nbsp; * You may, of course, add additional classes as you see fit.
+<i>48</i>&nbsp; * 
+<i>49</i>&nbsp; * &lt;li&gt;You should &lt;b&gt;create a class &lt;code&gt;Facade&lt;/code&gt;&lt;/b&gt; that implements this
+<i>50</i>&nbsp; * interface. This class should be placed &lt;b&gt;in the package
+<i>51</i>&nbsp; * &lt;code&gt;jumpingalien.part2.facade&lt;/code&gt;&lt;/b&gt;.&lt;/li&gt;
+<i>52</i>&nbsp; * 
+<i>53</i>&nbsp; * &lt;li&gt;
+<i>54</i>&nbsp; * The &lt;b&gt;header of that Facade class&lt;/b&gt; should look as follows:&lt;br&gt;
+<i>55</i>&nbsp; * &lt;code&gt;class Facade implements IFacadePart2 { ... }&lt;/code&gt;&lt;br&gt;
+<i>56</i>&nbsp; * The Facade class should also implement all methods of IFacade from part 1,
+<i>57</i>&nbsp; * except {@link IFacade#advanceTime(Mazub, double)}. The IFacadePart2 interface
+<i>58</i>&nbsp; * already extends IFacade, so this does not need to be indicated in the header
+<i>59</i>&nbsp; * explicitly.
+<i>60</i>&nbsp; * 
+<i>61</i>&nbsp; * Consult the &lt;a href=
+<i>62</i>&nbsp; * &quot;http://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html&quot;&gt;
+<i>63</i>&nbsp; * Java tutorial&lt;/a&gt; for more information on interfaces, if necessary.&lt;/li&gt;
+<i>64</i>&nbsp; *
+<i>65</i>&nbsp; * &lt;li&gt;Your &lt;code&gt;Facade&lt;/code&gt; class should offer a &lt;b&gt;default constructor&lt;/b&gt;.
+<i>66</i>&nbsp; * &lt;/li&gt;
+<i>67</i>&nbsp; * 
+<i>68</i>&nbsp; * &lt;li&gt;&lt;b&gt;Each method&lt;/b&gt; defined in the interfaces &lt;code&gt;IFacadePart2&lt;/code&gt;
+<i>69</i>&nbsp; * and &lt;code&gt;IFacade&lt;/code&gt; must be implemented by the class &lt;code&gt;Facade&lt;/code&gt;
+<i>70</i>&nbsp; * , except {@link IFacade#advanceTime(Mazub, double)}. For example, the
+<i>71</i>&nbsp; * implementation of &lt;code&gt;getLocation&lt;/code&gt; should call one or more methods on
+<i>72</i>&nbsp; * the given &lt;code&gt;alien&lt;/code&gt; to retrieve its current location.&lt;/li&gt;
+<i>73</i>&nbsp; * 
+<i>74</i>&nbsp; * &lt;li&gt;Methods in this interface are &lt;b&gt;only allowed to throw exceptions of type
+<i>75</i>&nbsp; * &lt;code&gt;jumpingalien.util.ModelException&lt;/code&gt;&lt;/b&gt; (this class is provided).
+<i>76</i>&nbsp; * This exception can be thrown only if calling a method of your
+<i>77</i>&nbsp; * &lt;code&gt;Mazub&lt;/code&gt; class with the given parameters would violate a
+<i>78</i>&nbsp; * precondition or if the method of your &lt;code&gt;Mazub&lt;/code&gt; class throws an
+<i>79</i>&nbsp; * exception (if so, wrap the exception in a &lt;code&gt;ModelException&lt;/code&gt;).&lt;/li&gt;
+<i>80</i>&nbsp; * 
+<i>81</i>&nbsp; * &lt;li&gt;&lt;b&gt;ModelException should not be used anywhere outside of your Facade
+<i>82</i>&nbsp; * implementation.&lt;/b&gt;&lt;/li&gt;
+<i>83</i>&nbsp; * 
+<i>84</i>&nbsp; * &lt;li&gt;Your Facade implementation should &lt;b&gt;only contain trivial code&lt;/b&gt; (for
+<i>85</i>&nbsp; * example, calling a method, combining multiple return values into an array,
+<i>86</i>&nbsp; * creating @Value instances, catching exceptions and wrapping it in a
+<i>87</i>&nbsp; * ModelException). All non-trivial code should be placed in the other classes
+<i>88</i>&nbsp; * that you create.&lt;/li&gt;
+<i>89</i>&nbsp; * 
+<i>90</i>&nbsp; * &lt;li&gt;The rules described above and the documentation described below for each
+<i>91</i>&nbsp; * method apply only to the class implementing this interface. &lt;b&gt;Your class for
+<i>92</i>&nbsp; * representing aliens should follow the rules described in the assignment.&lt;/b&gt;&lt;/li&gt;
+<i>93</i>&nbsp; * 
+<i>94</i>&nbsp; * &lt;li&gt;&lt;b&gt;Do not modify the signatures&lt;/b&gt; of the methods defined in this
+<i>95</i>&nbsp; * interface.&lt;/li&gt;
+<i>96</i>&nbsp; * 
+<i>97</i>&nbsp; * &lt;/ul&gt;
+<i>98</i>&nbsp; *
+<i>99</i>&nbsp; */
+<i>100</i>&nbsp;public interface IFacadePart3 extends IFacadePart2 {
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;	/**
+<i>103</i>&nbsp;	 * Create a new instance of Buzam, at the specified location, and with the
+<i>104</i>&nbsp;	 * specified sprites.
+<i>105</i>&nbsp;	 * 
+<i>106</i>&nbsp;	 * @param pixelLeftX
+<i>107</i>&nbsp;	 *            The x location of the bottom left pixel of Buzam
+<i>108</i>&nbsp;	 * @param pixelBottomY
+<i>109</i>&nbsp;	 *            The y location of the bottom left pixel of Buzam
+<i>110</i>&nbsp;	 * @param sprites
+<i>111</i>&nbsp;	 *            The sprites to be used by Buzam (following the same structure
+<i>112</i>&nbsp;	 *            as the table for Mazub in the assignment).
+<i>113</i>&nbsp;	 */
+<i>114</i>&nbsp;	public Buzam createBuzam(int pixelLeftX, int pixelBottomY, Sprite[] sprites);
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;	/**
+<i>117</i>&nbsp;	 * Create a new instance of Buzam, at the specified location, and with the
+<i>118</i>&nbsp;	 * specified sprites.
+<i>119</i>&nbsp;	 * 
+<i>120</i>&nbsp;	 * @param pixelLeftX
+<i>121</i>&nbsp;	 *            The x location of the bottom left pixel of Buzam
+<i>122</i>&nbsp;	 * @param pixelBottomY
+<i>123</i>&nbsp;	 *            The y location of the bottom left pixel of Buzam
+<i>124</i>&nbsp;	 * @param sprites
+<i>125</i>&nbsp;	 *            The sprites to be used by Buzam (following the same structure
+<i>126</i>&nbsp;	 *            as the table for Mazub in the assignment).
+<i>127</i>&nbsp;	 * @param program
+<i>128</i>&nbsp;	 *            The programs to exe, or null of Buzam should not exe a
+<i>129</i>&nbsp;	 *            programs.
+<i>130</i>&nbsp;	 */
+<i>131</i>&nbsp;	public Buzam createBuzamWithProgram(int pixelLeftX, int pixelBottomY,
+<i>132</i>&nbsp;			Sprite[] sprites, Program program);
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;	/**
+<i>135</i>&nbsp;	 * /**
+<i>136</i>&nbsp;	 * Creates a new plant, located at the provided pixel location (x, y).
+<i>137</i>&nbsp;	 * The returned plant should not belong to a world.
+<i>138</i>&nbsp;	 * 
+<i>139</i>&nbsp;	 * @param x
+<i>140</i>&nbsp;	 *            The x-coordinate of the plant&#39;s initial position
+<i>141</i>&nbsp;	 * @param y
+<i>142</i>&nbsp;	 *            The y-coordinate of the plant&#39;s initial position
+<i>143</i>&nbsp;	 * @param sprites
+<i>144</i>&nbsp;	 *            An array of sprites for the new plant
+<i>145</i>&nbsp;	 * @param program
+<i>146</i>&nbsp;	 *            The programs that this plant should exe, or null if the
+<i>147</i>&nbsp;	 *            plant should follow its default behavior.
+<i>148</i>&nbsp;	 * 
+<i>149</i>&nbsp;	 * @return A new plant, located at the provided location. The returned plant
+<i>150</i>&nbsp;	 *         should not belong to a world.
+<i>151</i>&nbsp;	 */
+<i>152</i>&nbsp;	public Plant createPlantWithProgram(int x, int y, Sprite[] sprites,
+<i>153</i>&nbsp;			Program program);
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;	/**
+<i>156</i>&nbsp;	 * Creates a new shark, located at the provided pixel location (x, y).
+<i>157</i>&nbsp;	 * The returned shark should not belong to a world.
+<i>158</i>&nbsp;	 * 
+<i>159</i>&nbsp;	 * @param x
+<i>160</i>&nbsp;	 *            The x-coordinate of the shark&#39;s initial position
+<i>161</i>&nbsp;	 * @param y
+<i>162</i>&nbsp;	 *            The y-coordinate of the shark&#39;s initial position
+<i>163</i>&nbsp;	 * @param sprites
+<i>164</i>&nbsp;	 *            An array of sprites for the new shark
+<i>165</i>&nbsp;	 * @param program
+<i>166</i>&nbsp;	 *            The programs that this shark should exe, or null if the
+<i>167</i>&nbsp;	 *            shark should follow its default behavior.
+<i>168</i>&nbsp;	 * 
+<i>169</i>&nbsp;	 * @return A new shark, located at the provided location. The returned shark
+<i>170</i>&nbsp;	 *         should not belong to a world.
+<i>171</i>&nbsp;	 */
+<i>172</i>&nbsp;	public Shark createSharkWithProgram(int x, int y, Sprite[] sprites,
+<i>173</i>&nbsp;			Program program);
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;	/**
+<i>176</i>&nbsp;	 * Creates a new slime, located at the provided pixel location (x, y).
+<i>177</i>&nbsp;	 * The returned slime should not belong to a world.
+<i>178</i>&nbsp;	 * 
+<i>179</i>&nbsp;	 * @param x
+<i>180</i>&nbsp;	 *            The x-coordinate of the slime&#39;s initial position
+<i>181</i>&nbsp;	 * @param y
+<i>182</i>&nbsp;	 *            The y-coordinate of the slime&#39;s initial position
+<i>183</i>&nbsp;	 * @param sprites
+<i>184</i>&nbsp;	 *            An array of sprites for the new slime
+<i>185</i>&nbsp;	 * @param school
+<i>186</i>&nbsp;	 *            The initial school to which the new slime belongs
+<i>187</i>&nbsp;	 * @param program
+<i>188</i>&nbsp;	 *            The programs that this slime should exe, or null if the
+<i>189</i>&nbsp;	 *            slime should follow its default behavior.
+<i>190</i>&nbsp;	 * 
+<i>191</i>&nbsp;	 * @return A new slime, located at the provided location and part of the
+<i>192</i>&nbsp;	 *         given school. The returned slime should not belong to a world.
+<i>193</i>&nbsp;	 */
+<i>194</i>&nbsp;	public Slime createSlimeWithProgram(int x, int y, Sprite[] sprites,
+<i>195</i>&nbsp;			School school, Program program);
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;    /**
+<i>198</i>&nbsp;	 * Parse the given text into the programs.
+<i>199</i>&nbsp;	 * Follow the instructions given in {@link ProgramParser}.
+<i>200</i>&nbsp;	 * 
+<i>201</i>&nbsp;	 * @param text
+<i>202</i>&nbsp;	 *            The text to parse
+<i>203</i>&nbsp;	 * 
+<i>204</i>&nbsp;	 * @return A {@link ParseOutcome}, namely
+<i>205</i>&nbsp;	 *         ParseOutcome.Success if parsing was successful, or
+<i>206</i>&nbsp;	 *         ParseOutcome.Failure if parsing was not successful.
+<i>207</i>&nbsp;	 */
+<i>208</i>&nbsp;	ParseOutcome&lt;?&gt; parse(String text);
+<i>209</i>&nbsp;
+<i>210</i>&nbsp;	/**
+<i>211</i>&nbsp;	 * Returns whether the given programs is well-formed according to the rules
+<i>212</i>&nbsp;	 * in the assignment.
+<i>213</i>&nbsp;	 * 
+<i>214</i>&nbsp;	 * @param program
+<i>215</i>&nbsp;	 *            The programs to check.
+<i>216</i>&nbsp;	 * @return true if the programs is well-formed; false otherwise.
+<i>217</i>&nbsp;	 */
+<i>218</i>&nbsp;	boolean isWellFormed(Program program);
+<i>219</i>&nbsp;
+<i>220</i>&nbsp;	/**
+<i>221</i>&nbsp;	 * Add the given Buzam to the given world.
+<i>222</i>&nbsp;	 * 
+<i>223</i>&nbsp;	 * @param world
+<i>224</i>&nbsp;	 *            The world to which Buzam should be added.
+<i>225</i>&nbsp;	 * @param plant
+<i>226</i>&nbsp;	 *            The Buzam object that needs to be added to the world.
+<i>227</i>&nbsp;	 */
+<i>228</i>&nbsp;	public void addBuzam(World world, Buzam buzam);
+<i>229</i>&nbsp;
+<i>230</i>&nbsp;	/**
+<i>231</i>&nbsp;	 * Returns the current location of the given Buzam object.
+<i>232</i>&nbsp;	 * 
+<i>233</i>&nbsp;	 * @param alien
+<i>234</i>&nbsp;	 *            The alien of which to find the location
+<i>235</i>&nbsp;	 * @return An array, consisting of 2 integers {x, y}, that represents the
+<i>236</i>&nbsp;	 *         coordinates of the given alien&#39;s bottom left pixel in the world.
+<i>237</i>&nbsp;	 */
+<i>238</i>&nbsp;	public int[] getLocation(Buzam alien);
+<i>239</i>&nbsp;
+<i>240</i>&nbsp;	/**
+<i>241</i>&nbsp;	 * Return the current velocity (in m/s) of the given alien.
+<i>242</i>&nbsp;	 * 
+<i>243</i>&nbsp;	 * @param alien
+<i>244</i>&nbsp;	 *            The alien of which to get the velocity.
+<i>245</i>&nbsp;	 * 
+<i>246</i>&nbsp;	 * @return an array, consisting of 2 doubles {vx, vy}, that represents the
+<i>247</i>&nbsp;	 *         horizontal and vertical components of the given alien&#39;s current
+<i>248</i>&nbsp;	 *         velocity, in units of m/s.
+<i>249</i>&nbsp;	 */
+<i>250</i>&nbsp;	public double[] getVelocity(Buzam alien);
+<i>251</i>&nbsp;
+<i>252</i>&nbsp;	/**
+<i>253</i>&nbsp;	 * Return the current acceleration (in m/s^2) of the given alien.
+<i>254</i>&nbsp;	 * 
+<i>255</i>&nbsp;	 * @param alien
+<i>256</i>&nbsp;	 *            The alien of which to get the acceleration.
+<i>257</i>&nbsp;	 * 
+<i>258</i>&nbsp;	 * @return an array, consisting of 2 doubles {ax, ay}, that represents the
+<i>259</i>&nbsp;	 *         horizontal and vertical components of the given alien&#39;s current
+<i>260</i>&nbsp;	 *         acceleration, in units of m/s^2.
+<i>261</i>&nbsp;	 */
+<i>262</i>&nbsp;	public double[] getAcceleration(Buzam alien);
+<i>263</i>&nbsp;
+<i>264</i>&nbsp;	/**
+<i>265</i>&nbsp;	 * Return the current size of the given alien.
+<i>266</i>&nbsp;	 * 
+<i>267</i>&nbsp;	 * @param alien
+<i>268</i>&nbsp;	 *            The alien of which to get the size.
+<i>269</i>&nbsp;	 * 
+<i>270</i>&nbsp;	 * @return An array, consisting of 2 integers {w, h}, that represents the
+<i>271</i>&nbsp;	 *         current width and height of the given alien, in number of pixels.
+<i>272</i>&nbsp;	 */
+<i>273</i>&nbsp;	public int[] getSize(Buzam alien);
+<i>274</i>&nbsp;
+<i>275</i>&nbsp;	/**
+<i>276</i>&nbsp;	 * Return the current sprite image for the given alien.
+<i>277</i>&nbsp;	 * 
+<i>278</i>&nbsp;	 * @param alien
+<i>279</i>&nbsp;	 *            The alien for which to get the current sprite image.
+<i>280</i>&nbsp;	 * 
+<i>281</i>&nbsp;	 * @return The current sprite image for the given alien. Buzam, the evil
+<i>282</i>&nbsp;	 *         twin of Mazub, follows the same rules as Mazub with respect to
+<i>283</i>&nbsp;	 *         its sprites.
+<i>284</i>&nbsp;	 */
+<i>285</i>&nbsp;	public Sprite getCurrentSprite(Buzam alien);
+<i>286</i>&nbsp;
+<i>287</i>&nbsp;	/**
+<i>288</i>&nbsp;	 * Returns the current number of hitpoints of the given alien.
+<i>289</i>&nbsp;	 */
+<i>290</i>&nbsp;	public int getNbHitPoints(Buzam alien);
+<i>291</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

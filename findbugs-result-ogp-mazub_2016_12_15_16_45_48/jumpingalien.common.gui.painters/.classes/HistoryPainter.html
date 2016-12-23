@@ -1,0 +1,121 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HistoryPainter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.common.gui.painters</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HistoryPainter (jumpingalien.common.gui.painters)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HistoryPainter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.common.gui.painters;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.awt.Color;
+<i>4</i>&nbsp;import java.awt.Graphics2D;
+<i>5</i>&nbsp;import java.util.LinkedList;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import jumpingalien.common.gui.AlienGameScreen;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public class HistoryPainter extends AbstractAlienPainter&lt;AlienGameScreen&lt;?, ?&gt;&gt; {
+<i>10</i>&nbsp;
+<b class="nc"><i>11</i>&nbsp;	private static final Color HISTORY_DOTS_COLOR = Color.GRAY;</b>
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;	private static final int MAX_HISTORY_SIZE = 20;
+<i>14</i>&nbsp;
+<b class="nc"><i>15</i>&nbsp;	private final LinkedList&lt;int[]&gt; history = new LinkedList&lt;int[]&gt;();</b>
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;	public HistoryPainter(AlienGameScreen&lt;?, ?&gt; screen) {
+<b class="nc"><i>18</i>&nbsp;		super(screen);</b>
+<i>19</i>&nbsp;	}
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;	@Override
+<i>22</i>&nbsp;	public void paintInWorld(Graphics2D g) {
+<b class="nc"><i>23</i>&nbsp;		g.setColor(HISTORY_DOTS_COLOR);</b>
+<b class="nc"><i>24</i>&nbsp;		for (int[] xyH : history) {</b>
+<b class="nc"><i>25</i>&nbsp;			g.fillRect(xyH[0] - 1, xyH[1] - 1, 2, 2);</b>
+<b class="nc"><i>26</i>&nbsp;		}</b>
+<b class="nc"><i>27</i>&nbsp;		getGame().getAlienInfoProvider().getAlienXY()</b>
+<b class="nc"><i>28</i>&nbsp;				.ifPresent(xy -&gt; updateHistory(xy));</b>
+<i>29</i>&nbsp;	}
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;	private void updateHistory(int[] xy) {
+<b class="nc"><i>32</i>&nbsp;		history.add(xy);</b>
+<b class="nc"><i>33</i>&nbsp;		while (history.size() &gt; MAX_HISTORY_SIZE) {</b>
+<b class="nc"><i>34</i>&nbsp;			history.poll();</b>
+<i>35</i>&nbsp;		}
+<i>36</i>&nbsp;	}
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

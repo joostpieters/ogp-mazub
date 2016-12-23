@@ -1,0 +1,658 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ParserVisitor</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part3.programs.internal</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ParserVisitor (jumpingalien.part3.programs.internal)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ParserVisitor</td>
+<td class="coverageStat">
+  <span class="percent">
+    70%
+  </span>
+  <span class="absValue">
+    (7/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    58.6%
+  </span>
+  <span class="absValue">
+    (34/ 58)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ParserVisitor$ExpressionVisitor</td>
+<td class="coverageStat">
+  <span class="percent">
+    27.3%
+  </span>
+  <span class="absValue">
+    (6/ 22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18.2%
+  </span>
+  <span class="absValue">
+    (18/ 99)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParserVisitor$StatementVisitor</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.5%
+  </span>
+  <span class="absValue">
+    (6/ 16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28.8%
+  </span>
+  <span class="absValue">
+    (15/ 52)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParserVisitor$TypeVisitor</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/ 5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    39.6%
+  </span>
+  <span class="absValue">
+    (21/ 53)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    32.2%
+  </span>
+  <span class="absValue">
+    (69/ 214)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part3.programs.internal;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;import java.util.HashMap;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;import java.util.Map;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import org.antlr.v4.runtime.ParserRuleContext;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import jumpingalien.part3.programs.IProgramFactory;
+<i>11</i>&nbsp;import jumpingalien.part3.programs.IProgramFactory.SortDirection;
+<i>12</i>&nbsp;import jumpingalien.part3.programs.SourceLocation;
+<i>13</i>&nbsp;import jumpingalien.part3.programs.IProgramFactory.Direction;
+<i>14</i>&nbsp;import jumpingalien.part3.programs.IProgramFactory.Kind;
+<i>15</i>&nbsp;import jumpingalien.part3.programs.internal.generated.JumpingAlienProgBaseVisitor;
+<i>16</i>&nbsp;import jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer;
+<i>17</i>&nbsp;import jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.*;
+<i>18</i>&nbsp;
+<b class="fc"><i>19</i>&nbsp;public class ParserVisitor&lt;E, S, T&gt; extends JumpingAlienProgBaseVisitor&lt;Void&gt; {</b>
+<i>20</i>&nbsp;
+<b class="fc"><i>21</i>&nbsp;	private class ExpressionVisitor extends JumpingAlienProgBaseVisitor&lt;E&gt; {</b>
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;		@Override
+<i>24</i>&nbsp;		public E visitVarExpr(VarExprContext ctx) {
+<b class="fc"><i>25</i>&nbsp;			String name = ctx.variableName.getText();</b>
+<b class="fc"><i>26</i>&nbsp;			T type = globals.getOrDefault(name, null);</b>
+<b class="fc"><i>27</i>&nbsp;			return factory</b>
+<b class="fc"><i>28</i>&nbsp;					.createReadVariable(name, type, toSourceLocation(ctx));</b>
+<i>29</i>&nbsp;		}
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;		@Override
+<i>32</i>&nbsp;		public E visitDoubleLiteral(DoubleLiteralContext ctx) {
+<b class="fc"><i>33</i>&nbsp;			return factory.createDoubleConstant(</b>
+<b class="fc"><i>34</i>&nbsp;					Double.parseDouble(ctx.getText()), toSourceLocation(ctx));</b>
+<i>35</i>&nbsp;		}
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;		@Override
+<i>38</i>&nbsp;		public E visitIntLiteral(IntLiteralContext ctx) {
+<b class="fc"><i>39</i>&nbsp;			return factory.createDoubleConstant(</b>
+<b class="fc"><i>40</i>&nbsp;					Integer.parseInt(ctx.getText()), toSourceLocation(ctx));</b>
+<i>41</i>&nbsp;		}
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;		@Override
+<i>44</i>&nbsp;		public E visitParenExpr(ParenExprContext ctx) {
+<b class="nc"><i>45</i>&nbsp;			return visit(ctx.expr);</b>
+<i>46</i>&nbsp;		}
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;		@Override
+<i>49</i>&nbsp;		public E visitBoolLiteral(BoolLiteralContext ctx) {
+<b class="nc"><i>50</i>&nbsp;			switch (ctx.getStart().getType()) {</b>
+<i>51</i>&nbsp;			case JumpingAlienProgLexer.BOOL_TRUE:
+<b class="nc"><i>52</i>&nbsp;				return factory.createTrue(toSourceLocation(ctx));</b>
+<i>53</i>&nbsp;			case JumpingAlienProgLexer.BOOL_FALSE:
+<b class="nc"><i>54</i>&nbsp;				return factory.createFalse(toSourceLocation(ctx));</b>
+<i>55</i>&nbsp;			}
+<b class="nc"><i>56</i>&nbsp;			throw new IllegalArgumentException(&quot;Error while visiting &quot;</b>
+<b class="nc"><i>57</i>&nbsp;					+ ctx.getText());</b>
+<i>58</i>&nbsp;		}
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;		@Override
+<i>61</i>&nbsp;		public E visitNullLiteral(NullLiteralContext ctx) {
+<b class="nc"><i>62</i>&nbsp;			return factory.createNull(toSourceLocation(ctx));</b>
+<i>63</i>&nbsp;		}
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;		@Override
+<i>66</i>&nbsp;		public E visitSelfLiteral(SelfLiteralContext ctx) {
+<b class="nc"><i>67</i>&nbsp;			return factory.createSelf(toSourceLocation(ctx));</b>
+<i>68</i>&nbsp;		}
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;		@Override
+<i>71</i>&nbsp;		public E visitDirectionLiteral(DirectionLiteralContext ctx) {
+<b class="nc"><i>72</i>&nbsp;			Direction direction = toDirection(ctx.directionLiteral);</b>
+<b class="nc"><i>73</i>&nbsp;			return factory.createDirectionConstant(direction,</b>
+<b class="nc"><i>74</i>&nbsp;					toSourceLocation(ctx));</b>
+<i>75</i>&nbsp;		}
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;		@Override
+<i>78</i>&nbsp;		public E visitAddExpr(AddExprContext ctx) {
+<b class="nc"><i>79</i>&nbsp;			E left = visit(ctx.left);</b>
+<b class="nc"><i>80</i>&nbsp;			E right = visit(ctx.right);</b>
+<b class="nc"><i>81</i>&nbsp;			switch (ctx.op.getType()) {</b>
+<i>82</i>&nbsp;			case JumpingAlienProgLexer.PLUS:
+<b class="nc"><i>83</i>&nbsp;				return factory.createAddition(left, right,</b>
+<b class="nc"><i>84</i>&nbsp;						toSourceLocation(ctx));</b>
+<i>85</i>&nbsp;			case JumpingAlienProgLexer.MINUS:
+<b class="nc"><i>86</i>&nbsp;				return factory.createSubtraction(left, right,</b>
+<b class="nc"><i>87</i>&nbsp;						toSourceLocation(ctx));</b>
+<i>88</i>&nbsp;			}
+<b class="nc"><i>89</i>&nbsp;			throw new IllegalArgumentException(&quot;Error while visiting &quot;</b>
+<b class="nc"><i>90</i>&nbsp;					+ ctx.getText());</b>
+<i>91</i>&nbsp;		}
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;		@Override
+<i>94</i>&nbsp;		public E visitMultExpr(MultExprContext ctx) {
+<b class="nc"><i>95</i>&nbsp;			E left = visit(ctx.left);</b>
+<b class="nc"><i>96</i>&nbsp;			E right = visit(ctx.right);</b>
+<b class="nc"><i>97</i>&nbsp;			switch (ctx.op.getType()) {</b>
+<i>98</i>&nbsp;			case JumpingAlienProgLexer.TIMES:
+<b class="nc"><i>99</i>&nbsp;				return factory.createMultiplication(left, right,</b>
+<b class="nc"><i>100</i>&nbsp;						toSourceLocation(ctx));</b>
+<i>101</i>&nbsp;			case JumpingAlienProgLexer.DIV:
+<b class="nc"><i>102</i>&nbsp;				return factory.createDivision(left, right,</b>
+<b class="nc"><i>103</i>&nbsp;						toSourceLocation(ctx));</b>
+<i>104</i>&nbsp;			}
+<b class="nc"><i>105</i>&nbsp;			throw new IllegalArgumentException(&quot;Error while visiting &quot;</b>
+<b class="nc"><i>106</i>&nbsp;					+ ctx.getText());</b>
+<i>107</i>&nbsp;		}
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;		@Override
+<i>110</i>&nbsp;		public E visitSqrtExpr(SqrtExprContext ctx) {
+<b class="nc"><i>111</i>&nbsp;			E expr = visit(ctx.expr);</b>
+<b class="nc"><i>112</i>&nbsp;			return factory.createSqrt(expr, toSourceLocation(ctx));</b>
+<i>113</i>&nbsp;		}
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;		@Override
+<i>116</i>&nbsp;		public E visitRandomExpr(RandomExprContext ctx) {
+<b class="fc"><i>117</i>&nbsp;			E maxValue = visit(ctx.maxValue);</b>
+<b class="fc"><i>118</i>&nbsp;			return factory.createRandom(maxValue, toSourceLocation(ctx));</b>
+<i>119</i>&nbsp;		}
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;		@Override
+<i>122</i>&nbsp;		public E visitAndExpr(AndExprContext ctx) {
+<b class="nc"><i>123</i>&nbsp;			E left = visit(ctx.left);</b>
+<b class="nc"><i>124</i>&nbsp;			E right = visit(ctx.right);</b>
+<b class="nc"><i>125</i>&nbsp;			return factory.createAnd(left, right, toSourceLocation(ctx));</b>
+<i>126</i>&nbsp;		}
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;		@Override
+<i>129</i>&nbsp;		public E visitOrExpr(OrExprContext ctx) {
+<b class="nc"><i>130</i>&nbsp;			E left = visit(ctx.left);</b>
+<b class="nc"><i>131</i>&nbsp;			E right = visit(ctx.right);</b>
+<b class="nc"><i>132</i>&nbsp;			return factory.createOr(left, right, toSourceLocation(ctx));</b>
+<i>133</i>&nbsp;		}
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;		@Override
+<i>136</i>&nbsp;		public E visitNotExpr(NotExprContext ctx) {
+<b class="nc"><i>137</i>&nbsp;			return factory.createNot(visit(ctx.expr), toSourceLocation(ctx));</b>
+<i>138</i>&nbsp;		}
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;		@Override
+<i>141</i>&nbsp;		public E visitCmpExpr(CmpExprContext ctx) {
+<b class="fc"><i>142</i>&nbsp;			E left = visit(ctx.left);</b>
+<b class="fc"><i>143</i>&nbsp;			E right = visit(ctx.right);</b>
+<b class="fc"><i>144</i>&nbsp;			switch (ctx.op.getType()) {</b>
+<i>145</i>&nbsp;			case JumpingAlienProgLexer.LT:
+<b class="fc"><i>146</i>&nbsp;				return factory.createLessThan(left, right,</b>
+<b class="fc"><i>147</i>&nbsp;						toSourceLocation(ctx));</b>
+<i>148</i>&nbsp;			case JumpingAlienProgLexer.LTE:
+<b class="fc"><i>149</i>&nbsp;				return factory.createLessThanOrEqualTo(left, right,</b>
+<b class="fc"><i>150</i>&nbsp;						toSourceLocation(ctx));</b>
+<i>151</i>&nbsp;			case JumpingAlienProgLexer.GT:
+<b class="nc"><i>152</i>&nbsp;				return factory.createGreaterThan(left, right,</b>
+<b class="nc"><i>153</i>&nbsp;						toSourceLocation(ctx));</b>
+<i>154</i>&nbsp;			case JumpingAlienProgLexer.GTE:
+<b class="nc"><i>155</i>&nbsp;				return factory.createGreaterThanOrEqualTo(left, right,</b>
+<b class="nc"><i>156</i>&nbsp;						toSourceLocation(ctx));</b>
+<i>157</i>&nbsp;			case JumpingAlienProgLexer.EQ:
+<b class="nc"><i>158</i>&nbsp;				return factory.createEquals(left, right, toSourceLocation(ctx));</b>
+<i>159</i>&nbsp;			case JumpingAlienProgLexer.NEQ:
+<b class="nc"><i>160</i>&nbsp;				return factory.createNotEquals(left, right,</b>
+<b class="nc"><i>161</i>&nbsp;						toSourceLocation(ctx));</b>
+<i>162</i>&nbsp;			}
+<b class="nc"><i>163</i>&nbsp;			throw new IllegalArgumentException(&quot;Error while visiting &quot;</b>
+<b class="nc"><i>164</i>&nbsp;					+ ctx.getText());</b>
+<i>165</i>&nbsp;		}
+<i>166</i>&nbsp;
+<i>167</i>&nbsp;		@Override
+<i>168</i>&nbsp;		public E visitGetExpr(GetExprContext ctx) {
+<b class="nc"><i>169</i>&nbsp;			E obj = visit(ctx.object);</b>
+<b class="nc"><i>170</i>&nbsp;			switch (ctx.attr.getType()) {</b>
+<i>171</i>&nbsp;			case JumpingAlienProgLexer.GETX:
+<b class="nc"><i>172</i>&nbsp;				return factory.createGetX(obj, toSourceLocation(ctx));</b>
+<i>173</i>&nbsp;			case JumpingAlienProgLexer.GETY:
+<b class="nc"><i>174</i>&nbsp;				return factory.createGetY(obj, toSourceLocation(ctx));</b>
+<i>175</i>&nbsp;			case JumpingAlienProgLexer.GETWIDTH:
+<b class="nc"><i>176</i>&nbsp;				return factory.createGetWidth(obj, toSourceLocation(ctx));</b>
+<i>177</i>&nbsp;			case JumpingAlienProgLexer.GETHEIGHT:
+<b class="nc"><i>178</i>&nbsp;				return factory.createGetHeight(obj, toSourceLocation(ctx));</b>
+<i>179</i>&nbsp;			case JumpingAlienProgLexer.GETHP:
+<b class="nc"><i>180</i>&nbsp;				return factory.createGetHitPoints(obj, toSourceLocation(ctx));</b>
+<i>181</i>&nbsp;			}
+<b class="nc"><i>182</i>&nbsp;			throw new IllegalArgumentException(&quot;Error while visiting &quot;</b>
+<b class="nc"><i>183</i>&nbsp;					+ ctx.getText());</b>
+<i>184</i>&nbsp;		}
+<i>185</i>&nbsp;
+<i>186</i>&nbsp;		@Override
+<i>187</i>&nbsp;		public E visitSearchObjExpr(SearchObjExprContext ctx) {
+<b class="nc"><i>188</i>&nbsp;			E direction = visit(ctx.searchDirection);</b>
+<b class="nc"><i>189</i>&nbsp;			return factory.createSearchObject(direction, toSourceLocation(ctx));</b>
+<i>190</i>&nbsp;		}
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;		@Override
+<i>193</i>&nbsp;		public E visitIsExpr(IsExprContext ctx) {
+<b class="nc"><i>194</i>&nbsp;			E obj = visit(ctx.obj);</b>
+<b class="nc"><i>195</i>&nbsp;			switch (ctx.test.getType()) {</b>
+<i>196</i>&nbsp;			case JumpingAlienProgLexer.ISMAZUB:
+<b class="nc"><i>197</i>&nbsp;				return factory.createIsMazub(obj, toSourceLocation(ctx));</b>
+<i>198</i>&nbsp;			case JumpingAlienProgLexer.ISSHARK:
+<b class="nc"><i>199</i>&nbsp;				return factory.createIsShark(obj, toSourceLocation(ctx));</b>
+<i>200</i>&nbsp;			case JumpingAlienProgLexer.ISSLIME:
+<b class="nc"><i>201</i>&nbsp;				return factory.createIsSlime(obj, toSourceLocation(ctx));</b>
+<i>202</i>&nbsp;			case JumpingAlienProgLexer.ISPLANT:
+<b class="nc"><i>203</i>&nbsp;				return factory.createIsPlant(obj, toSourceLocation(ctx));</b>
+<i>204</i>&nbsp;			case JumpingAlienProgLexer.ISDEAD:
+<b class="nc"><i>205</i>&nbsp;				return factory.createIsDead(obj, toSourceLocation(ctx));</b>
+<i>206</i>&nbsp;			case JumpingAlienProgLexer.ISTERRAIN:
+<b class="nc"><i>207</i>&nbsp;				return factory.createIsTerrain(obj, toSourceLocation(ctx));</b>
+<i>208</i>&nbsp;			case JumpingAlienProgLexer.ISPASSABLE:
+<b class="nc"><i>209</i>&nbsp;				return factory.createIsPassable(obj, toSourceLocation(ctx));</b>
+<i>210</i>&nbsp;			case JumpingAlienProgLexer.ISWATER:
+<b class="nc"><i>211</i>&nbsp;				return factory.createIsWater(obj, toSourceLocation(ctx));</b>
+<i>212</i>&nbsp;			case JumpingAlienProgLexer.ISMAGMA:
+<b class="nc"><i>213</i>&nbsp;				return factory.createIsMagma(obj, toSourceLocation(ctx));</b>
+<i>214</i>&nbsp;			case JumpingAlienProgLexer.ISAIR:
+<b class="nc"><i>215</i>&nbsp;				return factory.createIsAir(obj, toSourceLocation(ctx));</b>
+<i>216</i>&nbsp;			case JumpingAlienProgLexer.ISDUCKING:
+<b class="nc"><i>217</i>&nbsp;				return factory.createIsDucking(obj, toSourceLocation(ctx));</b>
+<i>218</i>&nbsp;			case JumpingAlienProgLexer.ISJUMPING:
+<b class="nc"><i>219</i>&nbsp;				return factory.createIsJumping(obj, toSourceLocation(ctx));</b>
+<i>220</i>&nbsp;			default:
+<b class="nc"><i>221</i>&nbsp;				throw new IllegalArgumentException(</b>
+<b class="nc"><i>222</i>&nbsp;						&quot;Unrecognized is* expression: &quot; + ctx.getText());</b>
+<i>223</i>&nbsp;			}
+<i>224</i>&nbsp;		}
+<i>225</i>&nbsp;
+<i>226</i>&nbsp;		@Override
+<i>227</i>&nbsp;		public E visitIsMoving(IsMovingContext ctx) {
+<b class="nc"><i>228</i>&nbsp;			E obj = visit(ctx.obj);</b>
+<b class="nc"><i>229</i>&nbsp;			E direction = visit(ctx.isMovingDirection);</b>
+<b class="nc"><i>230</i>&nbsp;			return factory</b>
+<b class="nc"><i>231</i>&nbsp;					.createIsMoving(obj, direction, toSourceLocation(ctx));</b>
+<i>232</i>&nbsp;		}
+<i>233</i>&nbsp;		
+<i>234</i>&nbsp;		 @Override
+<i>235</i>&nbsp;		public E visitGetTileExpr(GetTileExprContext ctx) {
+<b class="nc"><i>236</i>&nbsp;			 E x = visit(ctx.xpos);</b>
+<b class="nc"><i>237</i>&nbsp;			 E y = visit(ctx.ypos);</b>
+<b class="nc"><i>238</i>&nbsp;			 return factory.createGetTile(x, y, toSourceLocation(ctx));</b>
+<i>239</i>&nbsp;		}
+<i>240</i>&nbsp;
+<i>241</i>&nbsp;	}
+<i>242</i>&nbsp;
+<b class="fc"><i>243</i>&nbsp;	private class StatementVisitor extends JumpingAlienProgBaseVisitor&lt;S&gt; {</b>
+<i>244</i>&nbsp;
+<i>245</i>&nbsp;		@Override
+<i>246</i>&nbsp;		public S visitAssignStatement(AssignStatementContext ctx) {
+<b class="nc"><i>247</i>&nbsp;			String variable = ctx.variableName.getText();</b>
+<b class="nc"><i>248</i>&nbsp;			T type = globals.getOrDefault(variable, null);</b>
+<b class="nc"><i>249</i>&nbsp;			E value = expressions.visit(ctx.value);</b>
+<b class="nc"><i>250</i>&nbsp;			return factory.createAssignment(variable, type, value,</b>
+<b class="nc"><i>251</i>&nbsp;					toSourceLocation(ctx));</b>
+<i>252</i>&nbsp;		}
+<i>253</i>&nbsp;
+<i>254</i>&nbsp;		@Override
+<i>255</i>&nbsp;		public S visitWhileStatement(WhileStatementContext ctx) {
+<b class="fc"><i>256</i>&nbsp;			E condition = expressions.visit(ctx.condition);</b>
+<b class="fc"><i>257</i>&nbsp;			S body = visit(ctx.body);</b>
+<b class="fc"><i>258</i>&nbsp;			return factory.createWhile(condition, body, toSourceLocation(ctx));</b>
+<i>259</i>&nbsp;		}
+<i>260</i>&nbsp;
+<i>261</i>&nbsp;		@Override
+<i>262</i>&nbsp;		public S visitForeachStatement(ForeachStatementContext ctx) {
+<b class="nc"><i>263</i>&nbsp;			Kind kind = toKind(ctx.variableKind);</b>
+<b class="nc"><i>264</i>&nbsp;			String variableName = ctx.variableName.getText();</b>
+<b class="nc"><i>265</i>&nbsp;			S body = visit(ctx.body);</b>
+<b class="nc"><i>266</i>&nbsp;			E where = null;</b>
+<b class="nc"><i>267</i>&nbsp;			if (ctx.whereExpr != null) {</b>
+<b class="nc"><i>268</i>&nbsp;				where = expressions.visit(ctx.whereExpr);</b>
+<i>269</i>&nbsp;			}
+<b class="nc"><i>270</i>&nbsp;			E sort = null;</b>
+<b class="nc"><i>271</i>&nbsp;			SortDirection sortDir = null;</b>
+<b class="nc"><i>272</i>&nbsp;			if (ctx.sortExpr != null) {</b>
+<b class="nc"><i>273</i>&nbsp;				sort = expressions.visit(ctx.sortExpr);</b>
+<b class="nc"><i>274</i>&nbsp;				sortDir = toSortDir(ctx.sortDir);</b>
+<i>275</i>&nbsp;			}
+<b class="nc"><i>276</i>&nbsp;			return factory.createForEach(variableName, kind, where, sort,</b>
+<b class="nc"><i>277</i>&nbsp;					sortDir, body, toSourceLocation(ctx));</b>
+<i>278</i>&nbsp;		}
+<i>279</i>&nbsp;
+<i>280</i>&nbsp;		@Override
+<i>281</i>&nbsp;		public S visitBreakStatement(BreakStatementContext ctx) {
+<b class="fc"><i>282</i>&nbsp;			return factory.createBreak(toSourceLocation(ctx));</b>
+<i>283</i>&nbsp;		}
+<i>284</i>&nbsp;
+<i>285</i>&nbsp;		@Override
+<i>286</i>&nbsp;		public S visitIfStatement(IfStatementContext ctx) {
+<b class="fc"><i>287</i>&nbsp;			E condition = expressions.visit(ctx.condition);</b>
+<b class="fc"><i>288</i>&nbsp;			S ifbody = visit(ctx.ifbody);</b>
+<b class="fc"><i>289</i>&nbsp;			S elsebody = null;</b>
+<b class="fc"><i>290</i>&nbsp;			if (ctx.elsebody != null) {</b>
+<b class="nc"><i>291</i>&nbsp;				elsebody = visit(ctx.elsebody);</b>
+<i>292</i>&nbsp;			}
+<b class="fc"><i>293</i>&nbsp;			return factory.createIf(condition, ifbody, elsebody,</b>
+<b class="fc"><i>294</i>&nbsp;					toSourceLocation(ctx));</b>
+<i>295</i>&nbsp;		}
+<i>296</i>&nbsp;
+<i>297</i>&nbsp;		@Override
+<i>298</i>&nbsp;		public S visitPrintStatement(PrintStatementContext ctx) {
+<b class="nc"><i>299</i>&nbsp;			E value = expressions.visit(ctx.value);</b>
+<b class="nc"><i>300</i>&nbsp;			return factory.createPrint(value, toSourceLocation(ctx));</b>
+<i>301</i>&nbsp;		}
+<i>302</i>&nbsp;
+<i>303</i>&nbsp;		@Override
+<i>304</i>&nbsp;		public S visitStartRunStatement(StartRunStatementContext ctx) {
+<b class="nc"><i>305</i>&nbsp;			E direction = expressions.visit(ctx.runDirection);</b>
+<b class="nc"><i>306</i>&nbsp;			return factory.createStartRun(direction, toSourceLocation(ctx));</b>
+<i>307</i>&nbsp;		}
+<i>308</i>&nbsp;
+<i>309</i>&nbsp;		@Override
+<i>310</i>&nbsp;		public S visitStopRunStatement(StopRunStatementContext ctx) {
+<b class="nc"><i>311</i>&nbsp;			E direction = expressions.visit(ctx.runDirection);</b>
+<b class="nc"><i>312</i>&nbsp;			return factory.createStopRun(direction, toSourceLocation(ctx));</b>
+<i>313</i>&nbsp;		}
+<i>314</i>&nbsp;
+<i>315</i>&nbsp;		@Override
+<i>316</i>&nbsp;		public S visitStartJumpStatement(StartJumpStatementContext ctx) {
+<b class="nc"><i>317</i>&nbsp;			return factory.createStartJump(toSourceLocation(ctx));</b>
+<i>318</i>&nbsp;		}
+<i>319</i>&nbsp;
+<i>320</i>&nbsp;		@Override
+<i>321</i>&nbsp;		public S visitStopJumpStatement(StopJumpStatementContext ctx) {
+<b class="nc"><i>322</i>&nbsp;			return factory.createStopJump(toSourceLocation(ctx));</b>
+<i>323</i>&nbsp;		}
+<i>324</i>&nbsp;
+<i>325</i>&nbsp;		@Override
+<i>326</i>&nbsp;		public S visitStartDuckStatement(StartDuckStatementContext ctx) {
+<b class="nc"><i>327</i>&nbsp;			return factory.createStartDuck(toSourceLocation(ctx));</b>
+<i>328</i>&nbsp;		}
+<i>329</i>&nbsp;
+<i>330</i>&nbsp;		@Override
+<i>331</i>&nbsp;		public S visitStopDuckStatement(StopDuckStatementContext ctx) {
+<b class="nc"><i>332</i>&nbsp;			return factory.createStopDuck(toSourceLocation(ctx));</b>
+<i>333</i>&nbsp;		}
+<i>334</i>&nbsp;
+<i>335</i>&nbsp;		@Override
+<i>336</i>&nbsp;		public S visitWaitStatement(WaitStatementContext ctx) {
+<b class="nc"><i>337</i>&nbsp;			E duration = expressions.visit(ctx.duration);</b>
+<b class="nc"><i>338</i>&nbsp;			return factory.createWait(duration, toSourceLocation(ctx));</b>
+<i>339</i>&nbsp;		}
+<i>340</i>&nbsp;
+<i>341</i>&nbsp;		@Override
+<i>342</i>&nbsp;		public S visitSkipStatement(SkipStatementContext ctx) {
+<b class="fc"><i>343</i>&nbsp;			return factory.createSkip(toSourceLocation(ctx));</b>
+<i>344</i>&nbsp;		}
+<i>345</i>&nbsp;
+<i>346</i>&nbsp;		@Override
+<i>347</i>&nbsp;		public S visitStatement(StatementContext ctx) {
+<b class="fc"><i>348</i>&nbsp;			S first = visit(ctx.first);</b>
+<i>349</i>&nbsp;
+<b class="fc"><i>350</i>&nbsp;			if (ctx.rest.isEmpty()) {</b>
+<b class="fc"><i>351</i>&nbsp;				return first;</b>
+<i>352</i>&nbsp;			}
+<i>353</i>&nbsp;
+<b class="nc"><i>354</i>&nbsp;			List&lt;S&gt; statements = new ArrayList&lt;S&gt;();</b>
+<b class="nc"><i>355</i>&nbsp;			statements.add(first);</b>
+<b class="nc"><i>356</i>&nbsp;			for (SingleStatementContext nextCtx : ctx.rest) {</b>
+<b class="nc"><i>357</i>&nbsp;				statements.add(visit(nextCtx));</b>
+<b class="nc"><i>358</i>&nbsp;			}</b>
+<i>359</i>&nbsp;
+<b class="nc"><i>360</i>&nbsp;			return factory.createSequence(statements, toSourceLocation(ctx));</b>
+<i>361</i>&nbsp;		}
+<i>362</i>&nbsp;
+<i>363</i>&nbsp;	}
+<i>364</i>&nbsp;
+<b class="fc"><i>365</i>&nbsp;	private class TypeVisitor extends JumpingAlienProgBaseVisitor&lt;T&gt; {</b>
+<i>366</i>&nbsp;
+<i>367</i>&nbsp;		@Override
+<i>368</i>&nbsp;		public T visitDouble_type(Double_typeContext ctx) {
+<b class="fc"><i>369</i>&nbsp;			return factory.getDoubleType();</b>
+<i>370</i>&nbsp;		}
+<i>371</i>&nbsp;
+<i>372</i>&nbsp;		@Override
+<i>373</i>&nbsp;		public T visitBool_type(Bool_typeContext ctx) {
+<b class="nc"><i>374</i>&nbsp;			return factory.getBoolType();</b>
+<i>375</i>&nbsp;		}
+<i>376</i>&nbsp;
+<i>377</i>&nbsp;		@Override
+<i>378</i>&nbsp;		public T visitObject_type(Object_typeContext ctx) {
+<b class="nc"><i>379</i>&nbsp;			return factory.getGameObjectType();</b>
+<i>380</i>&nbsp;		}
+<i>381</i>&nbsp;
+<i>382</i>&nbsp;		@Override
+<i>383</i>&nbsp;		public T visitDirection_type(Direction_typeContext ctx) {
+<b class="nc"><i>384</i>&nbsp;			return factory.getDirectionType();</b>
+<i>385</i>&nbsp;		}
+<i>386</i>&nbsp;
+<i>387</i>&nbsp;	}
+<i>388</i>&nbsp;
+<i>389</i>&nbsp;	private final IProgramFactory&lt;E, S, T, ?&gt; factory;
+<i>390</i>&nbsp;
+<i>391</i>&nbsp;	private TypeVisitor types;
+<i>392</i>&nbsp;	private StatementVisitor statements;
+<i>393</i>&nbsp;	private ExpressionVisitor expressions;
+<i>394</i>&nbsp;
+<b class="fc"><i>395</i>&nbsp;	private List&lt;S&gt; variableInitialisationStatements = new ArrayList&lt;&gt;();</b>
+<i>396</i>&nbsp;
+<i>397</i>&nbsp;	private S mainStatement;
+<b class="fc"><i>398</i>&nbsp;	private Map&lt;String, T&gt; globals = new HashMap&lt;&gt;();</b>
+<i>399</i>&nbsp;
+<b class="fc"><i>400</i>&nbsp;	public ParserVisitor(IProgramFactory&lt;E, S, T, ?&gt; factory) {</b>
+<b class="fc"><i>401</i>&nbsp;		this.factory = factory;</b>
+<b class="fc"><i>402</i>&nbsp;		this.expressions = new ExpressionVisitor();</b>
+<b class="fc"><i>403</i>&nbsp;		this.statements = new StatementVisitor();</b>
+<b class="fc"><i>404</i>&nbsp;		this.types = new TypeVisitor();</b>
+<b class="fc"><i>405</i>&nbsp;	}</b>
+<i>406</i>&nbsp;
+<i>407</i>&nbsp;	public S getMainStatement() {
+<b class="fc"><i>408</i>&nbsp;		return mainStatement;</b>
+<i>409</i>&nbsp;	}
+<i>410</i>&nbsp;
+<i>411</i>&nbsp;	public Map&lt;String, T&gt; getGlobals() {
+<b class="fc"><i>412</i>&nbsp;		return globals;</b>
+<i>413</i>&nbsp;	}
+<i>414</i>&nbsp;
+<i>415</i>&nbsp;	@Override
+<i>416</i>&nbsp;	public Void visitProgram(ProgramContext ctx) {
+<b class="fc"><i>417</i>&nbsp;		for (DeclarationContext decl : ctx.declaration()) {</b>
+<b class="fc"><i>418</i>&nbsp;			visit(decl);</b>
+<b class="fc"><i>419</i>&nbsp;		}</b>
+<b class="fc"><i>420</i>&nbsp;		S mainStatement = statements.visit(ctx.main);</b>
+<i>421</i>&nbsp;
+<b class="fc"><i>422</i>&nbsp;		if (variableInitialisationStatements.isEmpty()) {</b>
+<b class="fc"><i>423</i>&nbsp;			this.mainStatement = mainStatement;</b>
+<i>424</i>&nbsp;		} else {
+<b class="fc"><i>425</i>&nbsp;			List&lt;S&gt; statements = new ArrayList&lt;&gt;(</b>
+<i>426</i>&nbsp;					variableInitialisationStatements);
+<b class="fc"><i>427</i>&nbsp;			statements.add(mainStatement);</b>
+<b class="fc"><i>428</i>&nbsp;			this.mainStatement = factory.createSequence(statements,</b>
+<b class="fc"><i>429</i>&nbsp;					toSourceLocation(ctx));</b>
+<i>430</i>&nbsp;		}
+<i>431</i>&nbsp;
+<b class="fc"><i>432</i>&nbsp;		return null;</b>
+<i>433</i>&nbsp;	}
+<i>434</i>&nbsp;
+<i>435</i>&nbsp;	@Override
+<i>436</i>&nbsp;	public Void visitDeclaration(DeclarationContext ctx) {
+<b class="fc"><i>437</i>&nbsp;		String name = ctx.variableName.getText();</b>
+<i>438</i>&nbsp;
+<b class="fc"><i>439</i>&nbsp;		T type = types.visit(ctx.variableType);</b>
+<b class="fc"><i>440</i>&nbsp;		if (globals.containsKey(name)) {</b>
+<b class="nc"><i>441</i>&nbsp;			throw new IllegalStateException(&quot;Error on line &quot;</b>
+<b class="nc"><i>442</i>&nbsp;					+ ctx.start.getLine() + &quot;: a variable with name &#39;&quot; + name</b>
+<i>443</i>&nbsp;					+ &quot;&#39; was already declared.&quot;);
+<i>444</i>&nbsp;		}
+<b class="fc"><i>445</i>&nbsp;		globals.put(name, type);</b>
+<i>446</i>&nbsp;
+<b class="fc"><i>447</i>&nbsp;		if (ctx.initialValue != null) {</b>
+<b class="fc"><i>448</i>&nbsp;			E value = expressions.visit(ctx.initialValue);</b>
+<b class="fc"><i>449</i>&nbsp;			variableInitialisationStatements.add(factory.createAssignment(name,</b>
+<b class="fc"><i>450</i>&nbsp;					type, value, toSourceLocation(ctx)));</b>
+<i>451</i>&nbsp;		}
+<b class="fc"><i>452</i>&nbsp;		return null;</b>
+<i>453</i>&nbsp;	}
+<i>454</i>&nbsp;
+<i>455</i>&nbsp;	private Kind toKind(KindContext kindCtx) {
+<b class="nc"><i>456</i>&nbsp;		switch (kindCtx.getStart().getType()) {</b>
+<i>457</i>&nbsp;		case JumpingAlienProgLexer.KIND_MAZUB:
+<b class="nc"><i>458</i>&nbsp;			return Kind.MAZUB;</b>
+<i>459</i>&nbsp;		case JumpingAlienProgLexer.KIND_BUZAM:
+<b class="nc"><i>460</i>&nbsp;			return Kind.BUZAM;</b>
+<i>461</i>&nbsp;		case JumpingAlienProgLexer.KIND_PLANT:
+<b class="nc"><i>462</i>&nbsp;			return Kind.PLANT;</b>
+<i>463</i>&nbsp;		case JumpingAlienProgLexer.KIND_SHARK:
+<b class="nc"><i>464</i>&nbsp;			return Kind.SHARK;</b>
+<i>465</i>&nbsp;		case JumpingAlienProgLexer.KIND_SLIME:
+<b class="nc"><i>466</i>&nbsp;			return Kind.SLIME;</b>
+<i>467</i>&nbsp;		case JumpingAlienProgLexer.KIND_TERRAIN:
+<b class="nc"><i>468</i>&nbsp;			return Kind.TERRAIN;</b>
+<i>469</i>&nbsp;		case JumpingAlienProgLexer.KIND_ANY:
+<b class="nc"><i>470</i>&nbsp;			return Kind.ANY;</b>
+<i>471</i>&nbsp;		default:
+<b class="nc"><i>472</i>&nbsp;			throw new IllegalArgumentException(&quot;Unknown direction: &quot;</b>
+<b class="nc"><i>473</i>&nbsp;					+ kindCtx.getText());</b>
+<i>474</i>&nbsp;		}
+<i>475</i>&nbsp;	}
+<i>476</i>&nbsp;
+<i>477</i>&nbsp;	private Direction toDirection(DirectionContext directionCtx) {
+<b class="nc"><i>478</i>&nbsp;		switch (directionCtx.getStart().getType()) {</b>
+<i>479</i>&nbsp;		case JumpingAlienProgLexer.DIRECTION_LEFT:
+<b class="nc"><i>480</i>&nbsp;			return Direction.LEFT;</b>
+<i>481</i>&nbsp;		case JumpingAlienProgLexer.DIRECTION_RIGHT:
+<b class="nc"><i>482</i>&nbsp;			return Direction.RIGHT;</b>
+<i>483</i>&nbsp;		case JumpingAlienProgLexer.DIRECTION_UP:
+<b class="nc"><i>484</i>&nbsp;			return Direction.UP;</b>
+<i>485</i>&nbsp;		case JumpingAlienProgLexer.DIRECTION_DOWN:
+<b class="nc"><i>486</i>&nbsp;			return Direction.DOWN;</b>
+<i>487</i>&nbsp;		default:
+<b class="nc"><i>488</i>&nbsp;			throw new IllegalArgumentException(&quot;Unknown direction: &quot;</b>
+<b class="nc"><i>489</i>&nbsp;					+ directionCtx.getText());</b>
+<i>490</i>&nbsp;		}
+<i>491</i>&nbsp;	}
+<i>492</i>&nbsp;
+<i>493</i>&nbsp;	private SourceLocation toSourceLocation(ParserRuleContext ctx) {
+<b class="fc"><i>494</i>&nbsp;		int line = ctx.getStart().getLine();</b>
+<b class="fc"><i>495</i>&nbsp;		int column = ctx.getStart().getCharPositionInLine();</b>
+<b class="fc"><i>496</i>&nbsp;		return new SourceLocation(line, column);</b>
+<i>497</i>&nbsp;	}
+<i>498</i>&nbsp;
+<i>499</i>&nbsp;	private SortDirection toSortDir(SortDirectionContext sortDir) {
+<b class="nc"><i>500</i>&nbsp;		switch (sortDir.start.getType()) {</b>
+<i>501</i>&nbsp;		case JumpingAlienProgLexer.ASCENDING:
+<b class="nc"><i>502</i>&nbsp;			return SortDirection.ASCENDING;</b>
+<i>503</i>&nbsp;		case JumpingAlienProgLexer.DESCENDING:
+<b class="nc"><i>504</i>&nbsp;			return SortDirection.DESCENDING;</b>
+<i>505</i>&nbsp;		default:
+<b class="nc"><i>506</i>&nbsp;			throw new IllegalArgumentException(&quot;Unknown sort direction: &quot;</b>
+<b class="nc"><i>507</i>&nbsp;					+ sortDir.getText());</b>
+<i>508</i>&nbsp;		}
+<i>509</i>&nbsp;	}
+<i>510</i>&nbsp;
+<i>511</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: StartRunExpr</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.model.programs.statements.primitive</a> ]
+</div>
+
+<h1>Coverage Summary for Class: StartRunExpr (jumpingalien.model.programs.statements.primitive)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StartRunExpr</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">StartRunExpr$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.model.programs.statements.primitive;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import jumpingalien.model.programs.Environment;
+<i>4</i>&nbsp;import jumpingalien.model.programs.Expression;
+<i>5</i>&nbsp;import jumpingalien.part3.programs.IProgramFactory;
+<i>6</i>&nbsp;import jumpingalien.part3.programs.SourceLocation;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public class StartRunExpr extends PrimitiveStatement&lt;IProgramFactory.Direction&gt;
+<i>9</i>&nbsp;{
+<i>10</i>&nbsp;	public StartRunExpr(SourceLocation sourceLocation, Expression&lt;IProgramFactory.Direction&gt; exp)
+<i>11</i>&nbsp;	{
+<b class="nc"><i>12</i>&nbsp;		super(sourceLocation, exp);</b>
+<b class="nc"><i>13</i>&nbsp;	}</b>
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;	protected void exec(Environment env, Expression&lt;IProgramFactory.Direction&gt; expression)
+<i>16</i>&nbsp;	{
+<b class="nc"><i>17</i>&nbsp;		switch (expression.getValue(env))</b>
+<i>18</i>&nbsp;		{
+<i>19</i>&nbsp;			case LEFT:
+<b class="nc"><i>20</i>&nbsp;				env.getActiveCaller().startMoveLeft();</b>
+<b class="nc"><i>21</i>&nbsp;				break;</b>
+<i>22</i>&nbsp;			case RIGHT:
+<b class="nc"><i>23</i>&nbsp;				env.getActiveCaller().startMoveRight();</b>
+<b class="nc"><i>24</i>&nbsp;				break;</b>
+<i>25</i>&nbsp;			case UP:
+<b class="nc"><i>26</i>&nbsp;				throw new IllegalArgumentException(&quot;can only move right or left not up&quot;);</b>
+<i>27</i>&nbsp;			case DOWN:
+<b class="nc"><i>28</i>&nbsp;				throw new IllegalArgumentException(&quot;can only move right or left not down&quot;);</b>
+<i>29</i>&nbsp;		}
+<b class="nc"><i>30</i>&nbsp;	}</b>
+<i>31</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

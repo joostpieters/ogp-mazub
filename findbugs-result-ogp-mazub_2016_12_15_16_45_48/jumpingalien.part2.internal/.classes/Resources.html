@@ -1,0 +1,129 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Resources</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part2.internal</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Resources (jumpingalien.part2.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Resources</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part2.internal;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.stream.IntStream;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import jumpingalien.common.sprites.ImageSprite;
+<i>6</i>&nbsp;import jumpingalien.common.sprites.JumpingAlienSprites;
+<i>7</i>&nbsp;
+<b class="nc"><i>8</i>&nbsp;public class Resources extends JumpingAlienSprites {</b>
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;	public static final String PLANT_LEFT_FILENAME = &quot;levels/items/plantPurple.png&quot;;
+<b class="nc"><i>11</i>&nbsp;	public static final ImageSprite PLANT_SPRITE_LEFT = ImageSprite</b>
+<b class="nc"><i>12</i>&nbsp;			.createSprite(PLANT_LEFT_FILENAME);</b>
+<b class="nc"><i>13</i>&nbsp;	public static final ImageSprite PLANT_SPRITE_RIGHT = ImageSprite</b>
+<b class="nc"><i>14</i>&nbsp;			.createHFlippedSprite(PLANT_LEFT_FILENAME);</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;	public static final String SHARK_LEFT_FILENAME = &quot;levels/enemies/fishSwim1.png&quot;;
+<i>17</i>&nbsp;	public static final String SHARK_LEFT2_FILENAME = &quot;levels/enemies/fishSwim2.png&quot;;
+<i>18</i>&nbsp;	public static final String SHARK_DEAD_FILENAME = &quot;levels/enemies/fishDead.png&quot;;
+<i>19</i>&nbsp;
+<b class="nc"><i>20</i>&nbsp;	public static final ImageSprite SHARK_SPRITE_LEFT = ImageSprite</b>
+<b class="nc"><i>21</i>&nbsp;			.createSprite(SHARK_LEFT_FILENAME);</b>
+<b class="nc"><i>22</i>&nbsp;	public static final ImageSprite SHARK_SPRITE_RIGHT = ImageSprite</b>
+<b class="nc"><i>23</i>&nbsp;			.createHFlippedSprite(SHARK_LEFT_FILENAME);</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;	public static final String SLIME_LEFT_FILENAME = &quot;levels/enemies/slimeWalk1.png&quot;;
+<i>26</i>&nbsp;	public static final String SLIME_LEFT2_FILENAME = &quot;levels/enemies/slimeWalk2.png&quot;;
+<i>27</i>&nbsp;	public static final String SLIME_DEAD_FILENAME = &quot;levels/enemies/slimeDead.png&quot;;
+<i>28</i>&nbsp;
+<b class="nc"><i>29</i>&nbsp;	public static final ImageSprite SLIME_SPRITE_LEFT = ImageSprite</b>
+<b class="nc"><i>30</i>&nbsp;			.createSprite(SLIME_LEFT_FILENAME);</b>
+<b class="nc"><i>31</i>&nbsp;	public static final ImageSprite SLIME_SPRITE_RIGHT = ImageSprite</b>
+<b class="nc"><i>32</i>&nbsp;			.createHFlippedSprite(SLIME_LEFT_FILENAME);</b>
+<i>33</i>&nbsp;
+<b class="nc"><i>34</i>&nbsp;	public static final ImageSprite[] NUMBER_SPRITES = IntStream</b>
+<b class="nc"><i>35</i>&nbsp;			.rangeClosed(0, 9)</b>
+<b class="nc"><i>36</i>&nbsp;			.mapToObj(n -&gt; String.format(&quot;levels/hud/hud_%d.png&quot;, n))</b>
+<b class="nc"><i>37</i>&nbsp;			.map(ImageSprite::createSprite)</b>
+<b class="nc"><i>38</i>&nbsp;			.toArray(size -&gt; new ImageSprite[size]);</b>
+<b class="nc"><i>39</i>&nbsp;	public static final ImageSprite HEALTH_FULL = ImageSprite</b>
+<b class="nc"><i>40</i>&nbsp;			.createSprite(&quot;levels/hud/hud_heartFull.png&quot;);</b>
+<b class="nc"><i>41</i>&nbsp;	public static final ImageSprite HEALTH_HALF = ImageSprite</b>
+<b class="nc"><i>42</i>&nbsp;			.createSprite(&quot;levels/hud/hud_heartHalf.png&quot;);</b>
+<i>43</i>&nbsp;	public static final ImageSprite HEALTH_EMPTY = ImageSprite
+<b class="nc"><i>44</i>&nbsp;			.createSprite(&quot;levels/hud/hud_heartEmpty.png&quot;);</b>
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

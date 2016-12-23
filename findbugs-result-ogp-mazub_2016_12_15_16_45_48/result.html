@@ -1,0 +1,1076 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>FindBugs Report</title>
+<style type="text/css">
+		.tablerow0 {
+			background: #EEEEEE;
+		}
+
+		.tablerow1 {
+			background: white;
+		}
+
+		.detailrow0 {
+			background: #EEEEEE;
+		}
+
+		.detailrow1 {
+			background: white;
+		}
+
+		.tableheader {
+			background: #b9b9fe;
+			font-size: larger;
+		}
+		</style>
+</head>
+<body>
+<h1>FindBugs Report</h1>
+<p>Produced using <a href="http://findbugs.sourceforge.net">FindBugs</a>3.0.1.</p>
+<p>Project: 
+			ogp-mazub[ogp-mazub]</p>
+<h2>Metrics</h2>
+<p>9436 lines of code analyzed,
+	in 298 classes, 
+	in 40 packages.</p>
+<table width="500" cellpadding="5" cellspacing="2">
+<tr class="tableheader">
+<th align="left">Metric</th>
+<th align="right">Total</th>
+<th align="right">Density*</th>
+</tr>
+<tr class="tablerow0">
+<td>High Priority Warnings</td>
+<td align="right">4</td>
+<td align="right">0.42</td>
+</tr>
+<tr class="tablerow1">
+<td>Medium Priority Warnings</td>
+<td align="right">36</td>
+<td align="right">3.82</td>
+</tr>
+<tr class="$totalClass">
+<td>
+<b>Total Warnings</b>
+</td>
+<td align="right">
+<b>40</b>
+</td>
+<td align="right">
+<b>4.24</b>
+</td>
+</tr>
+</table>
+<p>
+<i>(* Defects per Thousand lines of non-commenting source statements)</i>
+</p>
+<p>
+<br/>
+<br/>
+</p>
+<h2>Summary</h2>
+<table width="500" cellpadding="5" cellspacing="2">
+<tr class="tableheader">
+<th align="left">Warning Type</th>
+<th align="right">Number</th>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</td>
+<td align="right">7</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<a href="#Warnings_EXPERIMENTAL">Experimental Warnings</a>
+</td>
+<td align="right">1</td>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_I18N">Internationalization Warnings</a>
+</td>
+<td align="right">2</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</td>
+<td align="right">16</td>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_PERFORMANCE">Performance Warnings</a>
+</td>
+<td align="right">1</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<a href="#Warnings_STYLE">Dodgy code Warnings</a>
+</td>
+<td align="right">13</td>
+</tr>
+<tr class="tablerow0">
+<td>
+<b>Total</b>
+</td>
+<td align="right">
+<b>40</b>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h1>Warnings</h1>
+<p>Click on each warning link to see a full description of the issue, and
+	    details of how to resolve it.</p>
+<h2>
+<a name="Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#NM_SAME_SIMPLE_NAME_AS_SUPERCLASS">Class names shouldn't shadow simple name of superclass</a>
+</td>
+<td width="10%" valign="top">High</td>
+<td width="70%">
+<p>The class name jumpingalien.part3.internal.Resources shadows the simple name of the superclass jumpingalien.part2.internal.Resources<br/>
+<br/>
+<br/>In file Resources.java,
+					
+						lines 6
+						    to 21<br/>In class jumpingalien.part3.internal.Resources<br/>In class jumpingalien.part2.internal.Resources<br/>At Resources.java:[lines 6-21]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#CO_COMPARETO_INCORRECT_FLOATING">compareTo()/compare() incorrectly handles float or double value</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.model.programs.expressions.locationComparator.compare(ActiveObject, ActiveObject) incorrectly handles double value<br/>
+<br/>
+<br/>In file locationComparator.java,
+					
+						line 39<br/>In class jumpingalien.model.programs.expressions.locationComparator<br/>In method jumpingalien.model.programs.expressions.locationComparator.compare(ActiveObject, ActiveObject)<br/>Type double<br/>Should call Double.compare(double, double) instead<br/>At locationComparator.java:[line 39]<br/>At locationComparator.java:[line 39]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#VA_FORMAT_STRING_USES_NEWLINE">Format string should use %n rather than \n</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Format string should use %n rather than \n in jumpingalien.common.game.JumpingAlienGame.adjustTimescale(double)<br/>
+<br/>
+<br/>In file JumpingAlienGame.java,
+					
+						line 151<br/>In class jumpingalien.common.game.JumpingAlienGame<br/>In method jumpingalien.common.game.JumpingAlienGame.adjustTimescale(double)<br/>Called method String.format(String, Object[])<br/>Format string "Warning: Your advanceTime code seems too slow to ensure dt &lt;= %.3f with the current framerate.\n         In-game time will run slower than real time (1 in-game second = %.2f real-world seconds)"<br/>At JumpingAlienGame.java:[line 151]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#NM_CLASS_NAMING_CONVENTION">Class names should start with an upper case letter</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>The class name jumpingalien.model.ActiveObject$enHorState doesn't start with an upper case letter<br/>
+<br/>
+<br/>In file ActiveObject.java,
+					
+						lines 627
+						    to 629<br/>In class jumpingalien.model.ActiveObject$enHorState<br/>At ActiveObject.java:[lines 627-629]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#NM_CLASS_NAMING_CONVENTION">Class names should start with an upper case letter</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>The class name jumpingalien.model.ActiveObject$enVertState doesn't start with an upper case letter<br/>
+<br/>
+<br/>In file ActiveObject.java,
+					
+						lines 622
+						    to 624<br/>In class jumpingalien.model.ActiveObject$enVertState<br/>At ActiveObject.java:[lines 622-624]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#NM_CLASS_NAMING_CONVENTION">Class names should start with an upper case letter</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>The class name jumpingalien.model.programs.expressions.locationComparator doesn't start with an upper case letter<br/>
+<br/>
+<br/>In file locationComparator.java,
+					
+						lines 8
+						    to 76<br/>In class jumpingalien.model.programs.expressions.locationComparator<br/>At locationComparator.java:[lines 8-76]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#OS_OPEN_STREAM">Method may fail to close stream</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.internal.JumpingAlienGamePart3.parseProgram(String) may fail to close stream<br/>
+<br/>
+<br/>In file JumpingAlienGamePart3.java,
+					
+						line 175<br/>In class jumpingalien.part3.internal.JumpingAlienGamePart3<br/>In method jumpingalien.part3.internal.JumpingAlienGamePart3.parseProgram(String)<br/>Need to close java.io.Reader <br/>At JumpingAlienGamePart3.java:[line 175]<br/>At JumpingAlienGamePart3.java:[line 175]</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="Warnings_EXPERIMENTAL">Experimental Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#OBL_UNSATISFIED_OBLIGATION">Method may fail to clean up stream or resource</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part2.internal.tmxfile.TMXFileReader.read(String) may fail to clean up java.io.InputStream<br/>
+<br/>
+<br/>In file TMXFileReader.java,
+					
+						line 30<br/>In class jumpingalien.part2.internal.tmxfile.TMXFileReader<br/>In method jumpingalien.part2.internal.tmxfile.TMXFileReader.read(String)<br/>Reference type java.io.InputStream<br/>1 instances of obligation remaining<br/>Obligation to clean up resource created at TMXFileReader.java:[line 30] is not discharged<br/>Path continues at TMXFileReader.java:[line 32]<br/>Remaining obligations: {InputStream x 1}</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="Warnings_I18N">Internationalization Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#DM_DEFAULT_ENCODING">Reliance on default encoding</a>
+</td>
+<td width="10%" valign="top">High</td>
+<td width="70%">
+<p>Found reliance on default encoding in jumpingalien.part3.internal.JumpingAlienGamePart3.parseProgram(String): new java.io.InputStreamReader(InputStream)<br/>
+<br/>
+<br/>In file JumpingAlienGamePart3.java,
+					
+						line 175<br/>In class jumpingalien.part3.internal.JumpingAlienGamePart3<br/>In method jumpingalien.part3.internal.JumpingAlienGamePart3.parseProgram(String)<br/>Called method new java.io.InputStreamReader(InputStream)<br/>At JumpingAlienGamePart3.java:[line 175]<br/>At JumpingAlienGamePart3.java:[line 175]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#DM_DEFAULT_ENCODING">Reliance on default encoding</a>
+</td>
+<td width="10%" valign="top">High</td>
+<td width="70%">
+<p>Found reliance on default encoding in jumpingalien.part3.programs.ProgramParser.parseFile(String): new java.io.FileReader(String)<br/>
+<br/>
+<br/>In file ProgramParser.java,
+					
+						line 96<br/>In class jumpingalien.part3.programs.ProgramParser<br/>In method jumpingalien.part3.programs.ProgramParser.parseFile(String)<br/>Called method new java.io.FileReader(String)<br/>At ProgramParser.java:[line 96]<br/>At ProgramParser.java:[line 96]</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#MS_MUTABLE_ARRAY">Field is a mutable array</a>
+</td>
+<td width="10%" valign="top">High</td>
+<td width="70%">
+<p>jumpingalien.common.sprites.JumpingAlienSprites.ALIEN_SPRITESET is a mutable array<br/>
+<br/>
+<br/>In file JumpingAlienSprites.java,
+					
+						line 12<br/>In class jumpingalien.common.sprites.JumpingAlienSprites<br/>Field jumpingalien.common.sprites.JumpingAlienSprites.ALIEN_SPRITESET<br/>At JumpingAlienSprites.java:[line 12]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.getModeNames() may expose internal representation by returning JumpingAlienProgLexer.modeNames<br/>
+<br/>
+<br/>In file JumpingAlienProgLexer.java,
+					
+						line 130<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer<br/>In method jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.getModeNames()<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.modeNames<br/>At JumpingAlienProgLexer.java:[line 130]<br/>At JumpingAlienProgLexer.java:[line 130]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.getRuleNames() may expose internal representation by returning JumpingAlienProgLexer.ruleNames<br/>
+<br/>
+<br/>In file JumpingAlienProgLexer.java,
+					
+						line 124<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer<br/>In method jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.getRuleNames()<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.ruleNames<br/>At JumpingAlienProgLexer.java:[line 124]<br/>At JumpingAlienProgLexer.java:[line 124]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.getTokenNames() may expose internal representation by returning JumpingAlienProgLexer.tokenNames<br/>
+<br/>
+<br/>In file JumpingAlienProgLexer.java,
+					
+						line 105<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer<br/>In method jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.getTokenNames()<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.tokenNames<br/>At JumpingAlienProgLexer.java:[line 105]<br/>At JumpingAlienProgLexer.java:[line 105]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.getRuleNames() may expose internal representation by returning JumpingAlienProgParser.ruleNames<br/>
+<br/>
+<br/>In file JumpingAlienProgParser.java,
+					
+						line 117<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser<br/>In method jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.getRuleNames()<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.ruleNames<br/>At JumpingAlienProgParser.java:[line 117]<br/>At JumpingAlienProgParser.java:[line 117]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.getTokenNames() may expose internal representation by returning JumpingAlienProgParser.tokenNames<br/>
+<br/>
+<br/>In file JumpingAlienProgParser.java,
+					
+						line 104<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser<br/>In method jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.getTokenNames()<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.tokenNames<br/>At JumpingAlienProgParser.java:[line 104]<br/>At JumpingAlienProgParser.java:[line 104]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>new jumpingalien.model.ActiveObject(int, int, Sprite[], int, boolean, double, double, double, double) may expose internal representation by storing an externally mutable object into ActiveObject.aSprite<br/>
+<br/>
+<br/>In file ActiveObject.java,
+					
+						line 87<br/>In class jumpingalien.model.ActiveObject<br/>In method new jumpingalien.model.ActiveObject(int, int, Sprite[], int, boolean, double, double, double, double)<br/>Field jumpingalien.model.ActiveObject.aSprite<br/>Local variable named sprites<br/>At ActiveObject.java:[line 87]<br/>At ActiveObject.java:[line 87]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#MS_PKGPROTECT">Field should be package protected</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part2.internal.Resources.NUMBER_SPRITES should be package protected<br/>
+<br/>
+<br/>In file Resources.java,
+					
+						line 38<br/>In class jumpingalien.part2.internal.Resources<br/>Field jumpingalien.part2.internal.Resources.NUMBER_SPRITES<br/>At Resources.java:[line 38]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#MS_PKGPROTECT">Field should be package protected</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.internal.Resources.BUZAM_SPRITESET should be package protected<br/>
+<br/>
+<br/>In file Resources.java,
+					
+						line 16<br/>In class jumpingalien.part3.internal.Resources<br/>Field jumpingalien.part3.internal.Resources.BUZAM_SPRITESET<br/>At Resources.java:[line 16]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#MS_FINAL_PKGPROTECT">Field should be both final and package protected</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.modeNames should be both final and package protected<br/>
+<br/>
+<br/>In file JumpingAlienProgLexer.java,
+					
+						line 34<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.modeNames<br/>At JumpingAlienProgLexer.java:[line 34]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#MS_PKGPROTECT">Field should be package protected</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer._decisionToDFA should be package protected<br/>
+<br/>
+<br/>In file JumpingAlienProgLexer.java,
+					
+						line 357<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer._decisionToDFA<br/>At JumpingAlienProgLexer.java:[line 357]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#MS_PKGPROTECT">Field should be package protected</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.ruleNames should be package protected<br/>
+<br/>
+<br/>In file JumpingAlienProgLexer.java,
+					
+						line 38<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.ruleNames<br/>At JumpingAlienProgLexer.java:[line 38]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#MS_PKGPROTECT">Field should be package protected</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.tokenNames should be package protected<br/>
+<br/>
+<br/>In file JumpingAlienProgLexer.java,
+					
+						line 89<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgLexer.tokenNames<br/>At JumpingAlienProgLexer.java:[line 89]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#MS_PKGPROTECT">Field should be package protected</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser._decisionToDFA should be package protected<br/>
+<br/>
+<br/>In file JumpingAlienProgParser.java,
+					
+						line 2800<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser._decisionToDFA<br/>At JumpingAlienProgParser.java:[line 2800]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#MS_PKGPROTECT">Field should be package protected</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.ruleNames should be package protected<br/>
+<br/>
+<br/>In file JumpingAlienProgParser.java,
+					
+						line 42<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.ruleNames<br/>At JumpingAlienProgParser.java:[line 42]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#MS_PKGPROTECT">Field should be package protected</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.tokenNames should be package protected<br/>
+<br/>
+<br/>In file JumpingAlienProgParser.java,
+					
+						line 88<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.tokenNames<br/>At JumpingAlienProgParser.java:[line 88]</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="Warnings_PERFORMANCE">Performance Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#URF_UNREAD_FIELD">Unread field</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Unread field: jumpingalien.model.Potion.enHorState<br/>
+<br/>
+<br/>In file Potion.java,
+					
+						line 36<br/>In class jumpingalien.model.Potion<br/>Field jumpingalien.model.Potion.enHorState<br/>At Potion.java:[line 36]</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="Warnings_STYLE">Dodgy code Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Questionable cast to concrete collection</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Questionable cast from java.util.Map&lt;java.lang.String,jumpingalien.model.programs.Type&gt; to java.util.HashMap in jumpingalien.model.programs.Factory.createProgram(Statement, Map)<br/>
+<br/>
+<br/>In file Factory.java,
+					
+						line 858<br/>In class jumpingalien.model.programs.Factory<br/>In method jumpingalien.model.programs.Factory.createProgram(Statement, Map)<br/>Actual type java.util.Map&lt;java.lang.String,jumpingalien.model.programs.Type&gt;<br/>Expected java.util.HashMap<br/>Value loaded from globalVariables<br/>At Factory.java:[line 858]<br/>At Factory.java:[line 858]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#ICAST_IDIV_CAST_TO_DOUBLE">Integral division result cast to double or float</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Integral division result cast to double or float in jumpingalien.model.TileMap.roundToTile(int)<br/>
+<br/>
+<br/>In file TileMap.java,
+					
+						line 105<br/>In class jumpingalien.model.TileMap<br/>In method jumpingalien.model.TileMap.roundToTile(int)<br/>At TileMap.java:[line 105]<br/>At TileMap.java:[line 105]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT">Return value of method without side effect is ignored</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Return value of roundToTile(int) ignored, but method has no side effect<br/>
+<br/>
+<br/>In file TileMap.java,
+					
+						line 91<br/>In class jumpingalien.model.TileMap<br/>In method jumpingalien.model.TileMap.getTileinPixels(int, int)<br/>Called method jumpingalien.model.TileMap.roundToTile(int)<br/>At TileMap.java:[line 91]<br/>At TileMap.java:[line 91]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Switch statement found in jumpingalien.common.gui.AlienInputMode.keyPressed(KeyEvent) where default case is missing<br/>
+<br/>
+<br/>In file AlienInputMode.java,
+					
+						lines 63
+						    to 83<br/>In class jumpingalien.common.gui.AlienInputMode<br/>In method jumpingalien.common.gui.AlienInputMode.keyPressed(KeyEvent)<br/>At AlienInputMode.java:[lines 63-83]<br/>At AlienInputMode.java:[lines 63-83]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Switch statement found in jumpingalien.common.gui.AlienInputMode.keyReleased(KeyEvent) where default case is missing<br/>
+<br/>
+<br/>In file AlienInputMode.java,
+					
+						lines 36
+						    to 55<br/>In class jumpingalien.common.gui.AlienInputMode<br/>In method jumpingalien.common.gui.AlienInputMode.keyReleased(KeyEvent)<br/>At AlienInputMode.java:[lines 36-55]<br/>At AlienInputMode.java:[lines 36-55]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Switch statement found in jumpingalien.part1.internal.Part1Options.parse(String[]) where default case is missing<br/>
+<br/>
+<br/>In file Part1Options.java,
+					
+						lines 120
+						    to 141<br/>In class jumpingalien.part1.internal.Part1Options<br/>In method jumpingalien.part1.internal.Part1Options.parse(String[])<br/>At Part1Options.java:[lines 120-141]<br/>At Part1Options.java:[lines 120-141]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Switch statement found in jumpingalien.part2.internal.Part2Options.parse(String[]) where default case is missing<br/>
+<br/>
+<br/>In file Part2Options.java,
+					
+						lines 177
+						    to 201<br/>In class jumpingalien.part2.internal.Part2Options<br/>In method jumpingalien.part2.internal.Part2Options.parse(String[])<br/>At Part2Options.java:[lines 177-201]<br/>At Part2Options.java:[lines 177-201]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Switch statement found in jumpingalien.part2.internal.tmxfile.TMXFileSAXHandler.endElement(String, String, String) where default case is missing<br/>
+<br/>
+<br/>In file TMXFileSAXHandler.java,
+					
+						lines 150
+						    to 164<br/>In class jumpingalien.part2.internal.tmxfile.TMXFileSAXHandler<br/>In method jumpingalien.part2.internal.tmxfile.TMXFileSAXHandler.endElement(String, String, String)<br/>At TMXFileSAXHandler.java:[lines 150-164]<br/>At TMXFileSAXHandler.java:[lines 150-164]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Switch statement found in jumpingalien.part3.internal.Part3Options.parse(String[]) where default case is missing<br/>
+<br/>
+<br/>In file Part3Options.java,
+					
+						lines 22
+						    to 49<br/>In class jumpingalien.part3.internal.Part3Options<br/>In method jumpingalien.part3.internal.Part3Options.parse(String[])<br/>At Part3Options.java:[lines 22-49]<br/>At Part3Options.java:[lines 22-49]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Switch statement found in jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.expression(int) where default case is missing<br/>
+<br/>
+<br/>In file JumpingAlienProgParser.java,
+					
+						lines 1946
+						    to 2027<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser<br/>In method jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.expression(int)<br/>At JumpingAlienProgParser.java:[lines 1946-2027]<br/>At JumpingAlienProgParser.java:[lines 1946-2027]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Switch statement found in jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.literal() where default case is missing<br/>
+<br/>
+<br/>In file JumpingAlienProgParser.java,
+					
+						lines 2180
+						    to 2263<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser<br/>In method jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser.literal()<br/>At JumpingAlienProgParser.java:[lines 2180-2263]<br/>At JumpingAlienProgParser.java:[lines 2180-2263]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Switch statement found in ogp.framework.gui.menu.MenuScreen$1.keyReleased(KeyEvent) where default case is missing<br/>
+<br/>
+<br/>In file MenuScreen.java,
+					
+						lines 43
+						    to 59<br/>In class ogp.framework.gui.menu.MenuScreen$1<br/>In method ogp.framework.gui.menu.MenuScreen$1.keyReleased(KeyEvent)<br/>At MenuScreen.java:[lines 43-59]<br/>At MenuScreen.java:[lines 43-59]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD">Unread public/protected field</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Unread public/protected field: jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser$IntLiteralContext.value<br/>
+<br/>
+<br/>In file JumpingAlienProgParser.java,
+					
+						line 2200<br/>In class jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser$IntLiteralContext<br/>Field jumpingalien.part3.programs.internal.generated.JumpingAlienProgParser$IntLiteralContext.value<br/>At JumpingAlienProgParser.java:[line 2200]</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<p>
+<br/>
+<br/>
+</p>
+<h1>
+<a name="Details">Warning Types</a>
+</h1>
+<h2>
+<a name="BC_BAD_CAST_TO_CONCRETE_COLLECTION">Questionable cast to concrete collection</a>
+</h2>
+
+<p>
+This code casts an abstract collection (such as a Collection, List, or Set)
+to a specific concrete implementation (such as an ArrayList or HashSet).
+This might not be correct, and it may make your code fragile, since
+it makes it harder to switch to other concrete implementations at a future
+point. Unless you have a particular reason to do so, just use the abstract
+collection class.
+</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="CO_COMPARETO_INCORRECT_FLOATING">compareTo()/compare() incorrectly handles float or double value</a>
+</h2>
+
+  <p>This method compares double or float values using pattern like this: val1 &gt; val2 ? 1 : val1 &lt; val2 ? -1 : 0.
+This pattern works incorrectly for -0.0 and NaN values which may result in incorrect sorting result or broken collection 
+(if compared values are used as keys). Consider using Double.compare or Float.compare static methods which handle all 
+the special cases correctly.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="DM_DEFAULT_ENCODING">Reliance on default encoding</a>
+</h2>
+
+<p> Found a call to a method which will perform a byte to String (or String to byte) conversion, and will assume that the default platform encoding is suitable. This will cause the application behaviour to vary between platforms. Use an alternative API and specify a charset name or Charset object explicitly.  </p>
+
+      
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</h2>
+
+  <p> Returning a reference to a mutable object value stored in one of the object's fields
+  exposes the internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Returning a new copy of the object is better approach in many situations.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</h2>
+
+  <p> This code stores a reference to an externally mutable object into the
+  internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Storing a copy of the object is better approach in many situations.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="VA_FORMAT_STRING_USES_NEWLINE">Format string should use %n rather than \n</a>
+</h2>
+
+<p>
+This format string include a newline character (\n). In format strings, it is generally
+ preferable better to use %n, which will produce the platform-specific line separator.
+</p>
+
+     
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="ICAST_IDIV_CAST_TO_DOUBLE">Integral division result cast to double or float</a>
+</h2>
+
+<p>
+This code casts the result of an integral division (e.g., int or long division)
+operation to double or
+float.
+Doing division on integers truncates the result
+to the integer value closest to zero.  The fact that the result
+was cast to double suggests that this precision should have been retained.
+What was probably meant was to cast one or both of the operands to
+double <em>before</em> performing the division.  Here is an example:
+</p>
+<blockquote>
+<pre>
+int x = 2;
+int y = 5;
+// Wrong: yields result 0.0
+double value1 =  x / y;
+
+// Right: yields result 0.4
+double value2 =  x / (double) y;
+</pre>
+</blockquote>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="MS_MUTABLE_ARRAY">Field is a mutable array</a>
+</h2>
+
+<p> A final static field references an array
+   and can be accessed by malicious code or
+        by accident from another package.
+   This code can freely modify the contents of the array.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="MS_FINAL_PKGPROTECT">Field should be both final and package protected</a>
+</h2>
+
+ <p>
+   A mutable static field could be changed by malicious code or
+        by accident from another package.
+        The field could be made package protected and/or made final
+   to avoid
+        this vulnerability.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="MS_PKGPROTECT">Field should be package protected</a>
+</h2>
+
+  <p> A mutable static field could be changed by malicious code or
+   by accident.
+   The field could be made package protected to avoid
+   this vulnerability.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="NM_SAME_SIMPLE_NAME_AS_SUPERCLASS">Class names shouldn't shadow simple name of superclass</a>
+</h2>
+
+  <p> This class has a simple name that is identical to that of its superclass, except
+that its superclass is in a different package (e.g., <code>alpha.Foo</code> extends <code>beta.Foo</code>).
+This can be exceptionally confusing, create lots of situations in which you have to look at import statements
+to resolve references and creates many
+opportunities to accidentally define methods that do not override methods in their superclasses.
+</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="NM_CLASS_NAMING_CONVENTION">Class names should start with an upper case letter</a>
+</h2>
+
+  <p> Class names should be nouns, in mixed case with the first letter of each internal word capitalized. Try to keep your class names simple and descriptive. Use whole words-avoid acronyms and abbreviations (unless the abbreviation is much more widely used than the long form, such as URL or HTML).
+</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="OBL_UNSATISFIED_OBLIGATION">Method may fail to clean up stream or resource</a>
+</h2>
+          
+          <p>
+          This method may fail to clean up (close, dispose of) a stream,
+          database object, or other
+          resource requiring an explicit cleanup operation.
+          </p>
+
+          <p>
+          In general, if a method opens a stream or other resource,
+          the method should use a try/finally block to ensure that
+          the stream or resource is cleaned up before the method
+          returns.
+          </p>
+
+          <p>
+          This bug pattern is essentially the same as the
+          OS_OPEN_STREAM and ODR_OPEN_DATABASE_RESOURCE
+          bug patterns, but is based on a different
+          (and hopefully better) static analysis technique.
+          We are interested is getting feedback about the
+          usefulness of this bug pattern.
+          To send feedback, either:
+          </p>
+          <ul>
+            <li>send email to findbugs@cs.umd.edu</li>
+            <li>file a bug report: <a href="http://findbugs.sourceforge.net/reportingBugs.html">http://findbugs.sourceforge.net/reportingBugs.html</a></li>
+          </ul>
+
+          <p>
+          In particular,
+          the false-positive suppression heuristics for this
+          bug pattern have not been extensively tuned, so
+          reports about false positives are helpful to us.
+          </p>
+
+          <p>
+          See Weimer and Necula, <i>Finding and Preventing Run-Time Error Handling Mistakes</i>, for
+          a description of the analysis technique.
+          </p>
+          
+      
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="OS_OPEN_STREAM">Method may fail to close stream</a>
+</h2>
+
+<p> The method creates an IO stream object, does not assign it to any
+fields, pass it to other methods that might close it,
+or return it, and does not appear to close
+the stream on all paths out of the method.&nbsp; This may result in
+a file descriptor leak.&nbsp; It is generally a good
+idea to use a <code>finally</code> block to ensure that streams are
+closed.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT">Return value of method without side effect is ignored</a>
+</h2>
+
+<p>This code calls a method and ignores the return value. However our analysis shows that
+the method (including its implementations in subclasses if any) does not produce any effect 
+other than return value. Thus this call can be removed.
+</p>
+<p>We are trying to reduce the false positives as much as possible, but in some cases this warning might be wrong.
+Common false-positive cases include:</p>
+<p>- The method is designed to be overridden and produce a side effect in other projects which are out of the scope of the analysis.</p>
+<p>- The method is called to trigger the class loading which may have a side effect.</p>
+<p>- The method is called just to get some exception.</p>
+<p>If you feel that our assumption is incorrect, you can use a @CheckReturnValue annotation
+to instruct FindBugs that ignoring the return value of this method is acceptable.
+</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="SF_SWITCH_NO_DEFAULT">Switch statement found where default case is missing</a>
+</h2>
+
+  <p> This method contains a switch statement where default case is missing.
+  Usually you need to provide a default case.</p>
+  <p>Because the analysis only looks at the generated bytecode, this warning can be incorrect triggered if
+the default case is at the end of the switch statement and the switch statement doesn't contain break statements for other
+cases.
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="URF_UNREAD_FIELD">Unread field</a>
+</h2>
+
+  <p> This field is never read.&nbsp; Consider removing it from the class.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD">Unread public/protected field</a>
+</h2>
+
+  <p> This field is never read.&nbsp;
+The field is public or protected, so perhaps
+    it is intended to be used with classes not seen as part of the analysis. If not,
+consider removing it from the class.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+</body>
+</html>

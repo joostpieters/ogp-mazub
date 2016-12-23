@@ -1,0 +1,265 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: IFacade</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part1.facade</a> ]
+</div>
+
+<h1>Coverage Summary for Class: IFacade (jumpingalien.part1.facade)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">IFacade</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part1.facade;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import jumpingalien.model.Mazub;
+<i>4</i>&nbsp;import jumpingalien.util.Sprite;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;/**
+<i>7</i>&nbsp; * Implement this interface to connect your code to the graphical user interface
+<i>8</i>&nbsp; * (GUI).
+<i>9</i>&nbsp; * 
+<i>10</i>&nbsp; * &lt;ul&gt;
+<i>11</i>&nbsp; * &lt;li&gt;For separating the code that you wrote from the code that was provided to
+<i>12</i>&nbsp; * you, put &lt;b&gt;ALL your code in the &lt;code&gt;src&lt;/code&gt; folder.&lt;/b&gt; The code that
+<i>13</i>&nbsp; * is provided to you stays in the &lt;code&gt;src-provided&lt;/code&gt; folder. Only if you
+<i>14</i>&nbsp; * modify the provided code, it&#39;s advised to move the modified code to the
+<i>15</i>&nbsp; * &lt;code&gt;src&lt;/code&gt; folder, so that your changes cannot be accidentally
+<i>16</i>&nbsp; * overwritten by an updated version of the provided code.&lt;/li&gt;
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * &lt;li&gt;You should at least &lt;b&gt;create the following classes&lt;/b&gt; in the package
+<i>19</i>&nbsp; * &lt;code&gt;jumpingalien.model&lt;/code&gt;:
+<i>20</i>&nbsp; * &lt;ul&gt;
+<i>21</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Mazub&lt;/code&gt; for representing Mazub the alien&lt;/li&gt;
+<i>22</i>&nbsp; * &lt;/ul&gt;
+<i>23</i>&nbsp; * You may, of course, add additional classes as you see fit.
+<i>24</i>&nbsp; * 
+<i>25</i>&nbsp; * &lt;li&gt;You should &lt;b&gt;create a class &lt;code&gt;Facade&lt;/code&gt;&lt;/b&gt; that implements this
+<i>26</i>&nbsp; * interface. This class should be placed &lt;b&gt;in the package
+<i>27</i>&nbsp; * &lt;code&gt;jumpingalien.part1.facade&lt;/code&gt;&lt;/b&gt;.&lt;/li&gt;
+<i>28</i>&nbsp; * 
+<i>29</i>&nbsp; * &lt;li&gt;
+<i>30</i>&nbsp; * The &lt;b&gt;header of that Facade class&lt;/b&gt; should look as follows:&lt;br&gt;
+<i>31</i>&nbsp; * &lt;code&gt;class Facade implements IFacade { ... }&lt;/code&gt;&lt;br&gt;
+<i>32</i>&nbsp; * Consult the &lt;a href=
+<i>33</i>&nbsp; * &quot;http://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html&quot;&gt;
+<i>34</i>&nbsp; * Java tutorial&lt;/a&gt; for more information on interfaces, if necessary.&lt;/li&gt;
+<i>35</i>&nbsp; *
+<i>36</i>&nbsp; * &lt;li&gt;Your &lt;code&gt;Facade&lt;/code&gt; class should offer a &lt;b&gt;default constructor&lt;/b&gt;.
+<i>37</i>&nbsp; * &lt;/li&gt;
+<i>38</i>&nbsp; * 
+<i>39</i>&nbsp; * &lt;li&gt;&lt;b&gt;Each method&lt;/b&gt; defined in the interface &lt;code&gt;IFacade&lt;/code&gt; must be
+<i>40</i>&nbsp; * implemented by the class &lt;code&gt;Facade&lt;/code&gt;. For example, the implementation
+<i>41</i>&nbsp; * of &lt;code&gt;getLocation&lt;/code&gt; should call one or more methods on the given
+<i>42</i>&nbsp; * &lt;code&gt;alien&lt;/code&gt; to retrieve its current location.&lt;/li&gt;
+<i>43</i>&nbsp; * 
+<i>44</i>&nbsp; * &lt;li&gt;Methods in this interface are &lt;b&gt;only allowed to throw exceptions of type
+<i>45</i>&nbsp; * &lt;code&gt;jumpingalien.util.ModelException&lt;/code&gt;&lt;/b&gt; (this class is provided).
+<i>46</i>&nbsp; * No other exception types are allowed. This exception can be thrown only if
+<i>47</i>&nbsp; * calling a method of your &lt;code&gt;Mazub&lt;/code&gt; class with the given parameters
+<i>48</i>&nbsp; * would violate a precondition or if the method of your &lt;code&gt;Mazub&lt;/code&gt;
+<i>49</i>&nbsp; * class throws an exception (if so, wrap the exception in a
+<i>50</i>&nbsp; * &lt;code&gt;ModelException&lt;/code&gt;).&lt;/li&gt;
+<i>51</i>&nbsp; * 
+<i>52</i>&nbsp; * &lt;li&gt;&lt;b&gt;ModelException should not be used anywhere outside of your Facade
+<i>53</i>&nbsp; * implementation.&lt;/b&gt;&lt;/li&gt;
+<i>54</i>&nbsp; * 
+<i>55</i>&nbsp; * &lt;li&gt;Your Facade implementation should &lt;b&gt;only contain trivial code&lt;/b&gt; (for
+<i>56</i>&nbsp; * example, calling a method, combining multiple return values into an array,
+<i>57</i>&nbsp; * creating @Value instances, catching exceptions and wrapping it in a
+<i>58</i>&nbsp; * ModelException). All non-trivial code should be placed in the other classes
+<i>59</i>&nbsp; * that you create.&lt;/li&gt;
+<i>60</i>&nbsp; * 
+<i>61</i>&nbsp; * &lt;li&gt;The rules described above and the documentation described below for each
+<i>62</i>&nbsp; * method apply only to the class implementing IFacade. &lt;b&gt;Your class for
+<i>63</i>&nbsp; * representing aliens should follow the rules described in the assignment.&lt;/b&gt;&lt;/li&gt;
+<i>64</i>&nbsp; * 
+<i>65</i>&nbsp; * &lt;li&gt;&lt;b&gt;Do not modify the signatures&lt;/b&gt; of the methods defined in this
+<i>66</i>&nbsp; * interface.&lt;/li&gt;
+<i>67</i>&nbsp; * 
+<i>68</i>&nbsp; * &lt;/ul&gt;
+<i>69</i>&nbsp; *
+<i>70</i>&nbsp; */
+<i>71</i>&nbsp;public interface IFacade {
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;	/**
+<i>74</i>&nbsp;	 * Create an instance of Mazub.
+<i>75</i>&nbsp;	 * 
+<i>76</i>&nbsp;	 * @param pixelLeftX
+<i>77</i>&nbsp;	 *            The x-location of Mazub&#39;s bottom left pixel.
+<i>78</i>&nbsp;	 * @param pixelBottomY
+<i>79</i>&nbsp;	 *            The y-location of Mazub&#39;s bottom left pixel.
+<i>80</i>&nbsp;	 * @param sprites
+<i>81</i>&nbsp;	 *            The array of sprite images for Mazub.
+<i>82</i>&nbsp;	 * 
+<i>83</i>&nbsp;	 * @return
+<i>84</i>&nbsp;	 */
+<i>85</i>&nbsp;	Mazub createMazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites);
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;	/**
+<i>88</i>&nbsp;	 * Return the current location of the given alien.
+<i>89</i>&nbsp;	 * 
+<i>90</i>&nbsp;	 * @param alien
+<i>91</i>&nbsp;	 *            The alien of which to get the location.
+<i>92</i>&nbsp;	 * 
+<i>93</i>&nbsp;	 * @return an array, consisting of 2 integers {x, y}, that represents the
+<i>94</i>&nbsp;	 *         coordinates of the given alien&#39;s bottom left pixel in the world.
+<i>95</i>&nbsp;	 */
+<i>96</i>&nbsp;	int[] getLocation(Mazub alien);
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;	/**
+<i>99</i>&nbsp;	 * Return the current velocity (in m/s) of the given alien.
+<i>100</i>&nbsp;	 * 
+<i>101</i>&nbsp;	 * @param alien
+<i>102</i>&nbsp;	 *            The alien of which to get the velocity.
+<i>103</i>&nbsp;	 * 
+<i>104</i>&nbsp;	 * @return an array, consisting of 2 doubles {vx, vy}, that represents the
+<i>105</i>&nbsp;	 *         horizontal and vertical components of the given alien&#39;s current
+<i>106</i>&nbsp;	 *         velocity, in units of m/s.
+<i>107</i>&nbsp;	 */
+<i>108</i>&nbsp;	double[] getVelocity(Mazub alien);
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;	/**
+<i>111</i>&nbsp;	 * Return the current acceleration (in m/s^2) of the given alien.
+<i>112</i>&nbsp;	 * 
+<i>113</i>&nbsp;	 * @param alien
+<i>114</i>&nbsp;	 *            The alien of which to get the acceleration.
+<i>115</i>&nbsp;	 * 
+<i>116</i>&nbsp;	 * @return an array, consisting of 2 doubles {ax, ay}, that represents the
+<i>117</i>&nbsp;	 *         horizontal and vertical components of the given alien&#39;s current
+<i>118</i>&nbsp;	 *         acceleration, in units of m/s^2.
+<i>119</i>&nbsp;	 */
+<i>120</i>&nbsp;	double[] getAcceleration(Mazub alien);
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;	/**
+<i>123</i>&nbsp;	 * Return the current size of the given alien.
+<i>124</i>&nbsp;	 * 
+<i>125</i>&nbsp;	 * @param alien
+<i>126</i>&nbsp;	 *            The alien of which to get the size.
+<i>127</i>&nbsp;	 * 
+<i>128</i>&nbsp;	 * @return An array, consisting of 2 integers {w, h}, that represents the
+<i>129</i>&nbsp;	 *         current width and height of the given alien, in number of pixels.
+<i>130</i>&nbsp;	 */
+<i>131</i>&nbsp;	int[] getSize(Mazub alien);
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;	/**
+<i>134</i>&nbsp;	 * Return the current sprite image for the given alien.
+<i>135</i>&nbsp;	 * 
+<i>136</i>&nbsp;	 * @param alien
+<i>137</i>&nbsp;	 *            The alien for which to get the current sprite image.
+<i>138</i>&nbsp;	 * 
+<i>139</i>&nbsp;	 * @return The current sprite image for the given alien, determined by its
+<i>140</i>&nbsp;	 *         state as defined in the assignment.
+<i>141</i>&nbsp;	 */
+<i>142</i>&nbsp;	Sprite getCurrentSprite(Mazub alien);
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;	/**
+<i>145</i>&nbsp;	 * Make the given alien jump.
+<i>146</i>&nbsp;	 * 
+<i>147</i>&nbsp;	 * @param alien
+<i>148</i>&nbsp;	 *            The alien that has to start jumping.
+<i>149</i>&nbsp;	 */
+<i>150</i>&nbsp;	void startJump(Mazub alien);
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;	/**
+<i>153</i>&nbsp;	 * End the given alien&#39;s jump.
+<i>154</i>&nbsp;	 * 
+<i>155</i>&nbsp;	 * @param alien
+<i>156</i>&nbsp;	 *            The alien that has to stop jumping.
+<i>157</i>&nbsp;	 */
+<i>158</i>&nbsp;	void endJump(Mazub alien);
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;	/**
+<i>161</i>&nbsp;	 * Make the given alien move left.
+<i>162</i>&nbsp;	 * 
+<i>163</i>&nbsp;	 * @param alien
+<i>164</i>&nbsp;	 *            The alien that has to start moving left.
+<i>165</i>&nbsp;	 */
+<i>166</i>&nbsp;	void startMoveLeft(Mazub alien);
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;	/**
+<i>169</i>&nbsp;	 * End the given alien&#39;s left move.
+<i>170</i>&nbsp;	 * 
+<i>171</i>&nbsp;	 * @param alien
+<i>172</i>&nbsp;	 *            The alien that has to stop moving left.
+<i>173</i>&nbsp;	 */
+<i>174</i>&nbsp;	void endMoveLeft(Mazub alien);
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;	/**
+<i>177</i>&nbsp;	 * Make the given alien move right.
+<i>178</i>&nbsp;	 * 
+<i>179</i>&nbsp;	 * @param alien
+<i>180</i>&nbsp;	 *            The alien that has to start moving right.
+<i>181</i>&nbsp;	 */
+<i>182</i>&nbsp;	void startMoveRight(Mazub alien);
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;	/**
+<i>185</i>&nbsp;	 * End the given alien&#39;s right move.
+<i>186</i>&nbsp;	 * 
+<i>187</i>&nbsp;	 * @param alien
+<i>188</i>&nbsp;	 *            The alien that has to stop moving right.
+<i>189</i>&nbsp;	 */
+<i>190</i>&nbsp;	void endMoveRight(Mazub alien);
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;	/**
+<i>193</i>&nbsp;	 * Make the given alien duck.
+<i>194</i>&nbsp;	 * 
+<i>195</i>&nbsp;	 * @param alien
+<i>196</i>&nbsp;	 *            The alien that has to start ducking.
+<i>197</i>&nbsp;	 */
+<i>198</i>&nbsp;	void startDuck(Mazub alien);
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;	/**
+<i>201</i>&nbsp;	 * End the given alien&#39;s ducking.
+<i>202</i>&nbsp;	 * 
+<i>203</i>&nbsp;	 * @param alien
+<i>204</i>&nbsp;	 *            The alien that has to stop ducking.
+<i>205</i>&nbsp;	 */
+<i>206</i>&nbsp;	void endDuck(Mazub alien);
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;	/**
+<i>209</i>&nbsp;	 * Advance the state of the given alien by the given time period.
+<i>210</i>&nbsp;	 * 
+<i>211</i>&nbsp;	 * @param alien
+<i>212</i>&nbsp;	 *            The alien whose time has to be advanced.
+<i>213</i>&nbsp;	 * @param dt
+<i>214</i>&nbsp;	 *            The time interval (in seconds) by which to advance the given
+<i>215</i>&nbsp;	 *            alien&#39;s time.
+<i>216</i>&nbsp;	 */
+<i>217</i>&nbsp;	void advanceTime(Mazub alien, double dt);
+<i>218</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,376 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: JumpingAlienProgVisitor</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part3.programs.internal.generated</a> ]
+</div>
+
+<h1>Coverage Summary for Class: JumpingAlienProgVisitor (jumpingalien.part3.programs.internal.generated)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">JumpingAlienProgVisitor</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;// Generated from JumpingAlienProg.g by ANTLR 4.5
+<i>2</i>&nbsp;package jumpingalien.part3.programs.internal.generated;
+<i>3</i>&nbsp;import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/**
+<i>6</i>&nbsp; * This interface defines a complete generic visitor for a parse tree produced
+<i>7</i>&nbsp; * by {@link JumpingAlienProgParser}.
+<i>8</i>&nbsp; *
+<i>9</i>&nbsp; * @param &lt;T&gt; The return type of the visit operation. Use {@link Void} for
+<i>10</i>&nbsp; * operations with no return type.
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public interface JumpingAlienProgVisitor&lt;T&gt; extends ParseTreeVisitor&lt;T&gt; {
+<i>13</i>&nbsp;	/**
+<i>14</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#program}.
+<i>15</i>&nbsp;	 * @param ctx the parse tree
+<i>16</i>&nbsp;	 * @return the visitor result
+<i>17</i>&nbsp;	 */
+<i>18</i>&nbsp;	T visitProgram(JumpingAlienProgParser.ProgramContext ctx);
+<i>19</i>&nbsp;	/**
+<i>20</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#declaration}.
+<i>21</i>&nbsp;	 * @param ctx the parse tree
+<i>22</i>&nbsp;	 * @return the visitor result
+<i>23</i>&nbsp;	 */
+<i>24</i>&nbsp;	T visitDeclaration(JumpingAlienProgParser.DeclarationContext ctx);
+<i>25</i>&nbsp;	/**
+<i>26</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#statement}.
+<i>27</i>&nbsp;	 * @param ctx the parse tree
+<i>28</i>&nbsp;	 * @return the visitor result
+<i>29</i>&nbsp;	 */
+<i>30</i>&nbsp;	T visitStatement(JumpingAlienProgParser.StatementContext ctx);
+<i>31</i>&nbsp;	/**
+<i>32</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#singleStatement}.
+<i>33</i>&nbsp;	 * @param ctx the parse tree
+<i>34</i>&nbsp;	 * @return the visitor result
+<i>35</i>&nbsp;	 */
+<i>36</i>&nbsp;	T visitSingleStatement(JumpingAlienProgParser.SingleStatementContext ctx);
+<i>37</i>&nbsp;	/**
+<i>38</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#assignStatement}.
+<i>39</i>&nbsp;	 * @param ctx the parse tree
+<i>40</i>&nbsp;	 * @return the visitor result
+<i>41</i>&nbsp;	 */
+<i>42</i>&nbsp;	T visitAssignStatement(JumpingAlienProgParser.AssignStatementContext ctx);
+<i>43</i>&nbsp;	/**
+<i>44</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#whileStatement}.
+<i>45</i>&nbsp;	 * @param ctx the parse tree
+<i>46</i>&nbsp;	 * @return the visitor result
+<i>47</i>&nbsp;	 */
+<i>48</i>&nbsp;	T visitWhileStatement(JumpingAlienProgParser.WhileStatementContext ctx);
+<i>49</i>&nbsp;	/**
+<i>50</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#foreachStatement}.
+<i>51</i>&nbsp;	 * @param ctx the parse tree
+<i>52</i>&nbsp;	 * @return the visitor result
+<i>53</i>&nbsp;	 */
+<i>54</i>&nbsp;	T visitForeachStatement(JumpingAlienProgParser.ForeachStatementContext ctx);
+<i>55</i>&nbsp;	/**
+<i>56</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#breakStatement}.
+<i>57</i>&nbsp;	 * @param ctx the parse tree
+<i>58</i>&nbsp;	 * @return the visitor result
+<i>59</i>&nbsp;	 */
+<i>60</i>&nbsp;	T visitBreakStatement(JumpingAlienProgParser.BreakStatementContext ctx);
+<i>61</i>&nbsp;	/**
+<i>62</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#ifStatement}.
+<i>63</i>&nbsp;	 * @param ctx the parse tree
+<i>64</i>&nbsp;	 * @return the visitor result
+<i>65</i>&nbsp;	 */
+<i>66</i>&nbsp;	T visitIfStatement(JumpingAlienProgParser.IfStatementContext ctx);
+<i>67</i>&nbsp;	/**
+<i>68</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#printStatement}.
+<i>69</i>&nbsp;	 * @param ctx the parse tree
+<i>70</i>&nbsp;	 * @return the visitor result
+<i>71</i>&nbsp;	 */
+<i>72</i>&nbsp;	T visitPrintStatement(JumpingAlienProgParser.PrintStatementContext ctx);
+<i>73</i>&nbsp;	/**
+<i>74</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#actionStatement}.
+<i>75</i>&nbsp;	 * @param ctx the parse tree
+<i>76</i>&nbsp;	 * @return the visitor result
+<i>77</i>&nbsp;	 */
+<i>78</i>&nbsp;	T visitActionStatement(JumpingAlienProgParser.ActionStatementContext ctx);
+<i>79</i>&nbsp;	/**
+<i>80</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#startRunStatement}.
+<i>81</i>&nbsp;	 * @param ctx the parse tree
+<i>82</i>&nbsp;	 * @return the visitor result
+<i>83</i>&nbsp;	 */
+<i>84</i>&nbsp;	T visitStartRunStatement(JumpingAlienProgParser.StartRunStatementContext ctx);
+<i>85</i>&nbsp;	/**
+<i>86</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#stopRunStatement}.
+<i>87</i>&nbsp;	 * @param ctx the parse tree
+<i>88</i>&nbsp;	 * @return the visitor result
+<i>89</i>&nbsp;	 */
+<i>90</i>&nbsp;	T visitStopRunStatement(JumpingAlienProgParser.StopRunStatementContext ctx);
+<i>91</i>&nbsp;	/**
+<i>92</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#startJumpStatement}.
+<i>93</i>&nbsp;	 * @param ctx the parse tree
+<i>94</i>&nbsp;	 * @return the visitor result
+<i>95</i>&nbsp;	 */
+<i>96</i>&nbsp;	T visitStartJumpStatement(JumpingAlienProgParser.StartJumpStatementContext ctx);
+<i>97</i>&nbsp;	/**
+<i>98</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#stopJumpStatement}.
+<i>99</i>&nbsp;	 * @param ctx the parse tree
+<i>100</i>&nbsp;	 * @return the visitor result
+<i>101</i>&nbsp;	 */
+<i>102</i>&nbsp;	T visitStopJumpStatement(JumpingAlienProgParser.StopJumpStatementContext ctx);
+<i>103</i>&nbsp;	/**
+<i>104</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#startDuckStatement}.
+<i>105</i>&nbsp;	 * @param ctx the parse tree
+<i>106</i>&nbsp;	 * @return the visitor result
+<i>107</i>&nbsp;	 */
+<i>108</i>&nbsp;	T visitStartDuckStatement(JumpingAlienProgParser.StartDuckStatementContext ctx);
+<i>109</i>&nbsp;	/**
+<i>110</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#stopDuckStatement}.
+<i>111</i>&nbsp;	 * @param ctx the parse tree
+<i>112</i>&nbsp;	 * @return the visitor result
+<i>113</i>&nbsp;	 */
+<i>114</i>&nbsp;	T visitStopDuckStatement(JumpingAlienProgParser.StopDuckStatementContext ctx);
+<i>115</i>&nbsp;	/**
+<i>116</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#waitStatement}.
+<i>117</i>&nbsp;	 * @param ctx the parse tree
+<i>118</i>&nbsp;	 * @return the visitor result
+<i>119</i>&nbsp;	 */
+<i>120</i>&nbsp;	T visitWaitStatement(JumpingAlienProgParser.WaitStatementContext ctx);
+<i>121</i>&nbsp;	/**
+<i>122</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#skipStatement}.
+<i>123</i>&nbsp;	 * @param ctx the parse tree
+<i>124</i>&nbsp;	 * @return the visitor result
+<i>125</i>&nbsp;	 */
+<i>126</i>&nbsp;	T visitSkipStatement(JumpingAlienProgParser.SkipStatementContext ctx);
+<i>127</i>&nbsp;	/**
+<i>128</i>&nbsp;	 * Visit a parse tree produced by the {@code randomExpr}
+<i>129</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>130</i>&nbsp;	 * @param ctx the parse tree
+<i>131</i>&nbsp;	 * @return the visitor result
+<i>132</i>&nbsp;	 */
+<i>133</i>&nbsp;	T visitRandomExpr(JumpingAlienProgParser.RandomExprContext ctx);
+<i>134</i>&nbsp;	/**
+<i>135</i>&nbsp;	 * Visit a parse tree produced by the {@code sqrtExpr}
+<i>136</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>137</i>&nbsp;	 * @param ctx the parse tree
+<i>138</i>&nbsp;	 * @return the visitor result
+<i>139</i>&nbsp;	 */
+<i>140</i>&nbsp;	T visitSqrtExpr(JumpingAlienProgParser.SqrtExprContext ctx);
+<i>141</i>&nbsp;	/**
+<i>142</i>&nbsp;	 * Visit a parse tree produced by the {@code orExpr}
+<i>143</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>144</i>&nbsp;	 * @param ctx the parse tree
+<i>145</i>&nbsp;	 * @return the visitor result
+<i>146</i>&nbsp;	 */
+<i>147</i>&nbsp;	T visitOrExpr(JumpingAlienProgParser.OrExprContext ctx);
+<i>148</i>&nbsp;	/**
+<i>149</i>&nbsp;	 * Visit a parse tree produced by the {@code multExpr}
+<i>150</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>151</i>&nbsp;	 * @param ctx the parse tree
+<i>152</i>&nbsp;	 * @return the visitor result
+<i>153</i>&nbsp;	 */
+<i>154</i>&nbsp;	T visitMultExpr(JumpingAlienProgParser.MultExprContext ctx);
+<i>155</i>&nbsp;	/**
+<i>156</i>&nbsp;	 * Visit a parse tree produced by the {@code parenExpr}
+<i>157</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>158</i>&nbsp;	 * @param ctx the parse tree
+<i>159</i>&nbsp;	 * @return the visitor result
+<i>160</i>&nbsp;	 */
+<i>161</i>&nbsp;	T visitParenExpr(JumpingAlienProgParser.ParenExprContext ctx);
+<i>162</i>&nbsp;	/**
+<i>163</i>&nbsp;	 * Visit a parse tree produced by the {@code cmpExpr}
+<i>164</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>165</i>&nbsp;	 * @param ctx the parse tree
+<i>166</i>&nbsp;	 * @return the visitor result
+<i>167</i>&nbsp;	 */
+<i>168</i>&nbsp;	T visitCmpExpr(JumpingAlienProgParser.CmpExprContext ctx);
+<i>169</i>&nbsp;	/**
+<i>170</i>&nbsp;	 * Visit a parse tree produced by the {@code varExpr}
+<i>171</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>172</i>&nbsp;	 * @param ctx the parse tree
+<i>173</i>&nbsp;	 * @return the visitor result
+<i>174</i>&nbsp;	 */
+<i>175</i>&nbsp;	T visitVarExpr(JumpingAlienProgParser.VarExprContext ctx);
+<i>176</i>&nbsp;	/**
+<i>177</i>&nbsp;	 * Visit a parse tree produced by the {@code notExpr}
+<i>178</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>179</i>&nbsp;	 * @param ctx the parse tree
+<i>180</i>&nbsp;	 * @return the visitor result
+<i>181</i>&nbsp;	 */
+<i>182</i>&nbsp;	T visitNotExpr(JumpingAlienProgParser.NotExprContext ctx);
+<i>183</i>&nbsp;	/**
+<i>184</i>&nbsp;	 * Visit a parse tree produced by the {@code getExpr}
+<i>185</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>186</i>&nbsp;	 * @param ctx the parse tree
+<i>187</i>&nbsp;	 * @return the visitor result
+<i>188</i>&nbsp;	 */
+<i>189</i>&nbsp;	T visitGetExpr(JumpingAlienProgParser.GetExprContext ctx);
+<i>190</i>&nbsp;	/**
+<i>191</i>&nbsp;	 * Visit a parse tree produced by the {@code getTileExpr}
+<i>192</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>193</i>&nbsp;	 * @param ctx the parse tree
+<i>194</i>&nbsp;	 * @return the visitor result
+<i>195</i>&nbsp;	 */
+<i>196</i>&nbsp;	T visitGetTileExpr(JumpingAlienProgParser.GetTileExprContext ctx);
+<i>197</i>&nbsp;	/**
+<i>198</i>&nbsp;	 * Visit a parse tree produced by the {@code addExpr}
+<i>199</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>200</i>&nbsp;	 * @param ctx the parse tree
+<i>201</i>&nbsp;	 * @return the visitor result
+<i>202</i>&nbsp;	 */
+<i>203</i>&nbsp;	T visitAddExpr(JumpingAlienProgParser.AddExprContext ctx);
+<i>204</i>&nbsp;	/**
+<i>205</i>&nbsp;	 * Visit a parse tree produced by the {@code literalExpr}
+<i>206</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>207</i>&nbsp;	 * @param ctx the parse tree
+<i>208</i>&nbsp;	 * @return the visitor result
+<i>209</i>&nbsp;	 */
+<i>210</i>&nbsp;	T visitLiteralExpr(JumpingAlienProgParser.LiteralExprContext ctx);
+<i>211</i>&nbsp;	/**
+<i>212</i>&nbsp;	 * Visit a parse tree produced by the {@code isMoving}
+<i>213</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>214</i>&nbsp;	 * @param ctx the parse tree
+<i>215</i>&nbsp;	 * @return the visitor result
+<i>216</i>&nbsp;	 */
+<i>217</i>&nbsp;	T visitIsMoving(JumpingAlienProgParser.IsMovingContext ctx);
+<i>218</i>&nbsp;	/**
+<i>219</i>&nbsp;	 * Visit a parse tree produced by the {@code searchObjExpr}
+<i>220</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>221</i>&nbsp;	 * @param ctx the parse tree
+<i>222</i>&nbsp;	 * @return the visitor result
+<i>223</i>&nbsp;	 */
+<i>224</i>&nbsp;	T visitSearchObjExpr(JumpingAlienProgParser.SearchObjExprContext ctx);
+<i>225</i>&nbsp;	/**
+<i>226</i>&nbsp;	 * Visit a parse tree produced by the {@code isExpr}
+<i>227</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>228</i>&nbsp;	 * @param ctx the parse tree
+<i>229</i>&nbsp;	 * @return the visitor result
+<i>230</i>&nbsp;	 */
+<i>231</i>&nbsp;	T visitIsExpr(JumpingAlienProgParser.IsExprContext ctx);
+<i>232</i>&nbsp;	/**
+<i>233</i>&nbsp;	 * Visit a parse tree produced by the {@code andExpr}
+<i>234</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#expression}.
+<i>235</i>&nbsp;	 * @param ctx the parse tree
+<i>236</i>&nbsp;	 * @return the visitor result
+<i>237</i>&nbsp;	 */
+<i>238</i>&nbsp;	T visitAndExpr(JumpingAlienProgParser.AndExprContext ctx);
+<i>239</i>&nbsp;	/**
+<i>240</i>&nbsp;	 * Visit a parse tree produced by the {@code intLiteral}
+<i>241</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#literal}.
+<i>242</i>&nbsp;	 * @param ctx the parse tree
+<i>243</i>&nbsp;	 * @return the visitor result
+<i>244</i>&nbsp;	 */
+<i>245</i>&nbsp;	T visitIntLiteral(JumpingAlienProgParser.IntLiteralContext ctx);
+<i>246</i>&nbsp;	/**
+<i>247</i>&nbsp;	 * Visit a parse tree produced by the {@code doubleLiteral}
+<i>248</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#literal}.
+<i>249</i>&nbsp;	 * @param ctx the parse tree
+<i>250</i>&nbsp;	 * @return the visitor result
+<i>251</i>&nbsp;	 */
+<i>252</i>&nbsp;	T visitDoubleLiteral(JumpingAlienProgParser.DoubleLiteralContext ctx);
+<i>253</i>&nbsp;	/**
+<i>254</i>&nbsp;	 * Visit a parse tree produced by the {@code boolLiteral}
+<i>255</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#literal}.
+<i>256</i>&nbsp;	 * @param ctx the parse tree
+<i>257</i>&nbsp;	 * @return the visitor result
+<i>258</i>&nbsp;	 */
+<i>259</i>&nbsp;	T visitBoolLiteral(JumpingAlienProgParser.BoolLiteralContext ctx);
+<i>260</i>&nbsp;	/**
+<i>261</i>&nbsp;	 * Visit a parse tree produced by the {@code directionLiteral}
+<i>262</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#literal}.
+<i>263</i>&nbsp;	 * @param ctx the parse tree
+<i>264</i>&nbsp;	 * @return the visitor result
+<i>265</i>&nbsp;	 */
+<i>266</i>&nbsp;	T visitDirectionLiteral(JumpingAlienProgParser.DirectionLiteralContext ctx);
+<i>267</i>&nbsp;	/**
+<i>268</i>&nbsp;	 * Visit a parse tree produced by the {@code nullLiteral}
+<i>269</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#literal}.
+<i>270</i>&nbsp;	 * @param ctx the parse tree
+<i>271</i>&nbsp;	 * @return the visitor result
+<i>272</i>&nbsp;	 */
+<i>273</i>&nbsp;	T visitNullLiteral(JumpingAlienProgParser.NullLiteralContext ctx);
+<i>274</i>&nbsp;	/**
+<i>275</i>&nbsp;	 * Visit a parse tree produced by the {@code selfLiteral}
+<i>276</i>&nbsp;	 * labeled alternative in {@link JumpingAlienProgParser#literal}.
+<i>277</i>&nbsp;	 * @param ctx the parse tree
+<i>278</i>&nbsp;	 * @return the visitor result
+<i>279</i>&nbsp;	 */
+<i>280</i>&nbsp;	T visitSelfLiteral(JumpingAlienProgParser.SelfLiteralContext ctx);
+<i>281</i>&nbsp;	/**
+<i>282</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#type}.
+<i>283</i>&nbsp;	 * @param ctx the parse tree
+<i>284</i>&nbsp;	 * @return the visitor result
+<i>285</i>&nbsp;	 */
+<i>286</i>&nbsp;	T visitType(JumpingAlienProgParser.TypeContext ctx);
+<i>287</i>&nbsp;	/**
+<i>288</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#double_type}.
+<i>289</i>&nbsp;	 * @param ctx the parse tree
+<i>290</i>&nbsp;	 * @return the visitor result
+<i>291</i>&nbsp;	 */
+<i>292</i>&nbsp;	T visitDouble_type(JumpingAlienProgParser.Double_typeContext ctx);
+<i>293</i>&nbsp;	/**
+<i>294</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#bool_type}.
+<i>295</i>&nbsp;	 * @param ctx the parse tree
+<i>296</i>&nbsp;	 * @return the visitor result
+<i>297</i>&nbsp;	 */
+<i>298</i>&nbsp;	T visitBool_type(JumpingAlienProgParser.Bool_typeContext ctx);
+<i>299</i>&nbsp;	/**
+<i>300</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#object_type}.
+<i>301</i>&nbsp;	 * @param ctx the parse tree
+<i>302</i>&nbsp;	 * @return the visitor result
+<i>303</i>&nbsp;	 */
+<i>304</i>&nbsp;	T visitObject_type(JumpingAlienProgParser.Object_typeContext ctx);
+<i>305</i>&nbsp;	/**
+<i>306</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#direction_type}.
+<i>307</i>&nbsp;	 * @param ctx the parse tree
+<i>308</i>&nbsp;	 * @return the visitor result
+<i>309</i>&nbsp;	 */
+<i>310</i>&nbsp;	T visitDirection_type(JumpingAlienProgParser.Direction_typeContext ctx);
+<i>311</i>&nbsp;	/**
+<i>312</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#kind}.
+<i>313</i>&nbsp;	 * @param ctx the parse tree
+<i>314</i>&nbsp;	 * @return the visitor result
+<i>315</i>&nbsp;	 */
+<i>316</i>&nbsp;	T visitKind(JumpingAlienProgParser.KindContext ctx);
+<i>317</i>&nbsp;	/**
+<i>318</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#sortDirection}.
+<i>319</i>&nbsp;	 * @param ctx the parse tree
+<i>320</i>&nbsp;	 * @return the visitor result
+<i>321</i>&nbsp;	 */
+<i>322</i>&nbsp;	T visitSortDirection(JumpingAlienProgParser.SortDirectionContext ctx);
+<i>323</i>&nbsp;	/**
+<i>324</i>&nbsp;	 * Visit a parse tree produced by {@link JumpingAlienProgParser#direction}.
+<i>325</i>&nbsp;	 * @param ctx the parse tree
+<i>326</i>&nbsp;	 * @return the visitor result
+<i>327</i>&nbsp;	 */
+<i>328</i>&nbsp;	T visitDirection(JumpingAlienProgParser.DirectionContext ctx);
+<i>329</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

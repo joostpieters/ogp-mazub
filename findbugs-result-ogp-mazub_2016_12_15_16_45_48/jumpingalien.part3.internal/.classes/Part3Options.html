@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Part3Options</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part3.internal</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Part3Options (jumpingalien.part3.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Part3Options</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part3.internal;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import jumpingalien.part2.internal.Part2Options;
+<i>4</i>&nbsp;
+<b class="nc"><i>5</i>&nbsp;public class Part3Options extends Part2Options {</b>
+<i>6</i>&nbsp;	
+<b class="nc"><i>7</i>&nbsp;	private long randomSeed = 123;</b>
+<i>8</i>&nbsp;	
+<i>9</i>&nbsp;	public long getRandomSeed() {
+<b class="nc"><i>10</i>&nbsp;		return randomSeed;</b>
+<i>11</i>&nbsp;	}
+<i>12</i>&nbsp;	
+<i>13</i>&nbsp;	public void setRandomSeed(long randomSeed) {
+<b class="nc"><i>14</i>&nbsp;		this.randomSeed = randomSeed;</b>
+<i>15</i>&nbsp;	}
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;	public static Part3Options parse(String[] args) {
+<b class="nc"><i>18</i>&nbsp;		Part3Options options = new Part3Options();</b>
+<i>19</i>&nbsp;
+<b class="nc"><i>20</i>&nbsp;		for (int i = 0; i &lt; args.length; i++) {</b>
+<b class="nc"><i>21</i>&nbsp;			String arg = args[i];</b>
+<b class="nc"><i>22</i>&nbsp;			switch (arg) {</b>
+<i>23</i>&nbsp;			case &quot;-seed&quot;:
+<b class="nc"><i>24</i>&nbsp;				options.setRandomSeed(Long.parseLong(args[++i]));</b>
+<b class="nc"><i>25</i>&nbsp;				break;</b>
+<i>26</i>&nbsp;			case &quot;-targetfps&quot;:
+<b class="nc"><i>27</i>&nbsp;				options.setTargetFPS(Integer.parseInt(args[++i]));</b>
+<b class="nc"><i>28</i>&nbsp;				break;</b>
+<i>29</i>&nbsp;			case &quot;-timescale&quot;:
+<b class="nc"><i>30</i>&nbsp;				options.setTimescale(Double.parseDouble(args[++i]));</b>
+<b class="nc"><i>31</i>&nbsp;				break;</b>
+<i>32</i>&nbsp;			case &quot;-debuginfo&quot;:
+<b class="nc"><i>33</i>&nbsp;				options.setDebugShowInfo(Boolean.parseBoolean(args[++i]));</b>
+<b class="nc"><i>34</i>&nbsp;				break;</b>
+<i>35</i>&nbsp;			case &quot;-debugaxes&quot;:
+<b class="nc"><i>36</i>&nbsp;				options.setDebugShowAxes(Boolean.parseBoolean(args[++i]));</b>
+<b class="nc"><i>37</i>&nbsp;				break;</b>
+<i>38</i>&nbsp;			case &quot;-debuglocation&quot;:
+<b class="nc"><i>39</i>&nbsp;				options.setDebugShowObjectLocationAndSize(Boolean</b>
+<b class="nc"><i>40</i>&nbsp;						.parseBoolean(args[++i]));</b>
+<b class="nc"><i>41</i>&nbsp;				break;</b>
+<i>42</i>&nbsp;			case &quot;-debugpixels&quot;:
+<b class="nc"><i>43</i>&nbsp;				options.setDebugShowPixels(Boolean.parseBoolean(args[++i]));</b>
+<b class="nc"><i>44</i>&nbsp;				break;</b>
+<i>45</i>&nbsp;			case &quot;-debughistory&quot;:
+<b class="nc"><i>46</i>&nbsp;				options.setDebugShowHistory(Boolean.parseBoolean(args[++i]));</b>
+<b class="nc"><i>47</i>&nbsp;				break;</b>
+<i>48</i>&nbsp;			case &quot;-showtiletypes&quot;:
+<b class="nc"><i>49</i>&nbsp;				options.setDebugShowTileTypes(Boolean.parseBoolean(args[++i]));</b>
+<i>50</i>&nbsp;				break;
+<i>51</i>&nbsp;			}
+<i>52</i>&nbsp;		}
+<i>53</i>&nbsp;
+<b class="nc"><i>54</i>&nbsp;		return options;</b>
+<i>55</i>&nbsp;	}
+<i>56</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

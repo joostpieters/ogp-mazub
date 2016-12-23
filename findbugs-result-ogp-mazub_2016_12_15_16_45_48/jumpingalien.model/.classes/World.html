@@ -1,0 +1,337 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: World</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: World (jumpingalien.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">World</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.8%
+  </span>
+  <span class="absValue">
+    (4/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    21%
+  </span>
+  <span class="absValue">
+    (13/ 62)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">World$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">World$enGameState</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    26.7%
+  </span>
+  <span class="absValue">
+    (4/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (13/ 65)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import be.kuleuven.cs.som.annotate.Basic;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.ArrayList;
+<i>6</i>&nbsp;import java.util.Collection;
+<i>7</i>&nbsp;import java.util.LinkedList;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; * A class representing the game world
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public class World extends TileMap
+<i>13</i>&nbsp;{
+<i>14</i>&nbsp;	private final Thread collisionThread;
+<i>15</i>&nbsp;	private final CollisionChecker collisionRunnable;
+<i>16</i>&nbsp;	//collection
+<b class="fc"><i>17</i>&nbsp;	private final LinkedList&lt;ActiveObject&gt; colInterActive = new LinkedList&lt;&gt;();</b>
+<i>18</i>&nbsp;	//omgevings var
+<i>19</i>&nbsp;	private final int iVisibleWindowWidth;
+<i>20</i>&nbsp;	private final int iVisibleWindowHeight;
+<i>21</i>&nbsp;	private enGameState eGameState;
+<i>22</i>&nbsp;	//player
+<i>23</i>&nbsp;	private Mazub player;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;	/**
+<i>26</i>&nbsp;	 * Contructor of a World
+<i>27</i>&nbsp;	 *
+<i>28</i>&nbsp;	 * @param tileSize            The size of the Game Tiles
+<i>29</i>&nbsp;	 * @param nbTilesX            The number of tiles on the x-axis
+<i>30</i>&nbsp;	 * @param nbTilesY            The number of tiles on the y-axis
+<i>31</i>&nbsp;	 * @param visibleWindowWidth  The width of the visible window
+<i>32</i>&nbsp;	 * @param visibleWindowHeight The Height of the visible window
+<i>33</i>&nbsp;	 * @param targetTileX         The tile number of the winning tile on the x-axis
+<i>34</i>&nbsp;	 * @param targetTileY         The tile number of the winning tile on the y-axis
+<i>35</i>&nbsp;	 * @post Sets the iTileSize to the given value
+<i>36</i>&nbsp;	 * | iTileSize = tileSize
+<i>37</i>&nbsp;	 * @effect Initialises the given number of tiles in the tile array
+<i>38</i>&nbsp;	 * |tileArray = new Tile[nbTilesX][nbTilesY]
+<i>39</i>&nbsp;	 * @post The visible windows size is set to the given value
+<i>40</i>&nbsp;	 * |iVisibleWindowHeigt = visibleWindowHeight
+<i>41</i>&nbsp;	 * |iVisibleWindowWidth = visibleWindowWidth
+<i>42</i>&nbsp;	 * @post
+<i>43</i>&nbsp;	 */
+<i>44</i>&nbsp;	public World(int tileSize, int nbTilesX, int nbTilesY, int visibleWindowWidth, int visibleWindowHeight, int targetTileX, int targetTileY)
+<i>45</i>&nbsp;	{
+<b class="fc"><i>46</i>&nbsp;		super(nbTilesX, nbTilesY, tileSize, targetTileX, targetTileY);</b>
+<b class="fc"><i>47</i>&nbsp;		iVisibleWindowHeight = visibleWindowHeight;</b>
+<b class="fc"><i>48</i>&nbsp;		iVisibleWindowWidth = visibleWindowWidth;</b>
+<b class="fc"><i>49</i>&nbsp;		collisionRunnable = new CollisionChecker(this);</b>
+<b class="fc"><i>50</i>&nbsp;		this.collisionThread = new Thread(collisionRunnable);</b>
+<b class="fc"><i>51</i>&nbsp;		collisionThread.start();</b>
+<i>52</i>&nbsp;
+<b class="fc"><i>53</i>&nbsp;	}</b>
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;	private synchronized LinkedList&lt;ActiveObject&gt; getColInterActive()
+<i>56</i>&nbsp;	{
+<b class="fc"><i>57</i>&nbsp;		return colInterActive;</b>
+<i>58</i>&nbsp;	}
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;	@Basic
+<i>61</i>&nbsp;	public void startGame()
+<i>62</i>&nbsp;	{
+<b class="nc"><i>63</i>&nbsp;		eGameState = enGameState.started;</b>
+<b class="nc"><i>64</i>&nbsp;	}</b>
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;	@Basic
+<i>67</i>&nbsp;	public void setMazub(Mazub alien)
+<i>68</i>&nbsp;	{
+<b class="nc"><i>69</i>&nbsp;		if (player != null) throw new IllegalStateException(&quot;player already set&quot;);</b>
+<b class="nc"><i>70</i>&nbsp;		player = alien;</b>
+<b class="nc"><i>71</i>&nbsp;		addObject(alien);</b>
+<b class="nc"><i>72</i>&nbsp;	}</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;	/**
+<i>75</i>&nbsp;	 * Checks if the game has ended or not
+<i>76</i>&nbsp;	 *
+<i>77</i>&nbsp;	 * @return The value indicating if the game has ended or not
+<i>78</i>&nbsp;	 */
+<i>79</i>&nbsp;	public boolean isGameOver()
+<i>80</i>&nbsp;	{
+<b class="nc"><i>81</i>&nbsp;		switch (eGameState)</b>
+<i>82</i>&nbsp;		{
+<i>83</i>&nbsp;			case started:
+<b class="nc"><i>84</i>&nbsp;				return false;</b>
+<i>85</i>&nbsp;			case won:
+<b class="nc"><i>86</i>&nbsp;				return true;</b>
+<i>87</i>&nbsp;			case lost:
+<b class="nc"><i>88</i>&nbsp;				return true;</b>
+<i>89</i>&nbsp;			default:
+<b class="nc"><i>90</i>&nbsp;				throw new IllegalStateException(&quot;unexpected gamestate&quot;);</b>
+<i>91</i>&nbsp;		}
+<i>92</i>&nbsp;	}
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;	@Basic
+<i>95</i>&nbsp;	public boolean didPlayerWin()
+<i>96</i>&nbsp;	{
+<b class="nc"><i>97</i>&nbsp;		return (eGameState == enGameState.won);</b>
+<i>98</i>&nbsp;	}
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;	/**
+<i>101</i>&nbsp;	 * Calculates a rectangle representing the visible window
+<i>102</i>&nbsp;	 *
+<i>103</i>&nbsp;	 * @return An integer array being the left,bottom,right and top pixel of said window
+<i>104</i>&nbsp;	 * | if (InRangeOfGameWorld(middelOfPlayer - iVisibleWindowWidth / 2)) {
+<i>105</i>&nbsp;	 * left = middelOfPlayer + iVisibleWindowWidth / 2
+<i>106</i>&nbsp;	 * } else {
+<i>107</i>&nbsp;	 * left = 0
+<i>108</i>&nbsp;	 * right = iVisibleWindowWidth
+<i>109</i>&nbsp;	 * }
+<i>110</i>&nbsp;	 */
+<i>111</i>&nbsp;	public int[] getVisibleWindow()
+<i>112</i>&nbsp;	{
+<i>113</i>&nbsp;		//left, bottom, right, top
+<b class="nc"><i>114</i>&nbsp;		int[] iaWindow = new int[4];</b>
+<b class="nc"><i>115</i>&nbsp;		int iMidX = player.getLocation()[0] + player.getSize()[0] / 2;</b>
+<b class="nc"><i>116</i>&nbsp;		int iMidY = player.getLocation()[1] + player.getSize()[1] / 2;</b>
+<b class="nc"><i>117</i>&nbsp;		iaWindow[0] = iMidX - iVisibleWindowWidth / 2;</b>
+<b class="nc"><i>118</i>&nbsp;		if (iaWindow[0] &lt; 0)</b>
+<i>119</i>&nbsp;		{
+<b class="nc"><i>120</i>&nbsp;			iaWindow[2] = iVisibleWindowWidth;</b>
+<b class="nc"><i>121</i>&nbsp;			iaWindow[0] = 0;</b>
+<i>122</i>&nbsp;		}
+<i>123</i>&nbsp;
+<b class="nc"><i>124</i>&nbsp;		iaWindow[1] = iMidY - iVisibleWindowHeight / 2;</b>
+<b class="nc"><i>125</i>&nbsp;		if (iaWindow[1] &lt; 0)</b>
+<i>126</i>&nbsp;		{
+<b class="nc"><i>127</i>&nbsp;			iaWindow[3] = iVisibleWindowHeight;</b>
+<b class="nc"><i>128</i>&nbsp;			iaWindow[1] = 0;</b>
+<i>129</i>&nbsp;		}
+<i>130</i>&nbsp;
+<b class="nc"><i>131</i>&nbsp;		iaWindow[2] = (iaWindow[2] == iVisibleWindowWidth) ? iVisibleWindowWidth : iMidX + iVisibleWindowWidth / 2;</b>
+<b class="nc"><i>132</i>&nbsp;		if (iaWindow[2] &gt; getWorldSizeInPixel()[0])</b>
+<i>133</i>&nbsp;		{
+<b class="nc"><i>134</i>&nbsp;			iaWindow[0] = getWorldSizeInPixel()[0] - iVisibleWindowWidth;</b>
+<b class="nc"><i>135</i>&nbsp;			iaWindow[2] = getWorldSizeInPixel()[0];</b>
+<i>136</i>&nbsp;		}
+<i>137</i>&nbsp;
+<b class="nc"><i>138</i>&nbsp;		iaWindow[3] = (iaWindow[3] == iVisibleWindowHeight) ? iVisibleWindowHeight : iMidY + iVisibleWindowHeight / 2;</b>
+<b class="nc"><i>139</i>&nbsp;		if (iaWindow[3] &gt; getWorldSizeInPixel()[1])</b>
+<i>140</i>&nbsp;		{
+<b class="nc"><i>141</i>&nbsp;			iaWindow[1] = getWorldSizeInPixel()[1] - iVisibleWindowHeight;</b>
+<b class="nc"><i>142</i>&nbsp;			iaWindow[3] = getWorldSizeInPixel()[1];</b>
+<i>143</i>&nbsp;		}
+<b class="nc"><i>144</i>&nbsp;		return iaWindow;</b>
+<i>145</i>&nbsp;	}
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;	@Basic
+<i>148</i>&nbsp;	public void addObject(ActiveObject obj)
+<i>149</i>&nbsp;	{
+<b class="fc"><i>150</i>&nbsp;		obj.wCaller(this);</b>
+<b class="nc"><i>151</i>&nbsp;		getColInterActive().add(obj);</b>
+<b class="nc"><i>152</i>&nbsp;	}</b>
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;	@Basic
+<i>155</i>&nbsp;	public synchronized Collection&lt;?&gt; getCollection(Class obj)
+<i>156</i>&nbsp;	{
+<b class="fc"><i>157</i>&nbsp;		ArrayList&lt;ActiveObject&gt; tempCol = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>158</i>&nbsp;		getColInterActive().stream().filter(ActiveObject::isAlive).filter(obj::isInstance).forEach(tempCol::add);</b>
+<b class="fc"><i>159</i>&nbsp;		return tempCol;</b>
+<i>160</i>&nbsp;	}
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;	@Basic
+<i>163</i>&nbsp;	@Deprecated
+<i>164</i>&nbsp;	private void FncRemoveFromColl(ActiveObject obj)
+<i>165</i>&nbsp;	{
+<b class="nc"><i>166</i>&nbsp;		getColInterActive().remove(obj);</b>
+<b class="nc"><i>167</i>&nbsp;	}</b>
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;	@Basic
+<i>170</i>&nbsp;	public void objectDies(ActiveObject obj)
+<i>171</i>&nbsp;	{
+<b class="nc"><i>172</i>&nbsp;		if (obj == player)</b>
+<i>173</i>&nbsp;		{
+<b class="nc"><i>174</i>&nbsp;			eGameState = enGameState.lost;</b>
+<i>175</i>&nbsp;		}
+<b class="nc"><i>176</i>&nbsp;		obj.dies();</b>
+<b class="nc"><i>177</i>&nbsp;	}</b>
+<i>178</i>&nbsp;
+<i>179</i>&nbsp;	public void advanceTime(double dt)
+<i>180</i>&nbsp;	{
+<i>181</i>&nbsp;		try
+<i>182</i>&nbsp;		{
+<b class="nc"><i>183</i>&nbsp;			if (getTilePositionInTiles(player).stream().anyMatch(obj -&gt; obj == getWinningTile()))</b>
+<b class="nc"><i>184</i>&nbsp;				eGameState = enGameState.won;</b>
+<b class="nc"><i>185</i>&nbsp;		} catch (ArrayIndexOutOfBoundsException ex)</b>
+<i>186</i>&nbsp;		{
+<b class="nc"><i>187</i>&nbsp;			System.out.print(&quot;no valid winning tile&quot;);</b>
+<b class="nc"><i>188</i>&nbsp;		}</b>
+<b class="nc"><i>189</i>&nbsp;		getColInterActive().stream().filter(ActiveObject::isAlive).forEach(obj -&gt; obj.advanceTime(dt));</b>
+<b class="nc"><i>190</i>&nbsp;	}</b>
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;	/**
+<i>193</i>&nbsp;	 * Stop the collision decetion from running
+<i>194</i>&nbsp;	 *
+<i>195</i>&nbsp;	 * @effect stops the runnable detecting collisions
+<i>196</i>&nbsp;	 * | collisionRunnable.stop
+<i>197</i>&nbsp;	 */
+<i>198</i>&nbsp;	public void finialize()
+<i>199</i>&nbsp;	{
+<b class="nc"><i>200</i>&nbsp;		collisionRunnable.stop();</b>
+<b class="nc"><i>201</i>&nbsp;	}</b>
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;	//game state vars
+<b class="nc"><i>204</i>&nbsp;	private enum enGameState</b>
+<i>205</i>&nbsp;	{
+<b class="nc"><i>206</i>&nbsp;		started, won, lost</b>
+<i>207</i>&nbsp;	}
+<i>208</i>&nbsp;
+<i>209</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

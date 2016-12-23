@@ -1,0 +1,608 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: IFacadePart2</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part2.facade</a> ]
+</div>
+
+<h1>Coverage Summary for Class: IFacadePart2 (jumpingalien.part2.facade)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IFacadePart2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part2.facade;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.Collection;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import jumpingalien.model.Plant;
+<i>6</i>&nbsp;import jumpingalien.model.Shark;
+<i>7</i>&nbsp;import jumpingalien.model.Mazub;
+<i>8</i>&nbsp;import jumpingalien.model.Slime;
+<i>9</i>&nbsp;import jumpingalien.model.School;
+<i>10</i>&nbsp;import jumpingalien.model.World;
+<i>11</i>&nbsp;import jumpingalien.part1.facade.IFacade;
+<i>12</i>&nbsp;import jumpingalien.util.ModelException;
+<i>13</i>&nbsp;import jumpingalien.util.Sprite;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;/**
+<i>16</i>&nbsp; * Implement this interface to connect your code to the graphical user interface
+<i>17</i>&nbsp; * (GUI).
+<i>18</i>&nbsp; * 
+<i>19</i>&nbsp; * &lt;ul&gt;
+<i>20</i>&nbsp; * &lt;li&gt;For separating the code that you wrote from the code that was provided to
+<i>21</i>&nbsp; * you, put &lt;b&gt;ALL your code in the &lt;code&gt;src&lt;/code&gt; folder&lt;/b&gt; and &lt;b&gt;ALL your
+<i>22</i>&nbsp; * tests in the &lt;code&gt;tests&lt;/code&gt; folder&lt;/b&gt;. The code that is provided to you
+<i>23</i>&nbsp; * stays in the &lt;code&gt;src-provided&lt;/code&gt; folder. Only if you modify the
+<i>24</i>&nbsp; * provided code, it&#39;s advised to move the modified code to the &lt;code&gt;src&lt;/code&gt;
+<i>25</i>&nbsp; * folder, so that your changes cannot be accidentally overwritten by an updated
+<i>26</i>&nbsp; * version of the provided code.&lt;br&gt;
+<i>27</i>&nbsp; * Note: classes that belong to some package can be spread over multiple source
+<i>28</i>&nbsp; * folders. For example, two classes, one in &lt;code&gt;src&lt;/code&gt; and one in
+<i>29</i>&nbsp; * &lt;code&gt;src-provided&lt;/code&gt;, can be declared to belong to the same package,
+<i>30</i>&nbsp; * even though they are not located in the same source folder.&lt;/li&gt;
+<i>31</i>&nbsp; * 
+<i>32</i>&nbsp; * &lt;li&gt;You should at least &lt;b&gt;create the following classes&lt;/b&gt; in the package
+<i>33</i>&nbsp; * &lt;code&gt;jumpingalien.model&lt;/code&gt;:
+<i>34</i>&nbsp; * &lt;ul&gt;
+<i>35</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Mazub&lt;/code&gt; for representing Mazub the alien&lt;/li&gt;
+<i>36</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;World&lt;/code&gt; for representing the game world&lt;/li&gt;
+<i>37</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Plant&lt;/code&gt; for representing a plant&lt;/li&gt;
+<i>38</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Shark&lt;/code&gt; for representing a shark enemy&lt;/li&gt;
+<i>39</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;Slime&lt;/code&gt; for representing a slime enemy&lt;/li&gt;
+<i>40</i>&nbsp; * &lt;li&gt;a class &lt;code&gt;School&lt;/code&gt; for representing a slime school&lt;/li&gt;
+<i>41</i>&nbsp; * &lt;/ul&gt;
+<i>42</i>&nbsp; * You may, of course, add additional classes as you see fit.
+<i>43</i>&nbsp; * 
+<i>44</i>&nbsp; * &lt;li&gt;You should &lt;b&gt;create a class &lt;code&gt;Facade&lt;/code&gt;&lt;/b&gt; that implements this
+<i>45</i>&nbsp; * interface. This class should be placed &lt;b&gt;in the package
+<i>46</i>&nbsp; * &lt;code&gt;jumpingalien.part2.facade&lt;/code&gt;&lt;/b&gt;.&lt;/li&gt;
+<i>47</i>&nbsp; * 
+<i>48</i>&nbsp; * &lt;li&gt;
+<i>49</i>&nbsp; * The &lt;b&gt;header of that Facade class&lt;/b&gt; should look as follows:&lt;br&gt;
+<i>50</i>&nbsp; * &lt;code&gt;class Facade implements IFacadePart2 { ... }&lt;/code&gt;&lt;br&gt;
+<i>51</i>&nbsp; * The Facade class should also implement all methods of IFacade from part 1,
+<i>52</i>&nbsp; * except {@link IFacade#advanceTime(Mazub, double)}. The IFacadePart2 interface
+<i>53</i>&nbsp; * already extends IFacade, so this does not need to be indicated in the header
+<i>54</i>&nbsp; * explicitly.
+<i>55</i>&nbsp; * 
+<i>56</i>&nbsp; * Consult the &lt;a href=
+<i>57</i>&nbsp; * &quot;http://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html&quot;&gt;
+<i>58</i>&nbsp; * Java tutorial&lt;/a&gt; for more information on interfaces, if necessary.&lt;/li&gt;
+<i>59</i>&nbsp; *
+<i>60</i>&nbsp; * &lt;li&gt;Your &lt;code&gt;Facade&lt;/code&gt; class should offer a &lt;b&gt;default constructor&lt;/b&gt;.
+<i>61</i>&nbsp; * &lt;/li&gt;
+<i>62</i>&nbsp; * 
+<i>63</i>&nbsp; * &lt;li&gt;&lt;b&gt;Each method&lt;/b&gt; defined in the interfaces &lt;code&gt;IFacadePart2&lt;/code&gt;
+<i>64</i>&nbsp; * and &lt;code&gt;IFacade&lt;/code&gt; must be implemented by the class &lt;code&gt;Facade&lt;/code&gt;
+<i>65</i>&nbsp; * , except {@link IFacade#advanceTime(Mazub, double)}. For example, the
+<i>66</i>&nbsp; * implementation of &lt;code&gt;getLocation&lt;/code&gt; should call one or more methods on
+<i>67</i>&nbsp; * the given &lt;code&gt;alien&lt;/code&gt; to retrieve its current location.&lt;/li&gt;
+<i>68</i>&nbsp; * 
+<i>69</i>&nbsp; * &lt;li&gt;Methods in this interface are &lt;b&gt;only allowed to throw exceptions of type
+<i>70</i>&nbsp; * &lt;code&gt;jumpingalien.util.ModelException&lt;/code&gt;&lt;/b&gt; (this class is provided).
+<i>71</i>&nbsp; * This exception can be thrown only if calling a method of your
+<i>72</i>&nbsp; * &lt;code&gt;Mazub&lt;/code&gt; class with the given parameters would violate a
+<i>73</i>&nbsp; * precondition or if the method of your &lt;code&gt;Mazub&lt;/code&gt; class throws an
+<i>74</i>&nbsp; * exception (if so, wrap the exception in a &lt;code&gt;ModelException&lt;/code&gt;).&lt;/li&gt;
+<i>75</i>&nbsp; * 
+<i>76</i>&nbsp; * &lt;li&gt;&lt;b&gt;ModelException should not be used anywhere outside of your Facade
+<i>77</i>&nbsp; * implementation.&lt;/b&gt;&lt;/li&gt;
+<i>78</i>&nbsp; * 
+<i>79</i>&nbsp; * &lt;li&gt;Your Facade implementation should &lt;b&gt;only contain trivial code&lt;/b&gt; (for
+<i>80</i>&nbsp; * example, calling a method, combining multiple return values into an array,
+<i>81</i>&nbsp; * creating @Value instances, catching exceptions and wrapping it in a
+<i>82</i>&nbsp; * ModelException). All non-trivial code should be placed in the other classes
+<i>83</i>&nbsp; * that you create.&lt;/li&gt;
+<i>84</i>&nbsp; * 
+<i>85</i>&nbsp; * &lt;li&gt;The rules described above and the documentation described below for each
+<i>86</i>&nbsp; * method apply only to the class implementing this interface. &lt;b&gt;Your class for
+<i>87</i>&nbsp; * representing aliens should follow the rules described in the assignment.&lt;/b&gt;&lt;/li&gt;
+<i>88</i>&nbsp; * 
+<i>89</i>&nbsp; * &lt;li&gt;&lt;b&gt;Do not modify the signatures&lt;/b&gt; of the methods defined in this
+<i>90</i>&nbsp; * interface.&lt;/li&gt;
+<i>91</i>&nbsp; * 
+<i>92</i>&nbsp; * &lt;/ul&gt;
+<i>93</i>&nbsp; *
+<i>94</i>&nbsp; */
+<i>95</i>&nbsp;public interface IFacadePart2 extends jumpingalien.part1.facade.IFacade {
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;	/**
+<i>98</i>&nbsp;	 * Returns the current number of hitpoints of the given alien.
+<i>99</i>&nbsp;	 */
+<i>100</i>&nbsp;	int getNbHitPoints(Mazub alien);
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;	/**
+<i>103</i>&nbsp;	 * Create a new game world with the given parameters.
+<i>104</i>&nbsp;	 * 
+<i>105</i>&nbsp;	 * @param tileSize
+<i>106</i>&nbsp;	 *            Length (in pixels) of a side of each square tile in the world
+<i>107</i>&nbsp;	 * @param nbTilesX
+<i>108</i>&nbsp;	 *            Number of tiles in the horizontal direction
+<i>109</i>&nbsp;	 * @param nbTilesY
+<i>110</i>&nbsp;	 *            Number of tiles in the vertical direction
+<i>111</i>&nbsp;	 * @param visibleWindowWidth
+<i>112</i>&nbsp;	 *            Width of the visible window, in pixels
+<i>113</i>&nbsp;	 * @param visibleWindowHeight
+<i>114</i>&nbsp;	 *            Height of the visible window, in pixels
+<i>115</i>&nbsp;	 * @param targetTileX
+<i>116</i>&nbsp;	 *            Tile x-coordinate of the target tile of the created world
+<i>117</i>&nbsp;	 * @param targetTileY
+<i>118</i>&nbsp;	 *            Tile y-coordinate of the target tile of the created world
+<i>119</i>&nbsp;	 */
+<i>120</i>&nbsp;	World createWorld(int tileSize, int nbTilesX, int nbTilesY,
+<i>121</i>&nbsp;			int visibleWindowWidth, int visibleWindowHeight, int targetTileX,
+<i>122</i>&nbsp;			int targetTileY);
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;	/**
+<i>125</i>&nbsp;	 * Returns the size of the given game world, in number of pixels.
+<i>126</i>&nbsp;	 * 
+<i>127</i>&nbsp;	 * @param world
+<i>128</i>&nbsp;	 *            The world for which to return the size.
+<i>129</i>&nbsp;	 * @return The size of the game world, in pixels, as an array of two
+<i>130</i>&nbsp;	 *         elements: width (X) and height (Y), in that order.
+<i>131</i>&nbsp;	 */
+<i>132</i>&nbsp;	int[] getWorldSizeInPixels(World world);
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;	/**
+<i>135</i>&nbsp;	 * Returns the length of a square tile side in the given world.
+<i>136</i>&nbsp;	 * 
+<i>137</i>&nbsp;	 * @param world
+<i>138</i>&nbsp;	 *            The game world for which to retrieve the tile length
+<i>139</i>&nbsp;	 * 
+<i>140</i>&nbsp;	 * @return The length of a square tile side, expressed as a number of
+<i>141</i>&nbsp;	 *         pixels.
+<i>142</i>&nbsp;	 */
+<i>143</i>&nbsp;	int getTileLength(World world);
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;	/**
+<i>146</i>&nbsp;	 * Starts the game that is played in the given world.
+<i>147</i>&nbsp;	 * After this method has been invoked, no further game objects will be added
+<i>148</i>&nbsp;	 * via {@link IFacadePart2#addPlant(World, Plant)},
+<i>149</i>&nbsp;	 * {@link IFacadePart2#addShark(World, Shark)},
+<i>150</i>&nbsp;	 * {@link IFacadePart2#addSlime(World, Slime)}, or
+<i>151</i>&nbsp;	 * {@link IFacadePart2#setMazub(World, Mazub)}), and no geological features
+<i>152</i>&nbsp;	 * will be changed via
+<i>153</i>&nbsp;	 * {@link IFacadePart2#setGeologicalFeature(World, int, int, int)}.
+<i>154</i>&nbsp;	 * 
+<i>155</i>&nbsp;	 * @param The
+<i>156</i>&nbsp;	 *            world for which to start the game.
+<i>157</i>&nbsp;	 */
+<i>158</i>&nbsp;	void startGame(World world);
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;	/**
+<i>161</i>&nbsp;	 * Returns whether the game, played in the given game world, is over.
+<i>162</i>&nbsp;	 * The game is over when Mazub has died, or has reached the target tile.
+<i>163</i>&nbsp;	 * 
+<i>164</i>&nbsp;	 * @param world
+<i>165</i>&nbsp;	 *            The world for which to check whether the game is over
+<i>166</i>&nbsp;	 * @return true if the game is over, false otherwise.
+<i>167</i>&nbsp;	 */
+<i>168</i>&nbsp;	boolean isGameOver(World world);
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;	/**
+<i>171</i>&nbsp;	 * Returns whether the game played in the given world has finished and the
+<i>172</i>&nbsp;	 * player has won. The player wins when Mazub has reached the target tile.
+<i>173</i>&nbsp;	 * 
+<i>174</i>&nbsp;	 * @param world
+<i>175</i>&nbsp;	 *            The world for which to check whether the player won
+<i>176</i>&nbsp;	 * @return true if the game is over and the player has won; false otherwise.
+<i>177</i>&nbsp;	 */
+<i>178</i>&nbsp;	boolean didPlayerWin(World world);
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;	/**
+<i>181</i>&nbsp;	 * Advance the time for the world and all its objects by the given amount.
+<i>182</i>&nbsp;	 * 
+<i>183</i>&nbsp;	 * This method replaces {@link IFacadePart2#advanceTime(Mazub, double)}.
+<i>184</i>&nbsp;	 * 
+<i>185</i>&nbsp;	 * @param world
+<i>186</i>&nbsp;	 *            The world whose time needs to advance
+<i>187</i>&nbsp;	 * @param dt
+<i>188</i>&nbsp;	 *            The time interval (in seconds) by which to advance the given
+<i>189</i>&nbsp;	 *            world&#39;s time.
+<i>190</i>&nbsp;	 */
+<i>191</i>&nbsp;	void advanceTime(World world, double dt);
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;	/**
+<i>194</i>&nbsp;	 * @deprecated This method no longer needs to be implemented in your facade.
+<i>195</i>&nbsp;	 *             It has been replaced by
+<i>196</i>&nbsp;	 *             {@link IFacadePart2#advanceTime(World, double)}.
+<i>197</i>&nbsp;	 */
+<i>198</i>&nbsp;	@Override
+<i>199</i>&nbsp;	@Deprecated
+<i>200</i>&nbsp;	default public void advanceTime(Mazub alien, double dt) {
+<b class="nc"><i>201</i>&nbsp;		throw new IllegalStateException(</b>
+<i>202</i>&nbsp;				&quot;This method should no longer be implemented or called&quot;);
+<i>203</i>&nbsp;	};
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;	/**
+<i>206</i>&nbsp;	 * Return the coordinates of the rectangular visible window that moves
+<i>207</i>&nbsp;	 * together with Mazub.
+<i>208</i>&nbsp;	 * 
+<i>209</i>&nbsp;	 * @return The pixel coordinates of the visible window, in the order
+<i>210</i>&nbsp;	 *         &lt;b&gt;left, bottom, right, top&lt;/b&gt;.
+<i>211</i>&nbsp;	 */
+<i>212</i>&nbsp;	int[] getVisibleWindow(World world);
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;	/**
+<i>215</i>&nbsp;	 * Returns the bottom left pixel coordinate of the tile at the given tile
+<i>216</i>&nbsp;	 * position.
+<i>217</i>&nbsp;	 * 
+<i>218</i>&nbsp;	 * @param world
+<i>219</i>&nbsp;	 *            The world from which to retrieve the tile.
+<i>220</i>&nbsp;	 * @param tileX
+<i>221</i>&nbsp;	 *            The x-position x_T of the tile
+<i>222</i>&nbsp;	 * @param tileY
+<i>223</i>&nbsp;	 *            The y-position y_T of the tile
+<i>224</i>&nbsp;	 * @return An array which contains the x-coordinate and y-coordinate of the
+<i>225</i>&nbsp;	 *         bottom left pixel of the given tile, in that order.
+<i>226</i>&nbsp;	 */
+<i>227</i>&nbsp;	int[] getBottomLeftPixelOfTile(World world, int tileX, int tileY);
+<i>228</i>&nbsp;
+<i>229</i>&nbsp;	/**
+<i>230</i>&nbsp;	 * Returns the tile positions of all tiles within the given rectangular
+<i>231</i>&nbsp;	 * region.
+<i>232</i>&nbsp;	 * 
+<i>233</i>&nbsp;	 * @param world
+<i>234</i>&nbsp;	 *            The world from which the tile positions should be returned.
+<i>235</i>&nbsp;	 * @param pixelLeft
+<i>236</i>&nbsp;	 *            The x-coordinate of the left side of the rectangular region.
+<i>237</i>&nbsp;	 * @param pixelBottom
+<i>238</i>&nbsp;	 *            The y-coordinate of the bottom side of the rectangular region.
+<i>239</i>&nbsp;	 * @param pixelRight
+<i>240</i>&nbsp;	 *            The x-coordinate of the right side of the rectangular region.
+<i>241</i>&nbsp;	 * @param pixelTop
+<i>242</i>&nbsp;	 *            The y-coordinate of the top side of the rectangular region.
+<i>243</i>&nbsp;	 * 
+<i>244</i>&nbsp;	 * @return An array of tile positions, where each position (x_T, y_T) is
+<i>245</i>&nbsp;	 *         represented as an array of 2 elements, containing the horizontal
+<i>246</i>&nbsp;	 *         (x_T) and vertical (y_T) coordinate of a tile in that order.
+<i>247</i>&nbsp;	 *         The returned array is ordered from left to right,
+<i>248</i>&nbsp;	 *         bottom to top: all positions of the bottom row (ordered from
+<i>249</i>&nbsp;	 *         small to large x_T) precede the positions of the row above that.
+<i>250</i>&nbsp;	 * 
+<i>251</i>&nbsp;	 */
+<i>252</i>&nbsp;	int[][] getTilePositionsIn(World world, int pixelLeft, int pixelBottom,
+<i>253</i>&nbsp;			int pixelRight, int pixelTop);
+<i>254</i>&nbsp;
+<i>255</i>&nbsp;	/**
+<i>256</i>&nbsp;	 * Returns the geological feature of the tile with its bottom left pixel at
+<i>257</i>&nbsp;	 * the given position.
+<i>258</i>&nbsp;	 * 
+<i>259</i>&nbsp;	 * @param world
+<i>260</i>&nbsp;	 *            The world containing the tile for which the
+<i>261</i>&nbsp;	 *            geological feature should be returned.
+<i>262</i>&nbsp;	 * 
+<i>263</i>&nbsp;	 * @param pixelX
+<i>264</i>&nbsp;	 *            The x-position of the pixel at the bottom left of the tile for
+<i>265</i>&nbsp;	 *            which the geological feature should be returned.
+<i>266</i>&nbsp;	 * @param pixelY
+<i>267</i>&nbsp;	 *            The y-position of the pixel at the bottom left of the tile for
+<i>268</i>&nbsp;	 *            which the geological feature should be returned.
+<i>269</i>&nbsp;	 * 
+<i>270</i>&nbsp;	 * @return The type of the tile with the given bottom left pixel position,
+<i>271</i>&nbsp;	 *         where
+<i>272</i>&nbsp;	 *         &lt;ul&gt;
+<i>273</i>&nbsp;	 *         &lt;li&gt;the value 0 is returned for an &lt;b&gt;air&lt;/b&gt; tile;&lt;/li&gt;
+<i>274</i>&nbsp;	 *         &lt;li&gt;the value 1 is returned for a &lt;b&gt;solid ground&lt;/b&gt; tile;&lt;/li&gt;
+<i>275</i>&nbsp;	 *         &lt;li&gt;the value 2 is returned for a &lt;b&gt;water&lt;/b&gt; tile;&lt;/li&gt;
+<i>276</i>&nbsp;	 *         &lt;li&gt;the value 3 is returned for a &lt;b&gt;magma&lt;/b&gt; tile.&lt;/li&gt;
+<i>277</i>&nbsp;	 *         &lt;/ul&gt;
+<i>278</i>&nbsp;	 * 
+<i>279</i>&nbsp;	 * @note This method must return its result in constant time.
+<i>280</i>&nbsp;	 * 
+<i>281</i>&nbsp;	 * @throw ModelException if the given position does not correspond to the
+<i>282</i>&nbsp;	 *        bottom left pixel of a tile.
+<i>283</i>&nbsp;	 */
+<i>284</i>&nbsp;	int getGeologicalFeature(World world, int pixelX, int pixelY)
+<i>285</i>&nbsp;			throws ModelException;
+<i>286</i>&nbsp;
+<i>287</i>&nbsp;	/**
+<i>288</i>&nbsp;	 * Modify the geological type of a specific tile in the given world to a
+<i>289</i>&nbsp;	 * given type.
+<i>290</i>&nbsp;	 * 
+<i>291</i>&nbsp;	 * @param world
+<i>292</i>&nbsp;	 *            The world in which the geological type of a tile needs to be
+<i>293</i>&nbsp;	 *            modified
+<i>294</i>&nbsp;	 * @param tileX
+<i>295</i>&nbsp;	 *            The x-position x_T of the tile for which the type needs to be
+<i>296</i>&nbsp;	 *            modified
+<i>297</i>&nbsp;	 * @param tileY
+<i>298</i>&nbsp;	 *            The y-position y_T of the tile for which the type needs to be
+<i>299</i>&nbsp;	 *            modified
+<i>300</i>&nbsp;	 * @param tileType
+<i>301</i>&nbsp;	 *            The new type for the given tile, where
+<i>302</i>&nbsp;	 *            &lt;ul&gt;
+<i>303</i>&nbsp;	 *            &lt;li&gt;the value 0 is provided for an &lt;b&gt;air&lt;/b&gt; tile;&lt;/li&gt;
+<i>304</i>&nbsp;	 *            &lt;li&gt;the value 1 is provided for a &lt;b&gt;solid ground&lt;/b&gt; tile;&lt;/li&gt;
+<i>305</i>&nbsp;	 *            &lt;li&gt;the value 2 is provided for a &lt;b&gt;water&lt;/b&gt; tile;&lt;/li&gt;
+<i>306</i>&nbsp;	 *            &lt;li&gt;the value 3 is provided for a &lt;b&gt;magma&lt;/b&gt; tile.&lt;/li&gt;
+<i>307</i>&nbsp;	 *            &lt;/ul&gt;
+<i>308</i>&nbsp;	 */
+<i>309</i>&nbsp;	void setGeologicalFeature(World world, int tileX, int tileY, int tileType);
+<i>310</i>&nbsp;
+<i>311</i>&nbsp;	/**
+<i>312</i>&nbsp;	 * Sets the given alien as the player&#39;s character in the given world.
+<i>313</i>&nbsp;	 * 
+<i>314</i>&nbsp;	 * @param world
+<i>315</i>&nbsp;	 *            The world for which to set the player&#39;s character.
+<i>316</i>&nbsp;	 * @param mazub
+<i>317</i>&nbsp;	 *            The alien to be set as the player&#39;s character.
+<i>318</i>&nbsp;	 */
+<i>319</i>&nbsp;	void setMazub(World world, Mazub alien);
+<i>320</i>&nbsp;
+<i>321</i>&nbsp;	/**
+<i>322</i>&nbsp;	 * Returns whether the given alien is currently immune against enemies (see
+<i>323</i>&nbsp;	 * section 1.2.5 of the assignment).
+<i>324</i>&nbsp;	 * 
+<i>325</i>&nbsp;	 * @param alien
+<i>326</i>&nbsp;	 *            The alien for which to retrieve the immunity status.
+<i>327</i>&nbsp;	 * @return True if the given alien is immune against other enemies (i.e.,
+<i>328</i>&nbsp;	 *         there are no interactions between the alien and enemy objects).
+<i>329</i>&nbsp;	 */
+<i>330</i>&nbsp;	boolean isImmune(Mazub alien);
+<i>331</i>&nbsp;
+<i>332</i>&nbsp;	/**
+<i>333</i>&nbsp;	 * Creates a new plant, located at the provided pixel location (x, y).
+<i>334</i>&nbsp;	 * The returned plant should not belong to a world.
+<i>335</i>&nbsp;	 * 
+<i>336</i>&nbsp;	 * @param x
+<i>337</i>&nbsp;	 *            The x-coordinate of the plant&#39;s initial position
+<i>338</i>&nbsp;	 * @param y
+<i>339</i>&nbsp;	 *            The y-coordinate of the plant&#39;s initial position
+<i>340</i>&nbsp;	 * @param sprites
+<i>341</i>&nbsp;	 *            An array of sprites for the new plant
+<i>342</i>&nbsp;	 * 
+<i>343</i>&nbsp;	 * @return A new plant, located at the provided location. The returned plant
+<i>344</i>&nbsp;	 *         should not belong to a world.
+<i>345</i>&nbsp;	 */
+<i>346</i>&nbsp;	Plant createPlant(int x, int y, Sprite[] sprites);
+<i>347</i>&nbsp;
+<i>348</i>&nbsp;	/**
+<i>349</i>&nbsp;	 * Add the given plant as a game object to the given world.
+<i>350</i>&nbsp;	 * 
+<i>351</i>&nbsp;	 * @param world
+<i>352</i>&nbsp;	 *            The world to which the plant should be added.
+<i>353</i>&nbsp;	 * @param plant
+<i>354</i>&nbsp;	 *            The plant that needs to be added to the world.
+<i>355</i>&nbsp;	 */
+<i>356</i>&nbsp;	void addPlant(World world, Plant plant);
+<i>357</i>&nbsp;
+<i>358</i>&nbsp;	/**
+<i>359</i>&nbsp;	 * Returns all the plants currently located in the given world.
+<i>360</i>&nbsp;	 * 
+<i>361</i>&nbsp;	 * @param world
+<i>362</i>&nbsp;	 *            The world for which to retrieve all plants.
+<i>363</i>&nbsp;	 * @return All plants that are located somewhere in the given world. There
+<i>364</i>&nbsp;	 *         are no restrictions on the type or order of the returned
+<i>365</i>&nbsp;	 *         collection, but each plant may only be returned once.
+<i>366</i>&nbsp;	 */
+<i>367</i>&nbsp;	Collection&lt;Plant&gt; getPlants(World world);
+<i>368</i>&nbsp;
+<i>369</i>&nbsp;	/**
+<i>370</i>&nbsp;	 * Returns the current location of the given plant.
+<i>371</i>&nbsp;	 * 
+<i>372</i>&nbsp;	 * @param plant
+<i>373</i>&nbsp;	 *            The plant of which to find the location
+<i>374</i>&nbsp;	 * @return An array, consisting of 2 integers {x, y}, that represents the
+<i>375</i>&nbsp;	 *         coordinates of the given plant&#39;s bottom left pixel in the world.
+<i>376</i>&nbsp;	 */
+<i>377</i>&nbsp;	int[] getLocation(Plant plant);
+<i>378</i>&nbsp;
+<i>379</i>&nbsp;	/**
+<i>380</i>&nbsp;	 * Return the current sprite image for the given plant.
+<i>381</i>&nbsp;	 * 
+<i>382</i>&nbsp;	 * @param plant
+<i>383</i>&nbsp;	 *            The plant for which to get the current sprite image.
+<i>384</i>&nbsp;	 * 
+<i>385</i>&nbsp;	 * @return The current sprite image for the given plant, determined by its
+<i>386</i>&nbsp;	 *         orientation as defined in the assignment.
+<i>387</i>&nbsp;	 */
+<i>388</i>&nbsp;	public Sprite getCurrentSprite(Plant plant);
+<i>389</i>&nbsp;
+<i>390</i>&nbsp;	/**
+<i>391</i>&nbsp;	 * Creates a new shark, located at the provided pixel location (x, y).
+<i>392</i>&nbsp;	 * The returned shark should not belong to a world.
+<i>393</i>&nbsp;	 * 
+<i>394</i>&nbsp;	 * @param x
+<i>395</i>&nbsp;	 *            The x-coordinate of the shark&#39;s initial position
+<i>396</i>&nbsp;	 * @param y
+<i>397</i>&nbsp;	 *            The y-coordinate of the shark&#39;s initial position
+<i>398</i>&nbsp;	 * @param sprites
+<i>399</i>&nbsp;	 *            An array of sprites for the new shark
+<i>400</i>&nbsp;	 * 
+<i>401</i>&nbsp;	 * @return A new shark, located at the provided location. The returned shark
+<i>402</i>&nbsp;	 *         should not belong to a world.
+<i>403</i>&nbsp;	 */
+<i>404</i>&nbsp;	Shark createShark(int x, int y, Sprite[] sprites);
+<i>405</i>&nbsp;
+<i>406</i>&nbsp;	/**
+<i>407</i>&nbsp;	 * Add the given shark as a game object to the given world.
+<i>408</i>&nbsp;	 * 
+<i>409</i>&nbsp;	 * @param world
+<i>410</i>&nbsp;	 *            The world to which the shark should be added.
+<i>411</i>&nbsp;	 * @param shark
+<i>412</i>&nbsp;	 *            The shark that needs to be added to the world.
+<i>413</i>&nbsp;	 */
+<i>414</i>&nbsp;	void addShark(World world, Shark shark);
+<i>415</i>&nbsp;
+<i>416</i>&nbsp;	/**
+<i>417</i>&nbsp;	 * Returns all the sharks currently located in the given world.
+<i>418</i>&nbsp;	 * 
+<i>419</i>&nbsp;	 * @param world
+<i>420</i>&nbsp;	 *            The world for which to retrieve all sharks.
+<i>421</i>&nbsp;	 * @return All sharks that are located somewhere in the given world. There
+<i>422</i>&nbsp;	 *         are no restrictions on the type or order of the returned
+<i>423</i>&nbsp;	 *         collection, but each shark may only be returned once.
+<i>424</i>&nbsp;	 */
+<i>425</i>&nbsp;	Collection&lt;Shark&gt; getSharks(World world);
+<i>426</i>&nbsp;
+<i>427</i>&nbsp;	/**
+<i>428</i>&nbsp;	 * Returns the current location of the given shark.
+<i>429</i>&nbsp;	 * 
+<i>430</i>&nbsp;	 * @param shark
+<i>431</i>&nbsp;	 *            The shark of which to find the location
+<i>432</i>&nbsp;	 * @return An array, consisting of 2 integers {x, y}, that represents the
+<i>433</i>&nbsp;	 *         coordinates of the given shark&#39;s bottom left pixel in the world.
+<i>434</i>&nbsp;	 */
+<i>435</i>&nbsp;	int[] getLocation(Shark shark);
+<i>436</i>&nbsp;
+<i>437</i>&nbsp;	/**
+<i>438</i>&nbsp;	 * Return the current sprite image for the given shark.
+<i>439</i>&nbsp;	 * 
+<i>440</i>&nbsp;	 * @param shark
+<i>441</i>&nbsp;	 *            The shark for which to get the current sprite image.
+<i>442</i>&nbsp;	 * 
+<i>443</i>&nbsp;	 * @return The current sprite image for the given shark, determined by its
+<i>444</i>&nbsp;	 *         orientation as defined in the assignment.
+<i>445</i>&nbsp;	 */
+<i>446</i>&nbsp;	public Sprite getCurrentSprite(Shark shark);
+<i>447</i>&nbsp;
+<i>448</i>&nbsp;	/**
+<i>449</i>&nbsp;	 * Creates a new slime school.
+<i>450</i>&nbsp;	 * 
+<i>451</i>&nbsp;	 * @return A new school for slimes, without any members.
+<i>452</i>&nbsp;	 */
+<i>453</i>&nbsp;	School createSchool();
+<i>454</i>&nbsp;
+<i>455</i>&nbsp;	/**
+<i>456</i>&nbsp;	 * Creates a new slime, located at the provided pixel location (x, y).
+<i>457</i>&nbsp;	 * The returned slime should not belong to a world.
+<i>458</i>&nbsp;	 * 
+<i>459</i>&nbsp;	 * @param x
+<i>460</i>&nbsp;	 *            The x-coordinate of the slime&#39;s initial position
+<i>461</i>&nbsp;	 * @param y
+<i>462</i>&nbsp;	 *            The y-coordinate of the slime&#39;s initial position
+<i>463</i>&nbsp;	 * @param sprites
+<i>464</i>&nbsp;	 *            An array of sprites for the new slime
+<i>465</i>&nbsp;	 * @param school
+<i>466</i>&nbsp;	 *            The initial school to which the new slime belongs
+<i>467</i>&nbsp;	 * 
+<i>468</i>&nbsp;	 * @return A new slime, located at the provided location and part of the
+<i>469</i>&nbsp;	 *         given school. The returned slime should not belong to a world.
+<i>470</i>&nbsp;	 */
+<i>471</i>&nbsp;	Slime createSlime(int x, int y, Sprite[] sprites, School school);
+<i>472</i>&nbsp;
+<i>473</i>&nbsp;	/**
+<i>474</i>&nbsp;	 * Add the given slime as a game object to the given world.
+<i>475</i>&nbsp;	 * 
+<i>476</i>&nbsp;	 * @param world
+<i>477</i>&nbsp;	 *            The world to which the slime should be added.
+<i>478</i>&nbsp;	 * @param slime
+<i>479</i>&nbsp;	 *            The slime that needs to be added to the world.
+<i>480</i>&nbsp;	 */
+<i>481</i>&nbsp;	void addSlime(World world, Slime slime);
+<i>482</i>&nbsp;
+<i>483</i>&nbsp;	/**
+<i>484</i>&nbsp;	 * Returns all the slimes currently located in the given world.
+<i>485</i>&nbsp;	 * 
+<i>486</i>&nbsp;	 * @param world
+<i>487</i>&nbsp;	 *            The world for which to retrieve all slimes.
+<i>488</i>&nbsp;	 * @return All slimes that are located somewhere in the given world. There
+<i>489</i>&nbsp;	 *         are no restrictions on the type or order of the returned
+<i>490</i>&nbsp;	 *         collection, but each slime may only be returned once.
+<i>491</i>&nbsp;	 */
+<i>492</i>&nbsp;	Collection&lt;Slime&gt; getSlimes(World world);
+<i>493</i>&nbsp;
+<i>494</i>&nbsp;	/**
+<i>495</i>&nbsp;	 * Returns the current location of the given slime.
+<i>496</i>&nbsp;	 * 
+<i>497</i>&nbsp;	 * @param slime
+<i>498</i>&nbsp;	 *            The slime of which to find the location
+<i>499</i>&nbsp;	 * @return An array, consisting of 2 integers {x, y}, that represents the
+<i>500</i>&nbsp;	 *         coordinates of the given slime&#39;s bottom left pixel in the world.
+<i>501</i>&nbsp;	 */
+<i>502</i>&nbsp;	int[] getLocation(Slime slime);
+<i>503</i>&nbsp;
+<i>504</i>&nbsp;	/**
+<i>505</i>&nbsp;	 * Return the current sprite image for the given slime.
+<i>506</i>&nbsp;	 * 
+<i>507</i>&nbsp;	 * @param slime
+<i>508</i>&nbsp;	 *            The slime for which to get the current sprite image.
+<i>509</i>&nbsp;	 * 
+<i>510</i>&nbsp;	 * @return The current sprite image for the given slime, determined by its
+<i>511</i>&nbsp;	 *         orientation as defined in the assignment.
+<i>512</i>&nbsp;	 */
+<i>513</i>&nbsp;	public Sprite getCurrentSprite(Slime slime);
+<i>514</i>&nbsp;
+<i>515</i>&nbsp;	/**
+<i>516</i>&nbsp;	 * Returns the current school to which the given slime belongs.
+<i>517</i>&nbsp;	 * 
+<i>518</i>&nbsp;	 * @param slime
+<i>519</i>&nbsp;	 *            The slime for which to retrieve the school.
+<i>520</i>&nbsp;	 * 
+<i>521</i>&nbsp;	 * @return The current school of the given slime.
+<i>522</i>&nbsp;	 */
+<i>523</i>&nbsp;	School getSchool(Slime slime);
+<i>524</i>&nbsp;
+<i>525</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

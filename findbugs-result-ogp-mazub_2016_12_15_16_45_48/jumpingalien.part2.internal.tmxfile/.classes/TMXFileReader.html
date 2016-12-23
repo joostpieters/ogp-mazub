@@ -1,0 +1,122 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TMXFileReader</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part2.internal.tmxfile</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TMXFileReader (jumpingalien.part2.internal.tmxfile)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TMXFileReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part2.internal.tmxfile;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.File;
+<i>4</i>&nbsp;import java.io.FileInputStream;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import javax.xml.parsers.SAXParser;
+<i>7</i>&nbsp;import javax.xml.parsers.SAXParserFactory;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import jumpingalien.part2.internal.tmxfile.data.Map;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;public class TMXFileReader {
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;	public static void main(String[] args) {
+<b class="nc"><i>14</i>&nbsp;		TMXFileReader reader = new TMXFileReader(&quot;levels/&quot;);</b>
+<b class="nc"><i>15</i>&nbsp;		Map map = reader.read(&quot;simple_and_small.tmx&quot;);</b>
+<b class="nc"><i>16</i>&nbsp;		System.out.println(map);</b>
+<i>17</i>&nbsp;	}
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;	private final String levelsFolder;
+<i>20</i>&nbsp;
+<b class="nc"><i>21</i>&nbsp;	public TMXFileReader(String levelsFolder) {</b>
+<b class="nc"><i>22</i>&nbsp;		this.levelsFolder = levelsFolder;</b>
+<i>23</i>&nbsp;	}
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;	public Map read(String filename) throws IllegalArgumentException {
+<i>26</i>&nbsp;		try {
+<b class="nc"><i>27</i>&nbsp;			SAXParserFactory pf = SAXParserFactory.newInstance();</b>
+<b class="nc"><i>28</i>&nbsp;			SAXParser parser = pf.newSAXParser();</b>
+<b class="nc"><i>29</i>&nbsp;			TMXFileSAXHandler handler = new TMXFileSAXHandler(levelsFolder);</b>
+<b class="nc"><i>30</i>&nbsp;			parser.parse(new FileInputStream(new File(levelsFolder, filename)),</b>
+<i>31</i>&nbsp;					handler);
+<b class="nc"><i>32</i>&nbsp;			return handler.getResult();</b>
+<b class="nc"><i>33</i>&nbsp;		} catch (Exception e) {</b>
+<b class="nc"><i>34</i>&nbsp;			throw new IllegalArgumentException(&quot;Could not parse: &quot;</b>
+<b class="nc"><i>35</i>&nbsp;					+ e.getMessage(), e);</b>
+<i>36</i>&nbsp;		}
+<i>37</i>&nbsp;	}
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

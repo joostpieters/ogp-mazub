@@ -1,0 +1,306 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Part2GameScreen</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part2.internal</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Part2GameScreen (jumpingalien.part2.internal)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Part2GameScreen</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 76)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Part2GameScreen$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 83)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part2.internal;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.awt.Color;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import jumpingalien.common.gui.AlienGameScreen;
+<i>6</i>&nbsp;import jumpingalien.common.gui.AlienInputMode;
+<i>7</i>&nbsp;import jumpingalien.common.gui.AlienScreenPanel;
+<i>8</i>&nbsp;import jumpingalien.common.gui.painters.AbstractAlienPainter;
+<i>9</i>&nbsp;import jumpingalien.common.gui.painters.AxesPainter;
+<i>10</i>&nbsp;import jumpingalien.common.gui.painters.DebugInfoPainter;
+<i>11</i>&nbsp;import jumpingalien.common.gui.painters.HistoryPainter;
+<i>12</i>&nbsp;import jumpingalien.common.gui.painters.PixelPainter;
+<i>13</i>&nbsp;import jumpingalien.common.gui.painters.PlayerPainter;
+<i>14</i>&nbsp;import jumpingalien.common.gui.painters.WorldBorderPainter;
+<i>15</i>&nbsp;import ogp.framework.gui.InputMode;
+<i>16</i>&nbsp;import ogp.framework.gui.MessagePainter;
+<i>17</i>&nbsp;import ogp.framework.gui.Screen;
+<i>18</i>&nbsp;import ogp.framework.gui.SolidBackgroundPainter;
+<i>19</i>&nbsp;import ogp.framework.gui.camera.Camera;
+<i>20</i>&nbsp;import ogp.framework.gui.camera.SimpleCamera;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;public class Part2GameScreen extends
+<i>23</i>&nbsp;		AlienGameScreen&lt;JumpingAlienGamePart2, JumpingAlienGUIPart2&gt; {
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;	private Camera mainCamera, zoomCamera;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;	public Part2GameScreen(AlienScreenPanel&lt;JumpingAlienGamePart2&gt; panel,
+<i>28</i>&nbsp;			JumpingAlienGUIPart2 gui,
+<i>29</i>&nbsp;			Screen&lt;JumpingAlienGamePart2, JumpingAlienGUIPart2&gt; previous) {
+<b class="nc"><i>30</i>&nbsp;		super(panel, gui, previous);</b>
+<i>31</i>&nbsp;	}
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;	@Override
+<i>34</i>&nbsp;	public Part2Options getOptions() {
+<b class="nc"><i>35</i>&nbsp;		return getGUI().getGUIOptions();</b>
+<i>36</i>&nbsp;	}
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;	@Override
+<i>39</i>&nbsp;	protected void setupCameras() {
+<b class="nc"><i>40</i>&nbsp;		if (!getOptions().getDebugShowEntireWorld()) {</b>
+<b class="nc"><i>41</i>&nbsp;			setupDefaultCamera();</b>
+<i>42</i>&nbsp;		} else {
+<b class="nc"><i>43</i>&nbsp;			setupOverviewCamera();</b>
+<i>44</i>&nbsp;		}
+<i>45</i>&nbsp;
+<b class="nc"><i>46</i>&nbsp;		if (getOptions().getDebugShowPixels()) {</b>
+<b class="nc"><i>47</i>&nbsp;			int zoom = 20;</b>
+<b class="nc"><i>48</i>&nbsp;			int zoomCameraHeight = 250;</b>
+<b class="nc"><i>49</i>&nbsp;			int zoomCameraWidth = 500;</b>
+<b class="nc"><i>50</i>&nbsp;			zoomCamera = new Camera(new Camera.Rectangle(0, 0, zoomCameraWidth</b>
+<i>51</i>&nbsp;					/ zoom, zoomCameraHeight / zoom), new Camera.Rectangle(
+<b class="nc"><i>52</i>&nbsp;					getScreenWidth() - zoomCameraWidth, getScreenHeight()</b>
+<i>53</i>&nbsp;							- zoomCameraHeight, zoomCameraWidth,
+<i>54</i>&nbsp;					zoomCameraHeight));
+<b class="nc"><i>55</i>&nbsp;			zoomCamera.showBorder(true);</b>
+<b class="nc"><i>56</i>&nbsp;			addCamera(zoomCamera);</b>
+<i>57</i>&nbsp;		}
+<i>58</i>&nbsp;	}
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;	private void setupOverviewCamera() {
+<b class="nc"><i>61</i>&nbsp;		int[] size = getGame().getWorldSize();</b>
+<b class="nc"><i>62</i>&nbsp;		double ratioW = (double) getScreenWidth() / size[0];</b>
+<b class="nc"><i>63</i>&nbsp;		double ratioH = (double) getScreenHeight() / size[1];</b>
+<b class="nc"><i>64</i>&nbsp;		double ratio = Math.min(ratioW, ratioH);</b>
+<i>65</i>&nbsp;
+<b class="nc"><i>66</i>&nbsp;		int scaledScreenWidth = (int) (ratio / ratioW * getScreenWidth());</b>
+<b class="nc"><i>67</i>&nbsp;		int scaledScreenHeight = (int) (ratio / ratioH * getScreenHeight());</b>
+<b class="nc"><i>68</i>&nbsp;		mainCamera = new Camera(new Camera.Rectangle(0, 0, size[0], size[1]),</b>
+<i>69</i>&nbsp;				new Camera.Rectangle(
+<b class="nc"><i>70</i>&nbsp;						(getScreenWidth() - scaledScreenWidth) / 2,</b>
+<b class="nc"><i>71</i>&nbsp;						(getScreenHeight() - scaledScreenHeight) / 2,</b>
+<i>72</i>&nbsp;						scaledScreenWidth, scaledScreenHeight));
+<b class="nc"><i>73</i>&nbsp;		addCamera(mainCamera);</b>
+<i>74</i>&nbsp;	}
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;	private void setupDefaultCamera() {
+<b class="nc"><i>77</i>&nbsp;		mainCamera = new SimpleCamera(0, 0, getScreenWidth(), getScreenHeight());</b>
+<b class="nc"><i>78</i>&nbsp;		addCamera(mainCamera);</b>
+<i>79</i>&nbsp;	}
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;	@Override
+<i>82</i>&nbsp;	public Camera getMainCamera() {
+<b class="nc"><i>83</i>&nbsp;		return mainCamera;</b>
+<i>84</i>&nbsp;	}
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;	@Override
+<i>87</i>&nbsp;	protected void setupPainters() {
+<b class="nc"><i>88</i>&nbsp;		addPainter(new SolidBackgroundPainter(Color.BLACK, this));</b>
+<i>89</i>&nbsp;
+<b class="nc"><i>90</i>&nbsp;		addPainter(new TilePainter(this, getGame().getMap(), getGame()</b>
+<b class="nc"><i>91</i>&nbsp;				.getWorldInfoProvider()));</b>
+<i>92</i>&nbsp;
+<b class="nc"><i>93</i>&nbsp;		if (getOptions().getDebugShowInfo()) {</b>
+<b class="nc"><i>94</i>&nbsp;			DebugInfoPainter debugInfoPainter = new DebugInfoPainter(this);</b>
+<b class="nc"><i>95</i>&nbsp;			debugInfoPainter.addInfo(&quot;Tile size&quot;, () -&gt; String.format(&quot;%dx%d&quot;,</b>
+<b class="nc"><i>96</i>&nbsp;					getGame().getWorldInfoProvider().getTileLength(), getGame()</b>
+<b class="nc"><i>97</i>&nbsp;							.getWorldInfoProvider().getTileLength()));</b>
+<b class="nc"><i>98</i>&nbsp;			debugInfoPainter.addInfo(</b>
+<i>99</i>&nbsp;					&quot;Visible window&quot;,
+<b class="nc"><i>100</i>&nbsp;					() -&gt; getGame()</b>
+<b class="nc"><i>101</i>&nbsp;							.getWorldInfoProvider()</b>
+<b class="nc"><i>102</i>&nbsp;							.getVisibleWindow()</b>
+<b class="nc"><i>103</i>&nbsp;							.map(ar -&gt; String.format(&quot;(%d,%d), (%d, %d)&quot;,</b>
+<b class="nc"><i>104</i>&nbsp;									ar[0], ar[1], ar[2], ar[3]))</b>
+<b class="nc"><i>105</i>&nbsp;							.orElse(&quot;Unknown&quot;));</b>
+<b class="nc"><i>106</i>&nbsp;			addPainter(debugInfoPainter);</b>
+<i>107</i>&nbsp;		}
+<i>108</i>&nbsp;
+<b class="nc"><i>109</i>&nbsp;		if (getOptions().getDebugShowEntireWorld()) {</b>
+<b class="nc"><i>110</i>&nbsp;			addPainter(new AbstractAlienPainter&lt;AlienGameScreen&lt;?, ?&gt;&gt;(this) {</b>
+<i>111</i>&nbsp;				@Override
+<i>112</i>&nbsp;				public void paintInWorld(java.awt.Graphics2D g) {
+<b class="nc"><i>113</i>&nbsp;					((Part2WorldInfoProvider) getGame().getWorldInfoProvider())</b>
+<b class="nc"><i>114</i>&nbsp;							.getVisibleWindow().ifPresent(</b>
+<i>115</i>&nbsp;									activeRegion -&gt; {
+<b class="nc"><i>116</i>&nbsp;										g.setColor(Color.BLACK);</b>
+<b class="nc"><i>117</i>&nbsp;										g.setXORMode(Color.WHITE);</b>
+<b class="nc"><i>118</i>&nbsp;										g.drawRect(activeRegion[0],</b>
+<i>119</i>&nbsp;												activeRegion[1],
+<i>120</i>&nbsp;												activeRegion[2]
+<i>121</i>&nbsp;														- activeRegion[0] + 1,
+<i>122</i>&nbsp;												activeRegion[3]
+<i>123</i>&nbsp;														- activeRegion[1] + 1);
+<b class="nc"><i>124</i>&nbsp;										g.setPaintMode();</b>
+<i>125</i>&nbsp;									});
+<i>126</i>&nbsp;				};
+<i>127</i>&nbsp;			});
+<i>128</i>&nbsp;		}
+<i>129</i>&nbsp;
+<b class="nc"><i>130</i>&nbsp;		if (getOptions().getDebugShowAxes()) {</b>
+<b class="nc"><i>131</i>&nbsp;			addPainter(new AxesPainter(this));</b>
+<i>132</i>&nbsp;		}
+<i>133</i>&nbsp;
+<b class="nc"><i>134</i>&nbsp;		if (getOptions().getDebugShowPixels()) {</b>
+<b class="nc"><i>135</i>&nbsp;			addPainter(new PixelPainter(this));</b>
+<i>136</i>&nbsp;		}
+<i>137</i>&nbsp;
+<b class="nc"><i>138</i>&nbsp;		if (getOptions().getDebugShowHistory()) {</b>
+<b class="nc"><i>139</i>&nbsp;			addPainter(new HistoryPainter(this));</b>
+<i>140</i>&nbsp;		}
+<i>141</i>&nbsp;
+<b class="nc"><i>142</i>&nbsp;		addPainter(new GameObjectPainter(this,</b>
+<b class="nc"><i>143</i>&nbsp;				getGame().getAlienInfoProvider(), getGame()</b>
+<b class="nc"><i>144</i>&nbsp;						.getObjectInfoProvider()));</b>
+<i>145</i>&nbsp;
+<b class="nc"><i>146</i>&nbsp;		addPainter(new PlayerPainter(this));</b>
+<b class="nc"><i>147</i>&nbsp;		addPainter(new ImmunityPainter(this, getGame().getAlienInfoProvider()));</b>
+<i>148</i>&nbsp;
+<b class="nc"><i>149</i>&nbsp;		addPainter(new WorldBorderPainter(this));</b>
+<i>150</i>&nbsp;
+<b class="nc"><i>151</i>&nbsp;		addPainter(new HealthPainter(this, getGame().getAlienInfoProvider()));</b>
+<i>152</i>&nbsp;
+<b class="nc"><i>153</i>&nbsp;		addPainter(new MessagePainter&lt;Part2GameScreen&gt;(this,</b>
+<b class="nc"><i>154</i>&nbsp;				getGame()::getCurrentMessage));</b>
+<i>155</i>&nbsp;
+<b class="nc"><i>156</i>&nbsp;		addPainter(new GameOverPainter(this, getGame().getWorldInfoProvider()));</b>
+<i>157</i>&nbsp;	}
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;	@Override
+<i>160</i>&nbsp;	public void updateState(double dt) {
+<b class="nc"><i>161</i>&nbsp;		positionMainCamera();</b>
+<b class="nc"><i>162</i>&nbsp;		positionZoomCamera();</b>
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;	}
+<i>165</i>&nbsp;
+<i>166</i>&nbsp;	private void positionZoomCamera() {
+<b class="nc"><i>167</i>&nbsp;		if (zoomCamera != null) {</b>
+<b class="nc"><i>168</i>&nbsp;			getGame()</b>
+<b class="nc"><i>169</i>&nbsp;					.getAlienInfoProvider()</b>
+<b class="nc"><i>170</i>&nbsp;					.getAlienXY()</b>
+<b class="nc"><i>171</i>&nbsp;					.ifPresent(</b>
+<b class="nc"><i>172</i>&nbsp;							position -&gt; zoomCamera.moveToWorldLocation(</b>
+<i>173</i>&nbsp;									position[0] - 5, position[1] - 5));
+<i>174</i>&nbsp;		}
+<i>175</i>&nbsp;	}
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;	private void positionMainCamera() {
+<b class="nc"><i>178</i>&nbsp;		if (!getOptions().getDebugShowEntireWorld()) {</b>
+<b class="nc"><i>179</i>&nbsp;			getGame()</b>
+<b class="nc"><i>180</i>&nbsp;					.getWorldInfoProvider()</b>
+<b class="nc"><i>181</i>&nbsp;					.getVisibleWindow()</b>
+<b class="nc"><i>182</i>&nbsp;					.ifPresent(</b>
+<i>183</i>&nbsp;							activeRegion -&gt; {
+<b class="nc"><i>184</i>&nbsp;								if (mainCamera != null) {</b>
+<b class="nc"><i>185</i>&nbsp;									mainCamera.moveToWorldLocation(</b>
+<i>186</i>&nbsp;											activeRegion[0], activeRegion[1]);
+<i>187</i>&nbsp;								}
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;							});
+<i>190</i>&nbsp;		}
+<i>191</i>&nbsp;	}
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;	@Override
+<i>194</i>&nbsp;	protected InputMode&lt;JumpingAlienGamePart2, JumpingAlienGUIPart2&gt; createDefaultInputMode() {
+<b class="nc"><i>195</i>&nbsp;		return new AlienInputMode&lt;&gt;(this, null);</b>
+<i>196</i>&nbsp;	}
+<i>197</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

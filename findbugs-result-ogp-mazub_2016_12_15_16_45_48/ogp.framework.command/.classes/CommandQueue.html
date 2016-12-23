@@ -1,0 +1,118 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CommandQueue</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">ogp.framework.command</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CommandQueue (ogp.framework.command)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CommandQueue</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package ogp.framework.command;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.LinkedList;
+<i>4</i>&nbsp;import java.util.List;
+<i>5</i>&nbsp;import java.util.concurrent.LinkedBlockingQueue;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * Command queue is the link between the main thread (game and display updates)
+<i>9</i>&nbsp; * and the AWT event queue thread (reactions to key presses and mouse input).
+<i>10</i>&nbsp; * 
+<i>11</i>&nbsp; * This class is (supposed to be) thread-safe.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * @author koeny
+<i>14</i>&nbsp; *
+<i>15</i>&nbsp; */
+<b class="nc"><i>16</i>&nbsp;public class CommandQueue {</b>
+<i>17</i>&nbsp;
+<b class="nc"><i>18</i>&nbsp;	private final LinkedBlockingQueue&lt;Command&gt; queue = new LinkedBlockingQueue&lt;Command&gt;();</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;	public void add(Command command) {
+<b class="nc"><i>21</i>&nbsp;		queue.add(command);</b>
+<i>22</i>&nbsp;	}
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;	public List&lt;Command&gt; getAndClearPendingCommands() {
+<b class="nc"><i>25</i>&nbsp;		LinkedList&lt;Command&gt; result = new LinkedList&lt;Command&gt;();</b>
+<b class="nc"><i>26</i>&nbsp;		queue.drainTo(result);</b>
+<b class="nc"><i>27</i>&nbsp;		return result;</b>
+<i>28</i>&nbsp;	}
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;	public List&lt;Command&gt; peekPendingCommands() {
+<b class="nc"><i>31</i>&nbsp;		LinkedList&lt;Command&gt; result = new LinkedList&lt;Command&gt;(queue);</b>
+<b class="nc"><i>32</i>&nbsp;		return result;</b>
+<i>33</i>&nbsp;	}
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

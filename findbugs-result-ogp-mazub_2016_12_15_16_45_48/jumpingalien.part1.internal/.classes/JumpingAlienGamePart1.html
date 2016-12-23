@@ -1,0 +1,245 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: JumpingAlienGamePart1</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part1.internal</a> ]
+</div>
+
+<h1>Coverage Summary for Class: JumpingAlienGamePart1 (jumpingalien.part1.internal)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JumpingAlienGamePart1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JumpingAlienGamePart1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JumpingAlienGamePart1$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 26)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part1.internal;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.Optional;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import jumpingalien.common.game.IActionHandler;
+<i>6</i>&nbsp;import jumpingalien.common.game.AlienInfoProvider;
+<i>7</i>&nbsp;import jumpingalien.common.game.JumpingAlienGame;
+<i>8</i>&nbsp;import jumpingalien.common.game.WorldInfoProvider;
+<i>9</i>&nbsp;import jumpingalien.common.sprites.JumpingAlienSprites;
+<i>10</i>&nbsp;import jumpingalien.part1.facade.IFacade;
+<i>11</i>&nbsp;import jumpingalien.model.Mazub;
+<i>12</i>&nbsp;import jumpingalien.util.Sprite;
+<i>13</i>&nbsp;
+<b class="nc"><i>14</i>&nbsp;public class JumpingAlienGamePart1 extends JumpingAlienGame {</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;	private static final int WORLD_HEIGHT = 768;
+<i>17</i>&nbsp;	private static final int WORLD_WIDTH = 1024;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;	private Mazub alien;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;	public JumpingAlienGamePart1(Part1Options options, IFacade facade) {
+<b class="nc"><i>22</i>&nbsp;		super(options, facade);</b>
+<i>23</i>&nbsp;	}
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;	@Override
+<i>26</i>&nbsp;	public IFacade getFacade() {
+<b class="nc"><i>27</i>&nbsp;		return (IFacade) super.getFacade();</b>
+<i>28</i>&nbsp;	}
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;	@Override
+<i>31</i>&nbsp;	public Part1Options getOptions() {
+<b class="nc"><i>32</i>&nbsp;		return (Part1Options) super.getOptions();</b>
+<i>33</i>&nbsp;	}
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;	@Override
+<i>36</i>&nbsp;	public void load() {
+<i>37</i>&nbsp;	}
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;	@Override
+<i>40</i>&nbsp;	protected void createModel() {
+<b class="nc"><i>41</i>&nbsp;		int initialPositionX = 0;</b>
+<b class="nc"><i>42</i>&nbsp;		int initialPositionY = 0;</b>
+<i>43</i>&nbsp;
+<b class="nc"><i>44</i>&nbsp;		setAlien(getFacade().createMazub(initialPositionX, initialPositionY,</b>
+<i>45</i>&nbsp;				JumpingAlienSprites.ALIEN_SPRITESET));
+<i>46</i>&nbsp;	}
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;	private void setAlien(Mazub alien) {
+<b class="nc"><i>49</i>&nbsp;		if (this.alien != null) {</b>
+<b class="nc"><i>50</i>&nbsp;			throw new IllegalStateException(&quot;Mazub already created!&quot;);</b>
+<i>51</i>&nbsp;		}
+<b class="nc"><i>52</i>&nbsp;		this.alien = alien;</b>
+<i>53</i>&nbsp;	}
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;	Mazub getAlien() {
+<b class="nc"><i>56</i>&nbsp;		return alien;</b>
+<i>57</i>&nbsp;	}
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;	@Override
+<i>60</i>&nbsp;	protected void advanceTime(double dt) {
+<b class="nc"><i>61</i>&nbsp;		getFacade().advanceTime(getAlien(), dt);</b>
+<i>62</i>&nbsp;	}
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;	@Override
+<i>65</i>&nbsp;	protected IActionHandler createActionHandler() {
+<b class="nc"><i>66</i>&nbsp;		return new Part1ActionHandler(this);</b>
+<i>67</i>&nbsp;	}
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;	@Override
+<i>70</i>&nbsp;	protected AlienInfoProvider&lt;Mazub&gt; createAlienInfoProvider() {
+<b class="nc"><i>71</i>&nbsp;		return new AlienInfoProvider&lt;Mazub&gt;() {</b>
+<i>72</i>&nbsp;			
+<i>73</i>&nbsp;			@Override
+<i>74</i>&nbsp;			public Mazub getAlien() {
+<b class="nc"><i>75</i>&nbsp;				return alien;</b>
+<i>76</i>&nbsp;			}
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;			@Override
+<i>79</i>&nbsp;			public Optional&lt;int[]&gt; getAlienXY() {
+<b class="nc"><i>80</i>&nbsp;				return catchErrorGet(() -&gt; getFacade().getLocation(getAlien()));</b>
+<i>81</i>&nbsp;			}
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;			@Override
+<i>84</i>&nbsp;			public Optional&lt;double[]&gt; getAlienVelocity() {
+<b class="nc"><i>85</i>&nbsp;				return catchErrorGet(() -&gt; getFacade().getVelocity(getAlien()));</b>
+<i>86</i>&nbsp;			}
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;			@Override
+<i>89</i>&nbsp;			public Optional&lt;double[]&gt; getAlienAcceleration() {
+<b class="nc"><i>90</i>&nbsp;				return catchErrorGet(() -&gt; getFacade().getAcceleration(</b>
+<b class="nc"><i>91</i>&nbsp;						getAlien()));</b>
+<i>92</i>&nbsp;			}
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;			@Override
+<i>95</i>&nbsp;			public Optional&lt;int[]&gt; getAlienSize() {
+<b class="nc"><i>96</i>&nbsp;				return catchErrorGet(() -&gt; getFacade().getSize(getAlien()));</b>
+<i>97</i>&nbsp;			}
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;			@Override
+<i>100</i>&nbsp;			public Optional&lt;Sprite&gt; getPlayerSprite() {
+<b class="nc"><i>101</i>&nbsp;				return catchErrorGet(() -&gt; getFacade().getCurrentSprite(</b>
+<b class="nc"><i>102</i>&nbsp;						getAlien()));</b>
+<i>103</i>&nbsp;			}
+<i>104</i>&nbsp;		};
+<i>105</i>&nbsp;	}
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;	@Override
+<i>108</i>&nbsp;	protected WorldInfoProvider createWorldInfoProvider() {
+<b class="nc"><i>109</i>&nbsp;		return new WorldInfoProvider() {</b>
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;			@Override
+<i>112</i>&nbsp;			public Optional&lt;int[]&gt; getWorldSize() {
+<b class="nc"><i>113</i>&nbsp;				return Optional.of(new int[] { WORLD_WIDTH, WORLD_HEIGHT });</b>
+<i>114</i>&nbsp;			}
+<i>115</i>&nbsp;		};
+<i>116</i>&nbsp;	}
+<i>117</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

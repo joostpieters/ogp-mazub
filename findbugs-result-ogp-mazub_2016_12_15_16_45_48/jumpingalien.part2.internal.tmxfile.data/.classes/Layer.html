@@ -1,0 +1,118 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Layer</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part2.internal.tmxfile.data</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Layer (jumpingalien.part2.internal.tmxfile.data)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Layer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part2.internal.tmxfile.data;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;import java.util.List;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;public class Layer {
+<i>7</i>&nbsp;
+<b class="nc"><i>8</i>&nbsp;	private final List&lt;ImageTile&gt; tiles = new ArrayList&lt;&gt;();</b>
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;	private final String name;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;	private final int nbTilesY;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;	private final int nbTilesX;
+<i>15</i>&nbsp;
+<b class="nc"><i>16</i>&nbsp;	public Layer(String name, int nbTilesX, int nbTilesY) {</b>
+<b class="nc"><i>17</i>&nbsp;		this.name = name;</b>
+<b class="nc"><i>18</i>&nbsp;		this.nbTilesX = nbTilesX;</b>
+<b class="nc"><i>19</i>&nbsp;		this.nbTilesY = nbTilesY;</b>
+<i>20</i>&nbsp;	}
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;	public String getName() {
+<b class="nc"><i>23</i>&nbsp;		return name;</b>
+<i>24</i>&nbsp;	}
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;	public void addTile(ImageTile tile) {
+<b class="nc"><i>27</i>&nbsp;		tiles.add(tile);</b>
+<i>28</i>&nbsp;	}
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;	public ImageTile getTile(int tileX, int tileY) {
+<b class="nc"><i>31</i>&nbsp;		int tileIndex = (nbTilesY - tileY - 1) * nbTilesX + tileX;</b>
+<b class="nc"><i>32</i>&nbsp;		return tiles.get(tileIndex);</b>
+<i>33</i>&nbsp;	}
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

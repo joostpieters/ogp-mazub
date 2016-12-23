@@ -1,0 +1,316 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Mazub</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Mazub (jumpingalien.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Mazub</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 73)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import be.kuleuven.cs.som.annotate.Basic;
+<i>4</i>&nbsp;import jumpingalien.util.Sprite;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;/**
+<i>7</i>&nbsp; * a class representing Mazub in the game world
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;public class Mazub extends ActiveObject
+<i>10</i>&nbsp;{
+<i>11</i>&nbsp;	//classe invarianten
+<b class="nc"><i>12</i>&nbsp;	private double dInWater = 0;</b>
+<i>13</i>&nbsp;	private boolean bInWater;
+<b class="nc"><i>14</i>&nbsp;	private double dInMagma = 0;</b>
+<i>15</i>&nbsp;	private boolean bInMagma;
+<i>16</i>&nbsp;	//sprite counter
+<i>17</i>&nbsp;	private int iSpriteCounter;
+<b class="nc"><i>18</i>&nbsp;	private enHorState eLastHorState = enHorState.stand;</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;	/**
+<i>21</i>&nbsp;	 * Constructor of a Mazub extends an ActiveObject
+<i>22</i>&nbsp;	 *
+<i>23</i>&nbsp;	 * @param pixelLeftX   The location of the ActiveObject on the x-axis
+<i>24</i>&nbsp;	 * @param pixelBottomY The location of the ActiveObject on the y-axis
+<i>25</i>&nbsp;	 * @param sprites      The Array of sprites that wil be used by the ActiveObject
+<i>26</i>&nbsp;	 * @effect Sets the x-axis location to the given value
+<i>27</i>&nbsp;	 * | setLocationX(pixelLeftX)
+<i>28</i>&nbsp;	 * @effect Sets the y-axis location to the given value
+<i>29</i>&nbsp;	 * | setLocationX(pixelBottomY)
+<i>30</i>&nbsp;	 * @effect Sets the sprite array to the given array
+<i>31</i>&nbsp;	 * | aSprite = sprites
+<i>32</i>&nbsp;	 * @effect Sets the number of hitpoints to 20
+<i>33</i>&nbsp;	 * | iHitpoints = 20
+<i>34</i>&nbsp;	 * @effect Sets the fall flag to true |
+<i>35</i>&nbsp;	 * dCanFall = true
+<i>36</i>&nbsp;	 * @effect Sets the maximum velocity to infinite
+<i>37</i>&nbsp;	 * | maxVelocity = double.MAX_Value
+<i>38</i>&nbsp;	 */
+<i>39</i>&nbsp;	public Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites)
+<i>40</i>&nbsp;	{
+<b class="nc"><i>41</i>&nbsp;		this(pixelLeftX, pixelBottomY, sprites, null);</b>
+<b class="nc"><i>42</i>&nbsp;	}</b>
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;	Mazub(int pixelLeftX, int pixelBottomY, Sprite[] sprites, Program program)
+<i>45</i>&nbsp;	{
+<b class="nc"><i>46</i>&nbsp;		super(pixelLeftX, pixelBottomY, sprites, 100, true, 1, 0.9,</b>
+<i>47</i>&nbsp;				8, 3, program);
+<b class="nc"><i>48</i>&nbsp;	}</b>
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;	/**
+<i>51</i>&nbsp;	 * pocesses overlapping between mazub and other ActiveObject
+<i>52</i>&nbsp;	 *
+<i>53</i>&nbsp;	 * @param interObj The ActiveObject mazub is colliding with
+<i>54</i>&nbsp;	 * @effect if interObject is a plant then mazub absorbs it
+<i>55</i>&nbsp;	 * | if interObj instance of plant
+<i>56</i>&nbsp;	 * mazub.addHealth(100)
+<i>57</i>&nbsp;	 * plant.dies
+<i>58</i>&nbsp;	 * @effect if interObject is a potion then mazub absorbs it
+<i>59</i>&nbsp;	 * | if interObj instance of potion
+<i>60</i>&nbsp;	 * mazub.addHealth(potion.getHealth)
+<i>61</i>&nbsp;	 * potion.dies
+<i>62</i>&nbsp;	 * @effect if interObject is a Shark then mazub takes 50 damage and becoms imune
+<i>63</i>&nbsp;	 * | if interObj instance of Shark
+<i>64</i>&nbsp;	 * mazub.subtractHealth(50)
+<i>65</i>&nbsp;	 * mazub.becomsImune()
+<i>66</i>&nbsp;	 */
+<i>67</i>&nbsp;	@Override
+<i>68</i>&nbsp;	public void isOverlapping(ActiveObject interObj)
+<i>69</i>&nbsp;	{
+<b class="nc"><i>70</i>&nbsp;		if (interObj instanceof Plant)</b>
+<i>71</i>&nbsp;		{
+<b class="nc"><i>72</i>&nbsp;			if (getHealth() &lt; 500)</b>
+<i>73</i>&nbsp;			{
+<b class="nc"><i>74</i>&nbsp;				processHealth(100);</b>
+<b class="nc"><i>75</i>&nbsp;				getwCaller().objectDies(interObj);</b>
+<i>76</i>&nbsp;			}
+<b class="nc"><i>77</i>&nbsp;			return;</b>
+<i>78</i>&nbsp;		}
+<b class="nc"><i>79</i>&nbsp;		if (interObj instanceof Potion)</b>
+<i>80</i>&nbsp;		{
+<b class="nc"><i>81</i>&nbsp;			processHealth(interObj.getHealth());</b>
+<b class="nc"><i>82</i>&nbsp;			getwCaller().objectDies(interObj);</b>
+<i>83</i>&nbsp;		}
+<i>84</i>&nbsp;
+<b class="nc"><i>85</i>&nbsp;		if (interObj instanceof Shark)</b>
+<i>86</i>&nbsp;		{
+<b class="nc"><i>87</i>&nbsp;			processHealth(-50);</b>
+<b class="nc"><i>88</i>&nbsp;			becomsImune();</b>
+<i>89</i>&nbsp;		}
+<b class="nc"><i>90</i>&nbsp;	}</b>
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;	@Basic
+<i>93</i>&nbsp;	public void startDuck()
+<i>94</i>&nbsp;	{
+<b class="nc"><i>95</i>&nbsp;		eVerState = enVertState.duck;</b>
+<b class="nc"><i>96</i>&nbsp;	}</b>
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;	@Basic
+<i>99</i>&nbsp;	public void endDuck()
+<i>100</i>&nbsp;	{
+<b class="nc"><i>101</i>&nbsp;		eVerState = enVertState.stand;</b>
+<b class="nc"><i>102</i>&nbsp;	}</b>
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;	/**
+<i>105</i>&nbsp;	 * processes imune to become no longer imune after 0.6 seconds
+<i>106</i>&nbsp;	 *
+<i>107</i>&nbsp;	 * @param dt The amout of time since the last check in
+<i>108</i>&nbsp;	 * @effect afthter 0.6 seconds of being imune mazubs nolonger becoms imune
+<i>109</i>&nbsp;	 * | if (dLastImune &gt; 0.6)
+<i>110</i>&nbsp;	 * isNoLongerImune()
+<i>111</i>&nbsp;	 */
+<i>112</i>&nbsp;	private void processImune(double dt)
+<i>113</i>&nbsp;	{
+<b class="nc"><i>114</i>&nbsp;		if (isImune())</b>
+<i>115</i>&nbsp;		{
+<b class="nc"><i>116</i>&nbsp;			dLastImune += dt;</b>
+<b class="nc"><i>117</i>&nbsp;			if (dLastImune &gt; 0.6)</b>
+<i>118</i>&nbsp;			{
+<b class="nc"><i>119</i>&nbsp;				System.out.println(dLastImune);</b>
+<b class="nc"><i>120</i>&nbsp;				dLastImune = 0;</b>
+<b class="nc"><i>121</i>&nbsp;				isNoLongerImune();</b>
+<i>122</i>&nbsp;			}
+<i>123</i>&nbsp;		}
+<b class="nc"><i>124</i>&nbsp;	}</b>
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;	public void advanceTime(double dt)
+<i>127</i>&nbsp;	{
+<b class="nc"><i>128</i>&nbsp;		super.advanceTime(dt);</b>
+<i>129</i>&nbsp;		//imune
+<b class="nc"><i>130</i>&nbsp;		processImune(dt);</b>
+<b class="nc"><i>131</i>&nbsp;		if (eHorState == eLastHorState)</b>
+<b class="nc"><i>132</i>&nbsp;			dtLastMove += dt;</b>
+<i>133</i>&nbsp;		else
+<i>134</i>&nbsp;		{
+<b class="nc"><i>135</i>&nbsp;			dtLastMove = 0;</b>
+<b class="nc"><i>136</i>&nbsp;			eLastHorState = eHorState;</b>
+<i>137</i>&nbsp;		}
+<i>138</i>&nbsp;		//sprite counter
+<b class="nc"><i>139</i>&nbsp;		if (iSpriteCounter &lt; 10)</b>
+<i>140</i>&nbsp;		{
+<b class="nc"><i>141</i>&nbsp;			iSpriteCounter++;</b>
+<i>142</i>&nbsp;		} else
+<i>143</i>&nbsp;		{
+<b class="nc"><i>144</i>&nbsp;			iSpriteCounter = 0;</b>
+<i>145</i>&nbsp;		}
+<i>146</i>&nbsp;		//checkBoundry
+<i>147</i>&nbsp;
+<b class="nc"><i>148</i>&nbsp;	}</b>
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;	/**
+<i>151</i>&nbsp;	 * Processes environment
+<i>152</i>&nbsp;	 *
+<i>153</i>&nbsp;	 * @param dt       The duration that the Worm in in the given EnvType
+<i>154</i>&nbsp;	 * @param iEnvType The type of tile the Worm was in for dt time
+<i>155</i>&nbsp;	 * @effect If mazub is in water(2) or magma(3) the mazub recieves damage
+<i>156</i>&nbsp;	 * |if iEnvType == 2
+<i>157</i>&nbsp;	 * if dInWater &gt;= 0.2
+<i>158</i>&nbsp;	 * mazub.subtractHealth(6)
+<i>159</i>&nbsp;	 * |if iEnvType == 3
+<i>160</i>&nbsp;	 * if dInLava &gt;= 0.2
+<i>161</i>&nbsp;	 * mazub.subtractHealth(50)
+<i>162</i>&nbsp;	 */
+<i>163</i>&nbsp;	public void processEnv(double dt, int iEnvType)
+<i>164</i>&nbsp;	{
+<i>165</i>&nbsp;		//water
+<b class="nc"><i>166</i>&nbsp;		if (iEnvType == 2)</b>
+<i>167</i>&nbsp;		{
+<b class="nc"><i>168</i>&nbsp;			bInWater = true;</b>
+<b class="nc"><i>169</i>&nbsp;			dInWater += dt;</b>
+<b class="nc"><i>170</i>&nbsp;			if (dInWater &gt;= 0.2)</b>
+<i>171</i>&nbsp;			{
+<b class="nc"><i>172</i>&nbsp;				dInWater -= 0.2;</b>
+<b class="nc"><i>173</i>&nbsp;				processHealth(-6);</b>
+<i>174</i>&nbsp;			}
+<i>175</i>&nbsp;		}
+<i>176</i>&nbsp;		//magma
+<b class="nc"><i>177</i>&nbsp;		if (iEnvType == 3)</b>
+<i>178</i>&nbsp;		{
+<b class="nc"><i>179</i>&nbsp;			bInMagma = true;</b>
+<b class="nc"><i>180</i>&nbsp;			dInMagma += dt;</b>
+<b class="nc"><i>181</i>&nbsp;			if (dInMagma &gt;= 0.2)</b>
+<i>182</i>&nbsp;			{
+<b class="nc"><i>183</i>&nbsp;				dInMagma -= 0.2;</b>
+<b class="nc"><i>184</i>&nbsp;				processHealth(-50);</b>
+<i>185</i>&nbsp;			}
+<i>186</i>&nbsp;		}
+<b class="nc"><i>187</i>&nbsp;	}</b>
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;	@Override
+<i>190</i>&nbsp;	protected int correctSprite()
+<i>191</i>&nbsp;	{
+<b class="nc"><i>192</i>&nbsp;		int iCounter = 0;</b>
+<i>193</i>&nbsp;		//if ducking ++
+<b class="nc"><i>194</i>&nbsp;		if (eVerState == enVertState.duck)</b>
+<b class="nc"><i>195</i>&nbsp;			iCounter++;</b>
+<i>196</i>&nbsp;		//was going left
+<b class="nc"><i>197</i>&nbsp;		if (dtLastMove &lt; 1 &amp;&amp; eLastHorState == enHorState.right)</b>
+<b class="nc"><i>198</i>&nbsp;			iCounter += 2;</b>
+<i>199</i>&nbsp;		//was going right
+<b class="nc"><i>200</i>&nbsp;		if (dtLastMove &lt; 1 &amp;&amp; eLastHorState == enHorState.left)</b>
+<b class="nc"><i>201</i>&nbsp;			iCounter += 3;</b>
+<i>202</i>&nbsp;		//is jumping
+<b class="nc"><i>203</i>&nbsp;		if (eVerState == enVertState.jump &amp;&amp; eHorState != enHorState.stand)</b>
+<b class="nc"><i>204</i>&nbsp;			iCounter += 2;</b>
+<i>205</i>&nbsp;		/*if (geteHorState() != enHorState.stand)
+<i>206</i>&nbsp;            iCounter +=2;
+<i>207</i>&nbsp;*/
+<b class="nc"><i>208</i>&nbsp;		if (eVerState == enVertState.duck)</b>
+<i>209</i>&nbsp;		{
+<b class="nc"><i>210</i>&nbsp;			if (eHorState != enHorState.stand)</b>
+<b class="nc"><i>211</i>&nbsp;				iCounter += 3;</b>
+<i>212</i>&nbsp;		}
+<i>213</i>&nbsp;		//al loopend
+<b class="nc"><i>214</i>&nbsp;		if (eHorState == enHorState.stand)</b>
+<i>215</i>&nbsp;		{
+<b class="nc"><i>216</i>&nbsp;			iSpriteCounter = 0;</b>
+<i>217</i>&nbsp;		}
+<b class="nc"><i>218</i>&nbsp;		if (getVelocity()[1] == 0)</b>
+<i>219</i>&nbsp;		{
+<b class="nc"><i>220</i>&nbsp;			if (eHorState == enHorState.left)</b>
+<i>221</i>&nbsp;			{
+<b class="nc"><i>222</i>&nbsp;				iCounter = 19 + iSpriteCounter;</b>
+<i>223</i>&nbsp;			}
+<b class="nc"><i>224</i>&nbsp;			if (eHorState == enHorState.right)</b>
+<i>225</i>&nbsp;			{
+<b class="nc"><i>226</i>&nbsp;				iCounter = 8 + iSpriteCounter;</b>
+<i>227</i>&nbsp;			}
+<i>228</i>&nbsp;		}
+<i>229</i>&nbsp;
+<i>230</i>&nbsp;		//return result
+<b class="nc"><i>231</i>&nbsp;		return iCounter;</b>
+<i>232</i>&nbsp;	}
+<i>233</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

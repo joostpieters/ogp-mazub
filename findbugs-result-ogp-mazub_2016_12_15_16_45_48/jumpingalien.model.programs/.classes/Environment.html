@@ -1,0 +1,277 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Environment</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.model.programs</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Environment (jumpingalien.model.programs)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Environment</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 68)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Environment$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 69)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.model.programs;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import jumpingalien.model.ActiveObject;
+<i>4</i>&nbsp;import jumpingalien.model.Program;
+<i>5</i>&nbsp;import jumpingalien.model.World;
+<i>6</i>&nbsp;import jumpingalien.model.programs.statements.SequenceStatement;
+<i>7</i>&nbsp;import jumpingalien.part3.programs.IProgramFactory;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import java.util.HashMap;
+<i>10</i>&nbsp;import java.util.Stack;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;public class Environment
+<i>13</i>&nbsp;{
+<i>14</i>&nbsp;	private final ActiveObject activeCaller;
+<i>15</i>&nbsp;	private final Program programCaller;
+<b class="nc"><i>16</i>&nbsp;	private final HashMap&lt;String, Object&gt; allVariables = new HashMap&lt;&gt;();</b>
+<b class="nc"><i>17</i>&nbsp;	private final Stack&lt;Statement&gt; statementStack = new Stack&lt;&gt;();</b>
+<b class="nc"><i>18</i>&nbsp;	private final Stack&lt;Integer&gt; stackCounter = new Stack&lt;&gt;();</b>
+<b class="nc"><i>19</i>&nbsp;	private final HashMap&lt;String, Statement&gt; allFunctions = new HashMap&lt;&gt;();</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;	public Environment(ActiveObject activeObject, Program program)
+<b class="nc"><i>22</i>&nbsp;	{</b>
+<b class="nc"><i>23</i>&nbsp;		programCaller = program;</b>
+<b class="nc"><i>24</i>&nbsp;		activeCaller = activeObject;</b>
+<b class="nc"><i>25</i>&nbsp;		stackCounter.push(0);</b>
+<b class="nc"><i>26</i>&nbsp;		statementStack.push(program.getAllStatements());</b>
+<i>27</i>&nbsp;
+<b class="nc"><i>28</i>&nbsp;		for (HashMap.Entry&lt;String, Type&gt; variable : program.getAllVars().entrySet())</b>
+<i>29</i>&nbsp;		{
+<b class="nc"><i>30</i>&nbsp;			String key = variable.getKey();</b>
+<b class="nc"><i>31</i>&nbsp;			Type type = variable.getValue();</b>
+<b class="nc"><i>32</i>&nbsp;			switch (type)</b>
+<i>33</i>&nbsp;			{
+<i>34</i>&nbsp;				case ActiveObject:
+<b class="nc"><i>35</i>&nbsp;					setVariable(key, null);</b>
+<b class="nc"><i>36</i>&nbsp;					continue;</b>
+<i>37</i>&nbsp;				case Boolean:
+<b class="nc"><i>38</i>&nbsp;					setVariable(key, false);</b>
+<b class="nc"><i>39</i>&nbsp;					continue;</b>
+<i>40</i>&nbsp;				case Direction:
+<b class="nc"><i>41</i>&nbsp;					setVariable(key, IProgramFactory.Direction.RIGHT);</b>
+<b class="nc"><i>42</i>&nbsp;					continue;</b>
+<i>43</i>&nbsp;				case Double:
+<b class="nc"><i>44</i>&nbsp;					setVariable(key, 0.0);</b>
+<b class="nc"><i>45</i>&nbsp;					continue;</b>
+<i>46</i>&nbsp;			}
+<b class="nc"><i>47</i>&nbsp;		}</b>
+<i>48</i>&nbsp;	}
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;	public World getwCaller()
+<i>51</i>&nbsp;	{
+<b class="nc"><i>52</i>&nbsp;		return activeCaller.getwCaller();</b>
+<i>53</i>&nbsp;	}
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;	public ActiveObject getActiveCaller()
+<i>56</i>&nbsp;	{
+<b class="nc"><i>57</i>&nbsp;		return activeCaller;</b>
+<i>58</i>&nbsp;	}
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;	public void setVariable(String name, Object value)
+<i>61</i>&nbsp;	{
+<b class="nc"><i>62</i>&nbsp;		allVariables.put(name, value);</b>
+<i>63</i>&nbsp;	}
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;	public Object getVariable(String key)
+<i>66</i>&nbsp;	{
+<b class="nc"><i>67</i>&nbsp;		return allVariables.get(key);</b>
+<i>68</i>&nbsp;	}
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;	public void setFunction(String name, Statement expression)
+<i>72</i>&nbsp;	{
+<b class="nc"><i>73</i>&nbsp;		allFunctions.put(name, expression);</b>
+<i>74</i>&nbsp;	}
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;	public Statement getFunction(String name)
+<i>77</i>&nbsp;	{
+<b class="nc"><i>78</i>&nbsp;		return allFunctions.get(name);</b>
+<i>79</i>&nbsp;	}
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;	public Statement getStatement()
+<i>82</i>&nbsp;	{
+<b class="nc"><i>83</i>&nbsp;		if (statementStack.isEmpty()) reset();</b>
+<b class="nc"><i>84</i>&nbsp;		if (statementStack.peek() instanceof SequenceStatement)</b>
+<i>85</i>&nbsp;		{
+<b class="nc"><i>86</i>&nbsp;			SequenceStatement sequence = (SequenceStatement) statementStack.peek();</b>
+<b class="nc"><i>87</i>&nbsp;			if (stackCounter.peek() &gt;= sequence.getStatementList().size())</b>
+<i>88</i>&nbsp;			{
+<b class="nc"><i>89</i>&nbsp;				statementStack.pop();</b>
+<b class="nc"><i>90</i>&nbsp;				stackCounter.pop();</b>
+<b class="nc"><i>91</i>&nbsp;				return getStatement();</b>
+<i>92</i>&nbsp;			} else
+<i>93</i>&nbsp;			{
+<b class="nc"><i>94</i>&nbsp;				return sequence.getStatementList().get(stackCounter.peek());</b>
+<i>95</i>&nbsp;			}
+<i>96</i>&nbsp;		} else
+<i>97</i>&nbsp;		{
+<b class="nc"><i>98</i>&nbsp;			return statementStack.peek();</b>
+<i>99</i>&nbsp;		}
+<i>100</i>&nbsp;	}
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;	private int getStatementCount()
+<i>103</i>&nbsp;	{
+<b class="nc"><i>104</i>&nbsp;		if (statementStack.peek() instanceof SequenceStatement)</b>
+<i>105</i>&nbsp;		{
+<b class="nc"><i>106</i>&nbsp;			SequenceStatement sequence = (SequenceStatement) statementStack.peek();</b>
+<b class="nc"><i>107</i>&nbsp;			return sequence.getStatementList().size();</b>
+<i>108</i>&nbsp;		} else
+<i>109</i>&nbsp;		{
+<b class="nc"><i>110</i>&nbsp;			return 1;</b>
+<i>111</i>&nbsp;		}
+<i>112</i>&nbsp;	}
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;	public void continueStack()
+<i>115</i>&nbsp;	{
+<b class="nc"><i>116</i>&nbsp;		if (stackCounter.peek() &lt;= getStatementCount() - 1)</b>
+<i>117</i>&nbsp;		{
+<b class="nc"><i>118</i>&nbsp;			int i = stackCounter.pop();</b>
+<b class="nc"><i>119</i>&nbsp;			stackCounter.push(i + 1);</b>
+<b class="nc"><i>120</i>&nbsp;		} else</b>
+<i>121</i>&nbsp;		{
+<b class="nc"><i>122</i>&nbsp;			backStack();</b>
+<i>123</i>&nbsp;		}
+<i>124</i>&nbsp;	}
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;	public void backStack()
+<i>127</i>&nbsp;	{
+<b class="nc"><i>128</i>&nbsp;		stackCounter.add(stackCounter.pop() + 1);</b>
+<i>129</i>&nbsp;	}
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;	public void intoStack(Statement statement)
+<i>132</i>&nbsp;	{
+<b class="nc"><i>133</i>&nbsp;		stackCounter.push(stackCounter.pop() + 1);</b>
+<b class="nc"><i>134</i>&nbsp;		stackCounter.push(-1);</b>
+<b class="nc"><i>135</i>&nbsp;		statementStack.push(statement);</b>
+<i>136</i>&nbsp;	}
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;	private void reset()
+<i>140</i>&nbsp;	{
+<b class="nc"><i>141</i>&nbsp;		stackCounter.clear();</b>
+<b class="nc"><i>142</i>&nbsp;		stackCounter.clear();</b>
+<b class="nc"><i>143</i>&nbsp;		allVariables.clear();</b>
+<b class="nc"><i>144</i>&nbsp;		statementStack.push(programCaller.getAllStatements());</b>
+<b class="nc"><i>145</i>&nbsp;		stackCounter.push(0);</b>
+<b class="nc"><i>146</i>&nbsp;		for (HashMap.Entry&lt;String, Type&gt; variable : programCaller.getAllVars().entrySet())</b>
+<i>147</i>&nbsp;		{
+<b class="nc"><i>148</i>&nbsp;			String key = variable.getKey();</b>
+<b class="nc"><i>149</i>&nbsp;			Type type = variable.getValue();</b>
+<i>150</i>&nbsp;
+<b class="nc"><i>151</i>&nbsp;			switch (type)</b>
+<i>152</i>&nbsp;			{
+<i>153</i>&nbsp;				case ActiveObject:
+<b class="nc"><i>154</i>&nbsp;					setVariable(key, null);</b>
+<b class="nc"><i>155</i>&nbsp;					continue;</b>
+<i>156</i>&nbsp;				case Boolean:
+<b class="nc"><i>157</i>&nbsp;					setVariable(key, false);</b>
+<b class="nc"><i>158</i>&nbsp;					continue;</b>
+<i>159</i>&nbsp;				case Direction:
+<b class="nc"><i>160</i>&nbsp;					setVariable(key, IProgramFactory.Direction.RIGHT);</b>
+<b class="nc"><i>161</i>&nbsp;					continue;</b>
+<i>162</i>&nbsp;				case Double:
+<b class="nc"><i>163</i>&nbsp;					setVariable(key, 0.0);</b>
+<b class="nc"><i>164</i>&nbsp;					continue;</b>
+<i>165</i>&nbsp;			}
+<b class="nc"><i>166</i>&nbsp;		}</b>
+<i>167</i>&nbsp;	}
+<i>168</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

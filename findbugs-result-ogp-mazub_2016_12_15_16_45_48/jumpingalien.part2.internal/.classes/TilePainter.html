@@ -1,0 +1,284 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TilePainter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part2.internal</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TilePainter (jumpingalien.part2.internal)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TilePainter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 79)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TilePainter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 80)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part2.internal;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.awt.Color;
+<i>4</i>&nbsp;import java.awt.Graphics2D;
+<i>5</i>&nbsp;import java.util.Optional;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import jumpingalien.common.gui.AlienGUIUtils;
+<i>8</i>&nbsp;import jumpingalien.common.gui.AlienGameScreen;
+<i>9</i>&nbsp;import jumpingalien.common.gui.painters.AbstractAlienPainter;
+<i>10</i>&nbsp;import jumpingalien.part2.internal.tmxfile.data.ImageTile;
+<i>11</i>&nbsp;import jumpingalien.part2.internal.tmxfile.data.ImageTile.TileType;
+<i>12</i>&nbsp;import jumpingalien.part2.internal.tmxfile.data.Layer;
+<i>13</i>&nbsp;import jumpingalien.part2.internal.tmxfile.data.Map;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;public class TilePainter extends AbstractAlienPainter&lt;AlienGameScreen&lt;?, ?&gt;&gt; {
+<i>16</i>&nbsp;
+<b class="nc"><i>17</i>&nbsp;	private static final Color OVERLAPPING_TILE_COLOR = new Color(255, 64, 64,</b>
+<i>18</i>&nbsp;			64);
+<i>19</i>&nbsp;	private final Part2WorldInfoProvider worldInfoProvider;
+<i>20</i>&nbsp;	private final int tileSize;
+<i>21</i>&nbsp;	private final Map map;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;	public TilePainter(AlienGameScreen&lt;?, ?&gt; screen, Map map,
+<i>24</i>&nbsp;			Part2WorldInfoProvider worldInfoProvider) {
+<b class="nc"><i>25</i>&nbsp;		super(screen);</b>
+<b class="nc"><i>26</i>&nbsp;		this.map = map;</b>
+<b class="nc"><i>27</i>&nbsp;		this.worldInfoProvider = worldInfoProvider;</b>
+<b class="nc"><i>28</i>&nbsp;		this.tileSize = worldInfoProvider.getTileLength();</b>
+<i>29</i>&nbsp;	}
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;	@Override
+<i>32</i>&nbsp;	protected Part2Options getOptions() {
+<b class="nc"><i>33</i>&nbsp;		return (Part2Options) super.getOptions();</b>
+<i>34</i>&nbsp;	}
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;	@Override
+<i>37</i>&nbsp;	public void paintInWorld(Graphics2D g) {
+<b class="nc"><i>38</i>&nbsp;		int[] worldSize = worldInfoProvider.getWorldSize().get();</b>
+<i>39</i>&nbsp;
+<b class="nc"><i>40</i>&nbsp;		g.setColor(getBackgroundColor());</b>
+<b class="nc"><i>41</i>&nbsp;		g.fillRect(0, 0, worldSize[0], worldSize[1]);</b>
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;		Optional&lt;int[][]&gt; tileCoordinatesToDrawOpt;
+<b class="nc"><i>44</i>&nbsp;		if (getOptions().getDebugShowEntireWorld()) {</b>
+<b class="nc"><i>45</i>&nbsp;			tileCoordinatesToDrawOpt = worldInfoProvider.getTilesIn(0, 0,</b>
+<i>46</i>&nbsp;					worldSize[0], worldSize[1]);
+<i>47</i>&nbsp;		} else {
+<b class="nc"><i>48</i>&nbsp;			Optional&lt;int[]&gt; visibleWindowOpt = worldInfoProvider</b>
+<b class="nc"><i>49</i>&nbsp;					.getVisibleWindow();</b>
+<i>50</i>&nbsp;
+<b class="nc"><i>51</i>&nbsp;			if (!visibleWindowOpt.isPresent()) {</b>
+<i>52</i>&nbsp;				return;
+<i>53</i>&nbsp;			}
+<b class="nc"><i>54</i>&nbsp;			int[] visibleWindow = visibleWindowOpt.get();</b>
+<i>55</i>&nbsp;
+<b class="nc"><i>56</i>&nbsp;			tileCoordinatesToDrawOpt = worldInfoProvider.getTilesIn(</b>
+<i>57</i>&nbsp;					visibleWindow[0], visibleWindow[1], visibleWindow[2],
+<i>58</i>&nbsp;					visibleWindow[3]);
+<i>59</i>&nbsp;		}
+<b class="nc"><i>60</i>&nbsp;		if (!tileCoordinatesToDrawOpt.isPresent()) {</b>
+<i>61</i>&nbsp;			return;
+<i>62</i>&nbsp;		}
+<b class="nc"><i>63</i>&nbsp;		int[][] tileCoordinatesToDraw = tileCoordinatesToDrawOpt.get();</b>
+<i>64</i>&nbsp;
+<b class="nc"><i>65</i>&nbsp;		for (int[] tileXY : tileCoordinatesToDraw) {</b>
+<b class="nc"><i>66</i>&nbsp;			int tileX = tileXY[0];</b>
+<b class="nc"><i>67</i>&nbsp;			int tileY = tileXY[1];</b>
+<i>68</i>&nbsp;
+<b class="nc"><i>69</i>&nbsp;			paintTile(g, tileX, tileY);</b>
+<i>70</i>&nbsp;		}
+<i>71</i>&nbsp;
+<b class="nc"><i>72</i>&nbsp;		if (getOptions().getDebugShowAlienOverlappingTiles()) {</b>
+<i>73</i>&nbsp;
+<b class="nc"><i>74</i>&nbsp;			Optional&lt;int[]&gt; alienXYOpt = getGame().getAlienInfoProvider()</b>
+<b class="nc"><i>75</i>&nbsp;					.getAlienXY();</b>
+<b class="nc"><i>76</i>&nbsp;			Optional&lt;int[]&gt; alienSizeOpt = getGame().getAlienInfoProvider()</b>
+<b class="nc"><i>77</i>&nbsp;					.getAlienSize();</b>
+<b class="nc"><i>78</i>&nbsp;			if (alienXYOpt.isPresent() &amp;&amp; alienSizeOpt.isPresent()) {</b>
+<b class="nc"><i>79</i>&nbsp;				int[] alienXY = alienXYOpt.get();</b>
+<b class="nc"><i>80</i>&nbsp;				int[] alienSize = alienSizeOpt.get();</b>
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;				g.setColor(OVERLAPPING_TILE_COLOR);</b>
+<b class="nc"><i>83</i>&nbsp;				worldInfoProvider.getTilesIn(alienXY[0], alienXY[1],</b>
+<i>84</i>&nbsp;						alienXY[0] + alienSize[0] - 1,
+<b class="nc"><i>85</i>&nbsp;						alienXY[1] + alienSize[1] - 1).ifPresent(</b>
+<i>86</i>&nbsp;						overlappingTileCoords -&gt; {
+<b class="nc"><i>87</i>&nbsp;							for (int[] tileCoord : overlappingTileCoords) {</b>
+<b class="nc"><i>88</i>&nbsp;								worldInfoProvider.getBottomLeftPixelOfTile(</b>
+<b class="nc"><i>89</i>&nbsp;										tileCoord[0], tileCoord[1]).ifPresent(</b>
+<i>90</i>&nbsp;										overlappingXY -&gt;
+<i>91</i>&nbsp;
+<b class="nc"><i>92</i>&nbsp;										g.fillRect(overlappingXY[0],</b>
+<i>93</i>&nbsp;												overlappingXY[1], tileSize,
+<i>94</i>&nbsp;												tileSize));
+<i>95</i>&nbsp;							}
+<i>96</i>&nbsp;						});
+<i>97</i>&nbsp;			}
+<i>98</i>&nbsp;		}
+<i>99</i>&nbsp;	}
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;	private Color getBackgroundColor() {
+<b class="nc"><i>102</i>&nbsp;		String bg = map.getBackground();</b>
+<b class="nc"><i>103</i>&nbsp;		if (bg != null) {</b>
+<b class="nc"><i>104</i>&nbsp;			return Color.decode(bg);</b>
+<i>105</i>&nbsp;		} else {
+<b class="nc"><i>106</i>&nbsp;			return Color.black;</b>
+<i>107</i>&nbsp;		}
+<i>108</i>&nbsp;	}
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;	private void paintTile(Graphics2D g, int tileX, int tileY) {
+<b class="nc"><i>111</i>&nbsp;		Optional&lt;int[]&gt; bottomLeftOpt = worldInfoProvider</b>
+<b class="nc"><i>112</i>&nbsp;				.getBottomLeftPixelOfTile(tileX, tileY);</b>
+<b class="nc"><i>113</i>&nbsp;		if (!bottomLeftOpt.isPresent()) {</b>
+<i>114</i>&nbsp;			// TODO: do something else?
+<i>115</i>&nbsp;			return;
+<i>116</i>&nbsp;		}
+<b class="nc"><i>117</i>&nbsp;		int[] bottomLeftXY = bottomLeftOpt.get();</b>
+<i>118</i>&nbsp;
+<b class="nc"><i>119</i>&nbsp;		int tileSize = worldInfoProvider.getTileLength();</b>
+<i>120</i>&nbsp;
+<b class="nc"><i>121</i>&nbsp;		for (Layer layer : map.getLayers()) {</b>
+<b class="nc"><i>122</i>&nbsp;			if (map.isValidTileCoordinate(tileX, tileY)) {</b>
+<b class="nc"><i>123</i>&nbsp;				ImageTile tile = layer.getTile(tileX, tileY);</b>
+<b class="nc"><i>124</i>&nbsp;				if (tile != null) {</b>
+<b class="nc"><i>125</i>&nbsp;					AlienGUIUtils.drawImageInWorld(g, tile.getImage(),</b>
+<i>126</i>&nbsp;							bottomLeftXY[0], bottomLeftXY[1], false);
+<i>127</i>&nbsp;				}
+<i>128</i>&nbsp;			}
+<b class="nc"><i>129</i>&nbsp;		}</b>
+<i>130</i>&nbsp;
+<b class="nc"><i>131</i>&nbsp;		if (getOptions().getDebugShowTileTypes()) {</b>
+<b class="nc"><i>132</i>&nbsp;			Optional&lt;TileType&gt; optType = worldInfoProvider</b>
+<b class="nc"><i>133</i>&nbsp;					.getGeologicalFeature(bottomLeftXY[0], bottomLeftXY[1]);</b>
+<b class="nc"><i>134</i>&nbsp;			if (optType.isPresent()) {</b>
+<b class="nc"><i>135</i>&nbsp;				TileType type = optType.get();</b>
+<b class="nc"><i>136</i>&nbsp;				int alpha = 200;</b>
+<b class="nc"><i>137</i>&nbsp;				switch (type) {</b>
+<i>138</i>&nbsp;				case AIR:
+<b class="nc"><i>139</i>&nbsp;					g.setColor(new Color(0, 255, 255, alpha));</b>
+<b class="nc"><i>140</i>&nbsp;					break;</b>
+<i>141</i>&nbsp;				case SOLID:
+<b class="nc"><i>142</i>&nbsp;					g.setColor(new Color(255, 128, 128, alpha));</b>
+<b class="nc"><i>143</i>&nbsp;					break;</b>
+<i>144</i>&nbsp;				case MAGMA:
+<b class="nc"><i>145</i>&nbsp;					g.setColor(new Color(255, 255, 128, alpha));</b>
+<b class="nc"><i>146</i>&nbsp;					break;</b>
+<i>147</i>&nbsp;				case WATER:
+<b class="nc"><i>148</i>&nbsp;					g.setColor(new Color(0, 128, 255, alpha));</b>
+<b class="nc"><i>149</i>&nbsp;					break;</b>
+<i>150</i>&nbsp;				default:
+<b class="nc"><i>151</i>&nbsp;					g.setColor(new Color(128, 128, 128, alpha));</b>
+<i>152</i>&nbsp;					break;
+<i>153</i>&nbsp;				}
+<b class="nc"><i>154</i>&nbsp;				g.fillRect(bottomLeftXY[0], bottomLeftXY[1], tileSize, tileSize);</b>
+<i>155</i>&nbsp;			}
+<i>156</i>&nbsp;		}
+<i>157</i>&nbsp;
+<b class="nc"><i>158</i>&nbsp;		if (getOptions().getDebugShowTileGridlines()) {</b>
+<b class="nc"><i>159</i>&nbsp;			g.setColor(Color.WHITE);</b>
+<b class="nc"><i>160</i>&nbsp;			g.setXORMode(Color.BLACK);</b>
+<b class="nc"><i>161</i>&nbsp;			int offset = 5;</b>
+<b class="nc"><i>162</i>&nbsp;			g.drawLine(bottomLeftXY[0], bottomLeftXY[1], bottomLeftXY[0],</b>
+<i>163</i>&nbsp;					bottomLeftXY[1] + tileSize);
+<b class="nc"><i>164</i>&nbsp;			g.drawLine(bottomLeftXY[0], bottomLeftXY[1], bottomLeftXY[0]</b>
+<i>165</i>&nbsp;					+ tileSize, bottomLeftXY[1]);
+<i>166</i>&nbsp;
+<b class="nc"><i>167</i>&nbsp;			g.setXORMode(Color.LIGHT_GRAY);</b>
+<b class="nc"><i>168</i>&nbsp;			g.drawLine(bottomLeftXY[0] + 2, bottomLeftXY[1] + 2,</b>
+<i>169</i>&nbsp;					bottomLeftXY[0] + 2, bottomLeftXY[1] + tileSize - offset);
+<b class="nc"><i>170</i>&nbsp;			g.drawLine(bottomLeftXY[0] + 2, bottomLeftXY[1] + 2,</b>
+<i>171</i>&nbsp;					bottomLeftXY[0] + tileSize - offset, bottomLeftXY[1] + 2);
+<b class="nc"><i>172</i>&nbsp;			g.setPaintMode();</b>
+<i>173</i>&nbsp;		}
+<i>174</i>&nbsp;	}
+<i>175</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

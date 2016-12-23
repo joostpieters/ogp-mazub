@@ -1,0 +1,117 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AxesPainter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.common.gui.painters</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AxesPainter (jumpingalien.common.gui.painters)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AxesPainter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.common.gui.painters;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.awt.Color;
+<i>4</i>&nbsp;import java.awt.Graphics2D;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import jumpingalien.common.gui.AlienGameScreen;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public class AxesPainter extends AbstractAlienPainter&lt;AlienGameScreen&lt;?, ?&gt;&gt; {
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;	private static final int AXES_LENGTH = 100;
+<i>11</i>&nbsp;	private static final int AXES_WIDTH = 6;
+<i>12</i>&nbsp;	private static final int AXES_ARROW_SIZE = 12;
+<i>13</i>&nbsp;
+<b class="nc"><i>14</i>&nbsp;	private static final Color AXES_COLOR = Color.YELLOW;</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;	public AxesPainter(AlienGameScreen&lt;?, ?&gt; screen) {
+<b class="nc"><i>17</i>&nbsp;		super(screen);</b>
+<i>18</i>&nbsp;	}
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;	@Override
+<i>21</i>&nbsp;	public void paintInWorld(Graphics2D g) {
+<b class="nc"><i>22</i>&nbsp;		g.setColor(AXES_COLOR);</b>
+<b class="nc"><i>23</i>&nbsp;		g.fillRect(-AXES_WIDTH / 2, -AXES_WIDTH / 2, AXES_WIDTH, AXES_LENGTH);</b>
+<b class="nc"><i>24</i>&nbsp;		g.fillRect(-AXES_WIDTH / 2, -AXES_WIDTH / 2, AXES_LENGTH, AXES_WIDTH);</b>
+<b class="nc"><i>25</i>&nbsp;		g.fillPolygon(new int[] { -AXES_ARROW_SIZE, 0, AXES_ARROW_SIZE },</b>
+<i>26</i>&nbsp;				new int[] { AXES_LENGTH - AXES_WIDTH / 2,
+<i>27</i>&nbsp;						AXES_LENGTH - AXES_WIDTH / 2 + AXES_ARROW_SIZE,
+<i>28</i>&nbsp;						AXES_LENGTH - AXES_WIDTH / 2 }, 3);
+<b class="nc"><i>29</i>&nbsp;		g.fillPolygon(new int[] { AXES_LENGTH - AXES_WIDTH / 2,</b>
+<i>30</i>&nbsp;				AXES_LENGTH - AXES_WIDTH / 2 + AXES_ARROW_SIZE,
+<i>31</i>&nbsp;				AXES_LENGTH - AXES_WIDTH / 2 }, new int[] { -AXES_ARROW_SIZE,
+<i>32</i>&nbsp;				0, AXES_ARROW_SIZE }, 3);
+<i>33</i>&nbsp;	}
+<i>34</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

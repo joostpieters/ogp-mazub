@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TimeKeeper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">ogp.framework.gui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TimeKeeper (ogp.framework.gui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TimeKeeper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package ogp.framework.gui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * This class keeps track of how many time has passed between two frames, and
+<i>5</i>&nbsp; * counts the framerate.
+<i>6</i>&nbsp; * 
+<i>7</i>&nbsp; * Not thread safe.
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;public class TimeKeeper {
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;	private static final int UPDATE_PERIOD_NS = 500_000_000; // nanoseconds
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;	private long lastGameUpdateNS, lastFramePaintedNS, lastFrameDoneNS;
+<i>14</i>&nbsp;	private long totalTimeSinceLastUpdateNS;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;	private long frameCount;
+<i>17</i>&nbsp;	private final double targetFPS;
+<i>18</i>&nbsp;	private double fps;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;	private double timeToAdvanceS;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;	private long totalPaintTimeNS, totalGameUpdateTimeNS, totalSleepTimeNS;
+<i>23</i>&nbsp;	private double avgGameUpdateTimeMS, avgPaintTimeMS, avgSleepTimeMS;
+<i>24</i>&nbsp;
+<b class="nc"><i>25</i>&nbsp;	public TimeKeeper(double targetFPS) {</b>
+<b class="nc"><i>26</i>&nbsp;		this.targetFPS = targetFPS;</b>
+<i>27</i>&nbsp;	}
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;	public void start() {
+<b class="nc"><i>30</i>&nbsp;		timeToAdvanceS = 1.0 / targetFPS;</b>
+<b class="nc"><i>31</i>&nbsp;		lastFrameDoneNS = now();</b>
+<i>32</i>&nbsp;	}
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;	public double getTimeToAdvance() {
+<b class="nc"><i>35</i>&nbsp;		return timeToAdvanceS;</b>
+<i>36</i>&nbsp;	}
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;	public PerformanceStats getStats() {
+<b class="nc"><i>39</i>&nbsp;		return new PerformanceStats(avgGameUpdateTimeMS, avgPaintTimeMS,</b>
+<i>40</i>&nbsp;				avgSleepTimeMS, fps, targetFPS);
+<i>41</i>&nbsp;	}
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;	public long getTimeToSleep() {
+<b class="nc"><i>44</i>&nbsp;		double targetTimeBetweenFramesNS = 1e9 / targetFPS;</b>
+<b class="nc"><i>45</i>&nbsp;		double elapsedForFrameNS = lastFramePaintedNS - lastFrameDoneNS;</b>
+<i>46</i>&nbsp;		// return 95% of theoretical time to sleep; we may not have accounted for some time
+<b class="nc"><i>47</i>&nbsp;		long sleepTimeMS = (long) (0.95 * (targetTimeBetweenFramesNS - elapsedForFrameNS) / 1e6);</b>
+<i>48</i>&nbsp;
+<b class="nc"><i>49</i>&nbsp;		if (sleepTimeMS &lt;= 0) {</b>
+<b class="nc"><i>50</i>&nbsp;			return 5; // give some time to other threads anyway</b>
+<i>51</i>&nbsp;		} else {
+<b class="nc"><i>52</i>&nbsp;			return sleepTimeMS;</b>
+<i>53</i>&nbsp;		}
+<i>54</i>&nbsp;	}
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;	public void gameUpdated() {
+<b class="nc"><i>57</i>&nbsp;		lastGameUpdateNS = now();</b>
+<b class="nc"><i>58</i>&nbsp;		totalGameUpdateTimeNS += lastGameUpdateNS - lastFrameDoneNS;</b>
+<i>59</i>&nbsp;	}
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;	public void framePainted() {
+<b class="nc"><i>62</i>&nbsp;		lastFramePaintedNS = now();</b>
+<b class="nc"><i>63</i>&nbsp;		totalPaintTimeNS += lastFramePaintedNS - lastGameUpdateNS;</b>
+<i>64</i>&nbsp;	}
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;	public void frameDone() {
+<b class="nc"><i>67</i>&nbsp;		long now = now();</b>
+<b class="nc"><i>68</i>&nbsp;		totalSleepTimeNS += now - lastFramePaintedNS;</b>
+<b class="nc"><i>69</i>&nbsp;		long elapsedSinceLastFrameNS = now - lastFrameDoneNS;</b>
+<b class="nc"><i>70</i>&nbsp;		lastFrameDoneNS = now;</b>
+<i>71</i>&nbsp;
+<b class="nc"><i>72</i>&nbsp;		totalTimeSinceLastUpdateNS += elapsedSinceLastFrameNS;</b>
+<b class="nc"><i>73</i>&nbsp;		timeToAdvanceS = elapsedSinceLastFrameNS / 1e9;</b>
+<b class="nc"><i>74</i>&nbsp;		frameCount++;</b>
+<b class="nc"><i>75</i>&nbsp;		if (totalTimeSinceLastUpdateNS &gt;= UPDATE_PERIOD_NS) {</b>
+<b class="nc"><i>76</i>&nbsp;			fps = frameCount / (totalTimeSinceLastUpdateNS / 1e9);</b>
+<i>77</i>&nbsp;
+<b class="nc"><i>78</i>&nbsp;			avgGameUpdateTimeMS = totalGameUpdateTimeNS / (frameCount * 1e6);</b>
+<b class="nc"><i>79</i>&nbsp;			avgPaintTimeMS = totalPaintTimeNS / (frameCount * 1e6);</b>
+<b class="nc"><i>80</i>&nbsp;			avgSleepTimeMS = totalSleepTimeNS / (frameCount * 1e6);</b>
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;			totalTimeSinceLastUpdateNS = totalGameUpdateTimeNS = totalPaintTimeNS = totalSleepTimeNS = 0;</b>
+<b class="nc"><i>83</i>&nbsp;			frameCount = 0;</b>
+<i>84</i>&nbsp;		}
+<i>85</i>&nbsp;	}
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;	private long now() {
+<b class="nc"><i>88</i>&nbsp;		return System.nanoTime();</b>
+<i>89</i>&nbsp;	}
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>

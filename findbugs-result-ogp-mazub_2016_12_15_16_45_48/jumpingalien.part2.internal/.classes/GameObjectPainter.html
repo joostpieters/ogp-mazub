@@ -1,0 +1,234 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GameObjectPainter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">jumpingalien.part2.internal</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GameObjectPainter (jumpingalien.part2.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameObjectPainter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 66)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package jumpingalien.part2.internal;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.awt.BasicStroke;
+<i>4</i>&nbsp;import java.awt.Color;
+<i>5</i>&nbsp;import java.awt.Graphics2D;
+<i>6</i>&nbsp;import java.awt.Stroke;
+<i>7</i>&nbsp;import java.util.HashMap;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import jumpingalien.common.gui.AlienGUIUtils;
+<i>10</i>&nbsp;import jumpingalien.common.gui.AlienGameScreen;
+<i>11</i>&nbsp;import jumpingalien.common.gui.painters.AbstractAlienPainter;
+<i>12</i>&nbsp;import jumpingalien.common.sprites.ImageSprite;
+<i>13</i>&nbsp;import jumpingalien.model.Plant;
+<i>14</i>&nbsp;import jumpingalien.model.School;
+<i>15</i>&nbsp;import jumpingalien.model.Shark;
+<i>16</i>&nbsp;import jumpingalien.model.Slime;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;public final class GameObjectPainter extends
+<i>19</i>&nbsp;		AbstractAlienPainter&lt;AlienGameScreen&lt;?, ?&gt;&gt; {
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;	private final AlienInfoProvider2&lt;?&gt; alienInfoProvider;
+<i>22</i>&nbsp;	private final ObjectInfoProvider objectInfoProvider;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;	public GameObjectPainter(AlienGameScreen&lt;?, ?&gt; screen,
+<i>25</i>&nbsp;			AlienInfoProvider2&lt;?&gt; alienInfoProvider,
+<i>26</i>&nbsp;			ObjectInfoProvider objectInfoProvider) {
+<b class="nc"><i>27</i>&nbsp;		super(screen);</b>
+<b class="nc"><i>28</i>&nbsp;		this.alienInfoProvider = alienInfoProvider;</b>
+<b class="nc"><i>29</i>&nbsp;		this.objectInfoProvider = objectInfoProvider;</b>
+<i>30</i>&nbsp;	}
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;	@Override
+<i>33</i>&nbsp;	protected Part2Options getOptions() {
+<b class="nc"><i>34</i>&nbsp;		return (Part2Options) super.getOptions();</b>
+<i>35</i>&nbsp;	}
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	@Override
+<i>38</i>&nbsp;	public void paintInWorld(java.awt.Graphics2D g) {
+<b class="nc"><i>39</i>&nbsp;		paintMazubDebugInfo(g);</b>
+<b class="nc"><i>40</i>&nbsp;		paintPlants(g);</b>
+<b class="nc"><i>41</i>&nbsp;		paintSharks(g);</b>
+<b class="nc"><i>42</i>&nbsp;		paintSlimes(g);</b>
+<i>43</i>&nbsp;	}
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;	protected void paintMazubDebugInfo(Graphics2D g) {
+<b class="nc"><i>46</i>&nbsp;		alienInfoProvider.getAlienXY().ifPresent(</b>
+<b class="nc"><i>47</i>&nbsp;				xy -&gt; paintDebugInfo(g, alienInfoProvider.getAlien(), xy));</b>
+<i>48</i>&nbsp;	}
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;	protected void paintSharks(Graphics2D g) {
+<b class="nc"><i>51</i>&nbsp;		for (Shark shark : objectInfoProvider.getSharks()) {</b>
+<b class="nc"><i>52</i>&nbsp;			objectInfoProvider.getLocation(shark).ifPresent(</b>
+<i>53</i>&nbsp;					xy -&gt; {
+<b class="nc"><i>54</i>&nbsp;						objectInfoProvider.getCurrentSprite(shark).ifPresent(</b>
+<b class="nc"><i>55</i>&nbsp;								sprite -&gt; paintSprite(g, sprite, xy));</b>
+<b class="nc"><i>56</i>&nbsp;						paintDebugInfo(g, shark, xy);</b>
+<i>57</i>&nbsp;					});
+<b class="nc"><i>58</i>&nbsp;		}</b>
+<i>59</i>&nbsp;	}
+<i>60</i>&nbsp;
+<b class="nc"><i>61</i>&nbsp;	private final java.util.Map&lt;School, Integer&gt; schoolHueShifts = new HashMap&lt;&gt;();</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;	private int getHueShift(School school) {
+<b class="nc"><i>64</i>&nbsp;		return schoolHueShifts.computeIfAbsent(school,</b>
+<b class="nc"><i>65</i>&nbsp;				s -&gt; schoolHueShifts.size());</b>
+<i>66</i>&nbsp;	}
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;	protected void paintSlimes(Graphics2D g) {
+<b class="nc"><i>69</i>&nbsp;		for (Slime slime : objectInfoProvider.getSlimes()) {</b>
+<b class="nc"><i>70</i>&nbsp;			objectInfoProvider</b>
+<b class="nc"><i>71</i>&nbsp;					.getLocation(slime)</b>
+<b class="nc"><i>72</i>&nbsp;					.ifPresent(</b>
+<i>73</i>&nbsp;							xy -&gt; {
+<b class="nc"><i>74</i>&nbsp;								objectInfoProvider</b>
+<b class="nc"><i>75</i>&nbsp;										.getCurrentSprite(slime)</b>
+<b class="nc"><i>76</i>&nbsp;										.ifPresent(</b>
+<i>77</i>&nbsp;												sprite -&gt; objectInfoProvider
+<b class="nc"><i>78</i>&nbsp;														.getSchool(slime)</b>
+<b class="nc"><i>79</i>&nbsp;														.ifPresent(</b>
+<b class="nc"><i>80</i>&nbsp;																school -&gt; paintSprite(</b>
+<i>81</i>&nbsp;																		g,
+<b class="nc"><i>82</i>&nbsp;																		sprite.shiftHue(getHueShift(school)),</b>
+<i>83</i>&nbsp;																		xy)));
+<b class="nc"><i>84</i>&nbsp;								paintDebugInfo(g, slime, xy);</b>
+<i>85</i>&nbsp;							});
+<b class="nc"><i>86</i>&nbsp;		}</b>
+<i>87</i>&nbsp;	}
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;	private void paintDebugInfo(Graphics2D g, Object object, int[] xy) {
+<b class="nc"><i>90</i>&nbsp;		if (getOptions().getDebugShowObjectString() &amp;&amp; object != null) {</b>
+<i>91</i>&nbsp;			// need to flip y
+<b class="nc"><i>92</i>&nbsp;			g.scale(1, -1);</b>
+<b class="nc"><i>93</i>&nbsp;			g.setColor(Color.BLACK);</b>
+<b class="nc"><i>94</i>&nbsp;			g.setXORMode(Color.WHITE);</b>
+<b class="nc"><i>95</i>&nbsp;			g.drawString(object.toString(), xy[0], -xy[1]</b>
+<b class="nc"><i>96</i>&nbsp;					+ g.getFont().getSize());</b>
+<b class="nc"><i>97</i>&nbsp;			g.setPaintMode();</b>
+<b class="nc"><i>98</i>&nbsp;			g.scale(1, -1);</b>
+<i>99</i>&nbsp;		}
+<i>100</i>&nbsp;	}
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;	protected void paintPlants(Graphics2D g) {
+<b class="nc"><i>103</i>&nbsp;		for (Plant plant : objectInfoProvider.getPlants()) {</b>
+<b class="nc"><i>104</i>&nbsp;			objectInfoProvider.getLocation(plant).ifPresent(</b>
+<i>105</i>&nbsp;					xy -&gt; {
+<b class="nc"><i>106</i>&nbsp;						objectInfoProvider.getCurrentSprite(plant).ifPresent(</b>
+<b class="nc"><i>107</i>&nbsp;								sprite -&gt; paintSprite(g, sprite, xy));</b>
+<b class="nc"><i>108</i>&nbsp;						paintDebugInfo(g, plant, xy);</b>
+<i>109</i>&nbsp;					});
+<i>110</i>&nbsp;
+<b class="nc"><i>111</i>&nbsp;		}</b>
+<i>112</i>&nbsp;	}
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;	private void paintSprite(Graphics2D g, ImageSprite sprite, int[] xy) {
+<b class="nc"><i>115</i>&nbsp;		if (((Part2Options) getOptions()).getDebugShowObjectLocationAndSize()) {</b>
+<b class="nc"><i>116</i>&nbsp;			paintLocationAndSize(g, xy,</b>
+<b class="nc"><i>117</i>&nbsp;					new int[] { sprite.getWidth(), sprite.getHeight() },</b>
+<b class="nc"><i>118</i>&nbsp;					getOptions().getDebugShowPixels());</b>
+<i>119</i>&nbsp;		}
+<b class="nc"><i>120</i>&nbsp;		AlienGUIUtils.drawImageInWorld(g, sprite.getImage(), xy[0], xy[1],</b>
+<i>121</i>&nbsp;				false);
+<i>122</i>&nbsp;	}
+<i>123</i>&nbsp;
+<b class="nc"><i>124</i>&nbsp;	private static final Color SIZE_BORDER = Color.RED;</b>
+<b class="nc"><i>125</i>&nbsp;	private static final Color LOCATION_COLOR = Color.RED;</b>
+<b class="nc"><i>126</i>&nbsp;	private static final Color SIZE_FILL = new Color(0x880000ff, true);</b>
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;	protected void paintLocationAndSize(Graphics2D g, int[] xy, int[] size,
+<i>129</i>&nbsp;			boolean smallStroke) {
+<b class="nc"><i>130</i>&nbsp;		g.setColor(SIZE_FILL);</b>
+<b class="nc"><i>131</i>&nbsp;		g.fillRect(xy[0], xy[1], size[0], size[1]);</b>
+<i>132</i>&nbsp;
+<b class="nc"><i>133</i>&nbsp;		g.setColor(SIZE_BORDER);</b>
+<i>134</i>&nbsp;
+<b class="nc"><i>135</i>&nbsp;		Stroke oldStroke = g.getStroke();</b>
+<b class="nc"><i>136</i>&nbsp;		if (smallStroke) {</b>
+<i>137</i>&nbsp;			// use a smaller stroke if individual pixels are painted
+<b class="nc"><i>138</i>&nbsp;			g.setStroke(new BasicStroke(0.5f));</b>
+<i>139</i>&nbsp;		}
+<b class="nc"><i>140</i>&nbsp;		g.drawRect(xy[0], xy[1], size[0], size[1]);</b>
+<b class="nc"><i>141</i>&nbsp;		g.setStroke(oldStroke);</b>
+<i>142</i>&nbsp;
+<b class="nc"><i>143</i>&nbsp;		g.setColor(LOCATION_COLOR);</b>
+<b class="nc"><i>144</i>&nbsp;		if (smallStroke) {</b>
+<i>145</i>&nbsp;			// only fill 1 pixel if individual pixels are painted
+<b class="nc"><i>146</i>&nbsp;			g.fillRect(xy[0], xy[1], 1, 1);</b>
+<i>147</i>&nbsp;		} else {
+<b class="nc"><i>148</i>&nbsp;			g.fillRect(xy[0], xy[1], 5, 5);</b>
+<i>149</i>&nbsp;		}
+<i>150</i>&nbsp;	}
+<i>151</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-15 16:48</div>
+</div>
+</body>
+</html>
