@@ -9,8 +9,7 @@
 \maketitle
 \section{Bugs}
 \subsection{Bug 1: compareTo()compare()}
-\subsubsection{De code}
- jmpingalien.model.programs.expressions.locationComparator.compare(ActiveObject, ActiveObject) incorrectly handles double value
+jumpingalien.model.programs.expressions.locationComparator.compare(ActiveObject, ActiveObject) incorrectly handles double value
 
 
 In file locationComparator.java, line 39
@@ -20,6 +19,7 @@ Type double
 Should call Double.compare(double, double) instead
 At locationComparator.java:[line 39]
 At locationComparator.java:[line 39]
+\subsubsection{De code}
 \paragraph{The affected code}
 \usemintedstyle{colorful}
 \begin{minted}[linenos,breaklines,
@@ -100,5 +100,117 @@ public int compare(ActiveObject t1, ActiveObject t2)
 }
 \end{minted}
 \subsubsection{De bespreking}
+De bug bevindt zich in een locatie comparator in de behavior scripting engine.
+Wanneer een script de locatie relatief tot een object wilt weten wordt deze code uitgevoerd en terug gegeven.
+\paragraph{}
+
+Er wordt gebruikt gemaakt van de gewone logic operaties in java. Deze geven echter inacurate resultaten, in combinatie met undefined behavior bij het gebruikt van doubles.
+Dit is niet optimaal omdat er een functie Double\.compare is in de Double class die betere resultaten opleverd.
+\paragraph{}
+
+Gelukkig voor de programeur (ik) was de vereiste nauwkeurigheid niet groot en leverde het gebruikt van de logic operatie de gewenste behavior.
+Nogmaals, dit is niet optimale code vanwege het vertrouwen op undefined behavior.
+
+\subsection{Bug 2:Return value of method without side effect is ignored}
+Return value of roundToTile(int) ignored, but method has no side effect
+   In file TileMap.java, line 91
+   In class jumpingalien.model.TileMap
+   In method jumpingalien.model.TileMap.getTileinPixels(int, int)
+   Called method jumpingalien.model.TileMap.roundToTile(int)
+   At TileMap.java:[line 91]
+   At TileMap.java:[line 91]
+\subsubsection{De code}
+\usemintedstyle{colorful}
+\begin{minted}[linenos,breaklines,
+breakautoindent=false,
+breaksymbolleft=
+\raisebox
+{0.8ex}{
+\small\reflectbox
+{
+\carriagereturn
+}},
+breaksymbolindentleft=0pt,
+breaksymbolsepleft=0pt,
+breaksymbolright=
+\small\carriagereturn
+,
+breaksymbolindentright=0pt,
+breaksymbolsepright=0pt]{python}]{java}
+@Basic
+public Tile getTileinPixels(int pixelX, int pixelY) throws ArrayIndexOutOfBoundsException
+{
+	roundToTile(pixelX);
+	roundToTile(pixelY);
+	return getTileInArrPoss((pixelX / iTileSize), (pixelY / iTileSize));
+}
+
+/**
+ * Rounds down to the nearest tile
+ *
+ * @param tileCoor The coordinate on eighter the x or y-axis
+ * @return The x or y coordinate of the nearest tile lower than the tileCoor
+ */
+private int roundToTile(int tileCoor)
+{
+	tileCoor = tileCoor < 0 ? 0 : tileCoor;
+	return (int) (Math.floor((tileCoor) / getTileSize()) * getTileSize());
+}
+\end{minted}
+\subsubsection{De bespreking}
+De bug bevindt zich in de TileMap classe die gebruikt wordt door
+\paragraph{}
+De bug is zelfs voor onervaren programeurs zichtbaar, het is weliswaar een bug die geen effect zal hebben op de behavior van het programma. De roundToTile functie heeft echter geen side-effects en de return value wordt niet opgevangen in een variabele.
+\paragraph{}
+Deze code is waarschijnlijk een resultaat van refactoring en depricatie van functies.
+
+\subsection{Bug 3: Questionable cast to concrete collection}
+Questionable cast from java.util.Map<java.lang.String,jumpingalien.model.programs.Type> to java.util.HashMap in jumpingalien.model.programs.Factory.createProgram(Statement, Map)
+
+In file Factory.java, line 858
+In class jumpingalien.model.programs.Factory
+In method jumpingalien.model.programs.Factory.createProgram(Statement, Map)
+Actual type java.util.Map<java.lang.String,jumpingalien.model.programs.Type>
+Expected java.util.HashMap
+Value loaded from globalVariables
+At Factory.java:[line 858]
+At Factory.java:[line 858]
+\subsubsection{De code}
+\usemintedstyle{colorful}
+\begin{minted}[linenos,breaklines,
+breakautoindent=false,
+breaksymbolleft=
+\raisebox
+{0.8ex}{
+\small\reflectbox
+{
+\carriagereturn
+}},
+breaksymbolindentleft=0pt,
+breaksymbolsepleft=0pt,
+breaksymbolright=
+\small\carriagereturn
+,
+breaksymbolindentright=0pt,
+breaksymbolsepright=0pt]{python}]{java}
+/**
+ * Create a programs with the given main statement and variable declarations.
+ * The globalVariables map contains the type for each declared variable,
+ * with the name of the variable as the key.
+ *
+ * @param mainStatement
+ * @param globalVariables
+ */
+@Override
+public Program createProgram(Statement mainStatement, Map<String, Type> globalVariables)
+{
+	return new Program((HashMap<String, Type>) globalVariables, mainStatement);
+}
+\end{minted}
+\subsubsection{De bespreking}
+Deze bug vindt plaats in de factory voor het opstellen van scripts.
+\paragraph{}
+Het is een simpele bug omdat het eigenlijk een statische functie is, de oplossing is simpel. Des on danks is het een bug omdate de hoewel de interface een map defineert zou hij eigenlijk een haskmap moeten zijn.
+
 %%% End document
 \end{document}
