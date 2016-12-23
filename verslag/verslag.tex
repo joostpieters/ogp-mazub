@@ -1,0 +1,104 @@
+
+\documentclass[a4paper]{article}
+\usepackage[dutch]{babel}
+\usepackage{minted}
+\begin{document}
+	\title{Verslag algemene vergadering Jong VLD Leuven}
+	\author{Waarnemend secretaris Louis Roebben}
+	\date{26 mei 2016}
+\maketitle
+\section{Bugs}
+\subsection{Bug 1: compareTo()compare()}
+\subsubsection{De code}
+ jmpingalien.model.programs.expressions.locationComparator.compare(ActiveObject, ActiveObject) incorrectly handles double value
+
+
+In file locationComparator.java, line 39
+In class jumpingalien.model.programs.expressions.locationComparator
+In method jumpingalien.model.programs.expressions.locationComparator.compare(ActiveObject, ActiveObject)
+Type double
+Should call Double.compare(double, double) instead
+At locationComparator.java:[line 39]
+At locationComparator.java:[line 39]
+\paragraph{The affected code}
+\usemintedstyle{colorful}
+\begin{minted}[linenos,breaklines,
+breakautoindent=false,
+breaksymbolleft=
+\raisebox
+{0.8ex}{
+\small\reflectbox
+{
+\carriagereturn
+}},
+breaksymbolindentleft=0pt,
+breaksymbolsepleft=0pt,
+breaksymbolright=
+\small\carriagereturn
+,
+breaksymbolindentright=0pt,
+breaksymbolsepright=0pt]{python}]{java}
+@Override
+public int compare(ActiveObject t1, ActiveObject t2)
+{
+	switch (direction)
+	{
+
+		case LEFT:
+			//check if t1 & t2 is right of center
+			if (t1.getRawLocation()[0] - centerObject.getRawLocation()[0] > 0) return -1;
+			if (t2.getRawLocation()[0] - centerObject.getRawLocation()[0] > 0) return 1;
+			//check if t1 is closer than t2
+			if (t1.getRawLocation()[0] - centerObject.getRawLocation()[0] >
+					t2.getRawLocation()[0] - centerObject.getRawLocation()[0])
+			{
+				return 1;
+			} else
+			{
+				return -1;
+			}
+		case RIGHT:
+			if (t1.getRawLocation()[0] - centerObject.getRawLocation()[0] < 0) return -1;
+			if (t2.getRawLocation()[0] - centerObject.getRawLocation()[0] < 0) return 1;
+			//check if t1 is closer than t2
+			if (t1.getRawLocation()[0] - centerObject.getRawLocation()[0] <
+					t2.getRawLocation()[0] - centerObject.getRawLocation()[0])
+			{
+				return 1;
+			} else
+			{
+				return -1;
+			}
+		case UP:
+			if (t1.getRawLocation()[1] - centerObject.getRawLocation()[1] < 0) return -1;
+			if (t2.getRawLocation()[1] - centerObject.getRawLocation()[1] < 0) return 1;
+			//check if t1 is closer than t2
+			if (t1.getRawLocation()[1] - centerObject.getRawLocation()[1] <
+					t2.getRawLocation()[1] - centerObject.getRawLocation()[1])
+			{
+				return 1;
+			} else
+			{
+				return -1;
+			}
+		case DOWN:
+			//check if t1 & t2 is right of center
+			if (t1.getRawLocation()[1] - centerObject.getRawLocation()[1] > 0) return -1;
+			if (t2.getRawLocation()[1] - centerObject.getRawLocation()[1] > 0) return 1;
+			//check if t1 is closer than t2
+			if (t1.getRawLocation()[1] - centerObject.getRawLocation()[1] >
+					t2.getRawLocation()[1] - centerObject.getRawLocation()[1])
+			{
+				return 1;
+			} else
+			{
+				return -1;
+			}
+		default:
+			return 0;
+	}
+}
+\end{minted}
+\subsubsection{De bespreking}
+%%% End document
+\end{document}
